@@ -1,9 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Levelup Studio</title>
+
+<title>LevelUp Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -11,7 +15,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Segoe UI,Arial;
+font-family:'Poppins',sans-serif;
 }
 
 html{
@@ -19,10 +23,12 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#06080c;
+background:#05080c;
 color:white;
 overflow-x:hidden;
 }
+
+/* BACKGROUND */
 
 canvas{
 position:fixed;
@@ -35,7 +41,7 @@ z-index:-2;
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle at 50% 20%,rgba(0,150,255,0.25),transparent 60%);
+background:radial-gradient(circle at 50% 20%,rgba(0,140,255,0.25),transparent 60%);
 z-index:-1;
 }
 
@@ -45,28 +51,43 @@ nav{
 position:fixed;
 top:0;
 width:100%;
-padding:20px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(0,0,0,0.25);
+padding:18px 40px;
+background:rgba(0,0,0,0.3);
 backdrop-filter:blur(10px);
-z-index:100;
+z-index:1000;
 }
 
-nav a{
+.logo{
+font-weight:700;
+font-size:18px;
+letter-spacing:2px;
+}
+
+.nav-links{
+display:flex;
+gap:28px;
+}
+
+.nav-links a{
 color:white;
 text-decoration:none;
-margin-left:25px;
 font-size:14px;
-letter-spacing:1px;
 opacity:.8;
 transition:.3s;
 }
 
-nav a:hover{
+.nav-links a:hover{
 opacity:1;
 color:#4ec3ff;
+}
+
+.menu-btn{
+display:none;
+font-size:26px;
+cursor:pointer;
 }
 
 /* HERO */
@@ -78,29 +99,72 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:0 20px;
+padding:20px;
 }
 
 .hero img{
-width:460px;
+width:420px;
 max-width:90%;
 margin-bottom:30px;
-filter:drop-shadow(0 0 40px rgba(0,140,255,0.6));
-animation:fadeUp 1.2s ease;
+filter:drop-shadow(0 0 40px rgba(0,140,255,.6));
+
+opacity:0;
+transform:translateY(40px);
+
+animation:logoReveal 1.4s cubic-bezier(.2,.65,.3,1) forwards;
+}
+
+@keyframes logoReveal{
+
+0%{
+opacity:0;
+transform:translateY(40px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .hero h1{
-font-size:60px;
-letter-spacing:4px;
-margin-bottom:15px;
+font-size:56px;
+letter-spacing:3px;
+margin-bottom:10px;
 }
 
 .hero p{
-font-size:22px;
-color:#a8c8e0;
+opacity:0;
+transform:translateY(20px);
+animation:fadeText 1s ease forwards;
+animation-delay:.4s;
 }
 
-/* SECTIONS */
+@keyframes fadeText{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.cta{
+margin-top:35px;
+padding:14px 32px;
+border-radius:40px;
+background:linear-gradient(90deg,#0090ff,#00d2ff);
+border:none;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.cta:hover{
+transform:scale(1.05);
+}
+
+/* SECTION */
 
 .section{
 padding:120px 20px;
@@ -117,107 +181,155 @@ color:#56c4ff;
 
 .section p{
 color:#b7c8d8;
-font-size:18px;
 line-height:1.7;
+font-size:18px;
 max-width:750px;
 margin:auto;
 }
 
-/* GAME CARD */
+/* GAME */
+
+.games{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+margin-top:60px;
+}
 
 .game-card{
-
-margin-top:60px;
-padding:50px;
+padding:30px;
 border-radius:16px;
-
 background:linear-gradient(145deg,#0f141a,#161e26);
-
-box-shadow:
-0 0 40px rgba(0,0,0,0.6),
-0 0 60px rgba(0,140,255,0.15);
-
+box-shadow:0 0 40px rgba(0,0,0,0.6);
 transition:.4s;
 }
 
 .game-card:hover{
-
-transform:translateY(-10px);
-
-box-shadow:
-0 0 80px rgba(0,150,255,0.35);
-
+transform:translateY(-8px);
+box-shadow:0 0 60px rgba(0,150,255,0.4);
 }
 
 .game-title{
-font-size:30px;
+font-size:22px;
 color:#6ad0ff;
+margin-bottom:12px;
+}
+
+/* TEAM */
+
+.team{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:40px;
+margin-top:60px;
+}
+
+.member{
+text-align:center;
+}
+
+.member img{
+width:120px;
+height:120px;
+border-radius:50%;
 margin-bottom:15px;
 }
 
 /* CONTACT */
 
-.contact{
+.contact-btn{
 margin-top:30px;
-font-size:18px;
-color:#9cc6e3;
+display:inline-block;
+padding:14px 30px;
+border-radius:30px;
+background:#0090ff;
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.contact-btn:hover{
+background:#00b4ff;
 }
 
 /* FOOTER */
 
 footer{
-padding:40px;
 text-align:center;
+padding:40px;
 color:#666;
+margin-top:80px;
 }
 
-/* ANIMATION */
+/* MOBILE */
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(40px);
+@media(max-width:768px){
+
+.menu-btn{
+display:block;
 }
-to{
-opacity:1;
-transform:translateY(0);
+
+.nav-links{
+position:absolute;
+top:70px;
+right:0;
+background:#0a0f14;
+flex-direction:column;
+width:220px;
+padding:25px;
+display:none;
 }
+
+.nav-links.active{
+display:flex;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+.section h2{
+font-size:32px;
+}
+
 }
 
 </style>
-
 </head>
-
 
 <body>
 
 <canvas id="bg"></canvas>
 <div class="gradient"></div>
 
-
 <nav>
 
-<div><strong>LEVELUP STUDIO</strong></div>
+<div class="logo">LEVELUP STUDIO</div>
 
-<div>
-
+<div class="nav-links" id="navLinks">
 <a href="#about">ABOUT</a>
-<a href="#game">GAME</a>
+<a href="#games">GAME</a>
+<a href="#team">TEAM</a>
 <a href="#contact">CONTACT</a>
-
 </div>
 
-</nav>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
+</nav>
 
 <section class="hero">
 
 <img src="logo.png">
 
-<p>Creating immersive gameplay experiences</p>
+<p>Creating immersive gameplay experiences for players.</p>
+
+<button class="cta" onclick="scrollToGames()">View Our Game</button>
 
 </section>
-
 
 
 <section id="about" class="section">
@@ -225,69 +337,68 @@ transform:translateY(0);
 <h2>About Us</h2>
 
 <p>
-
-Levelup Studio is an independent game development studio focused on building
-memorable gameplay experiences.
-
-We believe great games are created through creativity, iteration, and passion.
-Our goal is to craft games that players truly connect with.
-
+Levelup Studio is an independent game development studio dedicated to crafting
+memorable gameplay experiences. Our mission is to build games that players
+truly connect with through creativity, iteration, and passion.
 </p>
 
 </section>
 
 
+<section id="games" class="section">
 
-<section id="game" class="section">
+<h2>Our Games</h2>
 
-<h2>Featured Project</h2>
+<div class="games">
 
 <div class="game-card">
-
-<div class="game-title">
-
-D.D.D: See ya in respawn
-
+<div class="game-title">D.D.D: See ya in respawn</div>
+<p>
+A unique gameplay experience currently in development.
+Stay tuned for updates.
+</p>
 </div>
 
+<div class="game-card">
+<div class="game-title">Future Project</div>
 <p>
-
-Our upcoming title currently in development.
-
-Stay tuned for more updates as we continue building
-a unique gameplay experience.
-
+More exciting titles are currently being developed by our team.
 </p>
+</div>
 
 </div>
 
 </section>
-
-
 
 <section id="contact" class="section">
 
 <h2>Contact</h2>
 
-<div class="contact">
+<p>admin@levelupdevs.com</p>
 
-admin@levelupdevs.com
-
-</div>
+<a class="contact-btn" href="mailto:admin@levelupdevs.com">Send Email</a>
 
 </section>
 
 
-
 <footer>
-
-© 2026 Level Up Studio Co., Ltd.
-
+© 2026 LevelUp Studio Co., Ltd.
 </footer>
 
 
-
 <script>
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active")
+}
+
+function scrollToGames(){
+document.getElementById("games").scrollIntoView({behavior:"smooth"})
+}
+
+/* PARTICLE BG */
 
 const canvas=document.getElementById("bg")
 const ctx=canvas.getContext("2d")
@@ -300,18 +411,14 @@ let particles=[]
 class Particle{
 
 constructor(){
-
 this.x=Math.random()*canvas.width
 this.y=Math.random()*canvas.height
 this.size=Math.random()*2
-
 this.vx=(Math.random()-.5)*.4
 this.vy=(Math.random()-.5)*.4
-
 }
 
 update(){
-
 this.x+=this.vx
 this.y+=this.vy
 
@@ -319,24 +426,19 @@ if(this.x<0) this.x=canvas.width
 if(this.x>canvas.width) this.x=0
 if(this.y<0) this.y=canvas.height
 if(this.y>canvas.height) this.y=0
-
 }
 
 draw(){
-
 ctx.fillStyle="rgba(0,160,255,.6)"
 ctx.beginPath()
 ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
 ctx.fill()
-
 }
 
 }
 
-for(let i=0;i<140;i++){
-
+for(let i=0;i<150;i++){
 particles.push(new Particle())
-
 }
 
 function animate(){
@@ -355,14 +457,12 @@ requestAnimationFrame(animate)
 animate()
 
 window.addEventListener("resize",()=>{
-
 canvas.width=window.innerWidth
 canvas.height=window.innerHeight
-
 })
 
 </script>
 
-
 </body>
 </html>
+```
