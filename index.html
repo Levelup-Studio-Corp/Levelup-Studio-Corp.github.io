@@ -1,39 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Game Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LevelUp Studio</title>
+
 <style>
-body {
-    font-family: Arial;
-    text-align: center;
-    margin: 50px;
-    background: #111;
-    color: white;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, Arial, sans-serif;
 }
-h1 { font-size: 48px; }
-.section { margin-top: 40px; }
+
+body{
+background:#0a0a0a;
+color:white;
+overflow-x:hidden;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero img{
+width:420px;
+max-width:90%;
+margin-bottom:30px;
+animation:fadeUp 1.2s ease;
+}
+
+.hero h1{
+font-size:52px;
+letter-spacing:2px;
+margin-bottom:10px;
+animation:fadeUp 1.4s ease;
+}
+
+.hero p{
+font-size:20px;
+color:#aaa;
+animation:fadeUp 1.6s ease;
+}
+
+.section{
+padding:100px 20px;
+text-align:center;
+}
+
+.section h2{
+font-size:36px;
+margin-bottom:20px;
+}
+
+.section p{
+max-width:700px;
+margin:auto;
+line-height:1.7;
+color:#bbb;
+font-size:18px;
+}
+
+.game-card{
+margin-top:40px;
+padding:40px;
+border-radius:12px;
+background:linear-gradient(145deg,#141414,#1b1b1b);
+box-shadow:0 0 40px rgba(0,0,0,0.6);
+transition:0.3s;
+}
+
+.game-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 60px rgba(0,140,255,0.2);
+}
+
+.game-title{
+font-size:26px;
+margin-bottom:10px;
+color:#4bb3ff;
+}
+
+.contact{
+margin-top:20px;
+font-size:18px;
+}
+
+footer{
+text-align:center;
+padding:40px;
+color:#666;
+font-size:14px;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
 </style>
 </head>
 
+
 <body>
 
-<h1>My Game Studio</h1>
+<div class="hero">
 
-<div class="section">
-<h2>About</h2>
-<p>We are an indie game studio focused on creating fun and unique games.</p>
+<img src="logo.png">
+
+<h1>LEVELUP STUDIO</h1>
+
+<p>Creating immersive gameplay experiences</p>
+
 </div>
 
+
 <div class="section">
+
+<h2>About Us</h2>
+
+<p>
+LevelUp Studio is an independent game development studio focused on building
+engaging and memorable gameplay experiences.
+We believe great games come from creativity, iteration, and passion.
+</p>
+
+</div>
+
+
+<div class="section">
+
 <h2>Our Game</h2>
-<p>Currently developing our first title.</p>
+
+<div class="container">
+
+<div class="game-card">
+
+<div class="game-title">
+D.D.D: See ya in respawn
 </div>
 
-<div class="section">
-<h2>Contact</h2>
-<p>Email: contact@mygamestudio.com</p>
+<p>
+Currently in development.  
+Stay tuned for updates.
+</p>
+
 </div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>Contact</h2>
+
+<div class="contact">
+admin@levelupdevs.com
+</div>
+
+</div>
+
+
+<footer>
+© 2026 LevelUp Studio
+</footer>
+
 
 </body>
 </html>
