@@ -6,21 +6,128 @@
 <title>점검 중 - LevelUp Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:#05080c;color:white;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;}
-.gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 20%,rgba(0,140,255,0.25),transparent 60%);z-index:-1;}
-.logo{font-weight:700;font-size:18px;letter-spacing:2px;margin-bottom:60px;opacity:.6;}
-h1{font-size:48px;margin-bottom:16px;color:#56c4ff;}
-p{color:#b7c8d8;font-size:16px;line-height:1.8;}
-footer{position:fixed;bottom:20px;color:#444;font-size:13px;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:#05080c;color:white;min-height:100vh;padding:40px 20px 60px;display:flex;flex-direction:column;align-items:center;}
+.gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 10%,rgba(0,140,255,0.2),transparent 60%);z-index:-1;pointer-events:none;}
+
+.logo{font-weight:700;font-size:15px;letter-spacing:3px;opacity:.5;margin-bottom:36px;margin-top:10px;}
+
+.status-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);
+  border-radius:30px;padding:8px 20px;margin-bottom:20px;
+}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#ffb400;box-shadow:0 0 8px #ffb400;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.status-text{font-size:13px;color:#ffb400;font-weight:600;letter-spacing:1px;}
+
+h1{font-size:32px;font-weight:700;color:#fff;margin-bottom:6px;text-align:center;}
+.subtitle{font-size:14px;color:#6a8aaa;margin-bottom:36px;text-align:center;}
+
+.card{
+  width:100%;max-width:560px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:24px;margin-bottom:16px;
+}
+
+.card-title{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:1.5px;
+  color:#56c4ff;margin-bottom:16px;text-transform:uppercase;
+}
+.card-title .icon{font-size:16px;}
+
+.time-row{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:#c8dae8;line-height:1.6;margin-bottom:8px;
+}
+.time-row .bullet{color:#56c4ff;font-size:16px;flex-shrink:0;margin-top:1px;}
+.time-note{
+  font-size:12px;color:#5a7a96;margin-top:4px;padding-left:18px;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.time-note::before{content:"▸";color:#3a5a76;flex-shrink:0;}
+
+.feature{margin-bottom:20px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:6px;
+}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{
+  font-size:12px;color:#5a7a96;line-height:1.7;
+  padding-left:18px;
+}
+.feature-desc li{
+  list-style:none;display:flex;align-items:flex-start;gap:6px;margin-bottom:2px;
+}
+.feature-desc li::before{content:"▸";color:#3a5a76;flex-shrink:0;margin-top:1px;}
+
+footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
 </style>
 </head>
 <body>
 <div class="gradient"></div>
+
 <div class="logo">LEVELUP STUDIO</div>
-<h1>🔧 점검 중</h1>
-<p>현재 서버 점검 중입니다.<br>불편을 드려 죄송합니다.</p>
+
+<div class="status-badge">
+  <div class="status-dot"></div>
+  <div class="status-text">UNDER MAINTENANCE</div>
+</div>
+
+<h1>서버 점검 중</h1>
+<p class="subtitle">불편을 드려 죄송합니다. 점검 완료 후 다시 접속해 주세요.</p>
+
+<!-- 점검 시간 -->
+<div class="card">
+  <div class="card-title"><span class="icon">🕐</span> 점검 시간</div>
+  <div class="time-row">
+    <span class="bullet">•</span>
+    <span>2026.05.29 &nbsp;14:00 ~ 15:00 &nbsp;<span style="color:#5a7a96;font-size:12px;">( 표준시 기준 )</span></span>
+  </div>
+  <div class="time-note">점검 시간은 작업 상황에 따라 변동될 수 있습니다.</div>
+</div>
+
+<!-- 업데이트 내용 -->
+<div class="card">
+  <div class="card-title"><span class="icon">✦</span> 업데이트 내용</div>
+
+  <div class="feature">
+    <div class="feature-title"><span class="bullet">•</span>재료 아이템 분해 추가</div>
+    <ul class="feature-desc">
+      <li>재료 가방에서 아이템을 선택하여 분해할 수 있습니다.</li>
+      <li>분해 시 아이템의 가치에 따라 <span style="color:#56c4ff;">'마일리지'</span> 가 획득되며, 계속 사용처를 추가할 예정입니다.</li>
+    </ul>
+  </div>
+
+  <div class="feature">
+    <div class="feature-title"><span class="bullet">•</span>상점에 마일리지 전용 뽑기 상자 추가</div>
+    <ul class="feature-desc">
+      <li>아이템 분해로 획득한 마일리지로 뽑기 기회를 가질 수 있습니다.</li>
+    </ul>
+  </div>
+
+  <div class="feature">
+    <div class="feature-title"><span class="bullet">•</span>각종 보상에 아이템 선택 상자 추가</div>
+    <ul class="feature-desc">
+      <li>해당 상자를 열어 보상을 선택하여 획득할 수 있습니다.</li>
+    </ul>
+  </div>
+
+  <div class="feature">
+    <div class="feature-title"><span class="bullet">•</span>상점 일부 아이템 구매 제한 추가</div>
+    <ul class="feature-desc">
+      <li>일부 아이템에 구매 제한이 추가되었습니다.</li>
+      <li>각 항목별 구매 제한 수량이 별도 동작합니다.</li>
+      <li>구매 제한은 표준시 기준 다음 날이 되면 초기화됩니다.</li>
+    </ul>
+  </div>
+
+</div>
+
 <footer>© 2026 LevelUp Studio Co., Ltd.</footer>
 </body>
 </html>
-
