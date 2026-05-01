@@ -3,131 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>점검 중 - LevelUp Studio</title>
+<title>Maintenance - LevelUp Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
 body{background:#05080c;color:white;min-height:100vh;padding:40px 20px 60px;display:flex;flex-direction:column;align-items:center;}
 .gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 10%,rgba(0,140,255,0.2),transparent 60%);z-index:-1;pointer-events:none;}
-
 .logo{font-weight:700;font-size:15px;letter-spacing:3px;opacity:.5;margin-bottom:36px;margin-top:10px;}
-
-.status-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);
-  border-radius:30px;padding:8px 20px;margin-bottom:20px;
-}
+.status-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);border-radius:30px;padding:8px 20px;margin-bottom:20px;}
 .status-dot{width:8px;height:8px;border-radius:50%;background:#ffb400;box-shadow:0 0 8px #ffb400;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
 .status-text{font-size:13px;color:#ffb400;font-weight:600;letter-spacing:1px;}
-
 h1{font-size:32px;font-weight:700;color:#fff;margin-bottom:6px;text-align:center;}
 .subtitle{font-size:14px;color:#6a8aaa;margin-bottom:36px;text-align:center;}
-
-.card{
-  width:100%;max-width:560px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;padding:24px;margin-bottom:16px;
-}
-
-.card-title{
-  display:flex;align-items:center;gap:8px;
-  font-size:13px;font-weight:600;letter-spacing:1.5px;
-  color:#56c4ff;margin-bottom:16px;text-transform:uppercase;
-}
-.card-title .icon{font-size:16px;}
-
-.time-row{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:14px;color:#c8dae8;line-height:1.6;margin-bottom:8px;
-}
+.card{width:100%;max-width:560px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;margin-bottom:16px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:16px;text-transform:uppercase;}
+.time-row{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#c8dae8;line-height:1.6;margin-bottom:8px;}
 .time-row .bullet{color:#56c4ff;font-size:16px;flex-shrink:0;margin-top:1px;}
-.time-note{
-  font-size:12px;color:#5a7a96;margin-top:4px;padding-left:18px;
-  display:flex;align-items:flex-start;gap:6px;
-}
+.time-note{font-size:12px;color:#5a7a96;margin-top:4px;padding-left:18px;display:flex;align-items:flex-start;gap:6px;}
 .time-note::before{content:"▸";color:#3a5a76;flex-shrink:0;}
-
 .feature{margin-bottom:20px;}
 .feature:last-child{margin-bottom:0;}
-.feature-title{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:14px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:6px;
-}
+.feature-title{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:6px;}
 .feature-title .bullet{color:#56c4ff;flex-shrink:0;}
-.feature-desc{
-  font-size:12px;color:#5a7a96;line-height:1.7;
-  padding-left:18px;
-}
-.feature-desc li{
-  list-style:none;display:flex;align-items:flex-start;gap:6px;margin-bottom:2px;
-}
+.feature-desc{font-size:12px;color:#5a7a96;line-height:1.7;padding-left:18px;}
+.feature-desc li{list-style:none;display:flex;align-items:flex-start;gap:6px;margin-bottom:2px;}
 .feature-desc li::before{content:"▸";color:#3a5a76;flex-shrink:0;margin-top:1px;}
-
 footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
 </style>
 </head>
 <body>
 <div class="gradient"></div>
-
 <div class="logo">LEVELUP STUDIO</div>
-
 <div class="status-badge">
   <div class="status-dot"></div>
   <div class="status-text">UNDER MAINTENANCE</div>
 </div>
+<h1 id="txt-title"></h1>
+<p class="subtitle" id="txt-subtitle"></p>
 
-<h1>서버 점검 중</h1>
-<p class="subtitle">불편을 드려 죄송합니다. 점검 완료 후 다시 접속해 주세요.</p>
-
-<!-- 점검 시간 -->
 <div class="card">
-  <div class="card-title"><span class="icon">🕐</span> 점검 시간</div>
+  <div class="card-title">🕐 <span id="txt-time-label"></span></div>
   <div class="time-row">
     <span class="bullet">•</span>
-    <span>2026.05.29 &nbsp;14:00 ~ 15:00 &nbsp;<span style="color:#5a7a96;font-size:12px;">( 표준시 기준 )</span></span>
+    <span>2026.05.29 &nbsp;14:00 ~ 15:00 &nbsp;<span style="color:#5a7a96;font-size:12px;" id="txt-timezone"></span></span>
   </div>
-  <div class="time-note">점검 시간은 작업 상황에 따라 변동될 수 있습니다.</div>
+  <div class="time-note" id="txt-time-note"></div>
 </div>
 
-<!-- 업데이트 내용 -->
 <div class="card">
-  <div class="card-title"><span class="icon">✦</span> 업데이트 내용</div>
-
-  <div class="feature">
-    <div class="feature-title"><span class="bullet">•</span>재료 아이템 분해 추가</div>
-    <ul class="feature-desc">
-      <li>재료 가방에서 아이템을 선택하여 분해할 수 있습니다.</li>
-      <li>분해 시 아이템의 가치에 따라 <span style="color:#56c4ff;">'마일리지'</span> 가 획득되며, 계속 사용처를 추가할 예정입니다.</li>
-    </ul>
-  </div>
-
-  <div class="feature">
-    <div class="feature-title"><span class="bullet">•</span>상점에 마일리지 전용 뽑기 상자 추가</div>
-    <ul class="feature-desc">
-      <li>아이템 분해로 획득한 마일리지로 뽑기 기회를 가질 수 있습니다.</li>
-    </ul>
-  </div>
-
-  <div class="feature">
-    <div class="feature-title"><span class="bullet">•</span>각종 보상에 아이템 선택 상자 추가</div>
-    <ul class="feature-desc">
-      <li>해당 상자를 열어 보상을 선택하여 획득할 수 있습니다.</li>
-    </ul>
-  </div>
-
-  <div class="feature">
-    <div class="feature-title"><span class="bullet">•</span>상점 일부 아이템 구매 제한 추가</div>
-    <ul class="feature-desc">
-      <li>일부 아이템에 구매 제한이 추가되었습니다.</li>
-      <li>각 항목별 구매 제한 수량이 별도 동작합니다.</li>
-      <li>구매 제한은 표준시 기준 다음 날이 되면 초기화됩니다.</li>
-    </ul>
-  </div>
-
+  <div class="card-title">✦ <span id="txt-update-label"></span></div>
+  <div id="features"></div>
 </div>
 
 <footer>© 2026 LevelUp Studio Co., Ltd.</footer>
+
+<script>
+const TEXTS = {
+  ko: {
+    title: "서버 점검 중",
+    subtitle: "불편을 드려 죄송합니다. 점검 완료 후 다시 접속해 주세요.",
+    timeLabel: "점검 시간",
+    timezone: "( 표준시 기준 )",
+    timeNote: "점검 시간은 작업 상황에 따라 변동될 수 있습니다.",
+    updateLabel: "업데이트 내용",
+    features: [
+      {
+        title: "재료 아이템 분해 추가",
+        descs: [
+          "재료 가방에서 아이템을 선택하여 분해할 수 있습니다.",
+          "분해 시 아이템의 가치에 따라 <span style='color:#56c4ff;'>'마일리지'</span> 가 획득되며, 계속 사용처를 추가할 예정입니다."
+        ]
+      },
+      {
+        title: "상점에 마일리지 전용 뽑기 상자 추가",
+        descs: ["아이템 분해로 획득한 마일리지로 뽑기 기회를 가질 수 있습니다."]
+      },
+      {
+        title: "각종 보상에 아이템 선택 상자 추가",
+        descs: ["해당 상자를 열어 보상을 선택하여 획득할 수 있습니다."]
+      },
+      {
+        title: "상점 일부 아이템 구매 제한 추가",
+        descs: [
+          "일부 아이템에 구매 제한이 추가되었습니다.",
+          "각 항목별 구매 제한 수량이 별도 동작합니다.",
+          "구매 제한은 표준시 기준 다음 날이 되면 초기화됩니다."
+        ]
+      }
+    ]
+  },
+  en: {
+    title: "Under Maintenance",
+    subtitle: "We apologize for the inconvenience. Please try again after maintenance is complete.",
+    timeLabel: "Maintenance Schedule",
+    timezone: "( UTC )",
+    timeNote: "Maintenance time may vary depending on progress.",
+    updateLabel: "Update Notes",
+    features: [
+      {
+        title: "Material Item Disassembly Added",
+        descs: [
+          "You can now select items from your material bag and disassemble them.",
+          "Disassembling items earns <span style='color:#56c4ff;'>'Mileage'</span> based on item value. More uses for Mileage will be added in the future."
+        ]
+      },
+      {
+        title: "Mileage Gacha Box Added to Shop",
+        descs: ["Use Mileage earned from disassembling items to try your luck with gacha draws."]
+      },
+      {
+        title: "Item Selection Box Added to Various Rewards",
+        descs: ["Open the box to choose and receive your preferred reward."]
+      },
+      {
+        title: "Purchase Limit Added to Some Shop Items",
+        descs: [
+          "Purchase limits have been added to certain items.",
+          "Each item has its own separate purchase limit.",
+          "Purchase limits reset at the start of the next day (UTC)."
+        ]
+      }
+    ]
+  },
+  id: {
+    title: "Sedang dalam Pemeliharaan",
+    subtitle: "Mohon maaf atas ketidaknyamanannya. Silakan coba lagi setelah pemeliharaan selesai.",
+    timeLabel: "Jadwal Pemeliharaan",
+    timezone: "( UTC )",
+    timeNote: "Waktu pemeliharaan dapat berubah tergantung pada kemajuan pekerjaan.",
+    updateLabel: "Catatan Pembaruan",
+    features: [
+      {
+        title: "Penambahan Fitur Bongkar Item Material",
+        descs: [
+          "Kamu sekarang bisa memilih item dari tas material dan membongkarnya.",
+          "Membongkar item menghasilkan <span style='color:#56c4ff;'>'Mileage'</span> berdasarkan nilai item. Penggunaan Mileage akan terus ditambahkan."
+        ]
+      },
+      {
+        title: "Kotak Gacha Khusus Mileage Ditambahkan ke Toko",
+        descs: ["Gunakan Mileage dari pembongkaran item untuk mencoba gacha."]
+      },
+      {
+        title: "Kotak Pilihan Item Ditambahkan ke Berbagai Hadiah",
+        descs: ["Buka kotak untuk memilih dan mendapatkan hadiah yang kamu inginkan."]
+      },
+      {
+        title: "Batas Pembelian Ditambahkan untuk Beberapa Item Toko",
+        descs: [
+          "Batas pembelian telah ditambahkan untuk item tertentu.",
+          "Setiap item memiliki batas pembelian tersendiri.",
+          "Batas pembelian akan direset pada hari berikutnya (UTC)."
+        ]
+      }
+    ]
+  },
+  ms: {
+    title: "Sedang dalam Penyelenggaraan",
+    subtitle: "Kami memohon maaf atas kesulitan ini. Sila cuba semula selepas penyelenggaraan selesai.",
+    timeLabel: "Jadual Penyelenggaraan",
+    timezone: "( UTC )",
+    timeNote: "Masa penyelenggaraan mungkin berubah bergantung kepada kemajuan kerja.",
+    updateLabel: "Nota Kemas Kini",
+    features: [
+      {
+        title: "Ciri Bongkar Item Bahan Ditambah",
+        descs: [
+          "Anda kini boleh memilih item dari beg bahan dan membongkarnya.",
+          "Membongkar item menghasilkan <span style='color:#56c4ff;'>'Mileage'</span> berdasarkan nilai item. Lebih banyak kegunaan Mileage akan ditambah."
+        ]
+      },
+      {
+        title: "Kotak Gacha Khas Mileage Ditambah ke Kedai",
+        descs: ["Gunakan Mileage yang diperoleh daripada pembongkaran item untuk mencuba gacha."]
+      },
+      {
+        title: "Kotak Pilihan Item Ditambah ke Pelbagai Ganjaran",
+        descs: ["Buka kotak untuk memilih dan menerima ganjaran pilihan anda."]
+      },
+      {
+        title: "Had Pembelian Ditambah untuk Beberapa Item Kedai",
+        descs: [
+          "Had pembelian telah ditambah untuk item tertentu.",
+          "Setiap item mempunyai had pembelian tersendiri.",
+          "Had pembelian akan direset pada hari berikutnya (UTC)."
+        ]
+      }
+    ]
+  },
+  zh: {
+    title: "服务器维护中",
+    subtitle: "给您带来不便，深感抱歉。维护完成后请重新登录。",
+    timeLabel: "维护时间",
+    timezone: "( UTC )",
+    timeNote: "维护时间可能根据工作进度有所变动。",
+    updateLabel: "更新内容",
+    features: [
+      {
+        title: "新增材料道具分解功能",
+        descs: [
+          "现在可以在材料背包中选择道具进行分解。",
+          "分解道具可根据道具价值获得 <span style='color:#56c4ff;'>'里程'</span>，后续将持续开放更多使用途径。"
+        ]
+      },
+      {
+        title: "商店新增里程专属抽奖箱",
+        descs: ["可使用分解道具获得的里程进行抽奖。"]
+      },
+      {
+        title: "各类奖励中新增道具选择箱",
+        descs: ["打开选择箱，自由选取想要的奖励。"]
+      },
+      {
+        title: "商店部分道具新增购买限制",
+        descs: [
+          "部分道具已添加购买限制。",
+          "各项目的购买限制数量独立计算。",
+          "购买限制将在UTC次日重置。"
+        ]
+      }
+    ]
+  },
+  fr: {
+    title: "Maintenance en cours",
+    subtitle: "Nous nous excusons pour la gêne occasionnée. Veuillez réessayer une fois la maintenance terminée.",
+    timeLabel: "Calendrier de maintenance",
+    timezone: "( UTC )",
+    timeNote: "La durée de maintenance peut varier selon l'avancement des travaux.",
+    updateLabel: "Notes de mise à jour",
+    features: [
+      {
+        title: "Démantèlement d'objets matériaux ajouté",
+        descs: [
+          "Vous pouvez désormais sélectionner des objets dans votre sac de matériaux et les démonter.",
+          "Le démantèlement rapporte des <span style='color:#56c4ff;'>'Miles'</span> selon la valeur de l'objet. De nouvelles utilisations seront ajoutées."
+        ]
+      },
+      {
+        title: "Boîte gacha Miles ajoutée à la boutique",
+        descs: ["Utilisez les Miles obtenus par démantèlement pour tenter votre chance au gacha."]
+      },
+      {
+        title: "Boîte de sélection d'objet ajoutée aux récompenses",
+        descs: ["Ouvrez la boîte pour choisir et recevoir la récompense de votre choix."]
+      },
+      {
+        title: "Limite d'achat ajoutée à certains articles",
+        descs: [
+          "Des limites d'achat ont été ajoutées à certains articles.",
+          "Chaque article possède sa propre limite d'achat.",
+          "Les limites d'achat sont réinitialisées le lendemain (UTC)."
+        ]
+      }
+    ]
+  }
+};
+
+function getLang() {
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get("lang");
+  if (!lang) return "ko";
+  return TEXTS[lang] ? lang : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang];
+
+  document.getElementById("txt-title").textContent = t.title;
+  document.getElementById("txt-subtitle").textContent = t.subtitle;
+  document.getElementById("txt-time-label").textContent = t.timeLabel;
+  document.getElementById("txt-timezone").textContent = t.timezone;
+  document.getElementById("txt-time-note").textContent = t.timeNote;
+  document.getElementById("txt-update-label").textContent = t.updateLabel;
+
+  const container = document.getElementById("features");
+  container.innerHTML = t.features.map(f => `
+    <div class="feature">
+      <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+      <ul class="feature-desc">
+        ${f.descs.map(d => `<li>${d}</li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
+}
+
+render();
+</script>
 </body>
 </html>
