@@ -229,7 +229,7 @@ footer {
 <div class="bg-glow"></div>
 
 <nav>
-  <div class="nav-logo">LEVELUP STUDIO</div>
+  <a class="nav-logo" href="https://levelupstudio.co.kr/" style="text-decoration:none;color:inherit;">LEVELUP STUDIO</a>
   <div class="nav-links">
     <a href="#about" id="nav-about">About</a>
     <a href="#screenshots" id="nav-screenshots">Screenshots</a>
@@ -249,9 +249,9 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow" id="hero-eyebrow">Now Available</div>
+  <div class="hero-eyebrow" id="hero-eyebrow"><span id="hero-eyebrow-text">지금 출시</span></div>
   <h1 class="hero-title">D.D.D.</h1>
-  <p class="hero-sub" id="hero-sub">See Ya in Respawn</p>
+  <p class="hero-sub">See Ya in Respawn</p>
 
   <div class="video-wrap">
     <iframe src="https://www.youtube.com/embed/4wBifBldQ-w?rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>
@@ -331,23 +331,21 @@ footer {
 const T = {
   ko: {
     heroEyebrow: "지금 출시",
-    heroSub: "리스폰에서 만나",
     navAbout: "소개", navShots: "스크린샷", navDl: "다운로드",
     aboutLabel: "게임 소개", aboutTitle: "실시간\n탑다운 PvP",
-    aboutBody: "개성 넘치는 동네 친구들과 신나는 뒷마당 총싸움에 초대합니다! 실시간 탑다운 PvP 슈터에서 1위를 노려보세요!",
+    aboutBody: "개성 넘치는 동네 친구들과 함께하는 뒷마당 총싸움! 4명의 개성 넘치는 캐릭터와 함께 실시간 탑다운 PvP 슈터에서 1등을 노려보세요.",
     shotsLabel: "스크린샷", shotsTitle: "게임플레이",
-    dlLabel: "다운로드", dlTitle: "지금 바로. 무료로.", dlBody: "안드로이드와 iOS에서 이용 가능합니다.",
+    dlLabel: "다운로드", dlTitle: "지금 바로. 무료로.", dlBody: "Android, iOS 모두 지원. 지금 바로 전장에 뛰어드세요.",
     dlGoogleSub: "다운로드", dlAppleSub: "다운로드",
     features: [
-      { icon:"🔫", name:"4가지 무기 클래스", desc:"권총, 소총, 저격총, 산탄총. 각각의 개성 있는 플레이스타일." },
-      { icon:"⚡", name:"퍽 커스터마이징", desc:"도탄, 관통, 스피드 부스트 등 퍽 조합으로 완전히 다른 전략이 펼쳐집니다." },
-      { icon:"💣", name:"맵을 바꾸는 투척물", desc:"지형지물을 활용해 전세를 역전시키세요." },
-      { icon:"🏆", name:"즉시 PvP 매칭", desc:"접속하는 순간 바로 실전! 빠른 캐주얼 전투를 즐기세요." },
+      { icon:"🔫", name:"4가지 무기", desc:"권총, 소총, 저격총, 산탄총. 각자의 플레이 스타일로 전장을 지배하세요." },
+      { icon:"⚡", name:"퍽 커스터마이징", desc:"도탄, 관통, 속도 부스트 등 퍽 조합으로 전략을 완전히 바꿔보세요." },
+      { icon:"💣", name:"지형 변경", desc:"투척물로 지형을 활용하고 전세를 역전시키세요." },
+      { icon:"🏆", name:"즉시 매칭 PvP", desc:"접속하는 순간 바로 실전! 빠르고 짜릿한 캐주얼 배틀." },
     ]
   },
   en: {
     heroEyebrow: "Now Available",
-    heroSub: "See Ya in Respawn",
     navAbout: "About", navShots: "Screenshots", navDl: "Download",
     aboutLabel: "About the Game", aboutTitle: "Real-Time\nTop-Down PvP",
     aboutBody: "You're invited to an exciting backyard gunfight with your mischievous neighborhood friends! Challenge for the #1 spot in this real-time top-down PvP shooter!",
@@ -363,7 +361,6 @@ const T = {
   },
   id: {
     heroEyebrow: "Tersedia Sekarang",
-    heroSub: "Sampai Jumpa di Respawn",
     navAbout: "Tentang", navShots: "Tangkapan Layar", navDl: "Unduh",
     aboutLabel: "Tentang Game", aboutTitle: "PvP\nTop-Down Real-Time",
     aboutBody: "Kamu diundang ke pertarungan seru di halaman belakang bersama teman-teman nakal! Rebut posisi #1 di shooter PvP top-down real-time ini!",
@@ -379,7 +376,6 @@ const T = {
   },
   ms: {
     heroEyebrow: "Kini Tersedia",
-    heroSub: "Jumpa di Respawn",
     navAbout: "Tentang", navShots: "Tangkapan Skrin", navDl: "Muat Turun",
     aboutLabel: "Tentang Permainan", aboutTitle: "PvP\nTop-Down Masa Nyata",
     aboutBody: "Anda dijemput ke pertarungan sengit di halaman belakang bersama kawan-kawan nakal! Rebut tempat #1 dalam shooter PvP top-down masa nyata ini!",
@@ -395,7 +391,6 @@ const T = {
   },
   zh: {
     heroEyebrow: "现已上线",
-    heroSub: "重生见",
     navAbout: "关于", navShots: "截图", navDl: "下载",
     aboutLabel: "游戏介绍", aboutTitle: "实时\n俯视角PvP",
     aboutBody: "与调皮的邻居朋友们展开一场刺激的后院枪战！在这款实时俯视角PvP射击游戏中争夺第一名！",
@@ -411,7 +406,6 @@ const T = {
   },
   fr: {
     heroEyebrow: "Disponible Maintenant",
-    heroSub: "À la Prochaine au Respawn",
     navAbout: "À propos", navShots: "Captures", navDl: "Télécharger",
     aboutLabel: "À propos du jeu", aboutTitle: "PvP\nTop-Down en Temps Réel",
     aboutBody: "Vous êtes invité à un gunfight palpitant dans la cour avec vos amis du quartier ! Visez la première place dans ce shooter PvP top-down en temps réel !",
@@ -438,8 +432,7 @@ function render() {
   const t = T[l];
   document.documentElement.lang = l;
 
-  document.getElementById("hero-eyebrow").childNodes[1].textContent = t.heroEyebrow;
-  document.getElementById("hero-sub").textContent = t.heroSub;
+  document.getElementById("hero-eyebrow-text").textContent = t.heroEyebrow;
   document.getElementById("nav-about").textContent = t.navAbout;
   document.getElementById("nav-screenshots").textContent = t.navShots;
   document.getElementById("nav-download").textContent = t.navDl;
