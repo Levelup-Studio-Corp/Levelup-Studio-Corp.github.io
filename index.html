@@ -1,468 +1,235 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>LevelUp Studio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-background:#05080c;
-color:white;
-overflow-x:hidden;
-}
-
-/* BACKGROUND */
-
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-2;
-}
-
-.gradient{
-position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle at 50% 20%,rgba(0,140,255,0.25),transparent 60%);
-z-index:-1;
-}
-
-/* NAVBAR */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 40px;
-background:rgba(0,0,0,0.3);
-backdrop-filter:blur(10px);
-z-index:1000;
-}
-
-.logo{
-font-weight:700;
-font-size:18px;
-letter-spacing:2px;
-}
-
-.nav-links{
-display:flex;
-gap:28px;
-}
-
-.nav-links a{
-color:white;
-text-decoration:none;
-font-size:14px;
-opacity:.8;
-transition:.3s;
-}
-
-.nav-links a:hover{
-opacity:1;
-color:#4ec3ff;
-}
-
-.menu-btn{
-display:none;
-font-size:26px;
-cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
-
-.hero img{
-width:420px;
-max-width:90%;
-margin-bottom:30px;
-filter:drop-shadow(0 0 40px rgba(0,140,255,.6));
-
-opacity:0;
-transform:translateY(40px);
-
-animation:logoReveal 1.4s cubic-bezier(.2,.65,.3,1) forwards;
-}
-
-@keyframes logoReveal{
-
-0%{
-opacity:0;
-transform:translateY(40px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-.hero h1{
-font-size:56px;
-letter-spacing:3px;
-margin-bottom:10px;
-}
-
-.hero p{
-opacity:0;
-transform:translateY(20px);
-animation:fadeText 1s ease forwards;
-animation-delay:.4s;
-}
-
-@keyframes fadeText{
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.cta{
-margin-top:35px;
-padding:14px 32px;
-border-radius:40px;
-background:linear-gradient(90deg,#0090ff,#00d2ff);
-border:none;
-color:white;
-font-size:16px;
-cursor:pointer;
-transition:.3s;
-}
-
-.cta:hover{
-transform:scale(1.05);
-}
-
-/* SECTION */
-
-.section{
-padding:120px 20px;
-max-width:1100px;
-margin:auto;
-text-align:center;
-}
-
-.section h2{
-font-size:40px;
-margin-bottom:25px;
-color:#56c4ff;
-}
-
-.section p{
-color:#b7c8d8;
-line-height:1.7;
-font-size:18px;
-max-width:750px;
-margin:auto;
-}
-
-/* GAME */
-
-.games{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-margin-top:60px;
-}
-
-.game-card{
-padding:30px;
-border-radius:16px;
-background:linear-gradient(145deg,#0f141a,#161e26);
-box-shadow:0 0 40px rgba(0,0,0,0.6);
-transition:.4s;
-}
-
-.game-card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 60px rgba(0,150,255,0.4);
-}
-
-.game-title{
-font-size:22px;
-color:#6ad0ff;
-margin-bottom:12px;
-}
-
-/* TEAM */
-
-.team{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:40px;
-margin-top:60px;
-}
-
-.member{
-text-align:center;
-}
-
-.member img{
-width:120px;
-height:120px;
-border-radius:50%;
-margin-bottom:15px;
-}
-
-/* CONTACT */
-
-.contact-btn{
-margin-top:30px;
-display:inline-block;
-padding:14px 30px;
-border-radius:30px;
-background:#0090ff;
-color:white;
-text-decoration:none;
-transition:.3s;
-}
-
-.contact-btn:hover{
-background:#00b4ff;
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:40px;
-color:#666;
-margin-top:80px;
-}
-
-/* MOBILE */
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:#05080c;color:white;overflow-x:hidden;}
+canvas{position:fixed;top:0;left:0;z-index:-2;}
+.gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 20%,rgba(0,140,255,0.25),transparent 60%);z-index:-1;}
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(0,0,0,0.3);backdrop-filter:blur(10px);z-index:1000;}
+.logo{font-weight:700;font-size:18px;letter-spacing:2px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{color:white;text-decoration:none;font-size:14px;opacity:.8;transition:.3s;}
+.nav-links a:hover{opacity:1;color:#4ec3ff;}
+.menu-btn{display:none;font-size:26px;cursor:pointer;}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;}
+.hero img{width:420px;max-width:90%;margin-bottom:30px;filter:drop-shadow(0 0 40px rgba(0,140,255,.6));opacity:0;transform:translateY(40px);animation:logoReveal 1.4s cubic-bezier(.2,.65,.3,1) forwards;}
+@keyframes logoReveal{0%{opacity:0;transform:translateY(40px);}100%{opacity:1;transform:translateY(0);}}
+.hero p{opacity:0;transform:translateY(20px);animation:fadeText 1s ease forwards;animation-delay:.4s;}
+@keyframes fadeText{to{opacity:1;transform:translateY(0);}}
+.cta{margin-top:35px;padding:14px 32px;border-radius:40px;background:linear-gradient(90deg,#0090ff,#00d2ff);border:none;color:white;font-size:16px;cursor:pointer;transition:.3s;}
+.cta:hover{transform:scale(1.05);}
+.section{padding:120px 20px;max-width:1100px;margin:auto;text-align:center;}
+.section h2{font-size:40px;margin-bottom:25px;color:#56c4ff;}
+.section p{color:#b7c8d8;line-height:1.7;font-size:18px;max-width:750px;margin:auto;}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:60px;}
+.game-card{padding:30px;border-radius:16px;background:linear-gradient(145deg,#0f141a,#161e26);box-shadow:0 0 40px rgba(0,0,0,0.6);transition:.4s;}
+.game-card:hover{transform:translateY(-8px);box-shadow:0 0 60px rgba(0,150,255,0.4);}
+.game-card-link{text-decoration:none;color:inherit;display:block;}
+.game-title{font-size:22px;color:#6ad0ff;margin-bottom:12px;}
+.game-badge{display:inline-block;margin-top:16px;padding:6px 16px;border-radius:20px;background:rgba(0,144,255,0.15);border:1px solid rgba(0,144,255,0.3);font-size:12px;color:#56c4ff;letter-spacing:1px;}
+.contact-btn{margin-top:30px;display:inline-block;padding:14px 30px;border-radius:30px;background:#0090ff;color:white;text-decoration:none;transition:.3s;}
+.contact-btn:hover{background:#00b4ff;}
+footer{text-align:center;padding:40px;color:#666;margin-top:80px;}
 @media(max-width:768px){
-
-.menu-btn{
-display:block;
+  .menu-btn{display:block;}
+  .nav-links{position:absolute;top:70px;right:0;background:#0a0f14;flex-direction:column;width:220px;padding:25px;display:none;}
+  .nav-links.active{display:flex;}
+  .hero h1{font-size:38px;}
+  .hero p{font-size:17px;}
+  .section h2{font-size:32px;}
 }
-
-.nav-links{
-position:absolute;
-top:70px;
-right:0;
-background:#0a0f14;
-flex-direction:column;
-width:220px;
-padding:25px;
-display:none;
-}
-
-.nav-links.active{
-display:flex;
-}
-
-.hero h1{
-font-size:38px;
-}
-
-.hero p{
-font-size:17px;
-}
-
-.section h2{
-font-size:32px;
-}
-
-}
-
 </style>
 </head>
-
 <body>
-
 <canvas id="bg"></canvas>
 <div class="gradient"></div>
 
 <nav>
-
-<div class="logo">LEVELUP STUDIO</div>
-
-<div class="nav-links" id="navLinks">
-<a href="#about">ABOUT</a>
-<a href="#games">GAME</a>
-<a href="#team">TEAM</a>
-<a href="#contact">CONTACT</a>
-</div>
-
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
+  <div class="logo">LEVELUP STUDIO</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about" id="nav-about">ABOUT</a>
+    <a href="#games" id="nav-game">GAME</a>
+    <a href="#contact" id="nav-contact">CONTACT</a>
+  </div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </nav>
 
 <section class="hero">
-
-<img src="logo.png">
-
-<p>Creating immersive gameplay experiences for players.</p>
-
-<button class="cta" onclick="scrollToGames()">View Our Game</button>
-
+  <img src="logo.png">
+  <p id="hero-sub">플레이어를 위한 몰입형 게임 경험을 만듭니다.</p>
+  <button class="cta" onclick="scrollToGames()" id="hero-cta">게임 보기</button>
 </section>
-
 
 <section id="about" class="section">
-
-<h2>About Us</h2>
-
-<p>
-Levelup Studio is an independent game development studio dedicated to crafting
-memorable gameplay experiences. Our mission is to build games that players
-truly connect with through creativity, iteration, and passion.
-</p>
-
+  <h2 id="about-title">About Us</h2>
+  <p id="about-body">LevelUp Studio는 독립 게임 개발 스튜디오로, 플레이어가 진심으로 공감할 수 있는 게임을 만들기 위해 창의성과 열정으로 임하고 있습니다.</p>
 </section>
 
-
 <section id="games" class="section">
-
-<h2>Our Games</h2>
-
-<div class="games">
-
-<div class="game-card">
-<div class="game-title">D.D.D: See ya in respawn</div>
-<p>
-A unique gameplay experience currently in development.
-Stay tuned for updates.
-</p>
-</div>
-
-<div class="game-card">
-<div class="game-title">Future Project</div>
-<p>
-More exciting titles are currently being developed by our team.
-</p>
-</div>
-
-</div>
-
+  <h2 id="games-title">Our Games</h2>
+  <div class="games">
+    <a class="game-card-link" href="#" id="ddd-link">
+      <div class="game-card">
+        <div class="game-title">D.D.D: See Ya in Respawn</div>
+        <p id="ddd-desc">실시간 탑다운 PvP 슈터. 지금 바로 플레이하세요!</p>
+        <div class="game-badge" id="ddd-badge">지금 출시 →</div>
+      </div>
+    </a>
+    <div class="game-card">
+      <div class="game-title" id="future-title">Future Project</div>
+      <p id="future-desc">더 많은 타이틀이 개발 중입니다.</p>
+    </div>
+  </div>
 </section>
 
 <section id="contact" class="section">
-
-<h2>Contact</h2>
-
-<p>admin@levelupdevs.com</p>
-
-<a class="contact-btn" href="mailto:admin@levelupdevs.com">Send Email</a>
-
+  <h2 id="contact-title">Contact</h2>
+  <p>admin@levelupdevs.com</p>
+  <a class="contact-btn" href="mailto:admin@levelupdevs.com" id="contact-btn">Send Email</a>
 </section>
 
-
-<footer>
-© 2026 LevelUp Studio Co., Ltd.
-</footer>
-
+<footer>© 2026 LevelUp Studio Co., Ltd.</footer>
 
 <script>
+const T = {
+  ko: {
+    navAbout:"ABOUT", navGame:"GAME", navContact:"CONTACT",
+    heroSub:"플레이어와 함께 만들어가는 게임.",
+    heroCta:"게임 보기",
+    aboutTitle:"About Us",
+    aboutBody:"LevelUp Studio는 플레이어가 진심으로 즐길 수 있는 게임을 만드는 독립 게임 스튜디오입니다. 창의성과 반복, 그리고 열정으로 기억에 남는 플레이 경험을 추구합니다.",
+    gamesTitle:"Our Games",
+    dddDesc:"개성 넘치는 캐릭터들과 함께하는 실시간 탑다운 PvP 슈터. 지금 바로 플레이하세요!",
+    dddBadge:"플레이하기 →",
+    futureTitle:"Future Project",
+    futureDesc:"다음 프로젝트를 준비 중입니다. 기대해 주세요.",
+    contactTitle:"Contact", contactBtn:"이메일 보내기",
+  },
+  en: {
+    navAbout:"ABOUT", navGame:"GAME", navContact:"CONTACT",
+    heroSub:"Creating immersive gameplay experiences for players.",
+    heroCta:"View Our Game",
+    aboutTitle:"About Us",
+    aboutBody:"Levelup Studio is an independent game development studio dedicated to crafting memorable gameplay experiences. Our mission is to build games that players truly connect with through creativity, iteration, and passion.",
+    gamesTitle:"Our Games",
+    dddDesc:"Real-time top-down PvP shooter. Play now!",
+    dddBadge:"Available Now →",
+    futureTitle:"Future Project",
+    futureDesc:"More exciting titles are currently being developed by our team.",
+    contactTitle:"Contact", contactBtn:"Send Email",
+  },
+  id: {
+    navAbout:"TENTANG", navGame:"GAME", navContact:"KONTAK",
+    heroSub:"Menciptakan pengalaman gameplay imersif untuk para pemain.",
+    heroCta:"Lihat Game Kami",
+    aboutTitle:"Tentang Kami",
+    aboutBody:"LevelUp Studio adalah studio pengembangan game independen yang berdedikasi untuk menciptakan pengalaman bermain yang berkesan.",
+    gamesTitle:"Game Kami",
+    dddDesc:"Shooter PvP top-down real-time. Main sekarang!",
+    dddBadge:"Tersedia Sekarang →",
+    futureTitle:"Proyek Mendatang",
+    futureDesc:"Lebih banyak judul menarik sedang dikembangkan.",
+    contactTitle:"Kontak", contactBtn:"Kirim Email",
+  },
+  ms: {
+    navAbout:"TENTANG", navGame:"PERMAINAN", navContact:"HUBUNGI",
+    heroSub:"Mencipta pengalaman permainan yang imersif untuk pemain.",
+    heroCta:"Lihat Permainan Kami",
+    aboutTitle:"Tentang Kami",
+    aboutBody:"LevelUp Studio ialah studio pembangunan permainan bebas yang berdedikasi untuk mencipta pengalaman bermain yang tidak terlupakan.",
+    gamesTitle:"Permainan Kami",
+    dddDesc:"Penembak PvP top-down masa nyata. Main sekarang!",
+    dddBadge:"Tersedia Sekarang →",
+    futureTitle:"Projek Akan Datang",
+    futureDesc:"Lebih banyak tajuk menarik sedang dibangunkan.",
+    contactTitle:"Hubungi", contactBtn:"Hantar E-mel",
+  },
+  zh: {
+    navAbout:"关于", navGame:"游戏", navContact:"联系",
+    heroSub:"为玩家打造沉浸式游戏体验。",
+    heroCta:"查看游戏",
+    aboutTitle:"关于我们",
+    aboutBody:"LevelUp Studio 是一家独立游戏开发工作室，致力于打造令玩家难忘的游戏体验。",
+    gamesTitle:"我们的游戏",
+    dddDesc:"实时俯视角PvP射击游戏。立即游玩！",
+    dddBadge:"现已上线 →",
+    futureTitle:"未来项目",
+    futureDesc:"更多精彩游戏正在开发中。",
+    contactTitle:"联系我们", contactBtn:"发送邮件",
+  },
+  fr: {
+    navAbout:"À PROPOS", navGame:"JEU", navContact:"CONTACT",
+    heroSub:"Créer des expériences de jeu immersives pour les joueurs.",
+    heroCta:"Voir Notre Jeu",
+    aboutTitle:"À Propos",
+    aboutBody:"LevelUp Studio est un studio de développement de jeux indépendant dédié à la création d'expériences de jeu mémorables.",
+    gamesTitle:"Nos Jeux",
+    dddDesc:"Shooter PvP top-down en temps réel. Jouez maintenant !",
+    dddBadge:"Disponible Maintenant →",
+    futureTitle:"Projet Futur",
+    futureDesc:"D'autres titres passionnants sont en cours de développement.",
+    contactTitle:"Contact", contactBtn:"Envoyer un Email",
+  },
+};
 
-/* MOBILE MENU */
-
-function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active")
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (!p) return "ko";
+  return T[p] ? p : "en";
 }
 
+function render() {
+  const l = getLang();
+  const t = T[l];
+  const langParam = l === "ko" ? "" : "?lang=" + l;
+
+  document.getElementById("nav-about").textContent = t.navAbout;
+  document.getElementById("nav-game").textContent = t.navGame;
+  document.getElementById("nav-contact").textContent = t.navContact;
+  document.getElementById("hero-sub").textContent = t.heroSub;
+  document.getElementById("hero-cta").textContent = t.heroCta;
+  document.getElementById("about-title").textContent = t.aboutTitle;
+  document.getElementById("about-body").textContent = t.aboutBody;
+  document.getElementById("games-title").textContent = t.gamesTitle;
+  document.getElementById("ddd-desc").textContent = t.dddDesc;
+  document.getElementById("ddd-badge").textContent = t.dddBadge;
+  document.getElementById("ddd-link").href = "https://levelupstudio.co.kr/ddd/" + langParam;
+  document.getElementById("future-title").textContent = t.futureTitle;
+  document.getElementById("future-desc").textContent = t.futureDesc;
+  document.getElementById("contact-title").textContent = t.contactTitle;
+  document.getElementById("contact-btn").textContent = t.contactBtn;
+}
+
+render();
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
 function scrollToGames(){
-document.getElementById("games").scrollIntoView({behavior:"smooth"})
+  document.getElementById("games").scrollIntoView({behavior:"smooth"});
 }
 
 /* PARTICLE BG */
-
-const canvas=document.getElementById("bg")
-const ctx=canvas.getContext("2d")
-
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-
-let particles=[]
-
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
 class Particle{
-
-constructor(){
-this.x=Math.random()*canvas.width
-this.y=Math.random()*canvas.height
-this.size=Math.random()*2
-this.vx=(Math.random()-.5)*.4
-this.vy=(Math.random()-.5)*.4
+  constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;}
+  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0)this.x=canvas.width;if(this.x>canvas.width)this.x=0;if(this.y<0)this.y=canvas.height;if(this.y>canvas.height)this.y=0;}
+  draw(){ctx.fillStyle="rgba(0,160,255,.6)";ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}
 }
-
-update(){
-this.x+=this.vx
-this.y+=this.vy
-
-if(this.x<0) this.x=canvas.width
-if(this.x>canvas.width) this.x=0
-if(this.y<0) this.y=canvas.height
-if(this.y>canvas.height) this.y=0
-}
-
-draw(){
-ctx.fillStyle="rgba(0,160,255,.6)"
-ctx.beginPath()
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2)
-ctx.fill()
-}
-
-}
-
-for(let i=0;i<150;i++){
-particles.push(new Particle())
-}
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-particles.forEach(p=>{
-p.update()
-p.draw()
-})
-
-requestAnimationFrame(animate)
-
-}
-
-animate()
-
-window.addEventListener("resize",()=>{
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
-})
-
+for(let i=0;i<150;i++)particles.push(new Particle());
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+animate();
+window.addEventListener("resize",()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 </script>
-
 </body>
 </html>
-```
