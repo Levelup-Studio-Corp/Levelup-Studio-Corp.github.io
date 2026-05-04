@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D.D.D.: See Ya in Respawn</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05080c;
+  --accent: #00b4ff;
+  --accent2: #ff4e00;
+  --text: #e8f2fa;
+  --muted: #4a6a84;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  overflow-x: hidden;
+}
+
+/* BG EFFECTS */
+.bg-grid {
+  position: fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,180,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.bg-glow {
+  position: fixed; top:-20%; left:50%; transform:translateX(-50%);
+  width:800px; height:600px; border-radius:50%;
+  background: radial-gradient(ellipse, rgba(0,140,255,0.12) 0%, transparent 70%);
+  z-index:0; pointer-events:none;
+}
+
+/* NAV */
+nav {
+  position: fixed; top:0; width:100%; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 40px;
+  background: rgba(5,8,12,0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:18px; letter-spacing:3px; opacity:.7; }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a { color:var(--text); text-decoration:none; font-size:13px; font-weight:500; letter-spacing:1px; opacity:.6; transition:.2s; text-transform:uppercase; }
+.nav-links a:hover { opacity:1; color:var(--accent); }
+.nav-store { display:flex; gap:12px; }
+.btn-store {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 16px; border-radius:8px; font-size:12px; font-weight:600;
+  text-decoration:none; letter-spacing:.5px; transition:.2s;
+  border: 1px solid var(--border);
+  color:var(--text); background: rgba(255,255,255,0.06);
+}
+.btn-store:hover { background:var(--accent); border-color:var(--accent); color:#000; }
+.btn-store svg { width:14px; height:14px; }
+
+/* HERO */
+.hero {
+  position:relative; z-index:1;
+  min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:100px 20px 60px;
+}
+.hero-eyebrow {
+  font-size:11px; font-weight:700; letter-spacing:4px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:20px;
+  display:flex; align-items:center; gap:10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content:''; display:block; width:40px; height:1px; background:var(--accent); opacity:.4;
+}
+.hero-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(64px, 12vw, 130px);
+  font-weight:900; line-height:.9; letter-spacing:-2px;
+  text-transform:uppercase;
+  background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+  animation: heroIn 1s cubic-bezier(.2,.65,.3,1) forwards;
+  opacity:0; transform:translateY(30px);
+}
+.hero-sub {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(18px, 4vw, 28px); font-weight:400; letter-spacing:6px;
+  color:var(--muted); text-transform:uppercase; margin-bottom:40px;
+  animation: heroIn 1s cubic-bezier(.2,.65,.3,1) .15s forwards;
+  opacity:0; transform:translateY(20px);
+}
+@keyframes heroIn { to { opacity:1; transform:translateY(0); } }
+
+/* VIDEO */
+.video-wrap {
+  width:100%; max-width:800px;
+  border-radius:16px; overflow:hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 80px rgba(0,180,255,0.15);
+  margin-bottom:48px;
+  animation: heroIn 1s cubic-bezier(.2,.65,.3,1) .3s forwards;
+  opacity:0;
+  aspect-ratio:16/9;
+}
+.video-wrap iframe { width:100%; height:100%; display:block; border:none; }
+
+.hero-cta { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 32px; border-radius:10px;
+  font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:2px;
+  text-decoration:none; text-transform:uppercase; transition:.2s;
+  background: linear-gradient(135deg, var(--accent), #0070cc);
+  color:#fff; border:none;
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(0,180,255,0.3); }
+.btn-secondary {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 32px; border-radius:10px;
+  font-family:'Barlow Condensed',sans-serif; font-size:16px; font-weight:700; letter-spacing:2px;
+  text-decoration:none; text-transform:uppercase; transition:.2s;
+  background: rgba(255,255,255,0.06); color:var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
+
+/* SECTIONS */
+section { position:relative; z-index:1; padding:100px 20px; }
+.section-inner { max-width:1000px; margin:auto; }
+.section-label {
+  font-size:11px; font-weight:700; letter-spacing:4px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:16px;
+}
+.section-title {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(40px, 6vw, 72px); font-weight:900; line-height:1;
+  text-transform:uppercase; margin-bottom:24px; letter-spacing:-1px;
+}
+.section-body { font-size:16px; color:var(--muted); line-height:1.8; max-width:600px; }
+
+/* FEATURES GRID */
+.features-grid {
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px; margin-top:60px;
+}
+.feature-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; padding:28px 24px;
+  transition:.3s;
+}
+.feature-card:hover { border-color:rgba(0,180,255,0.3); transform:translateY(-4px); }
+.feature-icon { font-size:28px; margin-bottom:14px; }
+.feature-name {
+  font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700;
+  letter-spacing:1px; text-transform:uppercase; color:#fff; margin-bottom:8px;
+}
+.feature-desc { font-size:13px; color:var(--muted); line-height:1.6; }
+
+/* SCREENSHOTS */
+.screenshots {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:12px; margin-top:48px;
+}
+.shot {
+  border-radius:10px; overflow:hidden; border:1px solid var(--border);
+  aspect-ratio:16/9; background:#0a0f14;
+  transition:.3s;
+}
+.shot:hover { transform:scale(1.02); border-color:rgba(0,180,255,0.3); }
+.shot img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* DOWNLOAD */
+.download-section {
+  text-align:center;
+  background: linear-gradient(135deg, rgba(0,140,255,0.08), rgba(0,70,130,0.05));
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+}
+.store-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:40px; }
+.btn-store-lg {
+  display:inline-flex; align-items:center; gap:14px;
+  padding:18px 32px; border-radius:14px;
+  background:rgba(255,255,255,0.06); border:1px solid var(--border);
+  color:var(--text); text-decoration:none; transition:.3s;
+  min-width:200px;
+}
+.btn-store-lg:hover { background:var(--accent); border-color:var(--accent); color:#000; }
+.btn-store-lg:hover .store-label { color:#000; }
+.store-icon { font-size:28px; }
+.store-info { text-align:left; }
+.store-sub { font-size:11px; opacity:.6; letter-spacing:1px; text-transform:uppercase; }
+.store-name { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:700; letter-spacing:1px; }
+.store-label { color:var(--text); }
+
+/* FOOTER */
+footer {
+  position:relative; z-index:1;
+  text-align:center; padding:40px 20px;
+  border-top:1px solid var(--border);
+  font-size:12px; color:#2a3a4a;
+}
+.footer-links { display:flex; gap:24px; justify-content:center; margin-bottom:12px; flex-wrap:wrap; }
+.footer-links a { color:var(--muted); text-decoration:none; font-size:12px; transition:.2s; }
+.footer-links a:hover { color:var(--accent); }
+
+/* DIVIDER */
+.divider { width:60px; height:3px; background:linear-gradient(90deg,var(--accent),transparent); margin-bottom:24px; }
+
+/* MOBILE */
+@media(max-width:768px) {
+  nav { padding:14px 20px; }
+  .nav-links { display:none; }
+  .hero { padding:80px 16px 40px; }
+  section { padding:60px 16px; }
+  .store-btns { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<nav>
+  <div class="nav-logo">LEVELUP STUDIO</div>
+  <div class="nav-links">
+    <a href="#about" id="nav-about">About</a>
+    <a href="#screenshots" id="nav-screenshots">Screenshots</a>
+    <a href="#download" id="nav-download">Download</a>
+  </div>
+  <div class="nav-store">
+    <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2l12.6-11.86-3.24-3.24L3.18 23.76zM20.54 10.2l-2.88-1.66-3.6 3.38 3.6 3.38 2.9-1.68c.83-.48.83-1.94-.02-2.42zM3.18.24L13.53 10.9l-3.24 3.24L3.18.24zM.54 1.64C.2 2 0 2.56 0 3.26v17.48c0 .7.2 1.26.54 1.62L13.1 9.86.54 1.64z"/></svg>
+      Google Play
+    </a>
+    <a class="btn-store" href="https://apps.apple.com/kr/app/d-d-d-see-ya-in-respawn/id6763499736" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow" id="hero-eyebrow">Now Available</div>
+  <h1 class="hero-title">D.D.D.</h1>
+  <p class="hero-sub" id="hero-sub">See Ya in Respawn</p>
+
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/4wBifBldQ-w?rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+
+  <div class="hero-cta">
+    <a class="btn-primary" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank" id="cta-google">Google Play</a>
+    <a class="btn-secondary" href="https://apps.apple.com/kr/app/d-d-d-see-ya-in-respawn/id6763499736" target="_blank" id="cta-apple">App Store</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label" id="about-label">About the Game</div>
+    <div class="divider"></div>
+    <h2 class="section-title" id="about-title">Real-Time<br>Top-Down PvP</h2>
+    <p class="section-body" id="about-body">You're invited to an exciting backyard gunfight with your mischievous neighborhood friends! Challenge for the #1 spot in this real-time top-down PvP shooter!</p>
+
+    <div class="features-grid" id="features-grid"></div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section id="screenshots">
+  <div class="section-inner">
+    <div class="section-label" id="shots-label">Screenshots</div>
+    <div class="divider"></div>
+    <h2 class="section-title" id="shots-title">Gameplay</h2>
+    <div class="screenshots">
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/-LrNLNEzDPpBJkuEAoo5oWDvIQBM4cqi2mKdYZfhn0kn7hWpasComsahiG_5381sgG4H54JQrDnAkYohNGsihQ=w526-h296" loading="lazy" alt="screenshot"></div>
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/UtP7gftjqC5kXaYQPFdZ3_c4wXQ-EeSdIdr-MzgduSrEI5U4k1anoE2aAHmWn3PrwEYQv8nZhe1m1Q8-gOvx4w=w526-h296" loading="lazy" alt="screenshot"></div>
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/U0WbisZmRmljaAfUehTnWTSHmHqOg3gMXCl4ON4MQnkN-FR4AKIeq-CWQ6u3uw4ERpdQl1HAwOaJkajL2PTKzA=w526-h296" loading="lazy" alt="screenshot"></div>
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/LQEuVizKtGQWGRRUQiHAqY7OGciSDC1gEfDRhuv1hV3EjG12LpS1xTDHLE5l6KQ9Nr0Or320WsrnMOisuJ1bUgc=w526-h296" loading="lazy" alt="screenshot"></div>
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/Gm5fUCGrSrY_7tHnSXZl9uRlwPEwX2KxodF9OL0ZEz2aPrbm7BChRrfB6-p0Gcgq-FC92gt7Zi23TBIfKICE=w526-h296" loading="lazy" alt="screenshot"></div>
+      <div class="shot"><img src="https://play-lh.googleusercontent.com/RTD4Lxczyzc6Nl9-gsBfHGNl0cXAGMalafB3RWJsyqeMdSEKqRcttQc3nHAdKpSfEg9zqOCMITQZ32Mvpa3OSw=w526-h296" loading="lazy" alt="screenshot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download-section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" id="dl-label" style="justify-content:center;display:flex;">Download</div>
+    <div class="divider" style="margin:0 auto 24px;"></div>
+    <h2 class="section-title" id="dl-title">Play Now. Free.</h2>
+    <p class="section-body" style="margin:0 auto;" id="dl-body">Available on Android and iOS. Jump into the action right now.</p>
+    <div class="store-btns">
+      <a class="btn-store-lg" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank">
+        <div class="store-icon">🎮</div>
+        <div class="store-info">
+          <div class="store-sub" id="dl-google-sub">Get it on</div>
+          <div class="store-name store-label">Google Play</div>
+        </div>
+      </a>
+      <a class="btn-store-lg" href="https://apps.apple.com/kr/app/d-d-d-see-ya-in-respawn/id6763499736" target="_blank">
+        <div class="store-icon">🍎</div>
+        <div class="store-info">
+          <div class="store-sub" id="dl-apple-sub">Download on the</div>
+          <div class="store-name store-label">App Store</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://www.youtube.com/@LevelUpStudio-i1n" target="_blank">YouTube</a>
+    <a href="mailto:admin@levelupdevs.com">Contact</a>
+    <a href="https://www.levelupstudio.co.kr">LevelUp Studio</a>
+  </div>
+  <div>© 2026 LevelUp Studio Co., Ltd.</div>
+</footer>
+
+<script>
+const T = {
+  ko: {
+    heroEyebrow: "지금 출시",
+    heroSub: "리스폰에서 만나",
+    navAbout: "소개", navShots: "스크린샷", navDl: "다운로드",
+    aboutLabel: "게임 소개", aboutTitle: "실시간\n탑다운 PvP",
+    aboutBody: "개성 넘치는 동네 친구들과 신나는 뒷마당 총싸움에 초대합니다! 실시간 탑다운 PvP 슈터에서 1위를 노려보세요!",
+    shotsLabel: "스크린샷", shotsTitle: "게임플레이",
+    dlLabel: "다운로드", dlTitle: "지금 바로. 무료로.", dlBody: "안드로이드와 iOS에서 이용 가능합니다.",
+    dlGoogleSub: "다운로드", dlAppleSub: "다운로드",
+    features: [
+      { icon:"🔫", name:"4가지 무기 클래스", desc:"권총, 소총, 저격총, 산탄총. 각각의 개성 있는 플레이스타일." },
+      { icon:"⚡", name:"퍽 커스터마이징", desc:"도탄, 관통, 스피드 부스트 등 퍽 조합으로 완전히 다른 전략이 펼쳐집니다." },
+      { icon:"💣", name:"맵을 바꾸는 투척물", desc:"지형지물을 활용해 전세를 역전시키세요." },
+      { icon:"🏆", name:"즉시 PvP 매칭", desc:"접속하는 순간 바로 실전! 빠른 캐주얼 전투를 즐기세요." },
+    ]
+  },
+  en: {
+    heroEyebrow: "Now Available",
+    heroSub: "See Ya in Respawn",
+    navAbout: "About", navShots: "Screenshots", navDl: "Download",
+    aboutLabel: "About the Game", aboutTitle: "Real-Time\nTop-Down PvP",
+    aboutBody: "You're invited to an exciting backyard gunfight with your mischievous neighborhood friends! Challenge for the #1 spot in this real-time top-down PvP shooter!",
+    shotsLabel: "Screenshots", shotsTitle: "Gameplay",
+    dlLabel: "Download", dlTitle: "Play Now. Free.", dlBody: "Available on Android and iOS. Jump into the action right now.",
+    dlGoogleSub: "Get it on", dlAppleSub: "Download on the",
+    features: [
+      { icon:"🔫", name:"4 Weapon Classes", desc:"Pistol, Rifle, Sniper, Shotgun — each with a unique playstyle." },
+      { icon:"⚡", name:"Perk Customization", desc:"Ricochet, pierce, speed boost and more. Same gun, totally different strategy." },
+      { icon:"💣", name:"Shape the Map", desc:"Use throwables to control the battlefield and turn the tide." },
+      { icon:"🏆", name:"Instant PvP", desc:"Jump into real battles the moment you log in. Fast, casual, competitive." },
+    ]
+  },
+  id: {
+    heroEyebrow: "Tersedia Sekarang",
+    heroSub: "Sampai Jumpa di Respawn",
+    navAbout: "Tentang", navShots: "Tangkapan Layar", navDl: "Unduh",
+    aboutLabel: "Tentang Game", aboutTitle: "PvP\nTop-Down Real-Time",
+    aboutBody: "Kamu diundang ke pertarungan seru di halaman belakang bersama teman-teman nakal! Rebut posisi #1 di shooter PvP top-down real-time ini!",
+    shotsLabel: "Tangkapan Layar", shotsTitle: "Gameplay",
+    dlLabel: "Unduh", dlTitle: "Main Sekarang. Gratis.", dlBody: "Tersedia di Android dan iOS.",
+    dlGoogleSub: "Dapatkan di", dlAppleSub: "Unduh di",
+    features: [
+      { icon:"🔫", name:"4 Kelas Senjata", desc:"Pistol, Senapan, Sniper, Shotgun — masing-masing dengan gaya unik." },
+      { icon:"⚡", name:"Kustomisasi Perk", desc:"Kombinasikan perk untuk strategi yang benar-benar berbeda." },
+      { icon:"💣", name:"Ubah Peta", desc:"Gunakan lempar untuk mengendalikan medan pertempuran." },
+      { icon:"🏆", name:"PvP Instan", desc:"Langsung bertarung begitu login. Cepat, kasual, kompetitif." },
+    ]
+  },
+  ms: {
+    heroEyebrow: "Kini Tersedia",
+    heroSub: "Jumpa di Respawn",
+    navAbout: "Tentang", navShots: "Tangkapan Skrin", navDl: "Muat Turun",
+    aboutLabel: "Tentang Permainan", aboutTitle: "PvP\nTop-Down Masa Nyata",
+    aboutBody: "Anda dijemput ke pertarungan sengit di halaman belakang bersama kawan-kawan nakal! Rebut tempat #1 dalam shooter PvP top-down masa nyata ini!",
+    shotsLabel: "Tangkapan Skrin", shotsTitle: "Gameplay",
+    dlLabel: "Muat Turun", dlTitle: "Main Sekarang. Percuma.", dlBody: "Tersedia di Android dan iOS.",
+    dlGoogleSub: "Dapatkan di", dlAppleSub: "Muat turun di",
+    features: [
+      { icon:"🔫", name:"4 Kelas Senjata", desc:"Pistol, Senapang, Sniper, Shotgun — masing-masing dengan gaya tersendiri." },
+      { icon:"⚡", name:"Penyesuaian Perk", desc:"Gabungkan perk untuk strategi yang benar-benar berbeza." },
+      { icon:"💣", name:"Ubah Peta", desc:"Gunakan bahan lempar untuk mengawal medan perang." },
+      { icon:"🏆", name:"PvP Segera", desc:"Terus bertarung sebaik log masuk. Pantas, kasual, kompetitif." },
+    ]
+  },
+  zh: {
+    heroEyebrow: "现已上线",
+    heroSub: "重生见",
+    navAbout: "关于", navShots: "截图", navDl: "下载",
+    aboutLabel: "游戏介绍", aboutTitle: "实时\n俯视角PvP",
+    aboutBody: "与调皮的邻居朋友们展开一场刺激的后院枪战！在这款实时俯视角PvP射击游戏中争夺第一名！",
+    shotsLabel: "截图", shotsTitle: "游戏画面",
+    dlLabel: "下载", dlTitle: "立即畅玩。免费。", dlBody: "支持安卓和iOS，现在就加入战斗！",
+    dlGoogleSub: "下载于", dlAppleSub: "下载于",
+    features: [
+      { icon:"🔫", name:"4种武器类型", desc:"手枪、步枪、狙击枪、霰弹枪，各具独特玩法。" },
+      { icon:"⚡", name:"技能自定义", desc:"组合弹跳、穿透、加速等技能，打造独一无二的策略。" },
+      { icon:"💣", name:"改变地图", desc:"利用投掷物掌控战场局势。" },
+      { icon:"🏆", name:"即时PvP", desc:"登录即战，快节奏休闲竞技。" },
+    ]
+  },
+  fr: {
+    heroEyebrow: "Disponible Maintenant",
+    heroSub: "À la Prochaine au Respawn",
+    navAbout: "À propos", navShots: "Captures", navDl: "Télécharger",
+    aboutLabel: "À propos du jeu", aboutTitle: "PvP\nTop-Down en Temps Réel",
+    aboutBody: "Vous êtes invité à un gunfight palpitant dans la cour avec vos amis du quartier ! Visez la première place dans ce shooter PvP top-down en temps réel !",
+    shotsLabel: "Captures d'écran", shotsTitle: "Gameplay",
+    dlLabel: "Télécharger", dlTitle: "Jouez Maintenant. Gratuit.", dlBody: "Disponible sur Android et iOS.",
+    dlGoogleSub: "Disponible sur", dlAppleSub: "Télécharger sur",
+    features: [
+      { icon:"🔫", name:"4 Classes d'Armes", desc:"Pistolet, Fusil, Sniper, Shotgun — chacun avec son style unique." },
+      { icon:"⚡", name:"Personnalisation", desc:"Combinez les perks pour une stratégie totalement différente." },
+      { icon:"💣", name:"Façonnez la Carte", desc:"Utilisez les grenades pour contrôler le champ de bataille." },
+      { icon:"🏆", name:"PvP Instantané", desc:"Combat immédiat dès la connexion. Rapide, casual, compétitif." },
+    ]
+  }
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (!p) return "ko";
+  return T[p] ? p : "en";
+}
+
+function render() {
+  const l = getLang();
+  const t = T[l];
+  document.documentElement.lang = l;
+
+  document.getElementById("hero-eyebrow").childNodes[1].textContent = t.heroEyebrow;
+  document.getElementById("hero-sub").textContent = t.heroSub;
+  document.getElementById("nav-about").textContent = t.navAbout;
+  document.getElementById("nav-screenshots").textContent = t.navShots;
+  document.getElementById("nav-download").textContent = t.navDl;
+  document.getElementById("about-label").textContent = t.aboutLabel;
+  document.getElementById("about-title").innerHTML = t.aboutTitle.replace("\n","<br>");
+  document.getElementById("about-body").textContent = t.aboutBody;
+  document.getElementById("shots-label").textContent = t.shotsLabel;
+  document.getElementById("shots-title").textContent = t.shotsTitle;
+  document.getElementById("dl-label").textContent = t.dlLabel;
+  document.getElementById("dl-title").textContent = t.dlTitle;
+  document.getElementById("dl-body").textContent = t.dlBody;
+  document.getElementById("dl-google-sub").textContent = t.dlGoogleSub;
+  document.getElementById("dl-apple-sub").textContent = t.dlAppleSub;
+
+  document.getElementById("features-grid").innerHTML = t.features.map(f => `
+    <div class="feature-card">
+      <div class="feature-icon">${f.icon}</div>
+      <div class="feature-name">${f.name}</div>
+      <div class="feature-desc">${f.desc}</div>
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
