@@ -32,6 +32,14 @@ h1{font-size:32px;font-weight:700;color:#fff;margin-bottom:6px;text-align:center
 .feature-desc{font-size:12px;color:#5a7a96;line-height:1.7;padding-left:18px;}
 .feature-desc li{list-style:none;display:block;padding-left:14px;position:relative;margin-bottom:4px;}
 .feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+.lang-selector{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:.2s;white-space:nowrap;}
+.lang-btn:hover{background:rgba(255,255,255,0.1);}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#0d1520;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;min-width:110px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:.15s;color:rgba(255,255,255,0.6);}
+.lang-option:hover{background:rgba(255,255,255,0.06);color:white;}
+.lang-option.active{color:#56c4ff;}
 footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
 </style>
 </head>
@@ -39,7 +47,20 @@ footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
 <div class="gradient"></div>
 <nav>
   <a class="nav-logo" href="#" id="nav-logo-link">LEVELUP STUDIO</a>
-  <a class="nav-back" href="#" id="nav-back-link">◀ D.D.D.</a>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="nav-back" href="#" id="nav-back-link">◀ D.D.D.</a>
+    <div class="lang-selector">
+      <div class="lang-btn" onclick="toggleLangMenu()"><span id="lang-current">🇰🇷 KO</span> ▾</div>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option" data-lang="ko">🇰🇷 KO</div>
+        <div class="lang-option" data-lang="en">🇺🇸 EN</div>
+        <div class="lang-option" data-lang="id">🇮🇩 ID</div>
+        <div class="lang-option" data-lang="ms">🇲🇾 MS</div>
+        <div class="lang-option" data-lang="zh">🇨🇳 ZH</div>
+        <div class="lang-option" data-lang="fr">🇫🇷 FR</div>
+      </div>
+    </div>
+  </div>
 </nav>
 <div class="status-badge">
   <div class="status-dot"></div>
@@ -266,17 +287,52 @@ const TEXTS = {
   }
 };
 
+const LANGS = [
+  {code:"ko", flag:"🇰🇷"}, {code:"en", flag:"🇺🇸"}, {code:"id", flag:"🇮🇩"},
+  {code:"ms", flag:"🇲🇾"}, {code:"zh", flag:"🇨🇳"}, {code:"fr", flag:"🇫🇷"},
+];
+
 function getLang() {
-  const params = new URLSearchParams(window.location.search);
-  const lang = params.get("lang");
-  if (!lang) return "ko";
-  return TEXTS[lang] ? lang : "en";
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) { localStorage.setItem("lang", p); return p; }
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function setLang(code) {
+  localStorage.setItem("lang", code);
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", code);
+  window.location.href = url.toString();
+}
+
+function toggleLangMenu() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".lang-selector")) {
+    document.getElementById("lang-dropdown").classList.remove("open");
+  }
+  const opt = e.target.closest(".lang-option");
+  if (opt) setLang(opt.dataset.lang);
+});
+
+function updateLangUI(l) {
+  const entry = LANGS.find(x => x.code === l);
+  document.getElementById("lang-current").textContent = entry.flag + " " + l.toUpperCase();
+  document.querySelectorAll(".lang-option").forEach(el => {
+    el.classList.toggle("active", el.dataset.lang === l);
+  });
 }
 
 function render() {
   const lang = getLang();
   const t = TEXTS[lang];
   const langParam = lang === "ko" ? "" : "?lang=" + lang;
+  updateLangUI(lang);
 
   document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/" + langParam;
   document.getElementById("nav-back-link").href = "https://levelupstudio.co.kr/ddd/" + langParam;
