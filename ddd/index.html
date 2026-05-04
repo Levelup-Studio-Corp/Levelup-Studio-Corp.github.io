@@ -234,7 +234,7 @@ footer {
     <a href="#about" id="nav-about">About</a>
     <a href="#screenshots" id="nav-screenshots">Screenshots</a>
     <a href="#download" id="nav-download">Download</a>
-    <a href="https://levelupstudio.co.kr/maintenance/" id="nav-patch" target="_blank">Patch Notes</a>
+    <a href="#" id="nav-patch">Patch Notes</a>
   </div>
   <div class="nav-store">
     <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank">
@@ -438,6 +438,8 @@ function render() {
   document.getElementById("nav-screenshots").textContent = t.navShots;
   document.getElementById("nav-download").textContent = t.navDl;
   document.getElementById("nav-patch").textContent = t.navPatch;
+  const patchLang = l === "ko" ? "" : "?lang=" + l;
+  document.getElementById("nav-patch").href = "https://levelupstudio.co.kr/maintenance/" + patchLang;
   document.getElementById("about-label").textContent = t.aboutLabel;
   document.getElementById("about-title").innerHTML = t.aboutTitle.replace("\n","<br>");
   document.getElementById("about-body").textContent = t.aboutBody;
