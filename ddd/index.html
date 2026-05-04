@@ -229,11 +229,12 @@ footer {
 <div class="bg-glow"></div>
 
 <nav>
-  <a class="nav-logo" href="https://levelupstudio.co.kr/" style="text-decoration:none;color:inherit;">LEVELUP STUDIO</a>
+  <a class="nav-logo" href="https://levelupstudio.co.kr/" style="text-decoration:none;color:inherit;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;">LEVELUP STUDIO</a>
   <div class="nav-links">
     <a href="#about" id="nav-about">About</a>
     <a href="#screenshots" id="nav-screenshots">Screenshots</a>
     <a href="#download" id="nav-download">Download</a>
+    <a href="https://levelupstudio.co.kr/maintenance/" id="nav-patch" target="_blank">Patch Notes</a>
   </div>
   <div class="nav-store">
     <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank">
@@ -331,7 +332,7 @@ footer {
 const T = {
   ko: {
     heroEyebrow: "지금 출시",
-    navAbout: "소개", navShots: "스크린샷", navDl: "다운로드",
+    navAbout: "소개", navShots: "스크린샷", navDl: "다운로드", navPatch: "패치노트",
     aboutLabel: "게임 소개", aboutTitle: "실시간\n탑다운 PvP",
     aboutBody: "개성 넘치는 동네 친구들과 함께하는 뒷마당 총싸움! 4명의 개성 넘치는 캐릭터와 함께 실시간 탑다운 PvP 슈터에서 1등을 노려보세요.",
     shotsLabel: "스크린샷", shotsTitle: "게임플레이",
@@ -346,7 +347,7 @@ const T = {
   },
   en: {
     heroEyebrow: "Now Available",
-    navAbout: "About", navShots: "Screenshots", navDl: "Download",
+    navAbout: "About", navShots: "Screenshots", navDl: "Download", navPatch: "Patch Notes",
     aboutLabel: "About the Game", aboutTitle: "Real-Time\nTop-Down PvP",
     aboutBody: "You're invited to an exciting backyard gunfight with your mischievous neighborhood friends! Challenge for the #1 spot in this real-time top-down PvP shooter!",
     shotsLabel: "Screenshots", shotsTitle: "Gameplay",
@@ -361,7 +362,7 @@ const T = {
   },
   id: {
     heroEyebrow: "Tersedia Sekarang",
-    navAbout: "Tentang", navShots: "Tangkapan Layar", navDl: "Unduh",
+    navAbout: "Tentang", navShots: "Tangkapan Layar", navDl: "Unduh", navPatch: "Catatan Patch",
     aboutLabel: "Tentang Game", aboutTitle: "PvP\nTop-Down Real-Time",
     aboutBody: "Kamu diundang ke pertarungan seru di halaman belakang bersama teman-teman nakal! Rebut posisi #1 di shooter PvP top-down real-time ini!",
     shotsLabel: "Tangkapan Layar", shotsTitle: "Gameplay",
@@ -376,7 +377,7 @@ const T = {
   },
   ms: {
     heroEyebrow: "Kini Tersedia",
-    navAbout: "Tentang", navShots: "Tangkapan Skrin", navDl: "Muat Turun",
+    navAbout: "Tentang", navShots: "Tangkapan Skrin", navDl: "Muat Turun", navPatch: "Nota Patch",
     aboutLabel: "Tentang Permainan", aboutTitle: "PvP\nTop-Down Masa Nyata",
     aboutBody: "Anda dijemput ke pertarungan sengit di halaman belakang bersama kawan-kawan nakal! Rebut tempat #1 dalam shooter PvP top-down masa nyata ini!",
     shotsLabel: "Tangkapan Skrin", shotsTitle: "Gameplay",
@@ -391,7 +392,7 @@ const T = {
   },
   zh: {
     heroEyebrow: "现已上线",
-    navAbout: "关于", navShots: "截图", navDl: "下载",
+    navAbout: "关于", navShots: "截图", navDl: "下载", navPatch: "补丁说明",
     aboutLabel: "游戏介绍", aboutTitle: "实时\n俯视角PvP",
     aboutBody: "与调皮的邻居朋友们展开一场刺激的后院枪战！在这款实时俯视角PvP射击游戏中争夺第一名！",
     shotsLabel: "截图", shotsTitle: "游戏画面",
@@ -406,7 +407,7 @@ const T = {
   },
   fr: {
     heroEyebrow: "Disponible Maintenant",
-    navAbout: "À propos", navShots: "Captures", navDl: "Télécharger",
+    navAbout: "À propos", navShots: "Captures", navDl: "Télécharger", navPatch: "Notes de patch",
     aboutLabel: "À propos du jeu", aboutTitle: "PvP\nTop-Down en Temps Réel",
     aboutBody: "Vous êtes invité à un gunfight palpitant dans la cour avec vos amis du quartier ! Visez la première place dans ce shooter PvP top-down en temps réel !",
     shotsLabel: "Captures d'écran", shotsTitle: "Gameplay",
@@ -436,6 +437,7 @@ function render() {
   document.getElementById("nav-about").textContent = t.navAbout;
   document.getElementById("nav-screenshots").textContent = t.navShots;
   document.getElementById("nav-download").textContent = t.navDl;
+  document.getElementById("nav-patch").textContent = t.navPatch;
   document.getElementById("about-label").textContent = t.aboutLabel;
   document.getElementById("about-title").innerHTML = t.aboutTitle.replace("\n","<br>");
   document.getElementById("about-body").textContent = t.aboutBody;
