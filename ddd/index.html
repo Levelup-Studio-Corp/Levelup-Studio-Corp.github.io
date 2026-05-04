@@ -213,6 +213,16 @@ footer {
 /* DIVIDER */
 .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--accent),transparent); margin-bottom:24px; }
 
+/* LANG SELECTOR */
+.lang-selector{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:.2s;white-space:nowrap;}
+.lang-btn:hover{background:rgba(255,255,255,0.1);}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#0d1520;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;min-width:110px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:.15s;color:rgba(255,255,255,0.6);}
+.lang-option:hover{background:rgba(255,255,255,0.06);color:white;}
+.lang-option.active{color:#56c4ff;}
+
 /* MOBILE */
 @media(max-width:768px) {
   nav { padding:14px 20px; }
@@ -237,6 +247,17 @@ footer {
     <a href="#" id="nav-patch">Patch Notes</a>
   </div>
   <div class="nav-store">
+    <div class="lang-selector">
+      <div class="lang-btn" id="lang-btn" onclick="toggleLangMenu()"><span id="lang-current">🇰🇷 KO</span> ▾</div>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option" data-lang="ko">🇰🇷 KO</div>
+        <div class="lang-option" data-lang="en">🇺🇸 EN</div>
+        <div class="lang-option" data-lang="id">🇮🇩 ID</div>
+        <div class="lang-option" data-lang="ms">🇲🇾 MS</div>
+        <div class="lang-option" data-lang="zh">🇨🇳 ZH</div>
+        <div class="lang-option" data-lang="fr">🇫🇷 FR</div>
+      </div>
+    </div>
     <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.99.2l12.6-11.86-3.24-3.24L3.18 23.76zM20.54 10.2l-2.88-1.66-3.6 3.38 3.6 3.38 2.9-1.68c.83-.48.83-1.94-.02-2.42zM3.18.24L13.53 10.9l-3.24 3.24L3.18.24zM.54 1.64C.2 2 0 2.56 0 3.26v17.48c0 .7.2 1.26.54 1.62L13.1 9.86.54 1.64z"/></svg>
       Google Play
@@ -422,16 +443,52 @@ const T = {
   }
 };
 
+const LANGS = [
+  {code:"ko", flag:"🇰🇷"}, {code:"en", flag:"🇺🇸"}, {code:"id", flag:"🇮🇩"},
+  {code:"ms", flag:"🇲🇾"}, {code:"zh", flag:"🇨🇳"}, {code:"fr", flag:"🇫🇷"},
+];
+
 function getLang() {
   const p = new URLSearchParams(window.location.search).get("lang");
-  if (!p) return "ko";
-  return T[p] ? p : "en";
+  if (p && T[p]) { localStorage.setItem("lang", p); return p; }
+  const saved = localStorage.getItem("lang");
+  if (saved && T[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return T[os] ? os : "en";
+}
+
+function setLang(code) {
+  localStorage.setItem("lang", code);
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", code);
+  window.location.href = url.toString();
+}
+
+function toggleLangMenu() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".lang-selector")) {
+    document.getElementById("lang-dropdown").classList.remove("open");
+  }
+  const opt = e.target.closest(".lang-option");
+  if (opt) setLang(opt.dataset.lang);
+});
+
+function updateLangUI(l) {
+  const entry = LANGS.find(x => x.code === l);
+  document.getElementById("lang-current").textContent = entry.flag + " " + l.toUpperCase();
+  document.querySelectorAll(".lang-option").forEach(el => {
+    el.classList.toggle("active", el.dataset.lang === l);
+  });
 }
 
 function render() {
   const l = getLang();
   const t = T[l];
   document.documentElement.lang = l;
+  updateLangUI(l);
 
   const langParam = l === "ko" ? "" : "?lang=" + l;
   document.getElementById("nav-logo").href = "https://levelupstudio.co.kr/" + langParam;
