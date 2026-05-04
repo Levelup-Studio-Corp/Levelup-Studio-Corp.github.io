@@ -278,7 +278,7 @@ function render() {
   const t = TEXTS[lang];
   const langParam = lang === "ko" ? "" : "?lang=" + lang;
 
-  document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/";
+  document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/" + langParam;
   document.getElementById("nav-back-link").href = "https://levelupstudio.co.kr/ddd/" + langParam;
 
   document.getElementById("txt-title").textContent = t.title;
