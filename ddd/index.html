@@ -229,7 +229,7 @@ footer {
 <div class="bg-glow"></div>
 
 <nav>
-  <a class="nav-logo" href="https://levelupstudio.co.kr/" style="text-decoration:none;color:inherit;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;">LEVELUP STUDIO</a>
+  <a class="nav-logo" id="nav-logo" href="https://levelupstudio.co.kr/" style="text-decoration:none;color:inherit;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;">LEVELUP STUDIO</a>
   <div class="nav-links">
     <a href="#about" id="nav-about">About</a>
     <a href="#screenshots" id="nav-screenshots">Screenshots</a>
@@ -323,7 +323,7 @@ footer {
   <div class="footer-links">
     <a href="https://www.youtube.com/@LevelUpStudio-i1n" target="_blank">YouTube</a>
     <a href="mailto:admin@levelupdevs.com">Contact</a>
-    <a href="https://www.levelupstudio.co.kr">LevelUp Studio</a>
+    <a href="https://www.levelupstudio.co.kr" id="footer-main">LevelUp Studio</a>
   </div>
   <div>© 2026 LevelUp Studio Co., Ltd.</div>
 </footer>
@@ -433,13 +433,15 @@ function render() {
   const t = T[l];
   document.documentElement.lang = l;
 
+  const langParam = l === "ko" ? "" : "?lang=" + l;
+  document.getElementById("nav-logo").href = "https://levelupstudio.co.kr/" + langParam;
+  document.getElementById("footer-main").href = "https://levelupstudio.co.kr/" + langParam;
   document.getElementById("hero-eyebrow-text").textContent = t.heroEyebrow;
   document.getElementById("nav-about").textContent = t.navAbout;
   document.getElementById("nav-screenshots").textContent = t.navShots;
   document.getElementById("nav-download").textContent = t.navDl;
   document.getElementById("nav-patch").textContent = t.navPatch;
-  const patchLang = l === "ko" ? "" : "?lang=" + l;
-  document.getElementById("nav-patch").href = "https://levelupstudio.co.kr/maintenance/" + patchLang;
+  document.getElementById("nav-patch").href = "https://levelupstudio.co.kr/maintenance/" + langParam;
   document.getElementById("about-label").textContent = t.aboutLabel;
   document.getElementById("about-title").innerHTML = t.aboutTitle.replace("\n","<br>");
   document.getElementById("about-body").textContent = t.aboutBody;
