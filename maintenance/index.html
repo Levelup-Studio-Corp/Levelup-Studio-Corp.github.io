@@ -7,9 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
-body{background:#05080c;color:white;min-height:100vh;padding:40px 20px 60px;display:flex;flex-direction:column;align-items:center;}
+body{background:#05080c;color:white;min-height:100vh;padding:80px 20px 60px;display:flex;flex-direction:column;align-items:center;}
 .gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 10%,rgba(0,140,255,0.2),transparent 60%);z-index:-1;pointer-events:none;}
-.logo{font-weight:700;font-size:15px;letter-spacing:3px;opacity:.5;margin-bottom:36px;margin-top:10px;}
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(5,8,12,0.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08);z-index:100;}
+.nav-logo{font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;text-decoration:none;color:white;}
+.nav-back{font-size:13px;font-weight:500;letter-spacing:1px;opacity:.6;text-decoration:none;color:white;text-transform:uppercase;transition:.2s;}
+.nav-back:hover{opacity:1;color:#56c4ff;}
 .status-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,180,0,0.12);border:1px solid rgba(255,180,0,0.3);border-radius:30px;padding:8px 20px;margin-bottom:20px;}
 .status-dot{width:8px;height:8px;border-radius:50%;background:#ffb400;box-shadow:0 0 8px #ffb400;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
@@ -34,7 +37,10 @@ footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
 </head>
 <body>
 <div class="gradient"></div>
-<div class="logo">LEVELUP STUDIO</div>
+<nav>
+  <a class="nav-logo" href="#" id="nav-logo-link">LEVELUP STUDIO</a>
+  <a class="nav-back" href="#" id="nav-back-link">◀ D.D.D.</a>
+</nav>
 <div class="status-badge">
   <div class="status-dot"></div>
   <div class="status-text">UNDER MAINTENANCE</div>
@@ -270,6 +276,10 @@ function getLang() {
 function render() {
   const lang = getLang();
   const t = TEXTS[lang];
+  const langParam = lang === "ko" ? "" : "?lang=" + lang;
+
+  document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/";
+  document.getElementById("nav-back-link").href = "https://levelupstudio.co.kr/ddd/" + langParam;
 
   document.getElementById("txt-title").textContent = t.title;
   document.getElementById("txt-subtitle").textContent = t.subtitle;
