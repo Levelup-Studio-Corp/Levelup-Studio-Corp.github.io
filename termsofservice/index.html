@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service - LevelUp Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:#05080c;color:white;min-height:100vh;padding:80px 20px 60px;}
+.gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 10%,rgba(0,140,255,0.15),transparent 60%);z-index:-1;pointer-events:none;}
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(5,8,12,0.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08);z-index:100;}
+.nav-logo{font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;text-decoration:none;color:white;}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-back{font-size:13px;font-weight:500;letter-spacing:1px;opacity:.6;text-decoration:none;color:white;text-transform:uppercase;transition:.2s;}
+.nav-back:hover{opacity:1;color:#56c4ff;}
+.lang-selector{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:.2s;white-space:nowrap;}
+.lang-btn:hover{background:rgba(255,255,255,0.1);}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#0d1520;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;min-width:110px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:.15s;color:rgba(255,255,255,0.6);}
+.lang-option:hover{background:rgba(255,255,255,0.06);color:white;}
+.lang-option.active{color:#56c4ff;}
+.content{max-width:760px;margin:0 auto;padding-top:20px;}
+.page-title{font-size:28px;font-weight:700;color:#fff;margin-bottom:6px;}
+.page-subtitle{font-size:13px;color:#4a6a84;margin-bottom:6px;}
+.page-date{font-size:13px;color:#4a6a84;margin-bottom:40px;}
+.section{margin-bottom:32px;}
+.section h2{font-size:16px;font-weight:700;color:#56c4ff;letter-spacing:.5px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.section h3{font-size:14px;font-weight:600;color:#a0c4d8;margin:16px 0 8px;}
+.section p{font-size:14px;color:#8a9eb0;line-height:1.8;margin-bottom:10px;}
+.section ul{padding-left:0;margin-bottom:10px;}
+.section ul li{font-size:14px;color:#8a9eb0;line-height:1.8;padding-left:16px;position:relative;margin-bottom:4px;}
+.section ul li::before{content:"–";position:absolute;left:0;color:#3a5a76;}
+footer{text-align:center;padding:40px 20px;font-size:12px;color:#2a3a4a;border-top:1px solid rgba(255,255,255,0.06);margin-top:40px;}
+@media(max-width:768px){nav{padding:14px 20px;}.content{padding-top:10px;}.page-title{font-size:22px;}}
+</style>
+</head>
+<body>
+<div class="gradient"></div>
+<nav>
+  <a class="nav-logo" href="#" id="nav-logo-link">LEVELUP STUDIO</a>
+  <div class="nav-right">
+    <a class="nav-back" href="#" id="nav-back-link" style="display:none;">◀ D.D.D.</a>
+    <div class="lang-selector">
+      <div class="lang-btn" onclick="toggleLangMenu()"><span id="lang-current">🇰🇷 KO</span> ▾</div>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option" data-lang="ko">🇰🇷 KO</div>
+        <div class="lang-option" data-lang="en">🇺🇸 EN</div>
+        <div class="lang-option" data-lang="id">🇮🇩 ID</div>
+        <div class="lang-option" data-lang="ms">🇲🇾 MS</div>
+        <div class="lang-option" data-lang="zh">🇨🇳 ZH</div>
+        <div class="lang-option" data-lang="fr">🇫🇷 FR</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="page-title" id="page-title">서비스 이용약관</div>
+  <div class="page-subtitle" id="page-subtitle">(본 이용약관에는 영리목적 광고성 정보 수신동의에 관한 사항이 포함되어 있습니다.)</div>
+  <div class="page-date" id="page-date"></div>
+  <div id="doc-content"></div>
+</div>
+
+<footer>© 2026 LevelUp Studio Co., Ltd.</footer>
+
+<script>
+const LANGS = [
+  {code:"ko",flag:"🇰🇷"},{code:"en",flag:"🇺🇸"},{code:"id",flag:"🇮🇩"},
+  {code:"ms",flag:"🇲🇾"},{code:"zh",flag:"🇨🇳"},{code:"fr",flag:"🇫🇷"},
+];
+
+const DOCS = {
+  ko: {
+    title: "서비스 이용약관",
+    subtitle: "(본 이용약관에는 영리목적 광고성 정보 수신동의에 관한 사항이 포함되어 있습니다.)",
+    date: "",
+    sections: [
+      {h2:"개요", content:[
+        {p:"본 이용약관은 Levelup Studio(\"회사\")의 게임 및/또는 기타 서비스(\"서비스\")와 관련하여 회사와 이용자 사이에 권리, 의무 및 기타 필요한 사항을 정하는 법적 계약입니다."},
+      ]},
+      {h2:"약관 동의", content:[
+        {p:"이용자가 회사의 서비스에 접속하거나 이용하기 위해서는 본 약관의 내용에 동의하는 것을 원칙으로 합니다. 서비스 이용 전 본 약관을 읽어보신 뒤 이용하십시오."},
+        {p:"이용자가 미성년자일 경우에는 친권자 등 법정보호자의 동의를 얻은 후 본 서비스를 이용하십시오."},
+        {p:"본 약관은 App Store, Google Play, Facebook 등 회사의 게임과 관련된 모든 서비스 이용에 적용됩니다."},
+      ]},
+      {h2:"약관 변경", content:[
+        {p:"회사는 당사의 판단에 따라 언제든지 본 약관을 변경하거나 교체할 수 있습니다. 이용자가 계속해서 서비스를 이용하는 경우 갱신된 약관에 동의하는 것으로 간주됩니다."},
+        {p:"약관 변경 내용을 검토하기 위해 주기적으로 게임 내 설정 화면 또는 공식 커뮤니티의 공지사항을 참조해 주십시오."},
+      ]},
+      {h2:"계정", content:[
+        {p:"이용자는 로그인 정보의 보안을 스스로 유지해야 하며, 제3자의 무단 접근에 대한 위험을 감수하는 것에 동의합니다."},
+        {p:"계정이 삭제되는 경우, 계정과 연계된 모든 정보(게임 진행 상황, 가상 화폐, 가상 상품 등)에 대한 이용 권한을 잃게 됩니다."},
+        {p:"회사는 사전 통지 없이 이용자의 계정을 제한, 중단, 수정 및 삭제할 수 있습니다."},
+      ]},
+      {h2:"5-1. 가상 화폐 및 가상 상품", content:[
+        {p:"회사의 게임에는 가상 화폐(코인, 젬 등) 또는 가상 상품이 포함될 수 있습니다. 이용자는 현금 또는 기타 결제 수단으로 이를 구매할 수 있습니다."},
+        {p:"구매한 가상 화폐 및 가상 상품에는 금전적 가치가 없으며, 현금이나 실제 재화로 교환할 수 없습니다. 또한 제3자에게 양도할 수 없습니다."},
+        {p:"회사는 사전고지 없이 가상 화폐 또는 가상 상품을 관리, 조정, 변경 또는 제거할 수 있습니다."},
+      ]},
+      {h2:"5-2. 환불 정책", content:[
+        {p:"서비스 내 모든 가상 화폐 또는 가상 상품 구매는 원칙적으로 환불이 불가능합니다."},
+        {p:"단, 관련 법령에 의해 요구되는 경우이거나, 구매 후 7일 이내에 전부 미사용된 경우에는 구매 철회를 요청할 수 있습니다. 일부라도 사용된 경우 철회가 불가합니다."},
+        {p:"구매 철회는 help@levelupdevs.com 을 통해 요청할 수 있습니다."},
+        {p:"19세 미만 미성년자가 법정대리인의 동의 없이 거래한 경우 거래를 취소할 수 있습니다."},
+      ]},
+      {h2:"이용자 행동 및 콘텐츠", content:[
+        {p:"이용자는 서비스를 통해 제공하는 모든 콘텐츠에 대해 단독으로 책임을 집니다."},
+        {p:"다음과 같은 콘텐츠를 제공하지 않는 데 동의합니다:"},
+        {ul:["타인을 비방하거나 명예를 훼손하는 콘텐츠","불법적이거나 법적 책임을 야기할 수 있는 콘텐츠","지적 재산권을 침해하는 콘텐츠","대량 또는 반복적인 상업적 메시지","제3자의 사생활을 침해할 수 있는 정보","소프트웨어 바이러스 또는 유해한 코드"]},
+        {p:"또한 타인의 서비스 이용 방해, 사칭, 스토킹, 13세 미만 계정 생성, 보안 조치 우회 등의 행위도 금지됩니다."},
+      ]},
+      {h2:"지적 재산권", content:[
+        {p:"서비스 내 모든 자산(로고, 디자인, 텍스트, 그래픽 등)은 회사 또는 라이센서가 소유하며 관련 법률에 의해 보호됩니다."},
+        {p:"이용자에게는 비배타적·양도 불가능한 제한적 사용권이 부여됩니다. 서비스를 공개 수행·수정·역공학하거나 경쟁 제품 제작에 사용하는 것은 금지됩니다."},
+      ]},
+      {h2:"링크 및 제3자 콘텐츠", content:[
+        {p:"회사는 서비스 내 링크를 통해 접근 가능한 제3자 웹사이트에 대해 책임을 지지 않습니다."},
+        {p:"서비스 내 이용자 또는 타인이 제공한 콘텐츠에 대해 회사는 검토, 확인 또는 인증하지 않으며, 콘텐츠 이용으로 발생하는 모든 위험은 이용자에게 있습니다."},
+      ]},
+      {h2:"광고 게재", content:[
+        {p:"회사는 서비스 유지를 위해 광고를 게재할 수 있으며, 이용자는 이에 동의합니다."},
+        {p:"회사는 수집한 개인정보를 통해 SMS, 푸시 알림, 이메일 등을 통해 광고성 정보를 발송할 수 있습니다. 이용자는 언제든지 수신을 거부할 수 있습니다."},
+      ]},
+      {h2:"책임 제한", content:[
+        {p:"어떠한 경우에도 회사, 임직원, 파트너, 대리인, 공급업체 또는 계열사는 이용자의 서비스 사용으로 인해 발생하는 직접적 또는 결과적 손해에 대해 책임을 지지 않습니다."},
+      ]},
+      {h2:"보증 면책", content:[
+        {p:"본 서비스는 \"있는 그대로\" 제공됩니다. 회사는 서비스의 중단 없는 운영, 오류 수정, 바이러스 부재 등을 보증하지 않습니다."},
+      ]},
+      {h2:"준거법", content:[
+        {p:"본 약관은 대한민국 법률에 따라 규율되고 해석됩니다."},
+      ]},
+      {h2:"서비스 중단", content:[
+        {p:"회사는 사전 고지 없이 서비스에 대한 이용자의 접근을 중단할 수 있습니다."},
+      ]},
+      {h2:"문의", content:[
+        {p:"서비스 및 본 약관에 관한 문의는 help@levelupdevs.com 으로 문의해 주십시오."},
+      ]},
+    ]
+  },
+  en: {
+    title: "Terms of Service",
+    subtitle: "(These Terms include provisions regarding consent to receive commercial advertising information.)",
+    date: "",
+    sections: [
+      {h2:"Overview", content:[
+        {p:"These Terms of Service constitute a legal agreement between Level Up Studio Co., Ltd. (\"Company\") and the user regarding rights, obligations, and other matters in connection with the Company's games and/or other services (\"Services\")."},
+      ]},
+      {h2:"Acceptance of Terms", content:[
+        {p:"Users must agree to these Terms in order to access or use the Company's Services. Please read these Terms before using the Services."},
+        {p:"If the user is a minor, the user must obtain consent from a legal guardian before using the Services."},
+        {p:"These Terms apply to all uses of Services related to the Company's games, including App Store, Google Play, and Facebook."},
+      ]},
+      {h2:"Changes to Terms", content:[
+        {p:"The Company may change or replace these Terms at any time. Continued use of the Services constitutes agreement to the updated Terms."},
+        {p:"Please periodically check in-game settings or official community notices to review changes to these Terms."},
+      ]},
+      {h2:"Account", content:[
+        {p:"Users must maintain the security of their login details and agree to bear the risk of unauthorized third-party access."},
+        {p:"If an account is deleted, users will lose access to all associated information (game progress, virtual currency, virtual goods, etc.)."},
+        {p:"The Company may restrict, suspend, modify, or delete user accounts at any time without prior notice."},
+      ]},
+      {h2:"5-1. Virtual Currency and Virtual Goods", content:[
+        {p:"The Company's games may include virtual currency (coins, gems, etc.) or virtual goods. Users may purchase these with cash or other payment methods."},
+        {p:"Virtual currency and virtual goods have no monetary value and cannot be exchanged for cash or real goods. They cannot be transferred to other users."},
+        {p:"The Company may manage, adjust, modify, or remove virtual currency or virtual goods without prior notice."},
+      ]},
+      {h2:"5-2. Refund Policy", content:[
+        {p:"All purchases of virtual currency or virtual goods within the Services are generally non-refundable."},
+        {p:"However, if required by applicable law, and if all purchased virtual currency and virtual goods remain unused within 7 days of purchase, a withdrawal request may be made. Partial use voids the right to withdrawal."},
+        {p:"Refund requests can be made through help@levelupdevs.com."},
+        {p:"Transactions made by minors under 19 without legal guardian consent may be cancelled."},
+      ]},
+      {h2:"User Conduct and Content", content:[
+        {p:"Users are solely responsible for all content they provide through the Services."},
+        {p:"Users agree not to provide content that:"},
+        {ul:["Defames or damages the reputation of others","Is illegal or may create legal liability","Infringes intellectual property rights","Involves mass or repeated commercial messages","Violates third-party privacy","Contains viruses or harmful code"]},
+        {p:"Users also agree not to interfere with others' use of the Services, impersonate others, stalk users, create accounts for minors under 13, or bypass security measures."},
+      ]},
+      {h2:"Intellectual Property", content:[
+        {p:"All assets within the Services (logos, designs, text, graphics, etc.) are owned by the Company or its licensors and protected by applicable laws."},
+        {p:"Users are granted a non-exclusive, non-transferable, limited license. Publicly performing, modifying, reverse engineering, or using the Services to create competing products is prohibited."},
+      ]},
+      {h2:"Links and Third-Party Content", content:[
+        {p:"The Company is not responsible for third-party websites accessible through links in the Services."},
+        {p:"The Company does not review or verify content provided by users or third parties in the Services. Users bear all risks arising from use of such content."},
+      ]},
+      {h2:"Advertising", content:[
+        {p:"The Company may display advertisements to maintain the Services, and users agree to such advertising."},
+        {p:"The Company may send commercial information via SMS, push notifications, and email. Users may opt out at any time."},
+      ]},
+      {h2:"Limitation of Liability", content:[
+        {p:"Under no circumstances shall the Company, its officers, partners, agents, suppliers, or affiliates be liable for any direct or consequential damages arising from users' use of the Services."},
+      ]},
+      {h2:"Disclaimer of Warranties", content:[
+        {p:"The Services are provided \"as is\" and \"as available.\" The Company makes no warranties regarding uninterrupted operation, error correction, or the absence of viruses."},
+      ]},
+      {h2:"Governing Law", content:[
+        {p:"These Terms shall be governed by and construed in accordance with the laws of the Republic of Korea, without regard to conflict of law principles."},
+      ]},
+      {h2:"Termination of Service", content:[
+        {p:"The Company may terminate users' access to the Services without prior notice or specific reason."},
+      ]},
+      {h2:"Contact", content:[
+        {p:"For inquiries regarding the Services or these Terms, please contact help@levelupdevs.com."},
+      ]},
+    ]
+  },
+  id: {
+    title: "Syarat Layanan",
+    subtitle: "(Syarat ini mencakup ketentuan mengenai persetujuan untuk menerima informasi iklan komersial.)",
+    date: "",
+    sections: [
+      {h2:"Gambaran Umum", content:[{p:"Syarat Layanan ini merupakan perjanjian hukum antara Level Up Studio Co., Ltd. (\"Perusahaan\") dan pengguna mengenai hak, kewajiban, dan hal-hal lain yang berkaitan dengan game dan/atau layanan lain (\"Layanan\") Perusahaan."}]},
+      {h2:"Penerimaan Syarat", content:[
+        {p:"Pengguna harus menyetujui Syarat ini untuk mengakses atau menggunakan Layanan Perusahaan. Harap baca Syarat ini sebelum menggunakan Layanan."},
+        {p:"Jika pengguna adalah anak di bawah umur, pengguna harus mendapatkan persetujuan dari wali hukum sebelum menggunakan Layanan."},
+      ]},
+      {h2:"Perubahan Syarat", content:[{p:"Perusahaan dapat mengubah atau mengganti Syarat ini kapan saja. Penggunaan Layanan yang berkelanjutan berarti persetujuan atas Syarat yang diperbarui."}]},
+      {h2:"Akun", content:[
+        {p:"Pengguna harus menjaga keamanan detail login mereka sendiri."},
+        {p:"Perusahaan dapat membatasi, menangguhkan, memodifikasi, atau menghapus akun pengguna kapan saja tanpa pemberitahuan sebelumnya."},
+      ]},
+      {h2:"5-1. Mata Uang Virtual dan Barang Virtual", content:[
+        {p:"Game Perusahaan dapat mencakup mata uang virtual (koin, gem, dll.) atau barang virtual. Mata uang dan barang virtual tidak memiliki nilai moneter dan tidak dapat ditukar dengan uang tunai atau dipindahtangankan."},
+      ]},
+      {h2:"5-2. Kebijakan Pengembalian Dana", content:[
+        {p:"Semua pembelian mata uang atau barang virtual umumnya tidak dapat dikembalikan. Permintaan penarikan dapat dilakukan melalui help@levelupdevs.com."},
+      ]},
+      {h2:"Perilaku Pengguna dan Konten", content:[
+        {p:"Pengguna sepenuhnya bertanggung jawab atas semua konten yang mereka berikan melalui Layanan. Pengguna setuju untuk tidak memberikan konten yang melanggar hukum, mencemarkan nama baik, melanggar hak kekayaan intelektual, atau mengandung kode berbahaya."},
+      ]},
+      {h2:"Kekayaan Intelektual", content:[{p:"Semua aset dalam Layanan dimiliki oleh Perusahaan atau pemberi lisensinya dan dilindungi oleh hukum yang berlaku."}]},
+      {h2:"Pembatasan Tanggung Jawab", content:[{p:"Perusahaan tidak bertanggung jawab atas kerusakan langsung atau konsekuensial yang timbul dari penggunaan Layanan oleh pengguna."}]},
+      {h2:"Hukum yang Berlaku", content:[{p:"Syarat ini diatur oleh hukum Republik Korea."}]},
+      {h2:"Kontak", content:[{p:"Untuk pertanyaan, hubungi help@levelupdevs.com."}]},
+    ]
+  },
+  ms: {
+    title: "Terma Perkhidmatan",
+    subtitle: "(Terma ini merangkumi peruntukan mengenai persetujuan untuk menerima maklumat iklan komersial.)",
+    date: "",
+    sections: [
+      {h2:"Gambaran Keseluruhan", content:[{p:"Terma Perkhidmatan ini merupakan perjanjian undang-undang antara Level Up Studio Co., Ltd. (\"Syarikat\") dan pengguna berkenaan hak, kewajipan, dan perkara lain yang berkaitan dengan permainan dan/atau perkhidmatan lain (\"Perkhidmatan\") Syarikat."}]},
+      {h2:"Penerimaan Terma", content:[
+        {p:"Pengguna mesti bersetuju dengan Terma ini untuk mengakses atau menggunakan Perkhidmatan Syarikat. Sila baca Terma ini sebelum menggunakan Perkhidmatan."},
+        {p:"Jika pengguna adalah kanak-kanak di bawah umur, pengguna mesti mendapatkan persetujuan daripada penjaga undang-undang sebelum menggunakan Perkhidmatan."},
+      ]},
+      {h2:"Perubahan Terma", content:[{p:"Syarikat boleh mengubah atau menggantikan Terma ini pada bila-bila masa. Penggunaan Perkhidmatan yang berterusan bermakna persetujuan terhadap Terma yang dikemas kini."}]},
+      {h2:"Akaun", content:[
+        {p:"Pengguna mesti mengekalkan keselamatan butiran log masuk mereka sendiri."},
+        {p:"Syarikat boleh menyekat, menggantung, mengubah suai, atau memadamkan akaun pengguna pada bila-bila masa tanpa notis terlebih dahulu."},
+      ]},
+      {h2:"5-1. Mata Wang Maya dan Barangan Maya", content:[
+        {p:"Permainan Syarikat mungkin merangkumi mata wang maya (syiling, permata, dll.) atau barangan maya. Mata wang dan barangan maya tidak mempunyai nilai kewangan dan tidak boleh ditukar dengan wang tunai atau dipindahkan kepada pengguna lain."},
+      ]},
+      {h2:"5-2. Dasar Bayaran Balik", content:[
+        {p:"Semua pembelian mata wang atau barangan maya secara amnya tidak boleh dikembalikan. Permintaan penarikan balik boleh dibuat melalui help@levelupdevs.com."},
+      ]},
+      {h2:"Kelakuan Pengguna dan Kandungan", content:[
+        {p:"Pengguna bertanggungjawab sepenuhnya atas semua kandungan yang mereka berikan melalui Perkhidmatan. Pengguna bersetuju untuk tidak memberikan kandungan yang menyalahi undang-undang, mencemarkan nama baik, melanggar hak harta intelek, atau mengandungi kod berbahaya."},
+      ]},
+      {h2:"Harta Intelek", content:[{p:"Semua aset dalam Perkhidmatan dimiliki oleh Syarikat atau pemberi lesennya dan dilindungi oleh undang-undang yang berkenaan."}]},
+      {h2:"Had Liabiliti", content:[{p:"Syarikat tidak bertanggungjawab atas sebarang kerosakan langsung atau berbangkit yang timbul daripada penggunaan Perkhidmatan oleh pengguna."}]},
+      {h2:"Undang-undang yang Mengawal", content:[{p:"Terma ini dikawal oleh undang-undang Republik Korea."}]},
+      {h2:"Hubungi", content:[{p:"Untuk pertanyaan, hubungi help@levelupdevs.com."}]},
+    ]
+  },
+  zh: {
+    title: "服务条款",
+    subtitle: "（本服务条款包含有关同意接收商业广告信息的条款。）",
+    date: "",
+    sections: [
+      {h2:"概述", content:[{p:"本服务条款是LevelUp Studio（\"公司\"）与用户之间就公司的游戏及/或其他服务（\"服务\"）相关的权利、义务及其他必要事项签订的法律协议。"}]},
+      {h2:"条款同意", content:[
+        {p:"用户访问或使用公司服务须同意本条款。使用服务前请仔细阅读本条款。"},
+        {p:"未成年用户须在法定监护人同意后方可使用本服务。"},
+      ]},
+      {h2:"条款变更", content:[{p:"公司可随时自行决定修改或替换本条款。继续使用服务即视为同意更新后的条款。"}]},
+      {h2:"账户", content:[
+        {p:"用户须自行维护登录信息的安全性。"},
+        {p:"公司可在未经事先通知的情况下限制、暂停、修改或删除用户账户。"},
+      ]},
+      {h2:"5-1. 虚拟货币和虚拟商品", content:[
+        {p:"公司游戏可能包含虚拟货币（金币、宝石等）或虚拟商品。虚拟货币和虚拟商品不具有货币价值，不可兑换为现金或实物，也不可转让给他人。"},
+      ]},
+      {h2:"5-2. 退款政策", content:[
+        {p:"服务内所有虚拟货币或虚拟商品的购买原则上不可退款。退款申请可通过 help@levelupdevs.com 提交。"},
+      ]},
+      {h2:"用户行为和内容", content:[
+        {p:"用户对其通过服务提供的所有内容承担全部责任。用户同意不提供违法、诽谤、侵犯知识产权或含有有害代码的内容。"},
+      ]},
+      {h2:"知识产权", content:[{p:"服务中的所有资产均归公司或其许可方所有，受相关法律保护。"}]},
+      {h2:"责任限制", content:[{p:"在任何情况下，公司均不对用户使用服务所产生的直接或间接损失承担责任。"}]},
+      {h2:"适用法律", content:[{p:"本条款受大韩民国法律管辖和解释。"}]},
+      {h2:"联系方式", content:[{p:"如有疑问，请联系 help@levelupdevs.com。"}]},
+    ]
+  },
+  fr: {
+    title: "Conditions d'utilisation",
+    subtitle: "(Ces Conditions incluent des dispositions concernant le consentement à recevoir des informations publicitaires commerciales.)",
+    date: "",
+    sections: [
+      {h2:"Aperçu", content:[{p:"Ces Conditions d'utilisation constituent un accord juridique entre Level Up Studio Co., Ltd. (\"Société\") et l'utilisateur concernant les droits, obligations et autres questions liées aux jeux et/ou autres services (\"Services\") de la Société."}]},
+      {h2:"Acceptation des Conditions", content:[
+        {p:"Les utilisateurs doivent accepter ces Conditions pour accéder ou utiliser les Services de la Société. Veuillez lire ces Conditions avant d'utiliser les Services."},
+        {p:"Si l'utilisateur est mineur, il doit obtenir le consentement d'un tuteur légal avant d'utiliser les Services."},
+      ]},
+      {h2:"Modifications des Conditions", content:[{p:"La Société peut modifier ou remplacer ces Conditions à tout moment. La poursuite de l'utilisation des Services constitue un accord avec les Conditions mises à jour."}]},
+      {h2:"Compte", content:[
+        {p:"Les utilisateurs doivent maintenir la sécurité de leurs informations de connexion."},
+        {p:"La Société peut restreindre, suspendre, modifier ou supprimer les comptes d'utilisateurs à tout moment sans préavis."},
+      ]},
+      {h2:"5-1. Monnaie Virtuelle et Biens Virtuels", content:[
+        {p:"Les jeux de la Société peuvent inclure des monnaies virtuelles (pièces, gemmes, etc.) ou des biens virtuels. Ces éléments n'ont aucune valeur monétaire et ne peuvent être échangés contre de l'argent réel ni transférés à d'autres utilisateurs."},
+      ]},
+      {h2:"5-2. Politique de Remboursement", content:[
+        {p:"Tous les achats de monnaie ou de biens virtuels sont généralement non remboursables. Les demandes de rétractation peuvent être effectuées via help@levelupdevs.com."},
+      ]},
+      {h2:"Conduite des Utilisateurs et Contenu", content:[
+        {p:"Les utilisateurs sont seuls responsables de tout le contenu qu'ils fournissent via les Services. Les utilisateurs s'engagent à ne pas fournir de contenu illégal, diffamatoire, portant atteinte aux droits de propriété intellectuelle ou contenant du code nuisible."},
+      ]},
+      {h2:"Propriété Intellectuelle", content:[{p:"Tous les actifs des Services appartiennent à la Société ou à ses concédants de licence et sont protégés par les lois applicables."}]},
+      {h2:"Limitation de Responsabilité", content:[{p:"La Société ne sera en aucun cas responsable des dommages directs ou indirects résultant de l'utilisation des Services par les utilisateurs."}]},
+      {h2:"Droit Applicable", content:[{p:"Ces Conditions sont régies par les lois de la République de Corée."}]},
+      {h2:"Contact", content:[{p:"Pour toute question, contactez help@levelupdevs.com."}]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && DOCS[p]) { localStorage.setItem("lang", p); return p; }
+  const saved = localStorage.getItem("lang");
+  if (saved && DOCS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return DOCS[os] ? os : "en";
+}
+
+function setLang(code) {
+  localStorage.setItem("lang", code);
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", code);
+  window.location.href = url.toString();
+}
+
+function toggleLangMenu() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".lang-selector")) document.getElementById("lang-dropdown").classList.remove("open");
+  const opt = e.target.closest(".lang-option");
+  if (opt) setLang(opt.dataset.lang);
+});
+
+function updateLangUI(l) {
+  const entry = LANGS.find(x => x.code === l);
+  document.getElementById("lang-current").textContent = entry.flag + " " + l.toUpperCase();
+  document.querySelectorAll(".lang-option").forEach(el => el.classList.toggle("active", el.dataset.lang === l));
+}
+
+function renderContent(l) {
+  const doc = DOCS[l];
+  const langParam = l === "ko" ? "" : "?lang=" + l;
+
+  document.getElementById("page-title").textContent = doc.title;
+  document.getElementById("page-subtitle").textContent = doc.subtitle;
+  document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/" + langParam;
+
+  const ref = new URLSearchParams(window.location.search).get("ref");
+  const backLink = document.getElementById("nav-back-link");
+  if (ref === "ddd") {
+    backLink.style.display = "inline";
+    backLink.href = "https://levelupstudio.co.kr/ddd/" + langParam;
+  }
+
+  let html = "";
+  doc.sections.forEach(sec => {
+    html += `<div class="section"><h2>${sec.h2}</h2>`;
+    sec.content.forEach(item => {
+      if (item.p) html += `<p>${item.p}</p>`;
+      if (item.h3) html += `<h3>${item.h3}</h3>`;
+      if (item.ul) html += `<ul>${item.ul.map(li => `<li>${li}</li>`).join("")}</ul>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById("doc-content").innerHTML = html;
+}
+
+function render() {
+  const l = getLang();
+  updateLangUI(l);
+  renderContent(l);
+}
+
+render();
+</script>
+</body>
+</html>
