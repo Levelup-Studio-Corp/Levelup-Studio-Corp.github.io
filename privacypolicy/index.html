@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - LevelUp Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:#05080c;color:white;min-height:100vh;padding:80px 20px 60px;}
+.gradient{position:fixed;width:100%;height:100%;background:radial-gradient(circle at 50% 10%,rgba(0,140,255,0.15),transparent 60%);z-index:-1;pointer-events:none;}
+nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:rgba(5,8,12,0.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08);z-index:100;}
+.nav-logo{font-weight:700;font-size:18px;letter-spacing:2px;opacity:.7;text-decoration:none;color:white;}
+.nav-right{display:flex;align-items:center;gap:16px;}
+.nav-back{font-size:13px;font-weight:500;letter-spacing:1px;opacity:.6;text-decoration:none;color:white;text-transform:uppercase;transition:.2s;}
+.nav-back:hover{opacity:1;color:#56c4ff;}
+.lang-selector{position:relative;}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:white;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;transition:.2s;white-space:nowrap;}
+.lang-btn:hover{background:rgba(255,255,255,0.1);}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:#0d1520;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;min-width:110px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,0.5);}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:.15s;color:rgba(255,255,255,0.6);}
+.lang-option:hover{background:rgba(255,255,255,0.06);color:white;}
+.lang-option.active{color:#56c4ff;}
+.content{max-width:760px;margin:0 auto;padding-top:20px;}
+.page-title{font-size:28px;font-weight:700;color:#fff;margin-bottom:6px;}
+.page-date{font-size:13px;color:#4a6a84;margin-bottom:40px;}
+.section{margin-bottom:32px;}
+.section h2{font-size:16px;font-weight:700;color:#56c4ff;letter-spacing:.5px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.section h3{font-size:14px;font-weight:600;color:#a0c4d8;margin:16px 0 8px;}
+.section p{font-size:14px;color:#8a9eb0;line-height:1.8;margin-bottom:10px;}
+.section ul{padding-left:0;margin-bottom:10px;}
+.section ul li{font-size:14px;color:#8a9eb0;line-height:1.8;padding-left:16px;position:relative;margin-bottom:4px;}
+.section ul li::before{content:"–";position:absolute;left:0;color:#3a5a76;}
+footer{text-align:center;padding:40px 20px;font-size:12px;color:#2a3a4a;border-top:1px solid rgba(255,255,255,0.06);margin-top:40px;}
+@media(max-width:768px){nav{padding:14px 20px;}.content{padding-top:10px;}.page-title{font-size:22px;}}
+</style>
+</head>
+<body>
+<div class="gradient"></div>
+<nav>
+  <a class="nav-logo" href="#" id="nav-logo-link">LEVELUP STUDIO</a>
+  <div class="nav-right">
+    <a class="nav-back" href="#" id="nav-back-link" style="display:none;">◀ D.D.D.</a>
+    <div class="lang-selector">
+      <div class="lang-btn" onclick="toggleLangMenu()"><span id="lang-current">🇰🇷 KO</span> ▾</div>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option" data-lang="ko">🇰🇷 KO</div>
+        <div class="lang-option" data-lang="en">🇺🇸 EN</div>
+        <div class="lang-option" data-lang="id">🇮🇩 ID</div>
+        <div class="lang-option" data-lang="ms">🇲🇾 MS</div>
+        <div class="lang-option" data-lang="zh">🇨🇳 ZH</div>
+        <div class="lang-option" data-lang="fr">🇫🇷 FR</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="page-title" id="page-title">개인정보처리방침</div>
+  <div class="page-date" id="page-date">시행일: 2026년 3월 4일</div>
+  <div id="doc-content"></div>
+</div>
+
+<footer>© 2026 LevelUp Studio Co., Ltd.</footer>
+
+<script>
+const LANGS = [
+  {code:"ko",flag:"🇰🇷"},{code:"en",flag:"🇺🇸"},{code:"id",flag:"🇮🇩"},
+  {code:"ms",flag:"🇲🇾"},{code:"zh",flag:"🇨🇳"},{code:"fr",flag:"🇫🇷"},
+];
+
+const DOCS = {
+  ko: {
+    title: "개인정보처리방침",
+    date: "시행일: 2026년 3월 4일",
+    sections: [
+      {h2:"개요", content:[
+        {p:"Levelup Studio(\"회사\")는 이용자의 프라이버시를 중요하게 생각하며 이용자의 프라이버시 권리를 보호하기 위해 최선을 다하고 있습니다."},
+        {p:"본 개인정보처리방침은 이용자가 모바일 플랫폼(iOS 및 Android)에서 제공되는 회사의 게임 및 관련 서비스에 접속할 때 이용자가 제공하거나 회사가 수집한 정보 및 데이터를 수집, 저장, 사용, 관리하는 방법을 설명합니다."},
+        {p:"이용자는 서비스를 사용함으로써 본 정책과 이용자의 개인정보를 비롯한 정보 및 데이터를 본 정책에 제공된 방법으로 처리하는 것에 동의합니다. 본 조항에 동의하지 않는 경우, 서비스를 사용하지 말아 주십시오."},
+        {p:"질문이나 우려 사항이 있는 경우, 아래 개인정보보호책임자 연락처로 문의해 주십시오."},
+      ]},
+      {h2:"2. 수집하는 정보 및 수집 방법", content:[
+        {h3:"(A) 필수 항목"},
+        {ul:["이용자의 이메일 주소, 이름, 연령, 소재지 또는 성별 등 서비스 이용 또는 계정 개설 시 제공하는 개인정보","이용자의 서비스 이용 세부 정보(소재지 국가, 게임 플레이 시점, 접속 기기 정보 등)","이용자가 회사에 연락하거나 메시지에 응답하는 경우 해당 통신 내용","회사의 소셜 미디어 채널에서 이용자와의 커뮤니케이션","쿠키 및 유사한 기술을 통해 수집하는 정보"]},
+        {h3:"(B) 선택 항목"},
+        {ul:["제3자 소셜 네트워크 연동 시 해당 네트워크에서 제공하는 개인정보(이름, ID, 이메일, 프로필 사진, 연락처 목록 등)","이용자가 사용 허가한 광고 식별자"]},
+        {h3:"추적 기술"},
+        {p:"회사와 파트너는 쿠키, 비콘, 스크립트, 태그 등을 사용해 사용자의 기기를 식별하고 방문 정보를 기억합니다. 이용자는 언제든지 쿠키를 비활성화할 수 있지만, 서비스 일부 기능을 사용하지 못할 수 있습니다."},
+      ]},
+      {h2:"3. 이용자 정보 사용 방법", content:[
+        {ul:["고객 서비스 연락 및 서비스 업데이트, 푸시 알림 발송","계정 관리 및 서비스 이용 경험 향상","조사, 설문, 이용자 소통","서비스 및 관련 제품의 마케팅 및 홍보","서비스 문제점 추적 및 사업 정보 목적의 보고서 작성","사기 및 범죄 방지","법률상 요구되는 목적"]},
+        {p:"마케팅 수신을 원하지 않는 경우 help@levelupdevs.com으로 연락해 주십시오."},
+      ]},
+      {h2:"4. 모바일 애플리케이션", content:[
+        {p:"이용자가 모바일 플랫폼에서 회사의 게임을 사용하는 경우, 회사는 앱 사용 정보, 고유 장치 ID, 하드웨어 유형, MAC 주소, IMEI, OS 버전, 장치 이름, 이메일 주소, 위치(IP 기반) 등을 기록할 수 있습니다."},
+        {p:"회사는 푸시 알림을 통해 게임 업데이트 및 서비스 관련 통지를 발송할 수 있으며, 이용자는 장치 설정에서 언제든지 수신 거부할 수 있습니다."},
+      ]},
+      {h2:"5. 광고", content:[
+        {p:"회사는 이용자에게 관련성 높은 광고를 제공하기 위해 게임 및 장치 사용, 온라인 행동, 관심사에 기반한 광고를 운영할 수 있습니다."},
+        {p:"관심 기반 광고 관련 추가 정보:"},
+        {ul:["Apple: http://www.apple.com/privacy/","Google: https://www.google.com/intl/ko/policies/privacy/","Facebook: http://www.facebook.com/about/privacy/"]},
+      ]},
+      {h2:"6. 제3자 정보 공개", content:[
+        {p:"회사는 이용자가 승인하거나 아래 경우에 한해 개인정보를 공유합니다:"},
+        {ul:["회사를 대신해 서비스를 제공하는 업체(데이터 분석, 고객 서비스 등)","법률 준수, 사기 조사, 정부 요청 대응, 권리 보호 등 법이 허용하는 경우","회사 합병, 자산 매각, 기업 구조조정의 경우","집합적 또는 익명화된 정보를 광고 회사, 파트너 등과 공유하는 경우"]},
+      ]},
+      {h2:"7. 이용자 정보 접근·수정·삭제", content:[
+        {p:"이용자는 계정 설정 변경 또는 help@levelupdevs.com 으로 연락해 개인정보를 수정, 업데이트, 삭제할 수 있습니다."},
+        {p:"마케팅 이메일 수신 거부는 이메일 내 안내에 따르거나 회사에 직접 연락해 주십시오."},
+        {h3:"개인정보 파기"},
+        {p:"개인정보가 불필요하게 된 경우 지체 없이 파기합니다. 전자 파일은 복구 불가능하게 삭제하며, 서면은 분쇄 또는 소각합니다."},
+      ]},
+      {h2:"8. 데이터 보유", content:[
+        {p:"회사는 이용자의 계정이 활성 상태인 동안 및 서비스 제공에 필요한 기간 동안 정보를 보관하며, 법적 의무 준수, 분쟁 해결, 계약 이행을 위해 필요한 기간 동안 데이터를 보유할 수 있습니다."},
+      ]},
+      {h2:"9. 어린이에 관한 정책", content:[
+        {p:"회사는 만 13세 미만 어린이의 개인정보를 의도적으로 수집하지 않습니다. 만 13세 미만인 경우 개인정보를 제공하지 마십시오. 만약 수집된 사실이 확인되면 즉시 삭제합니다."},
+      ]},
+      {h2:"10. 정책 변경", content:[
+        {p:"중요한 변경 발생 시 이메일 또는 서비스 내 공지를 통해 사전 통보합니다. 정기적으로 최신 개인정보처리방침을 검토하시기 바랍니다."},
+      ]},
+      {h2:"11. 개인정보보호책임자", content:[
+        {p:"이름: 이의준"},
+        {p:"전화: 02-525-0840"},
+        {p:"이메일: help@levelupdevs.com"},
+      ]},
+    ]
+  },
+  en: {
+    title: "Privacy Policy",
+    date: "Effective Date: March 4, 2026",
+    sections: [
+      {h2:"Overview", content:[
+        {p:"Level Up Studio Co., Ltd. (\"Company\") considers users' privacy important and makes its best efforts to protect users' privacy rights."},
+        {p:"This Privacy Policy explains how information and data provided by users or collected by the Company are collected, stored, used, and managed when users access the Company's games and related services on mobile platforms (iOS and Android)."},
+        {p:"By using the Services, users agree to this Policy and to the processing of their information in the manner provided herein. If you do not agree, please do not use the Services."},
+        {p:"For questions or concerns, please contact our Data Protection Officer using the information below."},
+      ]},
+      {h2:"2. Information Collected and Collection Methods", content:[
+        {h3:"(A) Required Items"},
+        {ul:["Personal information provided when using Services or creating an account (email, name, age, location, gender, etc.)","Details of service usage and resources accessed (country, gameplay time, device info, etc.)","Contents of communications when users contact the Company","Communications on the Company's social media channels","Information collected through cookies and similar technologies"]},
+        {h3:"(B) Optional Items"},
+        {ul:["Personal information from third-party social networks (name, ID, email, profile photo, contact list, etc.)","Advertising identifiers permitted by users"]},
+        {h3:"Tracking Technologies"},
+        {p:"The Company and its partners use cookies, beacons, scripts, and tags to identify devices and remember visit information. Users may disable cookies at any time, though some service features may become unavailable."},
+      ]},
+      {h2:"3. How User Information Is Used", content:[
+        {ul:["Contacting users as part of customer service, sending updates and push notifications","Managing accounts and improving user experience","Conducting research, surveys, and user interaction","Marketing and promoting Services and related products","Creating reports and analyses for research and business purposes","Preventing fraud and crime","As otherwise required by law"]},
+        {p:"To opt out of marketing communications, contact help@levelupdevs.com."},
+      ]},
+      {h2:"4. Mobile Applications", content:[
+        {p:"When using the Company's games on mobile platforms, the Company may record app usage, device ID, hardware type, MAC address, IMEI, OS version, device name, email address, and location (IP-based)."},
+        {p:"The Company may send push notifications for game updates and service notices. Users may opt out at any time through device settings."},
+      ]},
+      {h2:"5. Advertising", content:[
+        {p:"The Company may serve interest-based advertisements based on users' game usage, device activity, online behavior, and interests."},
+        {p:"For more information on interest-based advertising:"},
+        {ul:["Apple: http://www.apple.com/privacy/","Google: https://www.google.com/intl/ko/policies/privacy/","Facebook: http://www.facebook.com/about/privacy/"]},
+      ]},
+      {h2:"6. Disclosure to Third Parties", content:[
+        {p:"The Company shares user information only when approved by users or in the following cases:"},
+        {ul:["Service providers acting on behalf of the Company (data analysis, customer service, etc.)","When required by law, to comply with legal obligations, investigate fraud, or protect rights","In connection with a merger, asset sale, or corporate restructuring","Aggregated or anonymized information shared with advertising companies and partners"]},
+      ]},
+      {h2:"7. Access, Correction, and Deletion", content:[
+        {p:"Users may correct, update, or delete personal information through account settings or by contacting help@levelupdevs.com."},
+        {p:"To opt out of marketing emails, follow the instructions in such emails or contact the Company directly."},
+        {h3:"Destruction of Personal Information"},
+        {p:"Personal information is destroyed without delay when no longer necessary. Electronic files are deleted in an unrecoverable manner; paper records are shredded or incinerated."},
+      ]},
+      {h2:"8. Data Retention", content:[
+        {p:"The Company retains users' information while accounts are active and as necessary to provide Services, comply with legal obligations, resolve disputes, and enforce agreements."},
+      ]},
+      {h2:"9. Children's Policy", content:[
+        {p:"The Company does not knowingly collect personal information from children under 13. If such collection is discovered, the information will be deleted promptly."},
+      ]},
+      {h2:"10. Changes to This Policy", content:[
+        {p:"The Company will notify users of significant changes via email or in-game notice before changes take effect. Users are encouraged to periodically review this Policy."},
+      ]},
+      {h2:"11. Data Protection Officer", content:[
+        {p:"Name: Uijun Lee"},
+        {p:"Phone: +82-2-525-0840"},
+        {p:"Email: help@levelupdevs.com"},
+      ]},
+    ]
+  },
+  id: {
+    title: "Kebijakan Privasi",
+    date: "Berlaku: 4 Maret 2026",
+    sections: [
+      {h2:"Gambaran Umum", content:[
+        {p:"Level Up Studio Co., Ltd. (\"Perusahaan\") menganggap privasi pengguna sebagai hal yang penting dan berupaya sebaik mungkin untuk melindungi hak privasi pengguna."},
+        {p:"Kebijakan Privasi ini menjelaskan bagaimana informasi dan data yang diberikan pengguna atau dikumpulkan oleh Perusahaan dikumpulkan, disimpan, digunakan, dan dikelola saat pengguna mengakses layanan game Perusahaan di platform mobile (iOS dan Android)."},
+        {p:"Dengan menggunakan Layanan, pengguna menyetujui Kebijakan ini. Jika Anda tidak setuju, harap jangan gunakan Layanan."},
+      ]},
+      {h2:"2. Informasi yang Dikumpulkan", content:[
+        {h3:"(A) Item Wajib"},
+        {ul:["Informasi pribadi saat mendaftar (email, nama, usia, lokasi, gender, dll.)","Detail penggunaan layanan (negara, waktu bermain, informasi perangkat, dll.)","Isi komunikasi saat menghubungi Perusahaan","Komunikasi di saluran media sosial Perusahaan","Informasi yang dikumpulkan melalui cookie dan teknologi serupa"]},
+        {h3:"(B) Item Opsional"},
+        {ul:["Informasi pribadi dari jaringan sosial pihak ketiga","Pengidentifikasi iklan yang diizinkan pengguna"]},
+      ]},
+      {h2:"3. Penggunaan Informasi", content:[
+        {ul:["Layanan pelanggan dan notifikasi push","Mengelola akun dan meningkatkan pengalaman pengguna","Penelitian, survei, dan komunikasi","Pemasaran dan promosi layanan","Pencegahan penipuan dan kejahatan","Sesuai yang diwajibkan hukum"]},
+        {p:"Untuk menolak komunikasi pemasaran, hubungi help@levelupdevs.com."},
+      ]},
+      {h2:"4. Aplikasi Mobile", content:[
+        {p:"Saat menggunakan game Perusahaan di platform mobile, Perusahaan dapat mencatat penggunaan aplikasi, ID perangkat, tipe hardware, alamat MAC, IMEI, versi OS, nama perangkat, dan lokasi."},
+      ]},
+      {h2:"5. Periklanan", content:[
+        {p:"Perusahaan dapat menampilkan iklan berbasis minat berdasarkan penggunaan game, aktivitas perangkat, perilaku online, dan minat pengguna."},
+      ]},
+      {h2:"6. Pengungkapan kepada Pihak Ketiga", content:[
+        {ul:["Penyedia layanan yang bekerja atas nama Perusahaan","Saat diwajibkan oleh hukum atau untuk melindungi hak","Dalam merger, penjualan aset, atau restrukturisasi perusahaan","Informasi agregat atau anonim kepada mitra"]},
+      ]},
+      {h2:"7. Akses, Koreksi, dan Penghapusan", content:[
+        {p:"Pengguna dapat memperbarui atau menghapus informasi pribadi melalui pengaturan akun atau dengan menghubungi help@levelupdevs.com."},
+      ]},
+      {h2:"8. Retensi Data", content:[
+        {p:"Perusahaan menyimpan informasi pengguna selama akun aktif dan selama diperlukan untuk menyediakan Layanan serta memenuhi kewajiban hukum."},
+      ]},
+      {h2:"9. Kebijakan untuk Anak-anak", content:[
+        {p:"Perusahaan tidak dengan sengaja mengumpulkan informasi pribadi dari anak-anak di bawah usia 13 tahun."},
+      ]},
+      {h2:"10. Perubahan Kebijakan", content:[
+        {p:"Perubahan signifikan akan diberitahukan melalui email atau pemberitahuan dalam game sebelum berlaku."},
+      ]},
+      {h2:"11. Petugas Perlindungan Data", content:[
+        {p:"Nama: Uijun Lee"},
+        {p:"Telepon: +82-2-525-0840"},
+        {p:"Email: help@levelupdevs.com"},
+      ]},
+    ]
+  },
+  ms: {
+    title: "Dasar Privasi",
+    date: "Berkuat kuasa: 4 Mac 2026",
+    sections: [
+      {h2:"Gambaran Keseluruhan", content:[
+        {p:"Level Up Studio Co., Ltd. (\"Syarikat\") menganggap privasi pengguna sebagai perkara penting dan berusaha sebaik mungkin untuk melindungi hak privasi pengguna."},
+        {p:"Dasar Privasi ini menerangkan bagaimana maklumat dan data yang diberikan pengguna atau dikumpul oleh Syarikat dikumpul, disimpan, digunakan, dan diuruskan semasa pengguna mengakses perkhidmatan permainan Syarikat di platform mudah alih (iOS dan Android)."},
+        {p:"Dengan menggunakan Perkhidmatan, pengguna bersetuju dengan Dasar ini. Jika anda tidak bersetuju, sila jangan gunakan Perkhidmatan."},
+      ]},
+      {h2:"2. Maklumat yang Dikumpul", content:[
+        {h3:"(A) Item Wajib"},
+        {ul:["Maklumat peribadi semasa pendaftaran (e-mel, nama, umur, lokasi, jantina, dll.)","Butiran penggunaan perkhidmatan (negara, masa bermain, maklumat peranti, dll.)","Kandungan komunikasi apabila menghubungi Syarikat","Komunikasi di saluran media sosial Syarikat","Maklumat yang dikumpul melalui kuki dan teknologi serupa"]},
+        {h3:"(B) Item Pilihan"},
+        {ul:["Maklumat peribadi daripada rangkaian sosial pihak ketiga","Pengecam iklan yang dibenarkan oleh pengguna"]},
+      ]},
+      {h2:"3. Penggunaan Maklumat", content:[
+        {ul:["Perkhidmatan pelanggan dan pemberitahuan tolak","Mengurus akaun dan meningkatkan pengalaman pengguna","Penyelidikan, tinjauan, dan komunikasi","Pemasaran dan promosi perkhidmatan","Pencegahan penipuan dan jenayah","Seperti yang dikehendaki oleh undang-undang"]},
+        {p:"Untuk menolak komunikasi pemasaran, hubungi help@levelupdevs.com."},
+      ]},
+      {h2:"4. Aplikasi Mudah Alih", content:[
+        {p:"Semasa menggunakan permainan Syarikat di platform mudah alih, Syarikat boleh merekod penggunaan aplikasi, ID peranti, jenis perkakasan, alamat MAC, IMEI, versi OS, nama peranti, dan lokasi."},
+      ]},
+      {h2:"5. Pengiklanan", content:[
+        {p:"Syarikat boleh memaparkan iklan berasaskan minat berdasarkan penggunaan permainan, aktiviti peranti, tingkah laku dalam talian, dan minat pengguna."},
+      ]},
+      {h2:"6. Pendedahan kepada Pihak Ketiga", content:[
+        {ul:["Pembekal perkhidmatan yang bertindak bagi pihak Syarikat","Apabila dikehendaki oleh undang-undang atau untuk melindungi hak","Dalam penggabungan, penjualan aset, atau penstrukturan semula syarikat","Maklumat agregat atau tanpa nama kepada rakan kongsi"]},
+      ]},
+      {h2:"7. Akses, Pembetulan, dan Pemadaman", content:[
+        {p:"Pengguna boleh mengemas kini atau memadam maklumat peribadi melalui tetapan akaun atau dengan menghubungi help@levelupdevs.com."},
+      ]},
+      {h2:"8. Pengekalan Data", content:[
+        {p:"Syarikat menyimpan maklumat pengguna selama akaun aktif dan selama perlu untuk menyediakan Perkhidmatan serta memenuhi kewajipan undang-undang."},
+      ]},
+      {h2:"9. Dasar untuk Kanak-kanak", content:[
+        {p:"Syarikat tidak dengan sengaja mengumpul maklumat peribadi daripada kanak-kanak di bawah umur 13 tahun."},
+      ]},
+      {h2:"10. Perubahan Dasar", content:[
+        {p:"Perubahan ketara akan diberitahu melalui e-mel atau notis dalam permainan sebelum berkuat kuasa."},
+      ]},
+      {h2:"11. Pegawai Perlindungan Data", content:[
+        {p:"Nama: Uijun Lee"},
+        {p:"Telefon: +82-2-525-0840"},
+        {p:"E-mel: help@levelupdevs.com"},
+      ]},
+    ]
+  },
+  zh: {
+    title: "隐私政策",
+    date: "生效日期：2026年3月4日",
+    sections: [
+      {h2:"概述", content:[
+        {p:"LevelUp Studio（\"公司\"）重视用户的隐私，并尽最大努力保护用户的隐私权。"},
+        {p:"本隐私政策说明当用户在移动平台（iOS和Android）上访问公司的游戏及相关服务时，公司如何收集、存储、使用和管理用户提供或公司收集的信息和数据。"},
+        {p:"使用本服务即表示您同意本政策。如您不同意，请勿使用本服务。"},
+      ]},
+      {h2:"2. 收集的信息及收集方式", content:[
+        {h3:"(A) 必填项"},
+        {ul:["注册时提供的个人信息（电子邮件、姓名、年龄、位置、性别等）","服务使用详情（所在国家、游戏时间、设备信息等）","联系公司时的通信内容","公司社交媒体频道上的通信","通过Cookie及类似技术收集的信息"]},
+        {h3:"(B) 可选项"},
+        {ul:["第三方社交网络提供的个人信息","用户授权的广告标识符"]},
+      ]},
+      {h2:"3. 信息使用方式", content:[
+        {ul:["客户服务联系及推送通知","账户管理及改善用户体验","研究、调查及用户互动","服务及相关产品的营销推广","防止欺诈和犯罪","法律要求的其他目的"]},
+        {p:"如不希望接收营销信息，请联系 help@levelupdevs.com。"},
+      ]},
+      {h2:"4. 移动应用程序", content:[
+        {p:"在移动平台使用公司游戏时，公司可能记录应用使用情况、设备ID、硬件类型、MAC地址、IMEI、操作系统版本、设备名称及位置等信息。"},
+      ]},
+      {h2:"5. 广告", content:[
+        {p:"公司可能根据用户的游戏使用情况、设备活动、在线行为和兴趣投放基于兴趣的广告。"},
+      ]},
+      {h2:"6. 向第三方披露", content:[
+        {ul:["代表公司提供服务的供应商","法律要求或为保护权益时","公司合并、资产出售或企业重组时","向广告公司和合作伙伴共享汇总或匿名信息"]},
+      ]},
+      {h2:"7. 访问、更正和删除", content:[
+        {p:"用户可通过账户设置或联系 help@levelupdevs.com 更新或删除个人信息。"},
+      ]},
+      {h2:"8. 数据保留", content:[
+        {p:"公司在账户有效期间及提供服务所需的时间内保留用户信息，并在履行法律义务、解决争议和执行协议所需的时间内保留数据。"},
+      ]},
+      {h2:"9. 儿童政策", content:[
+        {p:"公司不会故意收集13岁以下儿童的个人信息。若发现此类收集，将立即删除。"},
+      ]},
+      {h2:"10. 政策变更", content:[
+        {p:"重大变更将在生效前通过电子邮件或游戏内通知告知用户。"},
+      ]},
+      {h2:"11. 数据保护负责人", content:[
+        {p:"姓名：Uijun Lee"},
+        {p:"电话：+82-2-525-0840"},
+        {p:"邮箱：help@levelupdevs.com"},
+      ]},
+    ]
+  },
+  fr: {
+    title: "Politique de Confidentialité",
+    date: "Date d'entrée en vigueur : 4 mars 2026",
+    sections: [
+      {h2:"Aperçu", content:[
+        {p:"Level Up Studio Co., Ltd. (\"Société\") accorde une grande importance à la vie privée des utilisateurs et fait de son mieux pour protéger leurs droits à la vie privée."},
+        {p:"Cette Politique de Confidentialité explique comment les informations et données fournies par les utilisateurs ou collectées par la Société sont collectées, stockées, utilisées et gérées lorsque les utilisateurs accèdent aux jeux et services connexes de la Société sur des plateformes mobiles (iOS et Android)."},
+        {p:"En utilisant les Services, vous acceptez cette Politique. Si vous n'êtes pas d'accord, veuillez ne pas utiliser les Services."},
+      ]},
+      {h2:"2. Informations collectées et méthodes de collecte", content:[
+        {h3:"(A) Éléments obligatoires"},
+        {ul:["Informations personnelles lors de l'inscription (e-mail, nom, âge, localisation, sexe, etc.)","Détails d'utilisation du service (pays, temps de jeu, informations sur l'appareil, etc.)","Contenu des communications lors des contacts avec la Société","Communications sur les réseaux sociaux de la Société","Informations collectées via les cookies et technologies similaires"]},
+        {h3:"(B) Éléments optionnels"},
+        {ul:["Informations personnelles provenant de réseaux sociaux tiers","Identifiants publicitaires autorisés par les utilisateurs"]},
+      ]},
+      {h2:"3. Utilisation des informations", content:[
+        {ul:["Service client et notifications push","Gestion des comptes et amélioration de l'expérience utilisateur","Recherches, enquêtes et interactions avec les utilisateurs","Marketing et promotion des services","Prévention de la fraude et de la criminalité","Tel que requis par la loi"]},
+        {p:"Pour refuser les communications marketing, contactez help@levelupdevs.com."},
+      ]},
+      {h2:"4. Applications mobiles", content:[
+        {p:"Lors de l'utilisation des jeux de la Société sur des plateformes mobiles, la Société peut enregistrer l'utilisation de l'application, l'ID de l'appareil, le type de matériel, l'adresse MAC, l'IMEI, la version du système d'exploitation, le nom de l'appareil et la localisation."},
+      ]},
+      {h2:"5. Publicité", content:[
+        {p:"La Société peut diffuser des publicités basées sur les intérêts en fonction de l'utilisation du jeu, de l'activité de l'appareil, du comportement en ligne et des intérêts de l'utilisateur."},
+      ]},
+      {h2:"6. Divulgation aux tiers", content:[
+        {ul:["Prestataires de services agissant au nom de la Société","Lorsque requis par la loi ou pour protéger des droits","Dans le cadre d'une fusion, vente d'actifs ou restructuration","Informations agrégées ou anonymisées partagées avec des partenaires"]},
+      ]},
+      {h2:"7. Accès, rectification et suppression", content:[
+        {p:"Les utilisateurs peuvent mettre à jour ou supprimer leurs informations personnelles via les paramètres du compte ou en contactant help@levelupdevs.com."},
+      ]},
+      {h2:"8. Conservation des données", content:[
+        {p:"La Société conserve les informations des utilisateurs tant que le compte est actif et aussi longtemps que nécessaire pour fournir les Services et respecter les obligations légales."},
+      ]},
+      {h2:"9. Politique concernant les enfants", content:[
+        {p:"La Société ne collecte pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans."},
+      ]},
+      {h2:"10. Modifications de la politique", content:[
+        {p:"Les modifications importantes seront notifiées par e-mail ou avis en jeu avant leur entrée en vigueur."},
+      ]},
+      {h2:"11. Délégué à la protection des données", content:[
+        {p:"Nom : Uijun Lee"},
+        {p:"Téléphone : +82-2-525-0840"},
+        {p:"E-mail : help@levelupdevs.com"},
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && DOCS[p]) { localStorage.setItem("lang", p); return p; }
+  const saved = localStorage.getItem("lang");
+  if (saved && DOCS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return DOCS[os] ? os : "en";
+}
+
+function setLang(code) {
+  localStorage.setItem("lang", code);
+  const url = new URL(window.location.href);
+  url.searchParams.set("lang", code);
+  window.location.href = url.toString();
+}
+
+function toggleLangMenu() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".lang-selector")) document.getElementById("lang-dropdown").classList.remove("open");
+  const opt = e.target.closest(".lang-option");
+  if (opt) setLang(opt.dataset.lang);
+});
+
+function updateLangUI(l) {
+  const entry = LANGS.find(x => x.code === l);
+  document.getElementById("lang-current").textContent = entry.flag + " " + l.toUpperCase();
+  document.querySelectorAll(".lang-option").forEach(el => el.classList.toggle("active", el.dataset.lang === l));
+}
+
+function renderContent(l) {
+  const doc = DOCS[l];
+  const langParam = l === "ko" ? "" : "?lang=" + l;
+
+  document.getElementById("page-title").textContent = doc.title;
+  document.getElementById("page-date").textContent = doc.date;
+  document.getElementById("nav-logo-link").href = "https://levelupstudio.co.kr/" + langParam;
+
+  const ref = new URLSearchParams(window.location.search).get("ref");
+  const backLink = document.getElementById("nav-back-link");
+  if (ref === "ddd") {
+    backLink.style.display = "inline";
+    backLink.href = "https://levelupstudio.co.kr/ddd/" + langParam;
+  }
+
+  let html = "";
+  doc.sections.forEach(sec => {
+    html += `<div class="section"><h2>${sec.h2}</h2>`;
+    sec.content.forEach(item => {
+      if (item.p) html += `<p>${item.p}</p>`;
+      if (item.h3) html += `<h3>${item.h3}</h3>`;
+      if (item.ul) html += `<ul>${item.ul.map(li => `<li>${li}</li>`).join("")}</ul>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById("doc-content").innerHTML = html;
+}
+
+function render() {
+  const l = getLang();
+  updateLangUI(l);
+  renderContent(l);
+}
+
+render();
+</script>
+</body>
+</html>
