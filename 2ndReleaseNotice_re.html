@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>QT 2nd Soft Launch — 마케팅 투자 요청</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+  /* ── TOKEN SYSTEM ──────────────────────────────────────── */
+  :root {
+    --bg:        #080c0a;
+    --bg2:       #0e1612;
+    --bg3:       #162019;
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(255,255,255,0.12);
+
+    /* Amber — primary accent */
+    --amber:     #f59e0b;
+    --amber-dim: rgba(245,158,11,0.15);
+    --amber-mid: rgba(245,158,11,0.35);
+
+    /* Emerald — positive / success */
+    --emerald:     #10b981;
+    --emerald-dim: rgba(16,185,129,0.12);
+
+    /* Rose — warning / negative */
+    --rose:     #f43f5e;
+    --rose-dim: rgba(244,63,94,0.12);
+
+    /* Slate text */
+    --text:     #e8ede9;
+    --text-dim: #8a9e8e;
+    --text-faint: #3d5040;
+  }
+
+  /* ── REVEAL RESET ──────────────────────────────────────── */
+  .reveal .slides section { padding: 0; text-align: left; }
+  .reveal { font-family: 'Noto Sans KR', sans-serif; }
+
+  /* ── SLIDE CONTAINER ───────────────────────────────────── */
+  .sc {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--text);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  /* ── BACKGROUND GRID ───────────────────────────────────── */
+  .grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(to right, rgba(16,185,129,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(16,185,129,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── GLOW ORBS ─────────────────────────────────────────── */
+  .orb {
+    position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+    filter: blur(80px);
+  }
+  .orb-amber { background: rgba(245,158,11,0.08); }
+  .orb-emerald { background: rgba(16,185,129,0.06); }
+
+  /* ── HEADER ────────────────────────────────────────────── */
+  .slide-header {
+    position: relative; z-index: 10;
+    padding: 36px 64px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+
+  .slide-eyebrow {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--amber);
+    box-shadow: 0 0 8px var(--amber);
+  }
+
+  .eyebrow-text {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-dim);
+  }
+
+  .slide-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px; font-weight: 800;
+    letter-spacing: -0.02em; color: #fff;
+    line-height: 1.15;
+  }
+
+  .slide-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 56px; font-weight: 800;
+    color: var(--text-faint); line-height: 1;
+  }
+
+  /* ── BODY ──────────────────────────────────────────────── */
+  .slide-body {
+    position: relative; z-index: 10;
+    flex: 1; padding: 32px 64px 24px;
+    display: flex; gap: 24px;
+  }
+
+  /* ── FOOTER ────────────────────────────────────────────── */
+  .slide-footer {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    padding: 14px 64px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--text-faint);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── CARD ──────────────────────────────────────────────── */
+  .card {
+    background: rgba(22,32,25,0.7);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    position: relative; overflow: hidden;
+  }
+
+  .card-amber { border-color: rgba(245,158,11,0.3); background: var(--amber-dim); }
+  .card-emerald { border-color: rgba(16,185,129,0.25); background: var(--emerald-dim); }
+  .card-rose { border-color: rgba(244,63,94,0.25); background: var(--rose-dim); }
+
+  .card-top-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+
+  /* ── TAG / BADGE ───────────────────────────────────────── */
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+  .tag-emerald { background: var(--emerald-dim); color: var(--emerald); border: 1px solid rgba(16,185,129,0.3); }
+  .tag-rose { background: var(--rose-dim); color: var(--rose); border: 1px solid rgba(244,63,94,0.3); }
+  .tag-dim { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
+
+  /* ── STATUS DOT ────────────────────────────────────────── */
+  .sdot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+  }
+  .sdot-g { background: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
+  .sdot-y { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+  .sdot-r { background: var(--rose); box-shadow: 0 0 8px var(--rose); }
+
+  /* ── ICON BOX ──────────────────────────────────────────── */
+  .ibox {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .ibox-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+  .ibox-emerald { background: var(--emerald-dim); color: var(--emerald); border: 1px solid rgba(16,185,129,0.2); }
+  .ibox-rose { background: var(--rose-dim); color: var(--rose); border: 1px solid rgba(244,63,94,0.2); }
+  .ibox-dim { background: rgba(255,255,255,0.04); color: var(--text-dim); border: 1px solid var(--border); }
+
+  /* ── BIG NUMBER ────────────────────────────────────────── */
+  .bnum {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 42px; font-weight: 800; letter-spacing: -0.03em; color: #fff;
+  }
+  .bnum-amber { color: var(--amber); }
+  .bnum-emerald { color: var(--emerald); }
+
+  /* ── TOOLTIP TERM ──────────────────────────────────────── */
+  .term {
+    border-bottom: 1px dashed rgba(245,158,11,0.6);
+    color: #fcd34d;
+    cursor: help; position: relative;
+  }
+  .term .tip {
+    visibility: hidden; opacity: 0;
+    position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%);
+    background: #1a2e1e; border: 1px solid var(--border2);
+    border-radius: 8px; padding: 10px 14px;
+    font-size: 12px; color: var(--text-dim);
+    white-space: normal; max-width: 260px; line-height: 1.5;
+    z-index: 999; box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    pointer-events: none; transition: opacity 0.15s;
+    font-weight: 400; text-transform: none; letter-spacing: 0;
+  }
+  .term:hover .tip { visibility: visible; opacity: 1; }
+
+  /* ── DIVIDER ───────────────────────────────────────────── */
+  .hdiv { height: 1px; background: var(--border); margin: 16px 0; }
+
+  /* ── UTILS ─────────────────────────────────────────────── */
+  .z10 { position: relative; z-index: 10; }
+  .flex { display: flex; }
+  .flex-col { display: flex; flex-direction: column; }
+  .gap-4 { gap: 16px; }
+  .gap-6 { gap: 24px; }
+  .gap-3 { gap: 12px; }
+  .gap-2 { gap: 8px; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .flex-1 { flex: 1; }
+  .p-6 { padding: 24px; }
+  .p-5 { padding: 20px; }
+  .p-4 { padding: 16px; }
+  .p-3 { padding: 12px; }
+  .mb-1 { margin-bottom: 4px; }
+  .mb-2 { margin-bottom: 8px; }
+  .mb-3 { margin-bottom: 12px; }
+  .mb-4 { margin-bottom: 16px; }
+  .mb-6 { margin-bottom: 24px; }
+  .mt-auto { margin-top: auto; }
+  .w-full { width: 100%; }
+  .text-sm { font-size: 13px; }
+  .text-xs { font-size: 11px; }
+  .text-lg { font-size: 17px; }
+  .text-xl { font-size: 20px; }
+  .text-2xl { font-size: 24px; }
+  .font-bold { font-weight: 700; }
+  .font-black { font-weight: 900; }
+  .font-medium { font-weight: 500; }
+  .leading-relaxed { line-height: 1.65; }
+  .leading-tight { line-height: 1.2; }
+  .tracking-wide { letter-spacing: 0.08em; }
+  .uppercase { text-transform: uppercase; }
+  .rounded-xl { border-radius: 12px; }
+  .rounded-lg { border-radius: 8px; }
+  .rounded-full { border-radius: 9999px; }
+  .text-white { color: #fff; }
+  .text-amber { color: var(--amber); }
+  .text-emerald { color: var(--emerald); }
+  .text-rose { color: var(--rose); }
+  .text-dim { color: var(--text-dim); }
+  .text-faint { color: var(--text-faint); }
+  .border-b { border-bottom: 1px solid var(--border); }
+  .overflow-hidden { overflow: hidden; }
+  .relative { position: relative; }
+  .absolute { position: absolute; }
+
+  /* ── SLIDE 1 SPECIFIC ──────────────────────────────────── */
+  .cover-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 64px; font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1.05;
+  }
+
+  /* ── FLOW ARROW ────────────────────────────────────────── */
+  .flow-wrap { display: flex; align-items: center; gap: 0; }
+  .flow-node {
+    flex: 1;
+    background: rgba(22,32,25,0.8);
+    border: 1px solid var(--border2);
+    border-radius: 12px; padding: 16px 14px;
+    text-align: center;
+  }
+  .flow-node.active {
+    border-color: rgba(245,158,11,0.4);
+    background: var(--amber-dim);
+  }
+  .flow-arrow { padding: 0 8px; color: var(--text-faint); font-size: 16px; flex-shrink: 0; }
+
+  /* ── CAMPAIGN REGION ───────────────────────────────────── */
+  .region-card {
+    flex: 1; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border2);
+  }
+  .region-head {
+    padding: 14px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .region-head.kr { background: rgba(245,158,11,0.1); color: #fcd34d; border-bottom: 1px solid rgba(245,158,11,0.2); }
+  .region-head.us { background: rgba(16,185,129,0.08); color: var(--emerald); border-bottom: 1px solid rgba(16,185,129,0.2); }
+  .store-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; background: rgba(0,0,0,0.2);
+    font-size: 13px; color: var(--text-dim);
+  }
+  .store-row:not(:last-child) { border-bottom: 1px solid var(--border); }
+
+  /* ── TIMELINE ──────────────────────────────────────────── */
+  .tl { position: relative; padding-left: 24px; }
+  .tl::before {
+    content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border2);
+  }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -20px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  /* ── BUDGET TABLE ──────────────────────────────────────── */
+  .btable { width: 100%; border-collapse: collapse; }
+  .btable th {
+    text-align: left; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-faint); padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .btable td {
+    padding: 11px 14px; font-size: 13px; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .btable tr:last-child td { border-bottom: none; }
+  .btable .total td {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 14px; color: var(--text);
+    border-top: 1px solid var(--border2);
+  }
+  .btable td.amt {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; color: var(--text); text-align: right;
+  }
+  .btable th.r { text-align: right; }
+
+  /* ── ROADMAP ───────────────────────────────────────────── */
+  .rm-step {
+    flex: 1; border: 1px solid var(--border); padding: 22px 18px;
+    background: rgba(22,32,25,0.5);
+  }
+  .rm-step:first-child { border-radius: 14px 0 0 14px; }
+  .rm-step:last-child { border-radius: 0 14px 14px 0; }
+  .rm-step.active {
+    border-color: rgba(245,158,11,0.4);
+    background: var(--amber-dim); z-index: 1;
+  }
+  .rm-step.done { opacity: 0.5; }
+  .rm-arrow {
+    display: flex; align-items: center; padding: 0 4px;
+    background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    color: var(--text-faint); font-size: 13px; flex-shrink: 0;
+  }
+
+  /* ── CALLOUT ───────────────────────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--amber);
+    background: var(--amber-dim);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 18px;
+    font-size: 13px; color: var(--text-dim); line-height: 1.6;
+  }
+  .callout-emerald {
+    border-left-color: var(--emerald);
+    background: var(--emerald-dim);
+  }
+
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 01 — COVER
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-amber" style="width:600px;height:600px;right:-200px;top:-200px;"></div>
+  <div class="orb orb-emerald" style="width:400px;height:400px;left:-100px;bottom:-100px;"></div>
+
+  <div class="z10 flex flex-col" style="flex:1; padding: 56px 64px 48px; justify-content: space-between;">
+    <div>
+      <div class="flex items-center gap-3 mb-6">
+        <span class="tag tag-amber">Investor Brief</span>
+        <span class="tag tag-dim">LevelUp Studio · 2026</span>
+      </div>
+      <div class="cover-title text-white">
+        Quad Trigger<br>
+        <span style="color:var(--amber);">2nd Soft Launch</span>
+      </div>
+      <p style="font-size:18px; color:var(--text-dim); margin-top:16px; max-width:600px; line-height:1.6;">
+        그랜드런칭 Go/No-Go 판단을 위한 핵심 지표 확보<br>마케팅 예산 투자 요청서
+      </p>
+    </div>
+
+    <div class="flex gap-6" style="margin-top:auto;">
+      <div class="card p-5" style="flex:1;">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">대상 리전</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#fff;">🇰🇷 KR &nbsp;·&nbsp; 🇺🇸 US</div>
+      </div>
+      <div class="card p-5" style="flex:1;">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">집행 플랫폼</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#fff;">Android &nbsp;·&nbsp; iOS</div>
+      </div>
+      <div class="card card-amber p-5" style="flex:1;">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">요청 예산</div>
+        <div class="bnum bnum-amber">$10,000</div>
+      </div>
+      <div class="card p-5" style="flex:1;">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">집행 기간</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#fff;">7일</div>
+        <div class="text-xs text-dim" style="margin-top:2px;">+ 무비용 관찰 4주+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>CONFIDENTIAL · For Investor Review Only</span>
+    <span>LevelUp Studio</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 02 — 1차 포스트모템
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-amber" style="width:400px;height:400px;right:-100px;bottom:-100px;"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 1 · Post-mortem</span></div>
+      <div class="slide-title">1차 소프트런칭 결과 <span style="color:var(--text-dim); font-size:28px;">ID · SG · MY</span></div>
+    </div>
+    <div class="slide-num">02</div>
+  </div>
+
+  <div class="slide-body" style="align-items: stretch;">
+
+    <!-- Left: 결과 -->
+    <div class="flex-1 flex-col flex gap-3">
+      <p class="text-sm text-dim leading-relaxed mb-2">
+        인도네시아를 시작으로 싱가포르, 말레이시아까지 순차 확장하며 실제 유저 환경에서의 기술 검증을 진행했습니다.
+      </p>
+
+      <div class="card p-4 flex items-start gap-3">
+        <div class="sdot sdot-g" style="margin-top:6px;"></div>
+        <div>
+          <div class="font-bold text-white text-sm mb-1">클라이언트 정상 동작 확인</div>
+          <div class="text-xs text-dim leading-relaxed">게임 클라이언트가 실제 유저 환경에서 의도한 대로 작동함을 검증했습니다.</div>
+        </div>
+      </div>
+
+      <div class="card p-4 flex items-start gap-3">
+        <div class="sdot sdot-g" style="margin-top:6px;"></div>
+        <div>
+          <div class="font-bold text-white text-sm mb-1">서버 아키텍처 안정성 검증 완료</div>
+          <div class="text-xs text-dim leading-relaxed">멀티 리전 서버 구조가 실 트래픽 환경에서 안정적으로 동작함을 확인했습니다.</div>
+        </div>
+      </div>
+
+      <div class="card card-amber p-4 flex items-start gap-3">
+        <div class="sdot sdot-y" style="margin-top:6px;"></div>
+        <div>
+          <div class="font-bold text-white text-sm mb-1">일부 저사양 디바이스 성능 이슈 → 대응 완료</div>
+          <div class="text-xs text-dim leading-relaxed">게임 최적화 문제가 아닌 <strong style="color:var(--amber);">디바이스 자체의 하드웨어 한계</strong>로 인한 이슈입니다. 해당 디바이스 범위를 파악하고 처리 완료했습니다.</div>
+        </div>
+      </div>
+
+      <div class="card card-rose p-4 flex items-start gap-3">
+        <div class="sdot sdot-r" style="margin-top:6px;"></div>
+        <div>
+          <div class="font-bold text-white text-sm mb-1">유의미한 지표 수집 불가</div>
+          <div class="text-xs text-dim leading-relaxed">위 이슈로 인해 리텐션 등 정량적 지표 측정이 어려웠습니다. 지표 확보는 2차로 이관합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: 결론 -->
+    <div style="width:320px; display:flex; flex-direction:column; gap:16px;">
+      <div class="card p-5 flex-col flex" style="flex:1;">
+        <div class="ibox ibox-emerald mb-4"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="font-bold text-white text-lg mb-2" style="font-family:'Space Grotesk',sans-serif;">기술 검증 ✓</div>
+        <div class="text-sm text-dim leading-relaxed">
+          1차의 핵심 성과는 <strong style="color:var(--emerald);">기술 검증</strong>입니다.<br>
+          게임이 실제로 돌아가고, 서버가 버틴다는 것을 확인했습니다.
+        </div>
+        <div class="hdiv"></div>
+        <div class="text-xs text-dim">2차는 그 위에 <strong style="color:#fff;">유저 데이터</strong>를 쌓는 단계입니다.</div>
+      </div>
+
+      <div class="callout callout-emerald">
+        <strong style="color:var(--emerald);">결론:</strong> 예상치 못한 디바이스 이슈가 있었으나, 핵심 아키텍처는 실전 검증됐습니다. 2차를 위한 기반이 마련되었습니다.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span>Phase 1 Post-mortem · ID / SG / MY</span>
+    <span>CONFIDENTIAL</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 03 — 2차 목표
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-emerald" style="width:500px;height:500px;right:-150px;top:-150px;"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Objective</span></div>
+      <div class="slide-title">2차 소프트런칭의 <span style="color:var(--amber);">단 하나의 목표</span></div>
+    </div>
+    <div class="slide-num">03</div>
+  </div>
+
+  <div class="slide-body" style="align-items:stretch; flex-direction:column; padding-top:24px;">
+
+    <div class="callout" style="margin-bottom:20px; font-size:15px;">
+      <strong style="color:var(--amber); font-size:17px;">그랜드런칭 Go/No-Go를 판단할 수 있는 데이터를 확보한다.</strong><br>
+      <span style="font-size:13px;">이 데이터 없이는 그랜드런칭 규모의 마케팅 투자 결정을 내릴 수 없습니다.</span>
+    </div>
+
+    <div class="flex gap-4" style="flex:1; align-items:stretch;">
+
+      <div class="card p-5 flex-1 flex-col flex">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="ibox ibox-amber"><i class="fa-solid fa-users"></i></div>
+          <div>
+            <div class="text-xs text-dim uppercase tracking-wide mb-1">핵심 지표 1</div>
+            <div class="font-bold text-white">
+              <span class="term">리텐션 (Retention)<span class="tip">가입한 유저가 일정 기간 후에도 게임을 켜는 비율. Week1 리텐션 20%라면 100명 중 20명이 1주 뒤에도 플레이 중이라는 뜻입니다.</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-sm text-dim leading-relaxed">
+          "이 게임이 계속 하고 싶은 게임인가"를 수치로 증명하는 지표입니다.<br><br>
+          글로벌 표준인 <strong style="color:#fff;">Weekly 코호트</strong>로 측정합니다.
+        </div>
+        <div class="hdiv"></div>
+        <div class="flex gap-2">
+          <span class="tag tag-amber" style="font-size:10px;">Week 1 리텐션</span>
+          <span class="tag tag-amber" style="font-size:10px;">Week 2 리텐션</span>
+        </div>
+      </div>
+
+      <div class="card p-5 flex-1 flex-col flex">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="ibox ibox-emerald"><i class="fa-solid fa-dollar-sign"></i></div>
+          <div>
+            <div class="text-xs text-dim uppercase tracking-wide mb-1">핵심 지표 2</div>
+            <div class="font-bold text-white">
+              <span class="term">CPI (Cost Per Install)<span class="tip">유저 1명을 게임에 데려오는 데 드는 광고비. CPI $2.5라면 한 명 설치시키는 데 2.5달러가 들었다는 의미입니다. 낮을수록 효율적입니다.</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-sm text-dim leading-relaxed">
+          "얼마를 써야 유저 한 명을 데려올 수 있는가"를 실측합니다.<br><br>
+          그랜드런칭 전체 마케팅 예산 산정의 기준이 됩니다.
+        </div>
+        <div class="hdiv"></div>
+        <div class="flex gap-2">
+          <span class="tag tag-emerald" style="font-size:10px;">리전별 CPI</span>
+          <span class="tag tag-emerald" style="font-size:10px;">플랫폼별 CPI</span>
+        </div>
+      </div>
+
+      <div class="card p-5 flex-1 flex-col flex">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="ibox ibox-dim"><i class="fa-solid fa-layer-group"></i></div>
+          <div>
+            <div class="text-xs text-dim uppercase tracking-wide mb-1">측정 방식</div>
+            <div class="font-bold text-white">
+              <span class="term">코호트 (Cohort)<span class="tip">같은 날(또는 같은 주)에 가입한 유저 묶음. 코호트 단위로 추적하면 어떤 광고가 오래 남는 유저를 데려오는지 비교할 수 있습니다.</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-sm text-dim leading-relaxed">
+          같은 날 가입한 유저들을 묶어서 추적합니다.<br><br>
+          광고 집행이 끝나도 유저는 앱에 남아있기 때문에, <strong style="color:#fff;">추가 비용 없이</strong> 장기 추적이 가능합니다.
+        </div>
+        <div class="hdiv"></div>
+        <div class="flex gap-2">
+          <span class="tag tag-dim" style="font-size:10px;">Weekly 코호트 표준</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="slide-footer">
+    <span>Phase 2 Objective · KR / US</span>
+    <span>CONFIDENTIAL</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 04 — 캠페인 구조
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Campaign Structure</span></div>
+      <div class="slide-title">캠페인 구조 — 리전 / 스토어별</div>
+    </div>
+    <div class="slide-num">04</div>
+  </div>
+
+  <div class="slide-body flex-col" style="gap:20px; padding-top:24px;">
+
+    <!-- Region Cards -->
+    <div class="flex gap-6" style="flex:1;">
+
+      <!-- KR -->
+      <div class="region-card">
+        <div class="region-head kr">🇰🇷 Korea</div>
+        <div style="background:rgba(0,0,0,0.3); padding:16px; flex:1;">
+          <div class="store-row">
+            <span>🤖 Google Play (Android)</span>
+            <span class="tag tag-amber" style="font-size:10px;">Google Ads UAC</span>
+          </div>
+          <div class="store-row">
+            <span>🍎 App Store (iOS)</span>
+            <span class="tag tag-amber" style="font-size:10px;">Google Ads UAC</span>
+          </div>
+          <div style="padding:12px 0 0; font-size:12px; color:var(--text-dim); line-height:1.6;">
+            목표 <span class="term">NRU<span class="tip">New Registered User. 새로 가입한 유저 수. 광고를 보고 설치 후 계정을 만든 사람의 수입니다.</span></span>: <strong style="color:#fff;">250명/일 × 7일 = 1,750명</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- US -->
+      <div class="region-card">
+        <div class="region-head us">🇺🇸 United States</div>
+        <div style="background:rgba(0,0,0,0.3); padding:16px; flex:1;">
+          <div class="store-row">
+            <span>🤖 Google Play (Android)</span>
+            <span class="tag tag-emerald" style="font-size:10px;">Google Ads UAC</span>
+          </div>
+          <div class="store-row">
+            <span>🍎 App Store (iOS)</span>
+            <span class="tag tag-emerald" style="font-size:10px;">Google Ads UAC</span>
+          </div>
+          <div style="padding:12px 0 0; font-size:12px; color:var(--text-dim); line-height:1.6;">
+            목표 NRU: <strong style="color:#fff;">250명/일 × 7일 = 1,750명</strong>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Flow -->
+    <div class="card p-4">
+      <div class="text-xs text-dim uppercase tracking-wide mb-3">광고에서 데이터까지 — 자동화 흐름</div>
+      <div class="flow-wrap">
+        <div class="flow-node active">
+          <div style="font-size:20px; margin-bottom:4px;">📢</div>
+          <div class="text-xs font-bold text-amber">Google Ads UAC</div>
+          <div class="text-xs text-dim">광고 집행</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div style="font-size:20px; margin-bottom:4px;">👁️</div>
+          <div class="text-xs font-bold text-white">노출 · 클릭</div>
+          <div class="text-xs text-dim">잠재 유저</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div style="font-size:20px; margin-bottom:4px;">📲</div>
+          <div class="text-xs font-bold text-white">앱 설치</div>
+          <div class="text-xs text-dim">스토어 다운로드</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div style="font-size:20px; margin-bottom:4px;">✅</div>
+          <div class="text-xs font-bold text-white">가입 (NRU)</div>
+          <div class="text-xs text-dim">계정 생성</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node active">
+          <div style="font-size:20px; margin-bottom:4px;">📊</div>
+          <div class="text-xs font-bold text-amber">MMP 자동 집계</div>
+          <div class="text-xs text-dim">코호트 · 리텐션</div>
+        </div>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:var(--text-faint);">
+        <span class="term">MMP<span class="tip">Mobile Measurement Partner. AppsFlyer, Adjust 등 모바일 광고 성과를 자동으로 집계·분석하는 플랫폼입니다.</span></span>(모바일 광고 성과 측정 플랫폼)가 설치·가입·재방문 데이터를 실시간으로 자동 집계합니다. 별도 수작업 없이 코호트 단위 리텐션을 추적합니다.
+      </div>
+    </div>
+
+    <div class="callout" style="font-size:12px;">
+      <strong style="color:var(--amber);">광고 소재 제작은 내부 진행.</strong> 이번 요청 예산은 <strong style="color:#fff;">Google Ads 플랫폼 집행 비용에만 해당</strong>합니다.
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span>Campaign Structure · KR / US · Android &amp; iOS</span>
+    <span>CONFIDENTIAL</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 05 — 집행 일정
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-amber" style="width:300px;height:300px;left:0;top:0;"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Timeline</span></div>
+      <div class="slide-title">집행 일정 및 관찰 계획</div>
+    </div>
+    <div class="slide-num">05</div>
+  </div>
+
+  <div class="slide-body" style="align-items:stretch;">
+
+    <!-- Timeline -->
+    <div class="flex-1">
+      <div class="tl">
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--text-dim); box-shadow:0 0 6px var(--text-dim);"></div>
+          <div class="card p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="tag tag-dim">D-14 ~ D-7</span>
+              <span class="font-bold text-white text-sm">캠페인 웜업 (트레이닝)</span>
+            </div>
+            <div class="text-sm text-dim leading-relaxed">
+              Google Ads 알고리즘이 "어떤 유저에게 광고를 보여줄지" 학습하는 기간입니다. 이 기간 없이 본 집행을 시작하면 초반 광고 효율이 크게 떨어집니다. 약 7~14일 소요되며 소규모 집행으로 진행합니다.
+            </div>
+            <div style="margin-top:8px; font-size:11px; color:var(--text-faint);">비용: 예산 버퍼에서 충당</div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--amber); box-shadow:0 0 8px var(--amber);"></div>
+          <div class="card card-amber p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="tag tag-amber">D+0 ~ D+7</span>
+              <span class="font-bold text-white text-sm">본 집행 — 7일</span>
+            </div>
+            <div class="text-sm text-dim leading-relaxed">
+              KR/US 각 리전, Android/iOS 각 스토어에서 동시 집행.<br>
+              목표: 각 리전 <strong style="color:#fff;">250 NRU/일</strong> → 7일간 리전당 1,750명, 총 3,500명.
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item" style="margin-bottom:0;">
+          <div class="tl-dot" style="background:var(--emerald); box-shadow:0 0 8px var(--emerald);"></div>
+          <div class="card card-emerald p-4">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="tag tag-emerald">D+7 이후</span>
+              <span class="font-bold text-white text-sm">무비용 코호트 관찰</span>
+            </div>
+            <div class="text-sm text-dim leading-relaxed">
+              광고 집행이 끝나도 확보된 유저들은 앱에 남아있습니다. 이들이 1주 후, 2주 후에도 게임을 켜는지 <strong style="color:var(--emerald);">추가 비용 없이</strong> 추적합니다. Week 1 · Week 2 리텐션까지 확보하면 그랜드런칭 판단에 충분한 데이터가 됩니다.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right: 핵심 포인트 -->
+    <div style="width:300px; display:flex; flex-direction:column; gap:14px;">
+
+      <div class="card p-5 flex-col flex">
+        <div class="text-xs text-dim uppercase tracking-wide mb-3">비용 효율</div>
+        <div class="bnum bnum-amber" style="font-size:32px;">1주 집행</div>
+        <div class="text-sm text-dim" style="margin-top:4px;">→ 4주 이상 데이터</div>
+        <div class="hdiv"></div>
+        <div class="text-xs text-dim leading-relaxed">광고가 끝나도 유저 코호트는 계속 관찰됩니다. 집행 비용 없이 Week1/Week2 리텐션 모두 확보 가능합니다.</div>
+      </div>
+
+      <div class="card p-5 flex-col flex">
+        <div class="text-xs text-dim uppercase tracking-wide mb-3">왜 Weekly 코호트인가?</div>
+        <div class="text-sm text-dim leading-relaxed">
+          글로벌 MMP 표준은 주 단위 코호트. Day7 데이터보다 Week1/Week2가 게임의 장기 재미를 더 정확히 반영합니다.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span>Campaign Timeline · Warmup → Launch → Observation</span>
+    <span>CONFIDENTIAL</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 06 — 예산 계획
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-amber" style="width:400px;height:400px;right:-100px;top:-100px;"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Budget · $10,000</span></div>
+      <div class="slide-title">예산 계획 및 산정 근거</div>
+    </div>
+    <div class="slide-num">06</div>
+  </div>
+
+  <div class="slide-body" style="align-items:stretch;">
+
+    <!-- Table -->
+    <div class="flex-1">
+      <div class="card" style="overflow:hidden; margin-bottom:14px;">
+        <table class="btable">
+          <thead>
+            <tr>
+              <th>플랫폼</th>
+              <th>리전</th>
+              <th>목표 NRU</th>
+              <th>CPI 추정</th>
+              <th class="r">예산</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🤖 Android</td>
+              <td>🇰🇷 KR</td>
+              <td>437명</td>
+              <td style="color:var(--text-dim);">$1.2</td>
+              <td class="amt">$524</td>
+            </tr>
+            <tr>
+              <td>🍎 iOS</td>
+              <td>🇰🇷 KR</td>
+              <td>438명</td>
+              <td style="color:var(--text-dim);">$1.8</td>
+              <td class="amt">$788</td>
+            </tr>
+            <tr>
+              <td>🤖 Android</td>
+              <td>🇺🇸 US</td>
+              <td>437명</td>
+              <td style="color:var(--text-dim);">$2.5</td>
+              <td class="amt">$1,093</td>
+            </tr>
+            <tr>
+              <td>🍎 iOS</td>
+              <td>🇺🇸 US</td>
+              <td>438명</td>
+              <td style="color:var(--text-dim);">$4.0</td>
+              <td class="amt">$1,752</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="color:var(--text-faint); font-size:12px;">캠페인 웜업 (트레이닝)</td>
+              <td style="color:var(--text-faint);">—</td>
+              <td style="color:var(--text-faint);">—</td>
+              <td class="amt" style="color:var(--text-faint);">$156</td>
+            </tr>
+            <tr class="total">
+              <td colspan="3">소계</td>
+              <td></td>
+              <td class="amt">$4,313</td>
+            </tr>
+            <tr class="total">
+              <td colspan="3">버퍼 (편차 대비 · 운영 여유)</td>
+              <td></td>
+              <td class="amt">$5,687</td>
+            </tr>
+            <tr class="total">
+              <td colspan="3"><strong>총 요청 예산</strong></td>
+              <td></td>
+              <td class="amt" style="color:var(--amber); font-size:18px;">$10,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="font-size:12px;">
+        💡 <strong style="color:var(--amber);">1차에서 US 기준 CPI $1.0~1.4를 경험했습니다.</strong> 단, 소규모 집행이었기에 통계적 편차 가능성을 고려해 <strong style="color:#fff;">업계 벤치마크 기준으로 보수적 산정</strong>했습니다. 실제 CPI가 낮을 경우 버퍼 예산으로 추가 유저를 확보합니다.
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div style="width:260px; display:flex; flex-direction:column; gap:14px;">
+
+      <div class="card card-amber p-5 flex-col flex">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">총 목표 NRU</div>
+        <div class="bnum bnum-amber">3,500명</div>
+        <div class="text-xs text-dim" style="margin-top:6px;">KR 1,750 + US 1,750</div>
+        <div class="hdiv"></div>
+        <div class="text-xs text-dim">리전별 독립 운영 · 각 250명/일</div>
+      </div>
+
+      <div class="card p-5 flex-col flex">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">CPI 기준</div>
+        <div class="text-sm text-white font-bold mb-1">업계 벤치마크 (보수적)</div>
+        <div style="font-size:12px; color:var(--text-dim); line-height:1.8;">
+          Android KR: <strong style="color:#fff;">$1.2</strong><br>
+          iOS KR: <strong style="color:#fff;">$1.8</strong><br>
+          Android US: <strong style="color:#fff;">$2.5</strong><br>
+          iOS US: <strong style="color:#fff;">$4.0</strong>
+        </div>
+      </div>
+
+      <div class="card p-5">
+        <div class="text-xs text-dim uppercase tracking-wide mb-2">소재 제작</div>
+        <div class="text-sm text-white font-bold">내부 제작 (별도 비용 없음)</div>
+        <div class="text-xs text-dim" style="margin-top:4px;">이번 예산은 플랫폼 집행비만 해당</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span>Budget Plan · $10,000 Total Request</span>
+    <span>CONFIDENTIAL</span>
+  </div>
+</div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 07 — 로드맵
+═══════════════════════════════════════════════════════ -->
+<section data-background-color="#080c0a">
+<div class="sc">
+  <div class="grid-bg"></div>
+  <div class="orb orb-emerald" style="width:500px;height:500px;left:-150px;bottom:-150px;"></div>
+  <div class="orb orb-amber" style="width:300px;height:300px;right:0;top:0;"></div>
+
+  <div class="slide-header">
+    <div>
+      <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Roadmap · Grand Launch</span></div>
+      <div class="slide-title">그랜드런칭까지의 경로</div>
+    </div>
+    <div class="slide-num">07</div>
+  </div>
+
+  <div class="slide-body flex-col" style="padding-top:28px; gap:20px;">
+
+    <!-- Roadmap -->
+    <div class="flex" style="align-items:stretch; margin-bottom:4px;">
+      <div class="rm-step done">
+        <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--text-faint); font-weight:700;">완료</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:var(--text-dim); margin-bottom:8px;">1차 소프트런칭</div>
+        <div class="text-xs text-dim leading-relaxed">ID · SG · MY<br>기술 검증 완료</div>
+        <div style="margin-top:12px;" class="flex gap-2 flex-wrap">
+          <span class="tag tag-emerald" style="font-size:10px;">클라이언트 ✓</span>
+          <span class="tag tag-emerald" style="font-size:10px;">서버 ✓</span>
+        </div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-step active">
+        <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--amber); font-weight:700;">진행 예정 · 이번 요청</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">2차 소프트런칭</div>
+        <div class="text-xs text-dim leading-relaxed">KR · US<br>리텐션 / CPI 지표 확보</div>
+        <div style="margin-top:12px;" class="flex gap-2 flex-wrap">
+          <span class="tag tag-amber" style="font-size:10px;">$10,000</span>
+          <span class="tag tag-amber" style="font-size:10px;">7일 집행</span>
+          <span class="tag tag-amber" style="font-size:10px;">3,500 NRU</span>
+        </div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-step" style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--text-faint); font-weight:700;">데이터 기반 판단</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:var(--text-dim); margin-bottom:6px;">Week 1/2 리텐션 확인</div>
+        <div class="text-xs text-dim">CPI · 코호트 품질 분석</div>
+      </div>
+      <div class="rm-arrow">▶</div>
+      <div class="rm-step" style="border-color:rgba(16,185,129,0.25); background:var(--emerald-dim);">
+        <div class="text-xs uppercase tracking-wide mb-2" style="color:var(--emerald); font-weight:700;">최종 목표</div>
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">그랜드런칭</div>
+        <div class="text-xs text-dim leading-relaxed">전 리전 동시 출시<br>데이터 기반 최대 화력</div>
+      </div>
+    </div>
+
+    <!-- Why this matters -->
+    <div class="flex gap-4">
+      <div class="callout flex-1">
+        <strong style="color:var(--amber);">3차 소프트런칭 없음.</strong> 2차 지표 확인 후 곧바로 그랜드런칭으로 진행합니다. 2차가 그랜드런칭의 유일한 판단 근거입니다.
+      </div>
+      <div class="callout callout-emerald flex-1">
+        <strong style="color:var(--emerald);">$10,000 투자의 의미.</strong> 이 예산으로 확보된 데이터는 그랜드런칭 전체 마케팅 예산 규모를 결정하는 기반이 됩니다.
+      </div>
+    </div>
+
+    <!-- Key metrics target -->
+    <div class="flex gap-4">
+      <div class="card p-4 flex-1 flex items-center gap-4">
+        <div class="ibox ibox-amber"><i class="fa-solid fa-chart-line"></i></div>
+        <div>
+          <div class="text-xs text-dim uppercase tracking-wide mb-1">그랜드런칭 Go 기준 (예시)</div>
+          <div class="text-sm text-white font-bold">Week 1 리텐션 <span style="color:var(--amber);">20%</span> 이상 · CPI <span style="color:var(--amber);">$3.0</span> 이하 유지</div>
+        </div>
+      </div>
+      <div class="card p-4 flex-1 flex items-center gap-4">
+        <div class="ibox ibox-emerald"><i class="fa-solid fa-calendar-check"></i></div>
+        <div>
+          <div class="text-xs text-dim uppercase tracking-wide mb-1">전체 일정</div>
+          <div class="text-sm text-white font-bold">웜업 2주 + 집행 1주 + 관찰 2주 = <span style="color:var(--emerald);">약 5주</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span>Roadmap · Phase 2 → Grand Launch</span>
+    <span>CONFIDENTIAL · LevelUp Studio</span>
+  </div>
+</div>
+</section>
+
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0,
+    hash: true, center: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    mouseWheel: true,
+    controls: true,
+    progress: true,
+  });
+</script>
+</body>
+</html>
