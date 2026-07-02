@@ -52,12 +52,14 @@ nav{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;a
 .viewer iframe{width:100%;border:none;display:block;min-height:400px;}
 
 footer{margin-top:40px;font-size:12px;color:#2a3a4a;}
+canvas{position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 
 @media(max-width:768px){nav{padding:14px 20px;}}
 </style>
 </head>
 <body>
 <div class="gradient"></div>
+<canvas id="bg"></canvas>
 
 <nav>
   <a class="nav-logo" href="#" id="nav-logo-link">LEVELUP STUDIO</a>
@@ -220,6 +222,8 @@ function render() {
 }
 
 render();
+
 </script>
+<script src="/particle-bg.js"></script>
 </body>
 </html>
