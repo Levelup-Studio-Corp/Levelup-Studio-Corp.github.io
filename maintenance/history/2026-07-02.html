@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-02 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date" id="patch-date">2026.07.02</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"신규 컨텐츠", features:[
+        { title:"신규 게임 모드 [디펜스] 추가", descs:["한 명의 다른 플레이어와 짝을 이루어 몰려드는 적으로부터 목표를 보호하는 PVE 게임모드입니다.","디펜스 모드에서는 보상으로 럼블 코인을 획득할 수 있습니다."]},
+        { title:"[랭킹] 추가 및 시즌제 운영", descs:["시즌 종료 시 랭크에 따른 보상을 지급합니다.","함께 추가된 [명예의 전당]에서는 시즌 별로 최상위 3인의 플레이어들을 확인할 수 있습니다."]},
+        { title:"기존 6종 스킬의 강화 버전 스킬 추가", descs:["상점 - 랭크 상점에서 랭크 포인트로 구매 가능합니다.","랭크 포인트는 랭크 시즌 종료 시 달성 랭크에 따라 받을 수 있으며, [미션] 클리어 시 소량 획득도 가능합니다.","강화 스킬들은 기간제로만 사용 가능합니다."]},
+        { title:"[미션] 컨텐츠 추가", descs:["게임 내 여러 플레이를 통해 미션을 수행하고 보상을 받는 보드게임 형태의 컨텐츠입니다.","주사위를 얻고 굴려 보드판 위에서 유령 NPC들과 주사위를 뺏고 뺏기는 추격전을 즐겨보세요.","미션은 주사위를 굴려 이동할 때마다 랜덤하게 제공됩니다."]},
+        { title:"다양한 [업적] 추가", descs:[]},
+      ]},
+      { label:"기존 시스템 추가/변경", features:[
+        { title:"자유대전 사망 시 리플레이 재생 기능 추가", descs:["자신이 누구에게 어떻게 사망했는지 확인할 수 있습니다.","리플레이 건너뛰기 아이템 사용 시 즉시 리스폰할 수 있습니다."]},
+        { title:"플레이 중 무기 교체 기능 추가", descs:["무기 가방 즐겨찾기에 등록한 무기를 게임 도중 교체 예약할 수 있습니다.","예약한 무기는 다음 리스폰 시 자동 장착됩니다.","무기 교체 시 골드를 소모합니다."]},
+        { title:"자유대전 모드 맵 일부 수정", descs:["일부 오브젝트 재배치 및 투척무기 랜덤 생성 포인트가 제거되었습니다."]},
+        { title:"장비 강화 방식 변경", descs:["강화 단계별로 성공 확률이 적용됩니다.","일정 강화 단계부터는 강화 실패 시 단계가 하락할 확률이 발생합니다.","강화 성공/실패 연출이 추가되었습니다."]},
+        { title:"멀티 킬 알림 추가 (최고 펜타킬)", descs:["업적과 미션에도 멀티 킬 관련 항목들이 추가되었습니다."]},
+        { title:"신규 투척무기 [목재 큐브] 추가", descs:["던진 위치에 박스 벽을 생성할 수 있습니다.","생성 위치에 적이 있을 경우 박스 대신 해당 대상에게 피해를 입힙니다."]},
+        { title:"박스 파괴 방식 변경", descs:["투척무기 피해뿐 아니라 총알 피해로도 박스가 파괴됩니다."]},
+        { title:"자유대전 드롭 아이템 일정 시간 후 소멸", descs:["다른 플레이어가 떨군 스킬과 포인트 아이템이 일정 시간 후 사라집니다."]},
+        { title:"사망 시 사운드 효과 버그 수정", descs:["사망 시 먹먹해지는 효과가 부활 후 정상 복귀되지 않던 문제를 수정하였습니다."]},
+      ]},
+      { label:"옵션 및 기타 편의 추가/변경", features:[
+        { title:"기간제 사용 아이템 추가", descs:["사용 기간이 정해진 아이템 및 장비가 추가되었습니다.","기간제 장비는 강화 또는 분해할 수 없습니다."]},
+        { title:"무기 잠금 및 즐겨찾기 기능 추가", descs:["잠금된 무기는 분해 창에서 표시되지 않습니다.","즐겨찾기 무기도 분해 창에 표시되지 않으며 게임 도중 교체 장착이 가능합니다."]},
+        { title:"진동 옵션 추가", descs:["총기 격발 등에 따른 진동 효과를 경험할 수 있습니다."]},
+        { title:"[스킬 줍기] 옵션 추가", descs:["옵션 또는 스킬 가방에서 켜거나 끌 수 있습니다.","꺼두면 게임 도중 다른 플레이어가 떨어뜨린 스킬을 줍지 않습니다."]},
+        { title:"빠른 게임 서버 변경 기능 추가", descs:["현재 사용 가능한 가장 빠른 서버로 변경할 수 있습니다.","서버 변경 시 게임이 재시작됩니다."]},
+      ]},
+      { label:"상점 & 상품 관련 추가/변경", features:[
+        { title:"[선택 상자] 기능 추가", descs:["구성품 중 원하는 품목을 선택해 획득할 수 있습니다."]},
+        { title:"랭크 상점 추가", descs:[]},
+        { title:"젬 상점 추가", descs:[]},
+        { title:"구매 횟수 제한 상품 기능 추가", descs:["기간 내 일정 수량만 구매 가능한 상품이 추가되었습니다."]},
+        { title:"재료 아이템 변환 기능 추가", descs:["재료 가방 아이템을 럼블 코인으로 변환할 수 있으며, 상점에서 럼블 코인으로 상품을 구매할 수 있습니다.","하루에 변환으로 얻을 수 있는 럼블 코인 총량은 정해져 있습니다."]},
+        { title:"유료젬 / 무료젬 구분 표시", descs:["로비 및 상점에서 유료젬(붉은색)과 무료젬(보라색)을 각각 구분하여 표시합니다.","각각 구매 가능한 상품의 종류가 다릅니다."]},
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"New Content", features:[
+        { title:"New Game Mode [Defense] Added", descs:["A PVE game mode where you team up with another player to protect an objective from waves of enemies.","Rumble Coins can be earned as rewards in Defense mode."]},
+        { title:"[Ranking] Added with Season System", descs:["Rewards are distributed based on your rank at the end of each season.","The [Hall of Fame] shows the top 3 players from each season."]},
+        { title:"Enhanced Versions of 6 Existing Skills Added", descs:["Available for purchase with Rank Points in the Rank Shop.","Rank Points are earned based on your rank at season end and in small amounts via Missions.","Enhanced skills are time-limited only."]},
+        { title:"[Mission] Content Added", descs:["A board game-style content where you complete missions via in-game activities to earn rewards.","Collect dice and roll them to chase and steal dice from ghost NPCs on the board.","Missions are provided randomly each time you move."]},
+        { title:"Various [Achievements] Added", descs:[]},
+      ]},
+      { label:"System Updates", features:[
+        { title:"Death Replay Feature Added in Free Battle", descs:["You can now see who killed you and how.","Use a Replay Skip item to respawn immediately."]},
+        { title:"In-Game Weapon Swap Feature Added", descs:["Favorited weapons can be queued for swap at any time during gameplay.","The queued weapon will be automatically equipped on the next respawn.","Swapping weapons costs Gold."]},
+        { title:"Free Battle Map Partially Updated", descs:["Some objects have been repositioned and random throwable spawn points removed."]},
+        { title:"Equipment Enhancement System Revised", descs:["Success rate now applies per enhancement level.","From certain levels, failed enhancements may cause the level to decrease.","Enhancement success/failure effects have been added."]},
+        { title:"Multi-Kill Notification Added (up to Penta Kill)", descs:["Multi-kill entries added to Achievements and Missions."]},
+        { title:"New Throwable [Wooden Cube] Added", descs:["Creates a box wall at the thrown location.","If an enemy is at the landing position, damage is dealt instead of creating a box."]},
+        { title:"Box Destruction Method Changed", descs:["Boxes can now be destroyed by bullets in addition to throwable damage."]},
+        { title:"Dropped Items Disappear After Time in Free Battle", descs:["Skills and point items dropped by other players will disappear after a set time."]},
+        { title:"Death Sound Effect Bug Fixed", descs:["Fixed an issue where the muffled sound effect on death did not return to normal after respawning."]},
+      ]},
+      { label:"Options & Convenience Updates", features:[
+        { title:"Time-Limited Items Added", descs:["Items and equipment with fixed usage periods have been added.","Time-limited equipment cannot be enhanced or disassembled."]},
+        { title:"Weapon Lock & Favorite Features Added", descs:["Locked weapons will not appear in the disassembly window.","Favorited weapons are hidden from disassembly and can be swapped during gameplay."]},
+        { title:"Vibration Option Added", descs:["Experience vibration feedback for firing weapons and other actions."]},
+        { title:"[Auto Skill Pickup] Option Added", descs:["Can be toggled in Options or the Skill Bag.","When off, skills dropped by other players will not be picked up."]},
+        { title:"Quick Game Server Switch Feature Added", descs:["Switch to the fastest available game server.","The game will restart upon server change."]},
+      ]},
+      { label:"Shop & Product Updates", features:[
+        { title:"[Selection Box] Feature Added", descs:["Choose the item you want from the box contents."]},
+        { title:"Rank Shop Added", descs:[]},
+        { title:"Gem Shop Added", descs:[]},
+        { title:"Purchase Limit Products Added", descs:["Products with a limited purchase quantity per period have been added."]},
+        { title:"Material Item Conversion Feature Added", descs:["Items in the material bag can be converted into Rumble Coins to purchase items in the shop.","The total Rumble Coins obtainable through daily conversion is capped."]},
+        { title:"Paid Gem / Free Gem Display Separated", descs:["Paid Gems (red) and Free Gems (purple) are now displayed separately in the lobby and shop.","Each type can be used to purchase different products."]},
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
