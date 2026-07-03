@@ -346,26 +346,30 @@
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">게임 최적화 문제가 아닌 <strong style="color:var(--amber);">디바이스 자체의 하드웨어 한계</strong>로 인한 이슈. 해당 디바이스 범위를 파악하고 처리 완료했습니다.</div></div>
       </div>
 
-      <div class="card card-rose anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.65s;">
-        <div class="sdot sdot-r" style="margin-top:5px;"></div>
-        <div><div style="font-weight:700;color:#fff;font-size:13px;margin-bottom:3px;">유의미한 지표 수집 불가</div>
-        <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">위 이슈로 인해 리텐션 등 정량적 지표 측정이 어려웠습니다. 지표 확보는 2차로 이관합니다.</div></div>
+      <div class="card anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.65s;border-color:rgba(255,255,255,0.06);">
+        <div class="sdot" style="margin-top:5px;background:var(--text-faint);flex-shrink:0;"></div>
+        <div><div style="font-weight:700;color:var(--text-dim);font-size:13px;margin-bottom:3px;">정량 지표 측정은 2차 목표</div>
+        <div style="font-size:12px;color:var(--text-faint);line-height:1.5;">1차의 목적은 처음부터 기술 검증이었습니다. 리텐션·매출 등 유저 지표 측정은 2차에서 진행합니다.</div></div>
       </div>
     </div>
 
-    <div style="width:300px;display:flex;flex-direction:column;gap:14px;">
-      <div class="card anim-right" style="padding:24px;flex:1;display:flex;flex-direction:column;--d:0.3s;">
-        <div class="ibox ibox-emerald" style="margin-bottom:14px;"><i class="fa-solid fa-circle-check"></i></div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:8px;">기술 검증 완료 ✓</div>
-        <div style="font-size:13px;color:var(--text-dim);line-height:1.6;">
-          1차의 핵심 성과는 <strong style="color:var(--emerald);">기술 검증</strong>입니다.<br>
-          게임이 실제로 돌아가고, 서버가 버틴다는 것을 확인했습니다.
+    <div style="width:290px;display:flex;flex-direction:column;gap:12px;">
+      <div class="card anim-right" style="padding:20px;display:flex;flex-direction:column;--d:0.3s;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div class="ibox ibox-emerald" style="width:36px;height:36px;font-size:16px;"><i class="fa-solid fa-circle-check"></i></div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;">기술 검증 완료</div>
         </div>
-        <div class="hdiv"></div>
-        <div style="font-size:12px;color:var(--text-dim);">2차는 그 위에 <strong style="color:#fff;">유저 데이터</strong>를 쌓는 단계입니다.</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">게임 클라이언트가 실제로 동작하고, 멀티 리전 서버 아키텍처가 실 트래픽을 버틴다는 것을 확인했습니다.</div>
       </div>
-      <div class="callout callout-emerald anim-right" style="--d:0.5s;font-size:12px;">
-        <strong style="color:var(--emerald);">결론:</strong> 예상치 못한 디바이스 이슈가 있었으나, 핵심 아키텍처는 실전 검증됐습니다. 2차를 위한 기반이 마련됐습니다.
+      <div class="card anim-right" style="padding:20px;display:flex;flex-direction:column;--d:0.45s;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div class="ibox ibox-amber" style="width:36px;height:36px;font-size:16px;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;">디바이스 이슈 대응</div>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">저사양 디바이스의 하드웨어 한계로 인한 이슈를 파악하고 처리했습니다. 게임 자체의 문제가 아닙니다.</div>
+      </div>
+      <div class="callout callout-emerald anim-right" style="--d:0.6s;font-size:12px;">
+        <strong style="color:var(--emerald);">결론:</strong> 1차 목표인 기술 검증은 완료. 2차에서 유저 데이터를 쌓습니다.
       </div>
     </div>
   </div>
