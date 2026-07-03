@@ -74,7 +74,7 @@
 }
 
 /* ── CARDS ── */
-.card { background:rgba(22,32,25,0.7); border:1px solid var(--border2); border-radius:16px; backdrop-filter:blur(12px); position:relative; overflow:hidden; }
+.card { background:rgba(22,32,25,0.7); border:1px solid var(--border2); border-radius:16px; backdrop-filter:blur(12px); position:relative; overflow:visible; }
 .card-amber { border-color:rgba(245,158,11,0.3); background:var(--amber-dim); }
 .card-emerald { border-color:rgba(16,185,129,0.25); background:var(--emerald-dim); }
 .card-rose { border-color:rgba(244,63,94,0.25); background:var(--rose-dim); }
@@ -101,12 +101,14 @@
 
 /* ── TERM TOOLTIP ── */
 .term { border-bottom:1px dashed rgba(245,158,11,0.6); color:#fcd34d; cursor:help; position:relative; }
+.term { position:relative; }
 .term .tip {
-  visibility:hidden; opacity:0; position:absolute; bottom:calc(100% + 8px); left:50%;
-  transform:translateX(-50%); background:#1a2e1e; border:1px solid var(--border2);
+  visibility:hidden; opacity:0;
+  position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%);
+  background:#1a2e1e; border:1px solid var(--border2);
   border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-dim);
-  white-space:normal; max-width:260px; line-height:1.5; z-index:999;
-  box-shadow:0 12px 32px rgba(0,0,0,0.5); pointer-events:none; transition:opacity 0.15s;
+  white-space:normal; width:240px; line-height:1.5; z-index:99999;
+  box-shadow:0 12px 32px rgba(0,0,0,0.6); pointer-events:none; transition:opacity 0.15s;
   font-weight:400; text-transform:none; letter-spacing:0;
 }
 .term:hover .tip { visibility:visible; opacity:1; }
@@ -401,7 +403,7 @@
     </div>
 
     <!-- 지표 3개 — flex:1 로 높이 채움 -->
-    <div style="display:flex;gap:12px;flex:1;">
+    <div style="display:flex;gap:12px;flex:1;overflow:visible;">
 
       <div class="card anim-card" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;--d:0.2s;">
         <div style="display:flex;align-items:center;gap:12px;">
@@ -661,7 +663,7 @@
 
   <div class="slide-body" style="align-items:stretch;">
     <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
-      <div class="card no-hover" style="overflow:hidden;">
+      <div class="card no-hover" style="overflow:hidden;position:relative;">
         <table class="btable">
           <thead><tr><th>플랫폼</th><th>리전</th><th>목표 NRU</th><th>CPI 추정</th><th class="r">예산</th></tr></thead>
           <tbody>
@@ -872,6 +874,47 @@ Reveal.on('ready', () => {
     countUp(el);
   });
 });
+
+/* ── TOOLTIP SINGLETON — sc overflow:hidden 우회 ── */
+const globalTip = document.createElement('div');
+globalTip.id = 'global-tip';
+globalTip.style.cssText = `
+  position:fixed; z-index:999999; display:none;
+  background:#1a2e1e; border:1px solid rgba(255,255,255,0.12);
+  border-radius:8px; padding:10px 14px; font-size:12px;
+  color:#8a9e8e; white-space:normal; width:240px; line-height:1.5;
+  box-shadow:0 12px 32px rgba(0,0,0,0.6); pointer-events:none;
+  font-family:'Noto Sans KR',sans-serif; font-weight:400;
+  transition:opacity 0.15s;
+`;
+document.body.appendChild(globalTip);
+
+document.querySelectorAll('.term').forEach(term => {
+  const tip = term.querySelector('.tip');
+  if (!tip) return;
+  // 원본 tip 숨기기
+  tip.style.display = 'none';
+  const tipHTML = tip.innerHTML;
+
+  term.addEventListener('mouseenter', () => {
+    const scale = Reveal.getScale();
+    const rect = term.getBoundingClientRect();
+    globalTip.innerHTML = tipHTML;
+    globalTip.style.display = 'block';
+    globalTip.style.opacity = '1';
+    // 화면 밖 방지
+    const tipW = 240;
+    let left = rect.left + rect.width / 2 - tipW / 2;
+    left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+    globalTip.style.left = left + 'px';
+    globalTip.style.top = (rect.top - globalTip.offsetHeight - 10) + 'px';
+  });
+  term.addEventListener('mouseleave', () => {
+    globalTip.style.display = 'none';
+  });
+});
+
+
 </script>
 </body>
 </html>
