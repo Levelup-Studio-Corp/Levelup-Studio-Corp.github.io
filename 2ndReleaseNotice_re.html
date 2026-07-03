@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>QT 2nd Soft Launch</title>
+<title>QT 2nd Soft Launch — 마케팅 투자 요청</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
@@ -767,7 +767,7 @@
         <strong style="color:var(--amber);">3차 소프트런칭 없음.</strong> 2차 지표 확인 후 곧바로 그랜드런칭으로 진행합니다. 2차가 그랜드런칭의 유일한 판단 근거입니다.
       </div>
       <div class="callout callout-emerald anim-card" style="flex:1;--d:0.9s;">
-        <strong style="color:var(--emerald);">$10,000 투자의 의미.</strong> 이 예산으로 확보된 데이터는 그랜드런칭 전체 마케팅 예산 규모를 결정하는 기반이 됩니다.
+        <strong style="color:var(--emerald);">2차 소프트 런칭 투자의 의미.</strong> 이 예산으로 확보된 데이터는 그랜드런칭 전체 마케팅 예산 규모를 결정하는 기반이 됩니다.
       </div>
     </div>
 
@@ -897,17 +897,23 @@ document.querySelectorAll('.term').forEach(term => {
   const tipHTML = tip.innerHTML;
 
   term.addEventListener('mouseenter', () => {
-    const scale = Reveal.getScale();
     const rect = term.getBoundingClientRect();
     globalTip.innerHTML = tipHTML;
+    // 높이 측정을 위해 visibility:hidden 상태로 먼저 렌더
+    globalTip.style.visibility = 'hidden';
     globalTip.style.display = 'block';
-    globalTip.style.opacity = '1';
-    // 화면 밖 방지
     const tipW = 240;
+    const tipH = globalTip.offsetHeight;
+    // 위치 계산
     let left = rect.left + rect.width / 2 - tipW / 2;
     left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+    let top = rect.top - tipH - 10;
+    // 화면 위로 넘어가면 아래에 표시
+    if (top < 8) top = rect.bottom + 10;
     globalTip.style.left = left + 'px';
-    globalTip.style.top = (rect.top - globalTip.offsetHeight - 10) + 'px';
+    globalTip.style.top = top + 'px';
+    globalTip.style.visibility = 'visible';
+    globalTip.style.opacity = '1';
   });
   term.addEventListener('mouseleave', () => {
     globalTip.style.display = 'none';
