@@ -260,46 +260,43 @@
   <div class="grid-bg"></div>
   <div class="particles" id="particles"></div>
   <div class="orb orb-amber" style="width:700px;height:700px;right:-250px;top:-250px;"></div>
-  <div class="orb orb-emerald" style="width:400px;height:400px;left:-100px;bottom:-100px;"></div>
-  <svg class="cover-hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50 2 L95 26 L95 74 L50 98 L5 74 L5 26 Z" fill="none" stroke="var(--amber)" stroke-width="1"/>
-    <path d="M50 12 L87 32 L87 68 L50 88 L13 68 L13 32 Z" fill="none" stroke="var(--emerald)" stroke-width="0.5"/>
+  <div class="orb orb-emerald" style="width:500px;height:500px;left:-150px;bottom:-150px;"></div>
+
+  <!-- 배경 데코 라인들 -->
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.06;" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="360" x2="1280" y2="360" stroke="var(--amber)" stroke-width="1"/>
+    <line x1="640" y1="0" x2="640" y2="720" stroke="var(--emerald)" stroke-width="1"/>
+    <circle cx="640" cy="360" r="280" fill="none" stroke="var(--amber)" stroke-width="1"/>
+    <circle cx="640" cy="360" r="180" fill="none" stroke="var(--emerald)" stroke-width="0.5"/>
   </svg>
 
-  <div style="position:relative;z-index:10;flex:1;padding:56px 64px 48px;display:flex;flex-direction:column;justify-content:space-between;">
-    <div>
-      <div class="anim-title" style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-        <span class="tag tag-amber">Investor Brief</span>
-        <span class="tag tag-dim">LevelUp Studio · 2026</span>
-      </div>
-      <div class="anim-title-delay" style="font-family:'Space Grotesk',sans-serif;font-size:68px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;color:#fff;">
-        Quad Trigger<br>
-        <span style="color:var(--amber);">2nd Soft Launch</span>
-      </div>
-      <p class="anim-sub" style="font-size:17px;color:var(--text-dim);margin-top:14px;line-height:1.6;max-width:560px;">
-        그랜드런칭 Go/No-Go 판단을 위한 핵심 지표 확보<br>마케팅 예산 투자 요청서
-      </p>
+  <!-- 메인 콘텐츠 — 세로 중앙 정렬 -->
+  <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 80px;">
+
+    <!-- 로고 -->
+    <div class="anim-title" style="margin-bottom:32px;">
+      <img src="./logo.png" alt="LevelUp Studio" style="height:56px;filter:brightness(0) invert(1);opacity:0.9;">
     </div>
 
-    <div style="display:flex;gap:16px;">
-      <div class="card anim-card p-5" style="flex:1;--d:0.5s;padding:20px 24px;">
-        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">대상 리전</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;">🇰🇷 KR &nbsp;·&nbsp; 🇺🇸 US</div>
-      </div>
-      <div class="card anim-card p-5" style="flex:1;--d:0.6s;padding:20px 24px;">
-        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">집행 플랫폼</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;">Android &nbsp;·&nbsp; iOS</div>
-      </div>
-      <div class="card card-amber anim-card" style="flex:1;--d:0.7s;padding:20px 24px;">
-        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">요청 예산</div>
-        <div class="bnum bnum-amber count-up" data-target="10000" data-prefix="$" data-comma="true" style="--d:0.7s;">$10,000</div>
-      </div>
-      <div class="card anim-card" style="flex:1;--d:0.8s;padding:20px 24px;">
-        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">집행 기간</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#fff;">7일</div>
-        <div style="font-size:11px;color:var(--text-dim);margin-top:2px;">+ 무비용 관찰 4주+</div>
-      </div>
+    <!-- 게임 타이틀 -->
+    <div class="anim-title-delay" style="margin-bottom:16px;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">presents</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:72px;font-weight:800;letter-spacing:-0.02em;line-height:1.0;color:#fff;">D.D.D.</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.12em;color:var(--amber);margin-top:4px;">See Ya in RESPAWN</div>
     </div>
+
+    <!-- 구분선 -->
+    <div class="anim-sub" style="width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent);margin:28px auto;"></div>
+
+    <!-- 서브 정보 -->
+    <div class="anim-sub" style="display:flex;align-items:center;gap:24px;justify-content:center;">
+      <span style="font-size:13px;color:var(--text-dim);letter-spacing:0.08em;">2nd Soft Launch</span>
+      <span style="color:var(--text-faint);">·</span>
+      <span style="font-size:13px;color:var(--text-dim);letter-spacing:0.08em;">Korea &amp; United States</span>
+      <span style="color:var(--text-faint);">·</span>
+      <span style="font-size:13px;color:var(--text-dim);letter-spacing:0.08em;">2026</span>
+    </div>
+
   </div>
 
   <div class="slide-footer">
