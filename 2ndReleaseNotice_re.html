@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>QT 2nd Soft Launch — 마케팅 투자 요청</title>
-
+<title>QT 2nd Soft Launch</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
 <style>
 :root {
   --bg:#080c0a; --bg2:#0e1612; --bg3:#162019;
@@ -19,10 +17,8 @@
   --rose:#f43f5e; --rose-dim:rgba(244,63,94,0.10);
   --text:#e8ede9; --text-dim:#8a9e8e; --text-faint:#3d5040;
 }
-
 .reveal .slides section { padding:0; text-align:left; }
 .reveal { font-family:'Noto Sans KR',sans-serif; }
-
 .sc {
   width:1280px; height:720px; background:var(--bg); color:var(--text);
   position:relative; overflow:hidden; display:flex; flex-direction:column;
@@ -37,12 +33,11 @@
     linear-gradient(to bottom,rgba(16,185,129,0.05) 1px,transparent 1px);
   background-size:48px 48px;
 }
-/* animated grid scan line */
 .grid-bg::after {
   content:''; position:absolute; inset:0;
-  background:linear-gradient(to bottom,transparent 0%,rgba(16,185,129,0.04) 50%,transparent 100%);
+  background:linear-gradient(to bottom,transparent 0%,rgba(16,185,129,0.06) 50%,transparent 100%);
   background-size:100% 200px;
-  animation:scan 6s linear infinite;
+  animation:scan 5s linear infinite;
 }
 @keyframes scan { 0%{background-position:0 -200px} 100%{background-position:0 100%} }
 
@@ -58,14 +53,15 @@
   display:flex; justify-content:space-between; align-items:flex-end;
 }
 .slide-eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-.eyebrow-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:pulse-dot 2s ease-in-out infinite; }
-@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+.eyebrow-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--amber);
+  box-shadow:0 0 8px var(--amber); animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
 .eyebrow-text { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-dim); }
 .slide-title { font-family:'Space Grotesk',sans-serif; font-size:34px; font-weight:800; letter-spacing:-0.02em; color:#fff; line-height:1.15; }
 .slide-num { font-family:'Space Grotesk',sans-serif; font-size:56px; font-weight:800; color:var(--text-faint); line-height:1; }
-
 .slide-body { position:relative; z-index:10; flex:1; padding:24px 64px 16px; display:flex; gap:24px; }
-
 .slide-footer {
   position:absolute; bottom:0; left:0; right:0; z-index:10;
   padding:12px 64px; border-top:1px solid var(--border);
@@ -73,11 +69,30 @@
   font-size:11px; color:var(--text-faint); letter-spacing:0.06em;
 }
 
+/* ── HEADER GLOW LINE ── */
+.header-glow {
+  position:absolute; bottom:0; left:64px; right:64px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--amber),transparent);
+  animation:hglow 3s ease-in-out infinite;
+}
+@keyframes hglow { 0%,100%{opacity:0.2} 50%{opacity:0.7} }
+
 /* ── CARDS ── */
-.card { background:rgba(22,32,25,0.7); border:1px solid var(--border2); border-radius:16px; backdrop-filter:blur(12px); position:relative; overflow:visible; }
+.card {
+  background:rgba(22,32,25,0.7); border:1px solid var(--border2);
+  border-radius:16px; backdrop-filter:blur(12px); position:relative; overflow:visible;
+  transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
 .card-amber { border-color:rgba(245,158,11,0.3); background:var(--amber-dim); }
 .card-emerald { border-color:rgba(16,185,129,0.25); background:var(--emerald-dim); }
 .card-rose { border-color:rgba(244,63,94,0.25); background:var(--rose-dim); }
+
+/* card hover tilt — handled by JS */
+.card-tilt { will-change:transform; }
+.card:not(.no-hover):hover {
+  box-shadow:0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.2);
+  border-color:rgba(245,158,11,0.3);
+}
 
 /* ── TAGS ── */
 .tag { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:6px; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
@@ -88,30 +103,22 @@
 
 /* ── STATUS DOTS ── */
 .sdot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
-.sdot-g { background:var(--emerald); box-shadow:0 0 8px var(--emerald); }
-.sdot-y { background:var(--amber); box-shadow:0 0 8px var(--amber); }
+.sdot-g { background:var(--emerald); box-shadow:0 0 8px var(--emerald); animation:sdot-pulse 2s ease-in-out infinite; }
+.sdot-y { background:var(--amber); box-shadow:0 0 8px var(--amber); animation:sdot-pulse 2s ease-in-out infinite 0.3s; }
 .sdot-r { background:var(--rose); box-shadow:0 0 8px var(--rose); }
+@keyframes sdot-pulse { 0%,100%{box-shadow:0 0 4px currentColor} 50%{box-shadow:0 0 12px currentColor} }
 
 /* ── ICON BOX ── */
-.ibox { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.ibox { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; transition:transform 0.2s; }
+.ibox:hover { transform:scale(1.1) rotate(-5deg); }
 .ibox-amber { background:var(--amber-dim); color:var(--amber); border:1px solid rgba(245,158,11,0.2); }
 .ibox-emerald { background:var(--emerald-dim); color:var(--emerald); border:1px solid rgba(16,185,129,0.2); }
 .ibox-rose { background:var(--rose-dim); color:var(--rose); border:1px solid rgba(244,63,94,0.2); }
 .ibox-dim { background:rgba(255,255,255,0.04); color:var(--text-dim); border:1px solid var(--border); }
 
-/* ── TERM TOOLTIP ── */
+/* ── TOOLTIP ── */
 .term { border-bottom:1px dashed rgba(245,158,11,0.6); color:#fcd34d; cursor:help; position:relative; }
-.term { position:relative; }
-.term .tip {
-  visibility:hidden; opacity:0;
-  position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%);
-  background:#1a2e1e; border:1px solid var(--border2);
-  border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-dim);
-  white-space:normal; width:240px; line-height:1.5; z-index:99999;
-  box-shadow:0 12px 32px rgba(0,0,0,0.6); pointer-events:none; transition:opacity 0.15s;
-  font-weight:400; text-transform:none; letter-spacing:0;
-}
-.term:hover .tip { visibility:visible; opacity:1; }
+.term .tip { display:none; }
 
 /* ── UTILS ── */
 .hdiv { height:1px; background:var(--border); margin:12px 0; }
@@ -123,16 +130,24 @@
 
 /* ── FLOW ── */
 .flow-wrap { display:flex; align-items:center; }
-.flow-node { flex:1; background:rgba(22,32,25,0.8); border:1px solid var(--border2); border-radius:12px; padding:14px 12px; text-align:center; transition:all 0.3s; }
-.flow-node.active { border-color:rgba(245,158,11,0.4); background:var(--amber-dim); }
+.flow-node {
+  flex:1; background:rgba(22,32,25,0.8); border:1px solid var(--border2);
+  border-radius:12px; padding:14px 12px; text-align:center;
+  transition:all 0.3s; cursor:default;
+}
+.flow-node:hover { transform:translateY(-4px); border-color:rgba(245,158,11,0.3); }
+.flow-node.active { border-color:rgba(245,158,11,0.4); background:var(--amber-dim); animation:flowPulse 2s ease-in-out infinite; }
+@keyframes flowPulse { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0)} 50%{box-shadow:0 0 0 8px rgba(245,158,11,0.08)} }
 .flow-arrow { padding:0 8px; color:var(--text-faint); font-size:16px; flex-shrink:0; }
 
 /* ── REGION ── */
-.region-card { flex:1; border-radius:14px; overflow:hidden; border:1px solid var(--border2); }
+.region-card { flex:1; border-radius:14px; overflow:hidden; border:1px solid var(--border2); transition:transform 0.25s, box-shadow 0.25s; }
+.region-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.4); }
 .region-head { padding:14px 20px; font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; display:flex; align-items:center; gap:10px; }
 .region-head.kr { background:rgba(245,158,11,0.1); color:#fcd34d; border-bottom:1px solid rgba(245,158,11,0.2); }
 .region-head.us { background:rgba(16,185,129,0.08); color:var(--emerald); border-bottom:1px solid rgba(16,185,129,0.2); }
-.store-row { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:rgba(0,0,0,0.2); font-size:13px; color:var(--text-dim); }
+.store-row { display:flex; align-items:center; justify-content:space-between; padding:10px 20px; background:rgba(0,0,0,0.2); font-size:13px; color:var(--text-dim); transition:background 0.2s; }
+.store-row:hover { background:rgba(245,158,11,0.05); }
 .store-row:not(:last-child) { border-bottom:1px solid var(--border); }
 
 /* ── TIMELINE ── */
@@ -145,152 +160,128 @@
 /* ── BUDGET TABLE ── */
 .btable { width:100%; border-collapse:collapse; }
 .btable th { text-align:left; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faint); padding:8px 14px; border-bottom:1px solid var(--border); }
-.btable td { padding:10px 14px; font-size:13px; color:var(--text-dim); border-bottom:1px solid var(--border); vertical-align:middle; }
+.btable td { padding:10px 14px; font-size:13px; color:var(--text-dim); border-bottom:1px solid var(--border); vertical-align:middle; transition:background 0.2s; }
+.btable tr:not(.total):hover td { background:rgba(245,158,11,0.04); }
 .btable tr:last-child td { border-bottom:none; }
 .btable .total td { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; color:var(--text); border-top:1px solid var(--border2); }
 .btable td.amt { font-family:'Space Grotesk',sans-serif; font-weight:600; color:var(--text); text-align:right; }
 .btable th.r { text-align:right; }
 
 /* ── ROADMAP ── */
-.rm-step { flex:1; border:1px solid var(--border); padding:20px 16px; background:rgba(22,32,25,0.5); transition:all 0.5s; }
+.rm-step { flex:1; border:1px solid var(--border); padding:20px 16px; background:rgba(22,32,25,0.5); transition:all 0.4s; cursor:default; }
 .rm-step:first-child { border-radius:14px 0 0 14px; }
 .rm-step:last-child { border-radius:0 14px 14px 0; }
-.rm-step.active { border-color:rgba(245,158,11,0.4); background:var(--amber-dim); }
+.rm-step:not(.done):not(.active):hover { background:rgba(22,32,25,0.9); border-color:var(--border2); transform:translateY(-2px); }
+.rm-step.active { border-color:rgba(245,158,11,0.4); background:var(--amber-dim); animation:rmPulse 3s ease-in-out infinite; }
+@keyframes rmPulse { 0%,100%{box-shadow:none} 50%{box-shadow:0 0 20px rgba(245,158,11,0.1)} }
 .rm-step.done { opacity:0.45; }
 .rm-arrow { display:flex; align-items:center; padding:0 4px; background:var(--bg); border-top:1px solid var(--border); border-bottom:1px solid var(--border); color:var(--text-faint); font-size:13px; flex-shrink:0; }
 
-/* ═══════════════════════════════════════
-   ANIMATION CLASSES
-═══════════════════════════════════════ */
-
-/* Slide 1 cover title */
-.anim-title { animation:fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) both; }
-.anim-title-delay { animation:fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
-.anim-sub { animation:fadeSlideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
-@keyframes fadeSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-
-/* Cards stagger */
-.anim-card { opacity:0; animation:cardIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes cardIn { from{opacity:0;transform:translateY(16px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
-
-/* Status items stagger (postmortem) */
-.anim-status { opacity:0; animation:statusIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes statusIn { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
-
-/* Flow nodes */
-.flow-node { opacity:0; animation:flowIn 0.4s cubic-bezier(0.16,1,0.3,1) both; }
-.flow-arrow { opacity:0; animation:fadeIn 0.3s ease both; }
-@keyframes flowIn { from{opacity:0;transform:scale(0.85)} to{opacity:1;transform:scale(1)} }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-/* Flow pulse on active nodes */
-.flow-node.active { animation:flowIn 0.4s cubic-bezier(0.16,1,0.3,1) both, flowPulse 2s ease-in-out 0.6s infinite; }
-@keyframes flowPulse { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0)} 50%{box-shadow:0 0 0 6px rgba(245,158,11,0.12)} }
-
-/* Flow connector line animation */
-.flow-arrow { animation:arrowFade 0.3s ease both; }
-@keyframes arrowFade { from{opacity:0;transform:scaleX(0)} to{opacity:1;transform:scaleX(1)} }
-
-/* Timeline items */
-.anim-tl { opacity:0; animation:tlIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes tlIn { from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }
-
-/* Budget table rows */
-.anim-row { opacity:0; animation:rowIn 0.4s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes rowIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
-
-/* Roadmap steps */
-.anim-rm { opacity:0; animation:rmIn 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes rmIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-/* Big number count-up handled by JS, just fade in */
-.count-up { opacity:0; animation:fadeSlideUp 0.6s cubic-bezier(0.16,1,0.3,1) both; }
-
-/* Metric hover */
-.card:not(.no-hover) { transition:border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
-.card:not(.no-hover):hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,0.4); border-color:rgba(245,158,11,0.25); }
-
-/* Reveal.js fragment overrides — use our own animations */
-.reveal .slides .fragment { opacity:1 !important; visibility:visible !important; }
-
-/* Cover big hex decoration */
-.cover-hex {
-  position:absolute; right:-160px; top:-160px; width:600px; height:600px;
-  opacity:0.04; z-index:0; pointer-events:none;
-  animation:hexRotate 20s linear infinite;
-}
-@keyframes hexRotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-
-/* Glowing line under header */
-.header-glow {
-  position:absolute; bottom:0; left:64px; right:64px; height:1px;
-  background:linear-gradient(90deg,transparent,var(--amber),transparent);
-  opacity:0.4;
-  animation:lineGlow 3s ease-in-out infinite;
-}
-@keyframes lineGlow { 0%,100%{opacity:0.2;background-position:0%} 50%{opacity:0.6} }
-
-/* Progress bar at bottom */
+/* ── PROGRESS BAR ── */
 .reveal .progress { color:var(--amber); height:3px; }
 
-/* Slide-in from right for right panels */
-.anim-right { opacity:0; animation:rightIn 0.6s cubic-bezier(0.16,1,0.3,1) both; }
-@keyframes rightIn { from{opacity:0;transform:translateX(24px)} to{opacity:1;transform:translateX(0)} }
+/* ── CURSOR TRAIL ── */
+#cursor-trail { position:fixed; pointer-events:none; z-index:9999999; }
+.trail-dot {
+  position:fixed; width:6px; height:6px; border-radius:50%;
+  background:var(--amber); pointer-events:none; z-index:9999999;
+  transform:translate(-50%,-50%); opacity:0;
+  transition:opacity 0.3s;
+}
 
-/* Particle dots on cover */
+/* ── CLICK RIPPLE ── */
+.ripple {
+  position:fixed; border-radius:50%; pointer-events:none; z-index:9999998;
+  border:1px solid rgba(245,158,11,0.5);
+  animation:rippleOut 0.6s ease-out forwards;
+  transform:translate(-50%,-50%);
+}
+@keyframes rippleOut {
+  from { width:0; height:0; opacity:0.8; }
+  to { width:80px; height:80px; opacity:0; }
+}
+
+/* ── PARTICLES ── */
 .particles { position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
 .particle {
-  position:absolute; width:2px; height:2px; border-radius:50%;
-  background:var(--emerald); opacity:0;
+  position:absolute; border-radius:50%; opacity:0;
   animation:particleDrift var(--dur,8s) var(--delay,0s) ease-in-out infinite;
 }
 @keyframes particleDrift {
   0%{opacity:0;transform:translate(0,0)}
-  10%{opacity:0.6}
-  90%{opacity:0.3}
+  10%{opacity:0.7} 90%{opacity:0.2}
   100%{opacity:0;transform:translate(var(--tx,20px),var(--ty,-80px))}
 }
+
+/* ══════════════════════════════════════
+   FRAGMENT ANIMATIONS
+══════════════════════════════════════ */
+.reveal .slides .{
+  opacity:0; visibility:hidden;
+  transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), visibility 0s 0.5s;
+}
+.reveal .slides ..visible {
+  opacity:1; visibility:visible;
+  transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+/* variants */
+.. { transform:translateY(20px); }
+...visible { transform:translateY(0); }
+.. { transform:translateX(-20px); }
+...visible { transform:translateX(0); }
+.. { transform:translateX(20px); }
+...visible { transform:translateX(0); }
+.. { transform:scale(0.92); }
+...visible { transform:scale(1); }
+
+/* ── COVER ANIM ── */
+.anim-title { animation:fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+.anim-title-delay { animation:fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+.anim-sub { animation:fadeSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+@keyframes fadeSlideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* count-up init */
+.count-up { opacity:0; }
+
+/* ── COVER SVG ROTATE ── */
+@keyframes svgRotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes svgRotateRev { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
 </style>
 </head>
 <body>
+
+<!-- CURSOR TRAIL -->
+<div id="cursor-trail"></div>
+
 <div class="reveal">
 <div class="slides">
 
-<!-- ═══ SLIDE 01 — COVER ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 01 — COVER ══ -->
+<section data-background-color="#080c0a" data-transition="zoom">
 <div class="sc" id="s1">
   <div class="grid-bg"></div>
   <div class="particles" id="particles"></div>
   <div class="orb orb-amber" style="width:700px;height:700px;right:-250px;top:-250px;"></div>
   <div class="orb orb-emerald" style="width:500px;height:500px;left:-150px;bottom:-150px;"></div>
 
-  <!-- 배경 데코 라인들 -->
-  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.06;" xmlns="http://www.w3.org/2000/svg">
-    <line x1="0" y1="360" x2="1280" y2="360" stroke="var(--amber)" stroke-width="1"/>
-    <line x1="640" y1="0" x2="640" y2="720" stroke="var(--emerald)" stroke-width="1"/>
-    <circle cx="640" cy="360" r="280" fill="none" stroke="var(--amber)" stroke-width="1"/>
-    <circle cx="640" cy="360" r="180" fill="none" stroke="var(--emerald)" stroke-width="0.5"/>
+  <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="360" x2="1280" y2="360" stroke="var(--amber)" stroke-width="0.5" opacity="0.08"/>
+    <line x1="640" y1="0" x2="640" y2="720" stroke="var(--emerald)" stroke-width="0.5" opacity="0.08"/>
+    <circle cx="640" cy="360" r="280" fill="none" stroke="var(--amber)" stroke-width="1" opacity="0.06" style="transform-origin:640px 360px;animation:svgRotate 30s linear infinite"/>
+    <circle cx="640" cy="360" r="180" fill="none" stroke="var(--emerald)" stroke-width="0.5" opacity="0.06" style="transform-origin:640px 360px;animation:svgRotateRev 20s linear infinite"/>
+    <circle cx="640" cy="360" r="80" fill="none" stroke="var(--amber)" stroke-width="0.5" opacity="0.04" style="transform-origin:640px 360px;animation:svgRotate 10s linear infinite"/>
   </svg>
 
-  <!-- 메인 콘텐츠 — 세로 중앙 정렬 -->
   <div style="position:relative;z-index:10;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 80px;">
-
-    <!-- 로고 -->
     <div class="anim-title" style="margin-bottom:32px;">
       <img src="./logo.png" alt="LevelUp Studio" style="height:56px;opacity:0.9;">
     </div>
-
-    <!-- 게임 타이틀 -->
     <div class="anim-title-delay" style="margin-bottom:16px;">
       <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">presents</div>
       <div style="font-family:'Space Grotesk',sans-serif;font-size:72px;font-weight:800;letter-spacing:-0.02em;line-height:1.0;color:#fff;">D.D.D.</div>
       <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:600;letter-spacing:0.12em;color:var(--amber);margin-top:4px;">See Ya in RESPAWN</div>
     </div>
-
-    <!-- 구분선 -->
     <div class="anim-sub" style="width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent);margin:28px auto;"></div>
-
-    <!-- 서브 정보 -->
     <div class="anim-sub" style="display:flex;align-items:center;gap:24px;justify-content:center;">
       <span style="font-size:13px;color:var(--text-dim);letter-spacing:0.08em;">2nd Soft Launch</span>
       <span style="color:var(--text-faint);">·</span>
@@ -298,9 +289,7 @@
       <span style="color:var(--text-faint);">·</span>
       <span style="font-size:13px;color:var(--text-dim);letter-spacing:0.08em;">2026</span>
     </div>
-
   </div>
-
   <div class="slide-footer">
     <span>CONFIDENTIAL · For Investor Review Only</span>
     <span>LevelUp Studio</span>
@@ -309,103 +298,89 @@
 </section>
 
 
-<!-- ═══ SLIDE 02 — 1차 포스트모템 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 02 — 1차 포스트모템 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
   <div class="orb orb-amber" style="width:350px;height:350px;right:-80px;bottom:-80px;"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 1 · Post-mortem</span></div>
-      <div class="slide-title anim-title">1차 소프트런칭 결과 <span style="color:var(--text-dim);font-size:26px;">ID · SG · MY</span></div>
+      <div class="slide-title">1차 소프트런칭 결과 <span style="color:var(--text-dim);font-size:26px;">ID · SG · MY</span></div>
     </div>
     <div class="slide-num">02</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="align-items:stretch;">
     <div style="flex:1;display:flex;flex-direction:column;gap:10px;">
-      <p class="anim-title" style="font-size:13px;color:var(--text-dim);line-height:1.65;margin-bottom:4px;">
+      <p class="" style="font-size:13px;color:var(--text-dim);line-height:1.65;margin-bottom:4px;">
         인도네시아를 시작으로 싱가포르, 말레이시아까지 순차 확장하며 실제 유저 환경에서의 기술 검증을 진행했습니다.
       </p>
-
-      <div class="card anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.2s;">
+      <div class="card  card-tilt" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;">
         <div class="sdot sdot-g" style="margin-top:5px;"></div>
         <div><div style="font-weight:700;color:#fff;font-size:13px;margin-bottom:3px;">클라이언트 정상 동작 확인</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">게임 클라이언트가 실제 유저 환경에서 의도한 대로 작동함을 검증했습니다.</div></div>
       </div>
-
-      <div class="card anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.35s;">
+      <div class="card  card-tilt" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;">
         <div class="sdot sdot-g" style="margin-top:5px;"></div>
         <div><div style="font-weight:700;color:#fff;font-size:13px;margin-bottom:3px;">서버 아키텍처 안정성 검증 완료</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">멀티 리전 서버 구조가 실 트래픽 환경에서 안정적으로 동작함을 확인했습니다.</div></div>
       </div>
-
-      <div class="card card-amber anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.5s;">
+      <div class="card card-amber  card-tilt" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;">
         <div class="sdot sdot-y" style="margin-top:5px;"></div>
         <div><div style="font-weight:700;color:#fff;font-size:13px;margin-bottom:3px;">일부 저사양 디바이스 성능 이슈 → 대응 완료</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">게임 최적화 문제가 아닌 <strong style="color:var(--amber);">디바이스 자체의 하드웨어 한계</strong>로 인한 이슈. 해당 디바이스 범위를 파악하고 처리 완료했습니다.</div></div>
       </div>
-
-      <div class="card anim-status" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;--d:0.65s;border-color:rgba(255,255,255,0.06);">
+      <div class="card  card-tilt" style="padding:14px 18px;display:flex;align-items:flex-start;gap:12px;border-color:rgba(255,255,255,0.06);">
         <div class="sdot" style="margin-top:5px;background:var(--text-faint);flex-shrink:0;"></div>
         <div><div style="font-weight:700;color:var(--text-dim);font-size:13px;margin-bottom:3px;">정량 지표 측정은 2차 목표</div>
         <div style="font-size:12px;color:var(--text-faint);line-height:1.5;">1차의 목적은 처음부터 기술 검증이었습니다. 리텐션·매출 등 유저 지표 측정은 2차에서 진행합니다.</div></div>
       </div>
     </div>
-
     <div style="width:290px;display:flex;flex-direction:column;gap:12px;">
-      <div class="card anim-right" style="padding:20px;display:flex;flex-direction:column;--d:0.3s;">
+      <div class="card  card-tilt" style="padding:20px;display:flex;flex-direction:column;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
           <div class="ibox ibox-emerald" style="width:36px;height:36px;font-size:16px;"><i class="fa-solid fa-circle-check"></i></div>
           <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;">기술 검증 완료</div>
         </div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">게임 클라이언트가 실제로 동작하고, 멀티 리전 서버 아키텍처가 실 트래픽을 버틴다는 것을 확인했습니다.</div>
       </div>
-      <div class="card anim-right" style="padding:20px;display:flex;flex-direction:column;--d:0.45s;">
+      <div class="card  card-tilt" style="padding:20px;display:flex;flex-direction:column;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
           <div class="ibox ibox-amber" style="width:36px;height:36px;font-size:16px;"><i class="fa-solid fa-triangle-exclamation"></i></div>
           <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;">디바이스 이슈 대응</div>
         </div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.6;">저사양 디바이스의 하드웨어 한계로 인한 이슈를 파악하고 처리했습니다. 게임 자체의 문제가 아닙니다.</div>
       </div>
-      <div class="callout callout-emerald anim-right" style="--d:0.6s;font-size:12px;">
+      <div class="callout callout-emerald " style="font-size:12px;">
         <strong style="color:var(--emerald);">결론:</strong> 1차 목표인 기술 검증은 완료. 2차에서 유저 데이터를 쌓습니다.
       </div>
     </div>
   </div>
-
   <div class="slide-footer"><span>Phase 1 Post-mortem · ID / SG / MY</span><span>CONFIDENTIAL</span></div>
 </div>
 </section>
 
 
-<!-- ═══ SLIDE 03 — 2차 목표 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 03 — 핵심 지표 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
   <div class="orb orb-emerald" style="width:500px;height:500px;right:-150px;top:-150px;"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Objective</span></div>
-      <div class="slide-title anim-title">2차 소프트런칭의 <span style="color:var(--amber);">핵심 지표</span></div>
+      <div class="slide-title">2차 소프트런칭의 <span style="color:var(--amber);">핵심 지표</span></div>
     </div>
     <div class="slide-num">03</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="align-items:stretch;flex-direction:column;padding-top:12px;padding-bottom:44px;gap:10px;">
-
-    <div class="callout anim-title" style="font-size:13px;padding:10px 16px;">
+    <div class="callout " style="font-size:13px;padding:10px 16px;">
       <strong style="color:var(--amber);">그랜드런칭 Go/No-Go 판단 기준.</strong> 이 데이터 없이는 그랜드런칭 규모의 투자 결정을 내릴 수 없습니다.
     </div>
-
-    <!-- 지표 3개 — flex:1 로 높이 채움 -->
-    <div style="display:flex;gap:12px;flex:1;overflow:visible;">
-
-      <div class="card anim-card" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;--d:0.2s;">
+    <div style="display:flex;gap:12px;flex:1;">
+      <div class="card  card-tilt" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="ibox ibox-amber" style="flex-shrink:0;"><i class="fa-solid fa-rotate-right"></i></div>
           <div>
@@ -417,8 +392,7 @@
         <div style="font-size:12px;color:var(--text-dim);line-height:1.65;flex:1;">"이 게임이 계속 하고 싶은 게임인가"를 수치로 증명합니다. 그랜드런칭 가능 여부를 판단하는 가장 핵심적인 지표입니다.</div>
         <div style="display:flex;gap:6px;"><span class="tag tag-amber" style="font-size:10px;">Week 1</span><span class="tag tag-amber" style="font-size:10px;">Week 2</span></div>
       </div>
-
-      <div class="card anim-card" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;--d:0.35s;">
+      <div class="card  card-tilt" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="ibox ibox-emerald" style="flex-shrink:0;"><i class="fa-solid fa-dollar-sign"></i></div>
           <div>
@@ -430,8 +404,7 @@
         <div style="font-size:12px;color:var(--text-dim);line-height:1.65;flex:1;">유저 1명을 획득하는 데 드는 광고비. 리전·플랫폼별로 실측해 그랜드런칭 전체 마케팅 예산 산정의 기준으로 삼습니다.</div>
         <div style="display:flex;gap:6px;"><span class="tag tag-emerald" style="font-size:10px;">리전별</span><span class="tag tag-emerald" style="font-size:10px;">플랫폼별</span></div>
       </div>
-
-      <div class="card anim-card" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;--d:0.5s;">
+      <div class="card  card-tilt" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="ibox" style="flex-shrink:0;background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);"><i class="fa-solid fa-coins"></i></div>
           <div>
@@ -443,66 +416,57 @@
         <div style="font-size:12px;color:var(--text-dim);line-height:1.65;flex:1;">"실제로 돈을 쓰는 유저가 있는가"를 확인합니다. 그랜드런칭 수익 모델 검증의 핵심이며 투자 회수 가능성을 보여줍니다.</div>
         <div style="display:flex;gap:6px;"><span class="tag" style="font-size:10px;background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);">IAP 전환율</span><span class="tag" style="font-size:10px;background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2);">ARPU</span></div>
       </div>
-
     </div>
-
-    <!-- 코호트 측정 흐름 — 하단 고정 -->
-    <div class="card anim-card no-hover" style="padding:12px 16px;--d:0.65s;border-color:rgba(255,255,255,0.08);">
+    <div class="card  no-hover" style="padding:12px 16px;border-color:rgba(255,255,255,0.08);">
       <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">측정 방법론 — Weekly 코호트 기반 추적</div>
       <div style="display:flex;align-items:stretch;gap:0;background:rgba(0,0,0,0.2);border-radius:8px;overflow:hidden;">
-        <div style="flex:1.2;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);">
+        <div class="cohort-step" style="flex:1.2;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);cursor:default;">
           <div style="font-size:10px;color:var(--amber);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">D+0 · 가입</div>
           <div style="font-size:11px;color:var(--text-dim);line-height:1.5;">이 주 가입 유저 전체가 <strong style="color:#fff;">하나의 코호트</strong></div>
         </div>
         <div style="display:flex;align-items:center;padding:0 6px;color:var(--text-faint);font-size:11px;">→</div>
-        <div style="flex:1;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);">
+        <div class="cohort-step" style="flex:1;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);cursor:default;">
           <div style="font-size:10px;color:var(--emerald);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">D+7 · Week 1</div>
           <div style="font-size:11px;color:var(--text-dim);line-height:1.5;">1주 후 재접속 여부 → <strong style="color:#fff;">Week 1 리텐션</strong></div>
         </div>
         <div style="display:flex;align-items:center;padding:0 6px;color:var(--text-faint);font-size:11px;">→</div>
-        <div style="flex:1;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);">
+        <div class="cohort-step" style="flex:1;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.06);cursor:default;">
           <div style="font-size:10px;color:var(--emerald);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">D+14 · Week 2</div>
           <div style="font-size:11px;color:var(--text-dim);line-height:1.5;">2주 후 재접속 여부 → <strong style="color:#fff;">Week 2 리텐션</strong></div>
         </div>
         <div style="display:flex;align-items:center;padding:0 6px;color:var(--text-faint);font-size:11px;">→</div>
-        <div style="flex:1.3;padding:10px 14px;background:rgba(245,158,11,0.06);border-left:2px solid rgba(245,158,11,0.2);">
+        <div class="cohort-step" style="flex:1.3;padding:10px 14px;background:rgba(245,158,11,0.06);border-left:2px solid rgba(245,158,11,0.2);cursor:default;">
           <div style="font-size:10px;color:var(--amber);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;">핵심</div>
           <div style="font-size:11px;color:var(--text-dim);line-height:1.5;">광고 종료 후에도 <strong style="color:#fff;">추가 비용 없이</strong> Week 2까지 추적</div>
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="slide-footer"><span>Phase 2 Objective · KR / US</span><span>CONFIDENTIAL</span></div>
 </div>
 </section>
 
 
-<!-- ═══ SLIDE 04 — 캠페인 구조 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 04 — 캠페인 구조 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Campaign Structure</span></div>
-      <div class="slide-title anim-title">캠페인 구조 — 리전 / 스토어별</div>
+      <div class="slide-title">캠페인 구조 — 리전 / 스토어별</div>
     </div>
     <div class="slide-num">04</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="flex-direction:column;gap:12px;padding-top:16px;padding-bottom:44px;">
-
-    <!-- 리전 카드 2개 -->
     <div style="display:flex;gap:16px;">
-      <div class="region-card anim-card" style="flex:1;--d:0.2s;">
+      <div class="region-card " style="flex:1;">
         <div class="region-head kr">🇰🇷 Korea</div>
         <div style="background:rgba(0,0,0,0.25);padding:12px 16px;">
           <div class="store-row">
             <span style="display:flex;align-items:center;gap:8px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#34a853"><path d="M3.18 23.76c.3.17.65.22 1 .16l11.7-11.7-3.27-3.27L3.18 23.76z"/><path d="M22.47 10.22 19.3 8.4l-3.66 3.66 3.67 3.67 3.14-1.8a1.8 1.8 0 0 0 0-3.71z" fill="#fbbc04"/><path d="M2.18.26A1.8 1.8 0 0 0 1.8 1.1v21.8c0 .3.07.58.2.82l.1.1L13.8 11.92v-.3L2.28.16l-.1.1z" fill="#4285f4"/><path d="M22.47 10.22l-9.3-9.3a1.8 1.8 0 0 0-2.55 0l-.1.1 11.52 11.52 3.14-1.82a1.8 1.8 0 0 0-.71-2.5z" fill="#ea4335"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#34a853" d="M3.18 23.76c.3.17.65.22 1 .16l11.7-11.7-3.27-3.27L3.18 23.76z"/><path fill="#fbbc04" d="M22.47 10.22 19.3 8.4l-3.66 3.66 3.67 3.67 3.14-1.8a1.8 1.8 0 0 0 0-3.71z"/><path fill="#4285f4" d="M2.18.26A1.8 1.8 0 0 0 1.8 1.1v21.8c0 .3.07.58.2.82l.1.1L13.8 11.92v-.3L2.28.16l-.1.1z"/><path fill="#ea4335" d="M22.47 10.22l-9.3-9.3a1.8 1.8 0 0 0-2.55 0l-.1.1 11.52 11.52 3.14-1.82a1.8 1.8 0 0 0-.71-2.5z"/></svg>
               Google Play
             </span>
             <span class="tag tag-amber" style="font-size:10px;">Google Ads UAC</span>
@@ -517,12 +481,12 @@
           <div style="padding:8px 0 0;font-size:12px;color:var(--text-dim);">목표 <span class="term">NRU<span class="tip">New Registered User. 새로 가입한 유저 수.</span></span>: <strong style="color:#fff;">250명/일 × 7일 = 1,750명</strong></div>
         </div>
       </div>
-      <div class="region-card anim-card" style="flex:1;--d:0.35s;">
+      <div class="region-card " style="flex:1;">
         <div class="region-head us">🇺🇸 United States</div>
         <div style="background:rgba(0,0,0,0.25);padding:12px 16px;">
           <div class="store-row">
             <span style="display:flex;align-items:center;gap:8px;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#34a853"><path d="M3.18 23.76c.3.17.65.22 1 .16l11.7-11.7-3.27-3.27L3.18 23.76z"/><path d="M22.47 10.22 19.3 8.4l-3.66 3.66 3.67 3.67 3.14-1.8a1.8 1.8 0 0 0 0-3.71z" fill="#fbbc04"/><path d="M2.18.26A1.8 1.8 0 0 0 1.8 1.1v21.8c0 .3.07.58.2.82l.1.1L13.8 11.92v-.3L2.28.16l-.1.1z" fill="#4285f4"/><path d="M22.47 10.22l-9.3-9.3a1.8 1.8 0 0 0-2.55 0l-.1.1 11.52 11.52 3.14-1.82a1.8 1.8 0 0 0-.71-2.5z" fill="#ea4335"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#34a853" d="M3.18 23.76c.3.17.65.22 1 .16l11.7-11.7-3.27-3.27L3.18 23.76z"/><path fill="#fbbc04" d="M22.47 10.22 19.3 8.4l-3.66 3.66 3.67 3.67 3.14-1.8a1.8 1.8 0 0 0 0-3.71z"/><path fill="#4285f4" d="M2.18.26A1.8 1.8 0 0 0 1.8 1.1v21.8c0 .3.07.58.2.82l.1.1L13.8 11.92v-.3L2.28.16l-.1.1z"/><path fill="#ea4335" d="M22.47 10.22l-9.3-9.3a1.8 1.8 0 0 0-2.55 0l-.1.1 11.52 11.52 3.14-1.82a1.8 1.8 0 0 0-.71-2.5z"/></svg>
               Google Play
             </span>
             <span class="tag tag-emerald" style="font-size:10px;">Google Ads UAC</span>
@@ -538,57 +502,49 @@
         </div>
       </div>
     </div>
-
-    <!-- 광고 흐름 -->
-    <div class="card anim-card no-hover" style="padding:14px 18px;--d:0.5s;">
+    <div class="card  no-hover" style="padding:14px 18px;">
       <div style="font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">광고에서 데이터까지 — 자동화 흐름</div>
       <div class="flow-wrap" id="flow-wrap">
-        <div class="flow-node active" style="--d:0.55s;"><div style="font-size:16px;margin-bottom:3px;">📢</div><div style="font-size:11px;font-weight:700;color:var(--amber);">Google Ads UAC</div><div style="font-size:10px;color:var(--text-dim);">광고 집행</div></div>
-        <div class="flow-arrow" style="--d:0.65s;">→</div>
-        <div class="flow-node" style="--d:0.7s;"><div style="font-size:16px;margin-bottom:3px;">👁️</div><div style="font-size:11px;font-weight:700;color:#fff;">노출 · 클릭</div><div style="font-size:10px;color:var(--text-dim);">잠재 유저</div></div>
-        <div class="flow-arrow" style="--d:0.8s;">→</div>
-        <div class="flow-node" style="--d:0.85s;"><div style="font-size:16px;margin-bottom:3px;">⬇️</div><div style="font-size:11px;font-weight:700;color:#fff;">앱 설치</div><div style="font-size:10px;color:var(--text-dim);">스토어</div></div>
-        <div class="flow-arrow" style="--d:0.95s;">→</div>
-        <div class="flow-node" style="--d:1.0s;"><div style="font-size:16px;margin-bottom:3px;">✅</div><div style="font-size:11px;font-weight:700;color:#fff;">가입 (NRU)</div><div style="font-size:10px;color:var(--text-dim);">계정 생성</div></div>
-        <div class="flow-arrow" style="--d:1.1s;">→</div>
-        <div class="flow-node active" style="--d:1.15s;"><div style="font-size:16px;margin-bottom:3px;">📊</div><div style="font-size:11px;font-weight:700;color:var(--amber);"><span class="term">MMP<span class="tip">Mobile Measurement Partner. 모바일 광고 성과를 자동 집계·분석하는 플랫폼.</span></span> 자동 집계</div><div style="font-size:10px;color:var(--text-dim);">코호트 · 리텐션</div></div>
+        <div class="flow-node active"><div style="font-size:16px;margin-bottom:3px;">📢</div><div style="font-size:11px;font-weight:700;color:var(--amber);">Google Ads UAC</div><div style="font-size:10px;color:var(--text-dim);">광고 집행</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div style="font-size:16px;margin-bottom:3px;">👁️</div><div style="font-size:11px;font-weight:700;color:#fff;">노출 · 클릭</div><div style="font-size:10px;color:var(--text-dim);">잠재 유저</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div style="font-size:16px;margin-bottom:3px;">⬇️</div><div style="font-size:11px;font-weight:700;color:#fff;">앱 설치</div><div style="font-size:10px;color:var(--text-dim);">스토어</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div style="font-size:16px;margin-bottom:3px;">✅</div><div style="font-size:11px;font-weight:700;color:#fff;">가입 (NRU)</div><div style="font-size:10px;color:var(--text-dim);">계정 생성</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node active"><div style="font-size:16px;margin-bottom:3px;">📊</div><div style="font-size:11px;font-weight:700;color:var(--amber);"><span class="term">MMP<span class="tip">Mobile Measurement Partner. 모바일 광고 성과를 자동 집계·분석하는 플랫폼.</span></span> 자동 집계</div><div style="font-size:10px;color:var(--text-dim);">코호트 · 리텐션</div></div>
       </div>
     </div>
-
-    <!-- 광고 소재 안내 — 컴팩트 -->
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--amber-dim);border:1px solid rgba(245,158,11,0.2);border-radius:8px;" class="anim-card" style="--d:0.7s;">
+    <div class="" style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--amber-dim);border:1px solid rgba(245,158,11,0.2);border-radius:8px;">
       <i class="fa-solid fa-circle-info" style="color:var(--amber);font-size:13px;flex-shrink:0;"></i>
       <div style="font-size:12px;color:var(--text-dim);"><strong style="color:var(--amber);">광고 소재 제작은 내부 진행.</strong> 이번 요청 예산은 <strong style="color:#fff;">Google Ads 플랫폼 집행 비용에만 해당</strong>합니다.</div>
     </div>
-
   </div>
-
   <div class="slide-footer"><span>Campaign Structure · KR / US · Android &amp; iOS</span><span>CONFIDENTIAL</span></div>
 </div>
 </section>
 
 
-<!-- ═══ SLIDE 05 — 집행 일정 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 05 — 집행 일정 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
   <div class="orb orb-amber" style="width:300px;height:300px;left:0;top:0;"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Phase 2 · Timeline</span></div>
-      <div class="slide-title anim-title">집행 일정 및 관찰 계획</div>
+      <div class="slide-title">집행 일정 및 관찰 계획</div>
     </div>
     <div class="slide-num">05</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="align-items:stretch;">
     <div style="flex:1;">
       <div class="tl">
-        <div class="tl-item anim-tl" style="--d:0.2s;">
+        <div class="tl-item ">
           <div class="tl-dot" style="background:var(--text-dim);box-shadow:0 0 6px var(--text-dim);"></div>
-          <div class="card" style="padding:16px 18px;">
+          <div class="card card-tilt" style="padding:16px 18px;">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
               <span class="tag tag-dim">D-14 ~ D-7</span>
               <span style="font-weight:700;color:#fff;font-size:13px;">캠페인 웜업 (트레이닝)</span>
@@ -597,10 +553,9 @@
             <div style="margin-top:6px;font-size:11px;color:var(--text-faint);">비용: 예산 버퍼에서 충당</div>
           </div>
         </div>
-
-        <div class="tl-item anim-tl" style="--d:0.4s;">
+        <div class="tl-item ">
           <div class="tl-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber);"></div>
-          <div class="card card-amber" style="padding:16px 18px;">
+          <div class="card card-amber card-tilt" style="padding:16px 18px;">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
               <span class="tag tag-amber">D+0 ~ D+7</span>
               <span style="font-weight:700;color:#fff;font-size:13px;">본 집행 — 7일</span>
@@ -608,10 +563,9 @@
             <div style="font-size:13px;color:var(--text-dim);line-height:1.6;">KR/US 각 리전, Android/iOS 각 스토어에서 동시 집행. 목표: 각 리전 <strong style="color:#fff;">250 NRU/일</strong> → 7일간 리전당 1,750명, 총 3,500명.</div>
           </div>
         </div>
-
-        <div class="tl-item anim-tl" style="--d:0.6s;margin-bottom:0;">
+        <div class="tl-item " style="margin-bottom:0;">
           <div class="tl-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
-          <div class="card card-emerald" style="padding:16px 18px;">
+          <div class="card card-emerald card-tilt" style="padding:16px 18px;">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
               <span class="tag tag-emerald">D+7 이후</span>
               <span style="font-weight:700;color:#fff;font-size:13px;">무비용 코호트 관찰</span>
@@ -621,16 +575,15 @@
         </div>
       </div>
     </div>
-
     <div style="width:260px;display:flex;flex-direction:column;gap:12px;">
-      <div class="card anim-right" style="padding:18px 20px;--d:0.3s;">
+      <div class="card  card-tilt" style="padding:18px 20px;">
         <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">비용 효율</div>
         <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:var(--amber);">1주 집행</div>
         <div style="font-size:12px;color:var(--text-dim);margin-top:3px;">→ 4주 이상 데이터 확보</div>
         <div class="hdiv" style="margin:8px 0;"></div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.55;">광고 종료 후에도 코호트는 계속 관찰됩니다. 추가 비용 없이 Week1/Week2 리텐션 확보 가능합니다.</div>
       </div>
-      <div class="card anim-right" style="padding:18px 20px;--d:0.5s;">
+      <div class="card  card-tilt" style="padding:18px 20px;">
         <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">전체 일정</div>
         <div style="font-size:13px;color:var(--text-dim);line-height:1.7;">
           웜업: <strong style="color:#fff;">~2주</strong><br>
@@ -640,56 +593,52 @@
       </div>
     </div>
   </div>
-
   <div class="slide-footer"><span>Campaign Timeline · Warmup → Launch → Observation</span><span>CONFIDENTIAL</span></div>
 </div>
 </section>
 
 
-<!-- ═══ SLIDE 06 — 예산 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 06 — 예산 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
   <div class="orb orb-amber" style="width:400px;height:400px;right:-100px;top:-100px;"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Budget · Phase 2</span></div>
-      <div class="slide-title anim-title">예산 계획 및 산정 근거</div>
+      <div class="slide-title">예산 계획 및 산정 근거</div>
     </div>
     <div class="slide-num">06</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="align-items:stretch;">
     <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
-      <div class="card no-hover" style="overflow:hidden;position:relative;">
+      <div class="card no-hover " style="overflow:hidden;">
         <table class="btable">
           <thead><tr><th>플랫폼</th><th>리전</th><th>목표 NRU</th><th>CPI 추정</th><th class="r">예산</th></tr></thead>
           <tbody>
-            <tr class="anim-row" style="--d:0.2s;"><td>🤖 Android</td><td>🇰🇷 KR</td><td>437명</td><td style="color:var(--text-dim);">$1.2</td><td class="amt">$524</td></tr>
-            <tr class="anim-row" style="--d:0.3s;"><td>🍎 iOS</td><td>🇰🇷 KR</td><td>438명</td><td style="color:var(--text-dim);">$1.8</td><td class="amt">$788</td></tr>
-            <tr class="anim-row" style="--d:0.4s;"><td>🤖 Android</td><td>🇺🇸 US</td><td>437명</td><td style="color:var(--text-dim);">$2.5</td><td class="amt">$1,093</td></tr>
-            <tr class="anim-row" style="--d:0.5s;"><td>🍎 iOS</td><td>🇺🇸 US</td><td>438명</td><td style="color:var(--text-dim);">$4.0</td><td class="amt">$1,752</td></tr>
-            <tr class="anim-row" style="--d:0.6s;"><td colspan="2" style="color:var(--text-faint);font-size:12px;">캠페인 웜업</td><td style="color:var(--text-faint);">—</td><td style="color:var(--text-faint);">—</td><td class="amt" style="color:var(--text-faint);">$156</td></tr>
-            <tr class="total anim-row" style="--d:0.7s;"><td colspan="3"><strong>합계</strong></td><td></td><td class="amt" style="color:var(--amber);font-size:18px;">$4,313</td></tr>
+            <tr><td>Android</td><td>KR</td><td>437명</td><td style="color:var(--text-dim);">$1.2</td><td class="amt">$524</td></tr>
+            <tr><td>iOS</td><td>KR</td><td>438명</td><td style="color:var(--text-dim);">$1.8</td><td class="amt">$788</td></tr>
+            <tr><td>Android</td><td>US</td><td>437명</td><td style="color:var(--text-dim);">$2.5</td><td class="amt">$1,093</td></tr>
+            <tr><td>iOS</td><td>US</td><td>438명</td><td style="color:var(--text-dim);">$4.0</td><td class="amt">$1,752</td></tr>
+            <tr><td colspan="2" style="color:var(--text-faint);font-size:12px;">캠페인 웜업</td><td style="color:var(--text-faint);">—</td><td style="color:var(--text-faint);">—</td><td class="amt" style="color:var(--text-faint);">$156</td></tr>
+            <tr class="total"><td colspan="3"><strong>합계</strong></td><td></td><td class="amt" style="color:var(--amber);font-size:18px;" data-countup="4313" data-prefix="$">$4,313</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout anim-card" style="--d:1.0s;font-size:12px;">
+      <div class="callout " style="font-size:12px;">
         💡 <strong style="color:var(--amber);">1차에서 US 기준 CPI $1.0~1.4를 경험했습니다.</strong> 단, 소규모 집행이었기에 통계적 편차를 고려해 <strong style="color:#fff;">업계 벤치마크 기준으로 보수적 산정</strong>했습니다. 실제 CPI가 낮을 경우 버퍼 예산으로 추가 유저를 확보합니다.
       </div>
     </div>
-
     <div style="width:250px;display:flex;flex-direction:column;gap:14px;">
-      <div class="card card-amber anim-right" style="padding:22px;--d:0.3s;">
+      <div class="card card-amber  card-tilt" style="padding:22px;">
         <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">총 목표 NRU</div>
-        <div class="bnum bnum-amber count-up" data-target="3500" data-suffix="명" style="--d:0.3s;">3,500명</div>
+        <div class="bnum bnum-amber count-up" data-target="3500" data-suffix="명">3,500명</div>
         <div style="font-size:11px;color:var(--text-dim);margin-top:6px;">KR 1,750 + US 1,750</div>
         <div class="hdiv"></div>
         <div style="font-size:11px;color:var(--text-dim);">리전별 독립 운영 · 각 250명/일</div>
       </div>
-      <div class="card anim-right" style="padding:22px;--d:0.5s;">
+      <div class="card  card-tilt" style="padding:22px;">
         <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">CPI 기준</div>
         <div style="font-size:13px;color:var(--text-dim);line-height:1.9;">
           Android KR: <strong style="color:#fff;">$1.2</strong><br>
@@ -698,38 +647,35 @@
           iOS US: <strong style="color:#fff;">$4.0</strong>
         </div>
       </div>
-      <div class="card anim-right" style="padding:18px 22px;--d:0.7s;">
+      <div class="card  card-tilt" style="padding:18px 22px;">
         <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">소재 제작</div>
         <div style="font-size:13px;font-weight:700;color:#fff;">내부 제작 (별도 비용 없음)</div>
         <div style="font-size:11px;color:var(--text-dim);margin-top:3px;">이번 예산은 플랫폼 집행비만</div>
       </div>
     </div>
   </div>
-
   <div class="slide-footer"><span>Budget Plan · Phase 2</span><span>CONFIDENTIAL</span></div>
 </div>
 </section>
 
 
-<!-- ═══ SLIDE 07 — 로드맵 ═══ -->
-<section data-background-color="#080c0a">
+<!-- ══ SLIDE 07 — 로드맵 ══ -->
+<section data-background-color="#080c0a" data-transition="slide">
 <div class="sc">
   <div class="grid-bg"></div>
   <div class="orb orb-emerald" style="width:500px;height:500px;left:-150px;bottom:-150px;"></div>
   <div class="orb orb-amber" style="width:300px;height:300px;right:0;top:0;"></div>
-
   <div class="slide-header">
     <div>
       <div class="slide-eyebrow"><div class="eyebrow-dot"></div><span class="eyebrow-text">Roadmap · Grand Launch</span></div>
-      <div class="slide-title anim-title">그랜드런칭까지의 경로</div>
+      <div class="slide-title">그랜드런칭까지의 경로</div>
     </div>
     <div class="slide-num">07</div>
     <div class="header-glow"></div>
   </div>
-
   <div class="slide-body" style="flex-direction:column;padding-top:24px;gap:18px;">
     <div style="display:flex;align-items:stretch;" id="roadmap">
-      <div class="rm-step done anim-rm" style="--d:0.1s;">
+      <div class="rm-step done ">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-faint);font-weight:700;margin-bottom:8px;">완료</div>
         <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text-dim);margin-bottom:6px;">1차 소프트런칭</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">ID · SG · MY<br>기술 검증 완료</div>
@@ -738,8 +684,8 @@
           <span class="tag tag-emerald" style="font-size:10px;">서버 ✓</span>
         </div>
       </div>
-      <div class="rm-arrow anim-rm" style="--d:0.25s;">▶</div>
-      <div class="rm-step active anim-rm" style="--d:0.3s;">
+      <div class="rm-arrow ">▶</div>
+      <div class="rm-step active ">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);font-weight:700;margin-bottom:8px;">진행 예정 · 이번 요청</div>
         <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">2차 소프트런칭</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">KR · US<br>리텐션 / CPI 지표 확보</div>
@@ -748,38 +694,36 @@
           <span class="tag tag-amber" style="font-size:10px;">3,500 NRU</span>
         </div>
       </div>
-      <div class="rm-arrow anim-rm" style="--d:0.45s;">▶</div>
-      <div class="rm-step anim-rm" style="--d:0.5s;display:flex;flex-direction:column;justify-content:center;">
+      <div class="rm-arrow ">▶</div>
+      <div class="rm-step " style="display:flex;flex-direction:column;justify-content:center;">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-faint);font-weight:700;margin-bottom:8px;">데이터 기반 판단</div>
         <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text-dim);margin-bottom:4px;">Week 1/2 리텐션 확인</div>
         <div style="font-size:12px;color:var(--text-dim);">CPI · 코호트 품질 분석</div>
       </div>
-      <div class="rm-arrow anim-rm" style="--d:0.65s;">▶</div>
-      <div class="rm-step anim-rm" style="border-color:rgba(16,185,129,0.25);background:var(--emerald-dim);--d:0.7s;">
+      <div class="rm-arrow ">▶</div>
+      <div class="rm-step " style="border-color:rgba(16,185,129,0.25);background:var(--emerald-dim);">
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--emerald);font-weight:700;margin-bottom:8px;">최종 목표</div>
         <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;">그랜드런칭</div>
         <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">전 리전 동시 출시<br>데이터 기반 최대 화력</div>
       </div>
     </div>
-
     <div style="display:flex;gap:16px;">
-      <div class="callout anim-card" style="flex:1;--d:0.8s;">
+      <div class="callout " style="flex:1;">
         <strong style="color:var(--amber);">3차 소프트런칭 없음.</strong> 2차 지표 확인 후 곧바로 그랜드런칭으로 진행합니다. 2차가 그랜드런칭의 유일한 판단 근거입니다.
       </div>
-      <div class="callout callout-emerald anim-card" style="flex:1;--d:0.9s;">
+      <div class="callout callout-emerald " style="flex:1;">
         <strong style="color:var(--emerald);">2차 소프트 런칭 투자의 의미.</strong> 이 예산으로 확보된 데이터는 그랜드런칭 전체 마케팅 예산 규모를 결정하는 기반이 됩니다.
       </div>
     </div>
-
     <div style="display:flex;gap:16px;">
-      <div class="card anim-card" style="flex:1;padding:16px 20px;display:flex;align-items:center;gap:14px;--d:1.0s;">
+      <div class="card  card-tilt" style="flex:1;padding:16px 20px;display:flex;align-items:center;gap:14px;">
         <div class="ibox ibox-amber"><i class="fa-solid fa-chart-line"></i></div>
         <div>
           <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">그랜드런칭 Go 기준 (예시)</div>
           <div style="font-size:13px;font-weight:700;color:#fff;">Week 1 리텐션 <span style="color:var(--amber);">20%</span> 이상 · CPI <span style="color:var(--amber);">$3.0</span> 이하 유지</div>
         </div>
       </div>
-      <div class="card anim-card" style="flex:1;padding:16px 20px;display:flex;align-items:center;gap:14px;--d:1.1s;">
+      <div class="card  card-tilt" style="flex:1;padding:16px 20px;display:flex;align-items:center;gap:14px;">
         <div class="ibox ibox-emerald"><i class="fa-solid fa-calendar-check"></i></div>
         <div>
           <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">전체 일정</div>
@@ -788,11 +732,9 @@
       </div>
     </div>
   </div>
-
   <div class="slide-footer"><span>Roadmap · Phase 2 → Grand Launch</span><span>CONFIDENTIAL · LevelUp Studio</span></div>
 </div>
 </section>
-
 
 </div>
 </div>
@@ -802,118 +744,163 @@
 Reveal.initialize({
   width:1280, height:720, margin:0,
   hash:true, center:true,
-  transition:'fade', transitionSpeed:'fast',
+  transition:'slide', transitionSpeed:'default',
   mouseWheel:true, controls:true, progress:true,
+  
 });
 
-/* ── PARTICLES (slide 1) ── */
+/* ══ PARTICLES ══ */
 (function(){
   const wrap = document.getElementById('particles');
   if(!wrap) return;
-  for(let i=0;i<30;i++){
+  for(let i=0;i<40;i++){
     const p = document.createElement('div');
     p.className = 'particle';
+    const size = Math.random()>0.7 ? 3 : 2;
     p.style.cssText = `
-      left:${Math.random()*100}%;
-      top:${Math.random()*100}%;
-      --dur:${6+Math.random()*8}s;
-      --delay:${Math.random()*6}s;
-      --tx:${(Math.random()-0.5)*60}px;
-      --ty:${-40-Math.random()*80}px;
-      width:${Math.random()>0.7?3:2}px;
-      height:${Math.random()>0.7?3:2}px;
+      left:${Math.random()*100}%; top:${Math.random()*100}%;
+      width:${size}px; height:${size}px;
+      --dur:${6+Math.random()*10}s; --delay:${Math.random()*8}s;
+      --tx:${(Math.random()-0.5)*80}px; --ty:${-40-Math.random()*100}px;
       background:${Math.random()>0.5?'var(--emerald)':'var(--amber)'};
     `;
     wrap.appendChild(p);
   }
 })();
 
-/* ── ANIMATION DELAY from CSS var ── */
-document.querySelectorAll('[style*="--d:"]').forEach(el => {
-  const match = el.getAttribute('style').match(/--d:([\d.]+)s/);
-  if(match) {
-    const delay = parseFloat(match[1]);
-    el.style.animationDelay = delay + 's';
-  }
+/* ══ CURSOR TRAIL ══ */
+const trailDots = [];
+const TRAIL_LEN = 8;
+for(let i=0;i<TRAIL_LEN;i++){
+  const d = document.createElement('div');
+  d.className = 'trail-dot';
+  d.style.cssText = `width:${6-i*0.5}px;height:${6-i*0.5}px;opacity:${0.7-i*0.08};`;
+  document.getElementById('cursor-trail').appendChild(d);
+  trailDots.push({el:d, x:0, y:0});
+}
+let mouseX=0, mouseY=0;
+document.addEventListener('mousemove', e => { mouseX=e.clientX; mouseY=e.clientY; });
+(function animTrail(){
+  let x=mouseX, y=mouseY;
+  trailDots.forEach((dot,i) => {
+    dot.x += (x - dot.x) * (0.35 - i*0.03);
+    dot.y += (y - dot.y) * (0.35 - i*0.03);
+    dot.el.style.left = dot.x + 'px';
+    dot.el.style.top = dot.y + 'px';
+    dot.el.style.opacity = 0.7 - i*0.08;
+    x = dot.x; y = dot.y;
+  });
+  requestAnimationFrame(animTrail);
+})();
+
+/* ══ CLICK RIPPLE ══ */
+document.addEventListener('click', e => {
+  const r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = e.clientX + 'px';
+  r.style.top = e.clientY + 'px';
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 700);
 });
 
-/* ── COUNT-UP ── */
+/* ══ CARD TILT ══ */
+document.querySelectorAll('.card-tilt').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const scale = Reveal.getScale();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(600px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-3px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* ══ COHORT STEP HOVER ══ */
+document.querySelectorAll('.cohort-step').forEach(step => {
+  step.addEventListener('mouseenter', () => {
+    step.style.background = 'rgba(245,158,11,0.06)';
+    step.style.transition = 'background 0.2s';
+  });
+  step.addEventListener('mouseleave', () => {
+    step.style.background = '';
+  });
+});
+
+/* ══ COUNT-UP ══ */
 function countUp(el) {
   const target = parseInt(el.dataset.target);
   const prefix = el.dataset.prefix || '';
   const suffix = el.dataset.suffix || '';
-  const comma = el.dataset.comma === 'true';
+  const dur = 1400;
+  const start = performance.now();
+  function step(now){
+    const t = Math.min((now-start)/dur, 1);
+    const ease = 1-Math.pow(1-t, 3);
+    const val = Math.round(ease*target);
+    el.textContent = prefix + val.toLocaleString() + suffix;
+    if(t<1) requestAnimationFrame(step);
+  }
+  el.style.opacity = '1';
+  requestAnimationFrame(step);
+}
+
+/* ══ TABLE COUNTUP ══ */
+function tableCountUp(el) {
+  const target = parseInt(el.dataset.countup);
+  const prefix = el.dataset.prefix || '';
   const dur = 1200;
   const start = performance.now();
-  function fmt(n){ return comma ? n.toLocaleString() : n; }
   function step(now){
-    const t = Math.min((now-start)/dur,1);
-    const ease = 1-Math.pow(1-t,3);
+    const t = Math.min((now-start)/dur, 1);
+    const ease = 1-Math.pow(1-t, 3);
     const val = Math.round(ease*target);
-    el.textContent = prefix + fmt(val) + suffix;
+    el.textContent = prefix + val.toLocaleString();
     if(t<1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 }
 
-/* ── SLIDE CHANGE: trigger animations ── */
-Reveal.on('slidechanged', ({indexh}) => {
-  // Count-up on current slide
+/* ══ SLIDE CHANGE ══ */
+function onSlideActive() {
   const slide = Reveal.getCurrentSlide();
-  slide.querySelectorAll('.count-up').forEach(el => {
-    el.style.opacity = '1';
-    countUp(el);
-  });
-});
+  slide.querySelectorAll('.count-up').forEach(el => countUp(el));
+  slide.querySelectorAll('[data-countup]').forEach(el => tableCountUp(el));
+}
+Reveal.on('slidechanged', onSlideActive);
+Reveal.on('ready', onSlideActive);
 
-// Also trigger on init for slide 0
-Reveal.on('ready', () => {
-  const slide = Reveal.getCurrentSlide();
-  slide.querySelectorAll('.count-up').forEach(el => {
-    el.style.opacity = '1';
-    countUp(el);
-  });
-});
-
-/* ── TOOLTIP SINGLETON — sc overflow:hidden 우회 ── */
+/* ══ TOOLTIP SINGLETON ══ */
 const globalTip = document.createElement('div');
-globalTip.id = 'global-tip';
 globalTip.style.cssText = `
   position:fixed; z-index:999999; display:none;
   background:#1a2e1e; border:1px solid rgba(255,255,255,0.12);
   border-radius:8px; padding:10px 14px; font-size:12px;
-  color:#8a9e8e; white-space:normal; width:240px; line-height:1.5;
+  color:#8a9e8e; width:240px; line-height:1.5;
   box-shadow:0 12px 32px rgba(0,0,0,0.6); pointer-events:none;
   font-family:'Noto Sans KR',sans-serif; font-weight:400;
-  transition:opacity 0.15s;
 `;
 document.body.appendChild(globalTip);
 
 document.querySelectorAll('.term').forEach(term => {
   const tip = term.querySelector('.tip');
-  if (!tip) return;
-  // 원본 tip 숨기기
-  tip.style.display = 'none';
+  if(!tip) return;
   const tipHTML = tip.innerHTML;
-
   term.addEventListener('mouseenter', () => {
     const rect = term.getBoundingClientRect();
     globalTip.innerHTML = tipHTML;
-    // 높이 측정을 위해 visibility:hidden 상태로 먼저 렌더
     globalTip.style.visibility = 'hidden';
     globalTip.style.display = 'block';
-    const tipW = 240;
     const tipH = globalTip.offsetHeight;
-    // 위치 계산
-    let left = rect.left + rect.width / 2 - tipW / 2;
-    left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+    const tipW = 240;
+    let left = rect.left + rect.width/2 - tipW/2;
+    left = Math.max(8, Math.min(left, window.innerWidth-tipW-8));
     let top = rect.top - tipH - 10;
-    // 화면 위로 넘어가면 아래에 표시
-    if (top < 8) top = rect.bottom + 10;
-    globalTip.style.left = left + 'px';
-    globalTip.style.top = top + 'px';
+    if(top < 8) top = rect.bottom + 10;
+    globalTip.style.left = left+'px';
+    globalTip.style.top = top+'px';
     globalTip.style.visibility = 'visible';
-    globalTip.style.opacity = '1';
   });
   term.addEventListener('mouseleave', () => {
     globalTip.style.display = 'none';
@@ -921,6 +908,139 @@ document.querySelectorAll('.term').forEach(term => {
 });
 
 
+/* ══ AUTO SEQUENTIAL ANIMATION ══ */
+const ANIM_CSS = `
+  @keyframes autoSlideUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes autoSlideRight {
+    from { opacity:0; transform:translateX(-18px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes autoSlideLeft {
+    from { opacity:0; transform:translateX(18px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes autoScaleIn {
+    from { opacity:0; transform:scale(0.93); }
+    to   { opacity:1; transform:scale(1); }
+  }
+  .auto-hidden { opacity:0; }
+`;
+const styleEl = document.createElement('style');
+styleEl.textContent = ANIM_CSS;
+document.head.appendChild(styleEl);
+
+function getAnimItems(slide) {
+  // 슬라이드별로 애니메이션할 요소 목록 반환
+  const items = [];
+  const idx = Array.from(slide.closest('.slides').querySelectorAll('section')).indexOf(slide);
+
+  if(idx === 0) {
+    // 표지: 이미 CSS 애니메이션 있음
+    return [];
+  }
+
+  // 공통: slide-header
+  const header = slide.querySelector('.slide-title');
+  if(header) items.push({el:header, anim:'autoSlideUp', delay:0});
+
+  if(idx === 1) { // 포스트모템
+    slide.querySelectorAll('.slide-body > div:first-child > *').forEach((el,i) => {
+      items.push({el, anim:'autoSlideRight', delay:0.1+i*0.12});
+    });
+    slide.querySelectorAll('.slide-body > div:last-child > *').forEach((el,i) => {
+      items.push({el, anim:'autoSlideLeft', delay:0.25+i*0.15});
+    });
+  } else if(idx === 2) { // 핵심 지표
+    const callout = slide.querySelector('.callout');
+    if(callout) items.push({el:callout, anim:'autoSlideUp', delay:0.1});
+    slide.querySelectorAll('.card').forEach((el,i) => {
+      items.push({el, anim:'autoScaleIn', delay:0.2+i*0.12});
+    });
+  } else if(idx === 3) { // 캠페인 구조
+    slide.querySelectorAll('.region-card').forEach((el,i) => {
+      items.push({el, anim: i===0?'autoSlideRight':'autoSlideLeft', delay:0.1+i*0.15});
+    });
+    slide.querySelectorAll('.card, .flow-node').forEach((el,i) => {
+      items.push({el, anim:'autoSlideUp', delay:0.3+i*0.08});
+    });
+    const infoBar = slide.querySelector('[style*="amber-dim"]');
+    if(infoBar) items.push({el:infoBar, anim:'autoSlideUp', delay:0.7});
+  } else if(idx === 4) { // 집행 일정
+    slide.querySelectorAll('.tl-item').forEach((el,i) => {
+      items.push({el, anim:'autoSlideRight', delay:0.1+i*0.18});
+    });
+    slide.querySelectorAll('.slide-body > div:last-child > *').forEach((el,i) => {
+      items.push({el, anim:'autoSlideLeft', delay:0.2+i*0.2});
+    });
+  } else if(idx === 5) { // 예산
+    const table = slide.querySelector('table');
+    if(table) {
+      items.push({el:table.closest('.card'), anim:'autoSlideUp', delay:0.1});
+      table.querySelectorAll('tbody tr').forEach((tr,i) => {
+        items.push({el:tr, anim:'autoSlideLeft', delay:0.2+i*0.08});
+      });
+    }
+    slide.querySelectorAll('.slide-body > div:last-child > *').forEach((el,i) => {
+      items.push({el, anim:'autoSlideLeft', delay:0.15+i*0.15});
+    });
+    const callout = slide.querySelector('.callout');
+    if(callout) items.push({el:callout, anim:'autoSlideUp', delay:0.65});
+  } else if(idx === 6) { // 로드맵
+    slide.querySelectorAll('.rm-step, .rm-arrow').forEach((el,i) => {
+      items.push({el, anim:'autoSlideUp', delay:0.08+i*0.1});
+    });
+    slide.querySelectorAll('.callout, .card').forEach((el,i) => {
+      items.push({el, anim:'autoSlideUp', delay:0.6+i*0.12});
+    });
+  }
+  return items;
+}
+
+function animateSlide(slide) {
+  const items = getAnimItems(slide);
+  if(!items.length) return;
+
+  // 초기 숨김
+  items.forEach(({el}) => {
+    el.style.opacity = '0';
+    el.style.animation = 'none';
+  });
+
+  // 순차 등장
+  requestAnimationFrame(() => {
+    items.forEach(({el, anim, delay}) => {
+      setTimeout(() => {
+        el.style.animation = `${anim} 0.55s cubic-bezier(0.16,1,0.3,1) forwards`;
+      }, delay * 1000);
+    });
+  });
+}
+
+Reveal.on('slidechanged', ({currentSlide}) => animateSlide(currentSlide));
+Reveal.on('ready', ({currentSlide}) => animateSlide(currentSlide));
+
+/* ══ FLOW NODE SEQUENTIAL HIGHLIGHT ══ */
+const flowNodes = document.querySelectorAll('#flow-wrap .flow-node');
+let flowIdx = 0;
+function cycleFlow() {
+  flowNodes.forEach((n,i) => {
+    if(i === flowIdx) {
+      n.style.borderColor = 'rgba(245,158,11,0.6)';
+      n.style.background = 'rgba(245,158,11,0.15)';
+    } else if(n.classList.contains('active')) {
+      n.style.borderColor = 'rgba(245,158,11,0.4)';
+      n.style.background = 'var(--amber-dim)';
+    } else {
+      n.style.borderColor = '';
+      n.style.background = '';
+    }
+  });
+  flowIdx = (flowIdx+1) % flowNodes.length;
+}
+if(flowNodes.length) setInterval(cycleFlow, 1200);
 </script>
 </body>
 </html>
