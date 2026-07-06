@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-07 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date">2026.07.07</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"사용성 개선 및 추가", features:[
+        { title:"럼블 코인 MAX 변환 기능 추가", descs:[
+          "재료 주머니의 아이템을 럼블 코인으로 변환 시, 기존 개수 지정 방식에 추가로 MAX 버튼이 추가되었습니다.",
+          "MAX 버튼 1회 터치만으로 변환 가능한 최대 수량을 한번에 설정할 수 있습니다."
+        ]},
+        { title:"친절한 파마씨 NPC 추가", descs:[
+          "자유대전 맵에 존재하던 '회복' 아이템 생성 포인트 대신 같은 자리에 NPC '친절한 파마씨'가 추가되었습니다.",
+          "기존 회복 아이템과 동일한 회복 아이템을 플레이어들에게 지급하며, 지급 시간 주기도 기존과 동일합니다."
+        ]},
+      ]},
+      { label:"밸런스 및 보상 수정", features:[
+        { title:"일일 출석 보상 개편", descs:[]},
+        { title:"럼블 패스 엘리트 / 플러스 구성 품목 변경", descs:[]},
+        { title:"미션 난이도 분포 조정", descs:[
+          "클리어 난이도가 높은 미션들이 기존보다 덜 등장합니다.",
+          "동일 미션이라도 요구 횟수가 많은 미션 역시 기존보다 덜 등장합니다."
+        ]},
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"Usability Improvements & Additions", features:[
+        { title:"Rumble Coin MAX Conversion Button Added", descs:[
+          "A MAX button has been added to the Rumble Coin conversion interface in the material bag.",
+          "Tap MAX once to instantly set the maximum convertible quantity."
+        ]},
+        { title:"'Friendly Pharmacist' NPC Added", descs:[
+          "The 'Friendly Pharmacist' NPC has been added to the Free Battle map, replacing the previous recovery item spawn point.",
+          "The NPC provides the same recovery items at the same intervals as before."
+        ]},
+      ]},
+      { label:"Balance & Reward Adjustments", features:[
+        { title:"Daily Attendance Rewards Revamped", descs:[]},
+        { title:"Rumble Pass Elite / Plus Contents Updated", descs:[]},
+        { title:"Mission Difficulty Distribution Adjusted", descs:[
+          "High-difficulty missions will appear less frequently.",
+          "Missions requiring a high number of completions will also appear less frequently."
+        ]},
+      ]},
+    ]
+  },
+  id: {
+    sections: [
+      { label:"Peningkatan & Penambahan Kegunaan", features:[
+        { title:"Tombol Konversi MAX Rumble Coin Ditambahkan", descs:[
+          "Tombol MAX telah ditambahkan ke antarmuka konversi Rumble Coin di tas material.",
+          "Ketuk MAX sekali untuk langsung mengatur jumlah maksimum yang bisa dikonversi."
+        ]},
+        { title:"NPC 'Apoteker Ramah' Ditambahkan", descs:[
+          "NPC 'Apoteker Ramah' telah ditambahkan ke peta Free Battle, menggantikan titik spawn item pemulihan sebelumnya.",
+          "NPC memberikan item pemulihan yang sama dengan interval yang sama seperti sebelumnya."
+        ]},
+      ]},
+      { label:"Penyesuaian Keseimbangan & Hadiah", features:[
+        { title:"Hadiah Absensi Harian Diperbarui", descs:[]},
+        { title:"Isi Rumble Pass Elite / Plus Diubah", descs:[]},
+        { title:"Distribusi Kesulitan Misi Disesuaikan", descs:[
+          "Misi dengan tingkat kesulitan tinggi akan lebih jarang muncul.",
+          "Misi yang membutuhkan banyak penyelesaian juga akan lebih jarang muncul."
+        ]},
+      ]},
+    ]
+  },
+  ms: {
+    sections: [
+      { label:"Penambahbaikan & Penambahan Kebolehgunaan", features:[
+        { title:"Butang Penukaran MAX Rumble Coin Ditambah", descs:[
+          "Butang MAX telah ditambah ke antara muka penukaran Rumble Coin dalam beg material.",
+          "Ketik MAX sekali untuk menetapkan kuantiti maksimum yang boleh ditukar sekaligus."
+        ]},
+        { title:"NPC 'Ahli Farmasi Mesra' Ditambah", descs:[
+          "NPC 'Ahli Farmasi Mesra' telah ditambah ke peta Free Battle, menggantikan titik janaan item pemulihan sebelumnya.",
+          "NPC memberikan item pemulihan yang sama pada selang masa yang sama seperti sebelumnya."
+        ]},
+      ]},
+      { label:"Pelarasan Keseimbangan & Ganjaran", features:[
+        { title:"Ganjaran Kehadiran Harian Diubah Suai", descs:[]},
+        { title:"Kandungan Rumble Pass Elite / Plus Diubah", descs:[]},
+        { title:"Taburan Kesukaran Misi Dilaraskan", descs:[
+          "Misi dengan kesukaran tinggi akan kurang kerap muncul.",
+          "Misi yang memerlukan banyak penyiapan juga akan kurang kerap muncul."
+        ]},
+      ]},
+    ]
+  },
+  zh: {
+    sections: [
+      { label:"易用性改进与新增", features:[
+        { title:"隆隆币MAX转换按钮上线", descs:[
+          "材料袋的隆隆币转换界面新增了MAX按钮。",
+          "只需点击一次MAX即可一键设置最大可转换数量。"
+        ]},
+        { title:"'亲切药剂师' NPC上线", descs:[
+          "'亲切药剂师' NPC已添加到自由对战地图，取代了原来的回复道具生成点。",
+          "NPC提供与原来相同的回复道具，补充周期也与原来相同。"
+        ]},
+      ]},
+      { label:"平衡性与奖励调整", features:[
+        { title:"每日签到奖励改版", descs:[]},
+        { title:"隆隆通行证精英版/增强版内容变更", descs:[]},
+        { title:"任务难度分布调整", descs:[
+          "高难度任务的出现频率将降低。",
+          "同一任务中要求完成次数较多的任务出现频率也将降低。"
+        ]},
+      ]},
+    ]
+  },
+  fr: {
+    sections: [
+      { label:"Améliorations d'utilisabilité & Ajouts", features:[
+        { title:"Bouton de conversion MAX de Rumble Coins ajouté", descs:[
+          "Un bouton MAX a été ajouté à l'interface de conversion de Rumble Coins dans le sac de matériaux.",
+          "Appuyez une fois sur MAX pour régler instantanément la quantité maximale convertible."
+        ]},
+        { title:"PNJ 'Pharmacien Sympathique' ajouté", descs:[
+          "Le PNJ 'Pharmacien Sympathique' a été ajouté à la carte Bataille libre, remplaçant l'ancien point d'apparition d'objets de soin.",
+          "Le PNJ fournit les mêmes objets de soin aux mêmes intervalles qu'auparavant."
+        ]},
+      ]},
+      { label:"Ajustements d'équilibre & Récompenses", features:[
+        { title:"Récompenses de présence quotidienne remaniées", descs:[]},
+        { title:"Contenu du Rumble Pass Élite / Plus modifié", descs:[]},
+        { title:"Distribution de la difficulté des missions ajustée", descs:[
+          "Les missions à haute difficulté apparaîtront moins fréquemment.",
+          "Les missions nécessitant un grand nombre de complétion apparaîtront également moins fréquemment."
+        ]},
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
