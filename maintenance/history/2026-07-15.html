@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-07-15 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date">2026.07.14</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"성능 개선", features:[
+        { title:"낮은 사양 기기 처리 속도 개선", descs:[] },
+      ]},
+      { label:"버그 수정", features:[
+        { title:"계정 연동 / 해제 후 표기 오류 수정", descs:[] },
+        { title:"출석 보상 수정", descs:[] },
+        { title:"미션 보너스로 뽑기 보상 수령 시 표기 오류 수정", descs:[] },
+        { title:"일부 캐릭터가 투명하게 보여지던 문제 수정", descs:[] },
+        { title:"방어구 강화 시 발생하던 오류 수정", descs:[] },
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"Performance Improvements", features:[
+        { title:"Processing Speed Improved on Low-End Devices", descs:[] },
+      ]},
+      { label:"Bug Fixes", features:[
+        { title:"Fixed Display Error After Account Link / Unlink", descs:[] },
+        { title:"Attendance Reward Fixed", descs:[] },
+        { title:"Fixed Display Error When Receiving Gacha Rewards via Mission Bonus", descs:[] },
+        { title:"Fixed Issue Where Some Characters Appeared Transparent", descs:[] },
+        { title:"Fixed Error Occurring During Armor Enhancement", descs:[] },
+      ]},
+    ]
+  },
+  id: {
+    sections: [
+      { label:"Peningkatan Performa", features:[
+        { title:"Peningkatan Kecepatan Pemrosesan pada Perangkat Spesifikasi Rendah", descs:[] },
+      ]},
+      { label:"Perbaikan Bug", features:[
+        { title:"Memperbaiki Kesalahan Tampilan Setelah Menautkan / Melepas Akun", descs:[] },
+        { title:"Perbaikan Hadiah Kehadiran", descs:[] },
+        { title:"Memperbaiki Kesalahan Tampilan Saat Menerima Hadiah Gacha via Bonus Misi", descs:[] },
+        { title:"Memperbaiki Masalah Beberapa Karakter Terlihat Transparan", descs:[] },
+        { title:"Memperbaiki Error Saat Peningkatan Armor", descs:[] },
+      ]},
+    ]
+  },
+  ms: {
+    sections: [
+      { label:"Peningkatan Prestasi", features:[
+        { title:"Kelajuan Pemprosesan Dipertingkat pada Peranti Spesifikasi Rendah", descs:[] },
+      ]},
+      { label:"Pembetulan Bug", features:[
+        { title:"Pembetulan Ralat Paparan Selepas Paut / Nyahpaut Akaun", descs:[] },
+        { title:"Pembetulan Ganjaran Kehadiran", descs:[] },
+        { title:"Pembetulan Ralat Paparan Semasa Menerima Ganjaran Gacha melalui Bonus Misi", descs:[] },
+        { title:"Pembetulan Masalah Beberapa Watak Kelihatan Telus", descs:[] },
+        { title:"Pembetulan Ralat Semasa Peningkatan Perisai", descs:[] },
+      ]},
+    ]
+  },
+  zh: {
+    sections: [
+      { label:"性能优化", features:[
+        { title:"低配置设备处理速度优化", descs:[] },
+      ]},
+      { label:"Bug修复", features:[
+        { title:"修复账号连接/解除后的显示错误", descs:[] },
+        { title:"出勤奖励修复", descs:[] },
+        { title:"修复通过任务奖励领取抽奖奖励时的显示错误", descs:[] },
+        { title:"修复部分角色显示透明的问题", descs:[] },
+        { title:"修复防具强化时发生的错误", descs:[] },
+      ]},
+    ]
+  },
+  fr: {
+    sections: [
+      { label:"Améliorations de performances", features:[
+        { title:"Vitesse de traitement améliorée sur les appareils bas de gamme", descs:[] },
+      ]},
+      { label:"Corrections de bugs", features:[
+        { title:"Correction d'une erreur d'affichage après liaison / déliaison de compte", descs:[] },
+        { title:"Correction des récompenses de présence", descs:[] },
+        { title:"Correction d'une erreur d'affichage lors de la réception de récompenses gacha via bonus de mission", descs:[] },
+        { title:"Correction d'un problème où certains personnages apparaissaient transparents", descs:[] },
+        { title:"Correction d'une erreur survenant lors de l'amélioration d'armure", descs:[] },
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
