@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-07 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date">2026.08.07</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"사용성 개선 및 수정", features:[
+        { title:"시즌 기간 7일로 변경", descs:[
+          "시즌 기간을 조정하여 7일 간 진행하는 형태로 변경되었습니다.",
+          "기간에 맞춰 시즌 보상으로 획득할 수 있는 랭크 코인의 가치도 조정되었습니다."
+        ]},
+        { title:"신규 유저 튜토리얼 프로세스 조정", descs:[
+          "단순한 조작 안내가 아니라, 실전형으로 변경했습니다."
+        ]},
+        { title:"상점 판매 항목 정리 & 조정", descs:[
+          "더 보기 편한 형태로 항목들을 정리했습니다.",
+          "각 재화 ( 랭크 코인 등 ) 의 가치 변경을 반영하여 가격을 조정하였습니다."
+        ]},
+        { title:"미션 내용 조정", descs:[
+          "이전보다 쉽게 미션을 완료할 수 있도록 난이도를 조정하였습니다.",
+          "보다 많은 미션 보상으로 주사위를 획득할 수 있도록 수정하였습니다."
+        ]},
+      ]},
+      { label:"신규 컨텐츠", features:[
+        { title:"자유 전투에서 '파마씨' 아이템 지급", descs:[
+          "파마씨는 일정 시간마다 다양한 효과를 가지는 아이템을 줍니다.",
+          "파마씨가 주는 아이템을 획득하면 일정 시간 동안 굉장한 효과를 얻을 수 있습니다.",
+          "파마씨가 주는 아이템은 전투 결과에 매우 큰 영향을 줄 수 있으니 놓치지 마세요!",
+          "겁이 많은 파마씨는 많은 공격을 받으면 다른 곳으로 도망갑니다."
+        ]},
+      ]},
+      { label:"밸런스 및 보상 수정", features:[
+        { title:"일일 출석 보상 수정", descs:[]},
+        { title:"럼블 패스 엘리트 / 플러스 구성 변경", descs:[
+          "이전보다 더 필요한 것들을 획득할 수 있도록 수정했습니다."
+        ]},
+        { title:"디펜스 보상 수정", descs:[
+          "디펜스 모드의 보상이 조금 더 세부적으로 구분될 수 있도록 수정했습니다.",
+          "이전보다 디펜스 모드에서 더 많은 보상을 획득할 수 있도록 수정했습니다."
+        ]},
+        { title:"무기 / 방어구 강화 수정", descs:[
+          "이전보다 무기 / 방어구 강화 효과가 강력해지도록 수정했습니다.",
+          "매 승급마다 강화 효과가 더욱 강해지도록 조정했습니다."
+        ]},
+        { title:"시즌 보상 랭크 코인 가치 대폭 상향", descs:[
+          "코인의 가치 상승에 의해 지급되는 코인의 양을 줄였습니다.",
+          "상점에서 코인 구매 물품의 가격이 하향 조정되었습니다.",
+          "시즌 기간이 줄어들고, 보상이 하향 조정된 것을 포함합니다."
+        ]},
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"Usability Improvements", features:[
+        { title:"Season Duration Changed to 7 Days", descs:[
+          "Season duration has been adjusted to 7 days.",
+          "Rank coin values obtainable through season rewards have been adjusted accordingly."
+        ]},
+        { title:"New User Tutorial Process Adjusted", descs:[
+          "Changed from simple control guidance to a hands-on combat tutorial."
+        ]},
+        { title:"Shop Items Reorganized & Adjusted", descs:[
+          "Items have been reorganized for easier browsing.",
+          "Prices have been adjusted to reflect changes in currency values (Rank Coins, etc.)."
+        ]},
+        { title:"Mission Content Adjusted", descs:[
+          "Difficulty adjusted so missions can be completed more easily than before.",
+          "More mission rewards now grant dice."
+        ]},
+      ]},
+      { label:"New Content", features:[
+        { title:"'Pharmacist' Now Gives Items in Free Battle", descs:[
+          "The Pharmacist gives items with various effects at regular intervals.",
+          "Obtaining the Pharmacist's item grants an amazing effect for a limited time.",
+          "The items can greatly impact battle results — don't miss them!",
+          "The timid Pharmacist will flee to another location when attacked too much."
+        ]},
+      ]},
+      { label:"Balance & Reward Adjustments", features:[
+        { title:"Daily Attendance Rewards Updated", descs:[]},
+        { title:"Rumble Pass Elite / Plus Contents Updated", descs:[
+          "Updated to provide more of what you actually need."
+        ]},
+        { title:"Defense Mode Rewards Updated", descs:[
+          "Rewards are now more specifically categorized.",
+          "More rewards can be obtained from Defense mode than before."
+        ]},
+        { title:"Weapon / Armor Enhancement Updated", descs:[
+          "Enhancement effects are now more powerful than before.",
+          "Enhancement effects grow stronger with each tier upgrade."
+        ]},
+        { title:"Season Reward Rank Coin Value Significantly Increased", descs:[
+          "The amount of coins distributed has been reduced due to the increased coin value.",
+          "Prices of coin-purchasable items in the shop have been reduced.",
+          "Includes adjustments for shorter season duration and reduced reward quantities."
+        ]},
+      ]},
+    ]
+  },
+  id: {
+    sections: [
+      { label:"Peningkatan Kegunaan", features:[
+        { title:"Durasi Musim Diubah Menjadi 7 Hari", descs:[
+          "Durasi musim telah disesuaikan menjadi 7 hari.",
+          "Nilai rank coin yang bisa diperoleh dari hadiah musim juga disesuaikan."
+        ]},
+        { title:"Proses Tutorial Pengguna Baru Disesuaikan", descs:[
+          "Diubah dari panduan kontrol sederhana menjadi tutorial tempur langsung."
+        ]},
+        { title:"Item Toko Diorganisir & Disesuaikan", descs:[
+          "Item telah diorganisir agar lebih mudah dilihat.",
+          "Harga disesuaikan untuk mencerminkan perubahan nilai mata uang."
+        ]},
+        { title:"Konten Misi Disesuaikan", descs:[
+          "Kesulitan disesuaikan agar misi lebih mudah diselesaikan.",
+          "Lebih banyak hadiah misi yang memberikan dadu."
+        ]},
+      ]},
+      { label:"Konten Baru", features:[
+        { title:"'Apoteker' Kini Memberikan Item di Free Battle", descs:[
+          "Apoteker memberikan item dengan berbagai efek secara berkala.",
+          "Mendapatkan item Apoteker memberikan efek luar biasa untuk waktu terbatas.",
+          "Item bisa sangat mempengaruhi hasil pertempuran — jangan sampai terlewat!",
+          "Apoteker yang penakut akan melarikan diri jika terlalu sering diserang."
+        ]},
+      ]},
+      { label:"Penyesuaian Keseimbangan & Hadiah", features:[
+        { title:"Hadiah Kehadiran Harian Diperbarui", descs:[]},
+        { title:"Isi Rumble Pass Elite / Plus Diperbarui", descs:[
+          "Diperbarui untuk memberikan hal-hal yang lebih dibutuhkan."
+        ]},
+        { title:"Hadiah Mode Defense Diperbarui", descs:[
+          "Hadiah kini dikategorikan lebih spesifik.",
+          "Lebih banyak hadiah bisa diperoleh dari mode Defense."
+        ]},
+        { title:"Peningkatan Senjata / Armor Diperbarui", descs:[
+          "Efek peningkatan kini lebih kuat dari sebelumnya.",
+          "Efek peningkatan semakin kuat di setiap tier."
+        ]},
+        { title:"Nilai Rank Coin Hadiah Musim Ditingkatkan Signifikan", descs:[
+          "Jumlah koin yang didistribusikan dikurangi karena nilai koin meningkat.",
+          "Harga item yang dibeli dengan koin di toko telah dikurangi.",
+          "Termasuk penyesuaian untuk durasi musim yang lebih pendek."
+        ]},
+      ]},
+    ]
+  },
+  ms: {
+    sections: [
+      { label:"Peningkatan Kebolehgunaan", features:[
+        { title:"Tempoh Musim Diubah kepada 7 Hari", descs:[
+          "Tempoh musim telah diselaraskan kepada 7 hari.",
+          "Nilai rank coin yang boleh diperoleh melalui ganjaran musim turut diselaraskan."
+        ]},
+        { title:"Proses Tutorial Pengguna Baharu Diselaraskan", descs:[
+          "Diubah daripada panduan kawalan mudah kepada tutorial tempur sebenar."
+        ]},
+        { title:"Item Kedai Disusun Semula & Diselaraskan", descs:[
+          "Item telah disusun untuk lebih mudah dilihat.",
+          "Harga diselaraskan untuk mencerminkan perubahan nilai mata wang."
+        ]},
+        { title:"Kandungan Misi Diselaraskan", descs:[
+          "Kesukaran diselaraskan supaya misi lebih mudah diselesaikan.",
+          "Lebih banyak ganjaran misi kini memberikan dadu."
+        ]},
+      ]},
+      { label:"Kandungan Baharu", features:[
+        { title:"'Ahli Farmasi' Kini Memberikan Item dalam Free Battle", descs:[
+          "Ahli Farmasi memberikan item dengan pelbagai kesan secara berkala.",
+          "Mendapatkan item Ahli Farmasi memberikan kesan luar biasa untuk tempoh terhad.",
+          "Item boleh memberi impak besar kepada hasil pertempuran — jangan lepaskan!",
+          "Ahli Farmasi yang penakut akan melarikan diri jika terlalu kerap diserang."
+        ]},
+      ]},
+      { label:"Pelarasan Keseimbangan & Ganjaran", features:[
+        { title:"Ganjaran Kehadiran Harian Dikemas Kini", descs:[]},
+        { title:"Kandungan Rumble Pass Elite / Plus Dikemas Kini", descs:[
+          "Dikemas kini untuk memberikan perkara yang lebih diperlukan."
+        ]},
+        { title:"Ganjaran Mod Defense Dikemas Kini", descs:[
+          "Ganjaran kini dikategorikan dengan lebih spesifik.",
+          "Lebih banyak ganjaran boleh diperoleh daripada mod Defense."
+        ]},
+        { title:"Peningkatan Senjata / Perisai Dikemas Kini", descs:[
+          "Kesan peningkatan kini lebih kuat daripada sebelumnya.",
+          "Kesan peningkatan semakin kuat pada setiap tier."
+        ]},
+        { title:"Nilai Rank Coin Ganjaran Musim Ditingkatkan Dengan Ketara", descs:[
+          "Jumlah koin yang diedarkan dikurangkan kerana nilai koin meningkat.",
+          "Harga item yang dibeli dengan koin di kedai telah dikurangkan.",
+          "Termasuk pelarasan untuk tempoh musim yang lebih pendek."
+        ]},
+      ]},
+    ]
+  },
+  zh: {
+    sections: [
+      { label:"易用性改进", features:[
+        { title:"赛季时长改为7天", descs:[
+          "赛季时长已调整为7天。",
+          "可通过赛季奖励获得的排名币价值也已相应调整。"
+        ]},
+        { title:"新用户教程流程调整", descs:[
+          "从简单操作指引改为实战型教程。"
+        ]},
+        { title:"商店商品整理与调整", descs:[
+          "商品已整理为更易浏览的形式。",
+          "价格已调整以反映各货币价值的变化。"
+        ]},
+        { title:"任务内容调整", descs:[
+          "难度已调整，使任务比以前更容易完成。",
+          "更多任务奖励现可获得骰子。"
+        ]},
+      ]},
+      { label:"新内容", features:[
+        { title:"自由战斗中'药剂师'现可给予道具", descs:[
+          "药剂师会定期给予具有各种效果的道具。",
+          "获得药剂师的道具后，可在一定时间内获得绝佳效果。",
+          "这些道具对战斗结果影响极大，千万不要错过！",
+          "胆小的药剂师受到过多攻击时会逃往其他地方。"
+        ]},
+      ]},
+      { label:"平衡性与奖励调整", features:[
+        { title:"每日签到奖励更新", descs:[]},
+        { title:"隆隆通行证精英版/增强版内容更新", descs:[
+          "更新为可获得更多实用物品。"
+        ]},
+        { title:"防御模式奖励更新", descs:[
+          "奖励现在分类更加细化。",
+          "可从防御模式中获得比以前更多的奖励。"
+        ]},
+        { title:"武器/防具强化更新", descs:[
+          "强化效果比以前更强。",
+          "每次晋级强化效果会进一步提升。"
+        ]},
+        { title:"赛季奖励排名币价值大幅提升", descs:[
+          "由于币值提升，发放的币数量已减少。",
+          "商店中用币购买的商品价格已下调。",
+          "包含赛季时长缩短和奖励数量下调的调整。"
+        ]},
+      ]},
+    ]
+  },
+  fr: {
+    sections: [
+      { label:"Améliorations d'utilisabilité", features:[
+        { title:"Durée de saison changée à 7 jours", descs:[
+          "La durée de la saison a été ajustée à 7 jours.",
+          "La valeur des rank coins obtenables via les récompenses de saison a également été ajustée."
+        ]},
+        { title:"Processus de tutoriel des nouveaux utilisateurs ajusté", descs:[
+          "Changé d'un simple guide de contrôle à un tutoriel de combat pratique."
+        ]},
+        { title:"Articles de boutique réorganisés & ajustés", descs:[
+          "Les articles ont été réorganisés pour une navigation plus facile.",
+          "Les prix ont été ajustés pour refléter les changements de valeur des devises."
+        ]},
+        { title:"Contenu des missions ajusté", descs:[
+          "La difficulté a été ajustée pour que les missions soient plus faciles à compléter.",
+          "Plus de récompenses de missions accordent désormais des dés."
+        ]},
+      ]},
+      { label:"Nouveau contenu", features:[
+        { title:"Le 'Pharmacien' donne maintenant des objets en Bataille libre", descs:[
+          "Le Pharmacien donne des objets aux effets variés à intervalles réguliers.",
+          "Obtenir l'objet du Pharmacien accorde un effet formidable pendant un temps limité.",
+          "Ces objets peuvent grandement influencer le résultat des combats — ne les ratez pas !",
+          "Le Pharmacien craintif fuira vers un autre endroit s'il est trop attaqué."
+        ]},
+      ]},
+      { label:"Ajustements d'équilibre & Récompenses", features:[
+        { title:"Récompenses de présence quotidienne mises à jour", descs:[]},
+        { title:"Contenu Rumble Pass Élite / Plus mis à jour", descs:[
+          "Mis à jour pour fournir des objets plus utiles qu'auparavant."
+        ]},
+        { title:"Récompenses du mode Défense mises à jour", descs:[
+          "Les récompenses sont maintenant catégorisées plus spécifiquement.",
+          "Plus de récompenses peuvent être obtenues en mode Défense qu'auparavant."
+        ]},
+        { title:"Amélioration des armes / armures mise à jour", descs:[
+          "Les effets d'amélioration sont maintenant plus puissants qu'auparavant.",
+          "Les effets d'amélioration deviennent plus forts à chaque tier."
+        ]},
+        { title:"Valeur des rank coins de récompense de saison fortement augmentée", descs:[
+          "La quantité de coins distribués a été réduite en raison de l'augmentation de la valeur.",
+          "Les prix des articles achetables avec des coins en boutique ont été réduits.",
+          "Inclut les ajustements pour la durée de saison réduite et les récompenses diminuées."
+        ]},
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
