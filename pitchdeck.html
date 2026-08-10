@@ -431,6 +431,129 @@
     .panel-connector::before{width:1px; height:100%;}
   }
 
+  /* ---------- Feature Combination Grid (병렬 조합 요소) ---------- */
+  .feature-grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:12px;
+  }
+  .feature-card-v{
+    display:flex; gap:18px; align-items:center;
+    padding:22px 24px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .feature-card-v .thumb{
+    flex:0 0 120px;
+    aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+  }
+  .feature-card-v .thumb span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:8px; color:var(--text-dim); letter-spacing:1px;
+  }
+  .feature-card-v .text .v-title{font-size:16px; font-weight:700; color:var(--text-hi); margin-bottom:6px;}
+  .feature-card-v .text .v-desc{font-size:12.5px; color:var(--text-mid); line-height:1.55;}
+
+  @media screen and (max-width:900px){
+    .feature-grid2{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Feature Spectrum (light → deep 예시 4개) ---------- */
+  .spectrum-axis{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:12px;
+  }
+  .spectrum-axis span{font-size:11px; letter-spacing:3px; color:var(--text-dim);}
+  .spectrum-bar{
+    position:relative; height:3px; border-radius:2px;
+    margin-bottom:44px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.12), var(--accent-1), var(--accent-2));
+  }
+  .spectrum-row{ display:flex; gap:26px; }
+  .spectrum-item{ flex:1; }
+  .spectrum-video{
+    width:100%; aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+    margin-bottom:16px;
+  }
+  .spectrum-video .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:1.5px; color:var(--text-dim);
+  }
+  .spectrum-step{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--accent-2); letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  .spectrum-title{font-size:15px; font-weight:700; color:var(--text-hi); margin-bottom:8px; line-height:1.35;}
+  .spectrum-desc{font-size:12.5px; color:var(--text-mid); line-height:1.6;}
+
+  @media screen and (max-width:900px){
+    .spectrum-row{flex-direction:column; gap:20px;}
+  }
+
+  /* ---------- Key Features ---------- */
+  .features-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .features-grid{
+    display:flex; gap:48px;
+    margin-top:54px;
+    align-items:stretch;
+  }
+  .screenshot-panel{
+    flex:0 0 42%;
+    border:2px dashed var(--line);
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+    min-height:420px;
+  }
+  .screenshot-panel .label{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--text-dim);
+    font-size:13px;
+    letter-spacing:2px;
+    text-align:center;
+    line-height:1.9;
+  }
+  .feature-cards{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    justify-content:center;
+  }
+  .feature-card{
+    display:flex; gap:20px; align-items:flex-start;
+    padding:20px 24px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .feature-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    color:var(--accent-2);
+    letter-spacing:1px;
+    flex:0 0 auto;
+    padding-top:2px;
+  }
+  .feature-title{font-size:17px; font-weight:700; color:var(--text-hi); margin-bottom:6px; letter-spacing:.2px;}
+  .feature-desc{font-size:13.5px; color:var(--text-mid); line-height:1.6;}
+
+  @media screen and (max-width:900px){
+    .features-grid{flex-direction:column; gap:24px;}
+    .screenshot-panel{min-height:220px;}
+  }
+
   /* ---------- Complete Contents Circulation (삼각 순환) ---------- */
   .triangle-row{ display:flex; align-items:stretch; gap:0; }
   .role-card{
@@ -645,130 +768,7 @@
     .cycle-arrow{display:none;}
   }
 
-  /* ---------- Feature Combination Grid (병렬 조합 요소) ---------- */
-  .feature-grid2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    margin-top:12px;
-  }
-  .feature-card-v{
-    display:flex; gap:18px; align-items:center;
-    padding:22px 24px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
-  }
-  .feature-card-v .thumb{
-    flex:0 0 120px;
-    aspect-ratio:16/9;
-    border:2px dashed var(--line);
-    border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.02);
-  }
-  .feature-card-v .thumb span{
-    font-family:'JetBrains Mono',monospace;
-    font-size:8px; color:var(--text-dim); letter-spacing:1px;
-  }
-  .feature-card-v .text .v-title{font-size:16px; font-weight:700; color:var(--text-hi); margin-bottom:6px;}
-  .feature-card-v .text .v-desc{font-size:12.5px; color:var(--text-mid); line-height:1.55;}
-
-  @media screen and (max-width:900px){
-    .feature-grid2{grid-template-columns:1fr;}
-  }
-
-  /* ---------- Feature Spectrum (light → deep 예시 4개) ---------- */
-  .spectrum-axis{
-    display:flex; justify-content:space-between; align-items:center;
-    margin-bottom:12px;
-  }
-  .spectrum-axis span{font-size:11px; letter-spacing:3px; color:var(--text-dim);}
-  .spectrum-bar{
-    position:relative; height:3px; border-radius:2px;
-    margin-bottom:44px;
-    background:linear-gradient(90deg, rgba(255,255,255,0.12), var(--accent-1), var(--accent-2));
-  }
-  .spectrum-row{ display:flex; gap:26px; }
-  .spectrum-item{ flex:1; }
-  .spectrum-video{
-    width:100%; aspect-ratio:16/9;
-    border:2px dashed var(--line);
-    border-radius:8px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.02);
-    margin-bottom:16px;
-  }
-  .spectrum-video .label{
-    font-family:'JetBrains Mono',monospace;
-    font-size:10px; letter-spacing:1.5px; color:var(--text-dim);
-  }
-  .spectrum-step{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px; color:var(--accent-2); letter-spacing:1px;
-    margin-bottom:8px;
-  }
-  .spectrum-title{font-size:15px; font-weight:700; color:var(--text-hi); margin-bottom:8px; line-height:1.35;}
-  .spectrum-desc{font-size:12.5px; color:var(--text-mid); line-height:1.6;}
-
-  @media screen and (max-width:900px){
-    .spectrum-row{flex-direction:column; gap:20px;}
-  }
-
-  /* ---------- Key Features ---------- */
-  .features-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
-  .features-grid{
-    display:flex; gap:48px;
-    margin-top:54px;
-    align-items:stretch;
-  }
-  .screenshot-panel{
-    flex:0 0 42%;
-    border:2px dashed var(--line);
-    border-radius:12px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,0.02);
-    min-height:420px;
-  }
-  .screenshot-panel .label{
-    font-family:'JetBrains Mono',monospace;
-    color:var(--text-dim);
-    font-size:13px;
-    letter-spacing:2px;
-    text-align:center;
-    line-height:1.9;
-  }
-  .feature-cards{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-    justify-content:center;
-  }
-  .feature-card{
-    display:flex; gap:20px; align-items:flex-start;
-    padding:20px 24px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
-  }
-  .feature-num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:14px;
-    color:var(--accent-2);
-    letter-spacing:1px;
-    flex:0 0 auto;
-    padding-top:2px;
-  }
-  .feature-title{font-size:17px; font-weight:700; color:var(--text-hi); margin-bottom:6px; letter-spacing:.2px;}
-  .feature-desc{font-size:13.5px; color:var(--text-mid); line-height:1.6;}
-
-  @media screen and (max-width:900px){
-    .features-grid{flex-direction:column; gap:24px;}
-    .screenshot-panel{min-height:220px;}
-  }
-
-
+  /* ---------- Print / PDF export safety ----------
      브라우저는 인쇄 캡처 시 CSS 애니메이션을 재생하지 않음.
      화면 모드에서 opacity:0 → 애니메이션으로 나타나던 요소들이
      print-pdf 모드에서는 애니메이션이 아예 실행되지 않아
@@ -1413,7 +1413,7 @@
 
         <div class="closing-body">
           <div class="closing-eyebrow">돌고 도는, 물고 물리는 콘텐츠와 자원들</div>
-          <h2 class="closing-hero">플레이어는, <span class="emph">게임만</span> 하면 됩니다.</h2>
+          <h2 class="closing-hero">플레이어는!<br><span class="emph">게임만</span> 하면 됩니다.</h2>
           <div class="closing-sub">더 빠르게 이루고, 더 강해지고 싶다면 —<br><span class="accent">자원을 사용하면</span> 됩니다.</div>
         </div>
       </div>
