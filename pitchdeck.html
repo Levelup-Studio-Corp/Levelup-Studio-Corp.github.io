@@ -224,7 +224,7 @@
   @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(1.4);} }
   @keyframes ringPulse{ 0%{transform:scale(1); opacity:1;} 100%{transform:scale(2.4); opacity:0;} }
 
-  @media (max-width:900px){
+  @media screen and (max-width:900px){
     .title-slide{padding:24px 26px;}
     .hud-main{flex-direction:column; gap:20px; justify-content:center; text-align:center;}
     .radar-wrap{position:absolute; inset:0; height:100%; opacity:.18; z-index:0; transform:none;}
@@ -357,7 +357,7 @@
   .m-status.upcoming{ color:var(--text-dim); border:1px dashed var(--line); background:transparent; }
   .m-status .status-dot{ width:5px; height:5px; }
 
-  @media (max-width:900px){
+  @media screen and (max-width:900px){
     .content-slide{padding:26px 24px;}
     .section-title{font-size:31px !important;}
     .timeline{flex-direction:column; gap:28px; margin-top:36px;}
@@ -422,6 +422,14 @@
   }
   html.print-pdf .hud-main{
     flex-direction:row !important;
+  }
+
+  /* 용지 방향을 landscape로 강제 - 사용자가 인쇄 대화상자에서
+     Portrait로 잘못 설정해도 모바일(900px 이하) 스타일이
+     끼어드는 것을 방지 */
+  @page{
+    size: landscape;
+    margin: 0;
   }
 </style>
 </head>
