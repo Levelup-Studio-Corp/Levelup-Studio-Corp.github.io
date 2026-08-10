@@ -226,16 +226,17 @@
 
   @media (max-width:900px){
     .title-slide{padding:24px 26px;}
-    .hud-main{flex-direction:column; gap:24px; justify-content:center;}
+    .hud-main{flex-direction:column; gap:20px; justify-content:center; text-align:center;}
     .radar-wrap{position:absolute; inset:0; height:100%; opacity:.18; z-index:0; transform:none;}
     .radar{width:340px; height:340px;}
     .r1{width:340px;height:340px;} .r2{width:240px;height:240px;} .r3{width:140px;height:140px;}
     .radar-cross{width:340px;height:340px;}
     .radar-sweep{width:340px;height:340px;}
-    .title-block{max-width:100%; z-index:2;}
-    .game-logo{font-size:56px !important;}
-    .game-subtitle{font-size:17px;}
-    .meta-row{gap:18px; flex-wrap:wrap;}
+    .title-block{max-width:100%; z-index:2; margin-left:0 !important; transform:none !important;}
+    .eyebrow{justify-content:center;}
+    .game-logo{font-size:72px !important;}
+    .game-subtitle{font-size:20px;}
+    .meta-row{gap:18px; flex-wrap:wrap; justify-content:center;}
   }
 
   /* ---------- Content slide shared shell ---------- */
@@ -394,6 +395,33 @@
     animation:none !important;
     transform:scale(1) !important;
     opacity:1 !important;
+  }
+
+  /* percentage(height:100%) 기반 레이아웃이 reveal의 print 페이지네이션 과정에서
+     제대로 계산되지 않아 flex-direction:column; justify-content:space-between
+     구조가 무너지고 상단바/본문/하단바가 서로 겹치는 문제 방지 :
+     print 모드에서는 슬라이드 크기(1280x720)를 명시적 픽셀로 고정 */
+  html.print-pdf .reveal .slides section{
+    width:1280px !important;
+    height:720px !important;
+  }
+  html.print-pdf .title-slide,
+  html.print-pdf .content-slide{
+    width:1280px !important;
+    height:720px !important;
+  }
+  html.print-pdf .hud-top,
+  html.print-pdf .hud-bottom,
+  html.print-pdf .cs-header,
+  html.print-pdf .cs-footer{
+    flex-direction:row !important;
+  }
+  html.print-pdf .status-tag{
+    flex:0 0 auto !important;
+    width:auto !important;
+  }
+  html.print-pdf .hud-main{
+    flex-direction:row !important;
   }
 </style>
 </head>
