@@ -54,22 +54,29 @@
     align-items:center;
   }
   .studio-mark{
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:6px;
-    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:10px;
     opacity:0;
     animation:fadeUp .9s ease forwards;
     animation-delay:.1s;
-    margin-bottom:38px;
+    margin-bottom:48px;
   }
-  .studio-mark span{
-    color:var(--text-mid);
+  .studio-mark img{
+    height:26px;
+    width:auto;
+    filter:drop-shadow(0 0 12px rgba(0,140,255,.5));
+  }
+  .studio-mark-text{
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:2px;
+    color:var(--text-hi);
   }
   .game-logo{
-    font-size:80px;
+    font-size:96px;
     font-weight:800;
-    line-height:1.05;
+    line-height:1;
     letter-spacing:-1px;
     margin:0;
     opacity:0;
@@ -77,65 +84,34 @@
     animation:logoReveal 1.2s cubic-bezier(.2,.65,.3,1) forwards;
     animation-delay:.3s;
   }
-  .game-logo .dot{
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 40px rgba(0,150,255,.55));
-  }
   .game-subtitle{
-    font-size:26px;
+    font-size:28px;
     font-weight:300;
     color:var(--text-mid);
-    margin-top:14px;
+    margin-top:22px;
     letter-spacing:1px;
     opacity:0;
     animation:fadeUp 1s ease forwards;
     animation-delay:.75s;
   }
+  .game-subtitle .highlight{
+    font-weight:700;
+    letter-spacing:2px;
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 30px rgba(0,150,255,.5));
+  }
   .divider{
     width:64px;
     height:2px;
-    margin:40px 0;
+    margin-top:48px;
     background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
     border-radius:2px;
     opacity:0;
     animation:fadeUp 1s ease forwards;
     animation-delay:1s;
-  }
-  .doc-label{
-    font-size:16px;
-    font-weight:500;
-    color:var(--text-hi);
-    letter-spacing:2px;
-    opacity:0;
-    animation:fadeUp 1s ease forwards;
-    animation-delay:1.15s;
-  }
-  .doc-sub{
-    font-size:14px;
-    color:var(--text-dim);
-    margin-top:10px;
-    letter-spacing:.5px;
-    opacity:0;
-    animation:fadeUp 1s ease forwards;
-    animation-delay:1.3s;
-  }
-  .footer-meta{
-    position:absolute;
-    bottom:34px;
-    left:0; right:0;
-    display:flex;
-    justify-content:space-between;
-    padding:0 48px;
-    font-size:11px;
-    color:var(--text-dim);
-    letter-spacing:1.5px;
-    z-index:2;
-    opacity:0;
-    animation:fadeUp 1s ease forwards;
-    animation-delay:1.5s;
   }
 
   @keyframes fadeUp{
@@ -148,10 +124,9 @@
   }
 
   @media (max-width:768px){
-    .game-logo{font-size:44px;}
-    .game-subtitle{font-size:17px;}
-    .studio-mark{font-size:11px; letter-spacing:4px;}
-    .footer-meta{flex-direction:column; gap:6px; text-align:center; bottom:24px;}
+    .game-logo{font-size:52px;}
+    .game-subtitle{font-size:18px;}
+    .studio-mark-text{font-size:13px; letter-spacing:1.5px;}
   }
 </style>
 </head>
@@ -163,16 +138,13 @@
       <div class="title-slide">
         <canvas id="particle-canvas"></canvas>
         <div class="title-content">
-          <div class="studio-mark">LEVELUP <span>STUDIO</span></div>
-          <h1 class="game-logo">D.D.D<span class="dot">:</span> See Ya in Respawn</h1>
-          <p class="game-subtitle">실시간 탑다운 PvP 슈터</p>
+          <div class="studio-mark">
+            <img src="https://levelupstudio.co.kr/logo.png" alt="LevelUp Studio logo">
+            <span class="studio-mark-text">LEVELUP STUDIO</span>
+          </div>
+          <h1 class="game-logo">D.D.D.</h1>
+          <p class="game-subtitle">See ya in <span class="highlight">RESPAWN</span></p>
           <div class="divider"></div>
-          <div class="doc-label">PUBLISHING PROPOSAL</div>
-          <div class="doc-sub">게임 소개 및 협업 제안서</div>
-        </div>
-        <div class="footer-meta">
-          <span>LEVELUP STUDIO CO., LTD.</span>
-          <span>CONFIDENTIAL</span>
         </div>
       </div>
     </section>
