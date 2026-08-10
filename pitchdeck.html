@@ -364,6 +364,37 @@
     .milestone{text-align:left; padding:0 0 0 26px; border-left:2px solid var(--line);}
     .node-dot{margin:0 0 0 -33px; position:absolute; left:0; top:2px;}
   }
+
+  /* ---------- Print / PDF export safety ----------
+     브라우저는 인쇄 캡처 시 CSS 애니메이션을 재생하지 않음.
+     화면 모드에서 opacity:0 → 애니메이션으로 나타나던 요소들이
+     print-pdf 모드에서는 애니메이션이 아예 실행되지 않아
+     시작 상태(투명)로 고정되는 문제를 여기서 강제로 해제함. */
+  html.print-pdf .bg-grid,
+  html.print-pdf .hud-top,
+  html.print-pdf .eyebrow,
+  html.print-pdf .game-logo,
+  html.print-pdf .game-subtitle,
+  html.print-pdf .meta-row,
+  html.print-pdf .radar-wrap,
+  html.print-pdf .hud-bottom{
+    opacity:1 !important;
+    animation:none !important;
+  }
+  html.print-pdf .game-logo{
+    transform:translateY(0) !important;
+  }
+  html.print-pdf .status-dot,
+  html.print-pdf .blip.respawn{
+    animation:none !important;
+    opacity:1 !important;
+    transform:scale(1) !important;
+  }
+  html.print-pdf .node-dot.active::after{
+    animation:none !important;
+    transform:scale(1) !important;
+    opacity:1 !important;
+  }
 </style>
 </head>
 <body>
