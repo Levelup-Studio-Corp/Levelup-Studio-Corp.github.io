@@ -366,7 +366,60 @@
     .node-dot{margin:0 0 0 -33px; position:absolute; left:0; top:2px;}
   }
 
-  /* ---------- Print / PDF export safety ----------
+  /* ---------- Key Features ---------- */
+  .features-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .features-grid{
+    display:flex; gap:48px;
+    margin-top:54px;
+    align-items:stretch;
+  }
+  .screenshot-panel{
+    flex:0 0 42%;
+    border:2px dashed var(--line);
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+    min-height:420px;
+  }
+  .screenshot-panel .label{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--text-dim);
+    font-size:13px;
+    letter-spacing:2px;
+    text-align:center;
+    line-height:1.9;
+  }
+  .feature-cards{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    justify-content:center;
+  }
+  .feature-card{
+    display:flex; gap:20px; align-items:flex-start;
+    padding:20px 24px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .feature-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    color:var(--accent-2);
+    letter-spacing:1px;
+    flex:0 0 auto;
+    padding-top:2px;
+  }
+  .feature-title{font-size:17px; font-weight:700; color:var(--text-hi); margin-bottom:6px; letter-spacing:.2px;}
+  .feature-desc{font-size:13.5px; color:var(--text-mid); line-height:1.6;}
+
+  @media screen and (max-width:900px){
+    .features-grid{flex-direction:column; gap:24px;}
+    .screenshot-panel{min-height:220px;}
+  }
+
+
      브라우저는 인쇄 캡처 시 CSS 애니메이션을 재생하지 않음.
      화면 모드에서 opacity:0 → 애니메이션으로 나타나던 요소들이
      print-pdf 모드에서는 애니메이션이 아예 실행되지 않아
@@ -535,7 +588,55 @@
       </div>
     </section>
 
-    <!-- 다음 슬라이드(key features 등)는 여기에 이어서 추가 -->
+    <!-- ============ Key Features ============ -->
+    <section>
+      <div class="content-slide" data-page="03">
+        <div class="bg-grid"></div>
+
+        <div class="features-body">
+          <h2 class="section-title">우리에게는 <span class="emph">'이런'</span> 특징들이 있습니다</h2>
+
+          <div class="features-grid">
+            <div class="screenshot-panel">
+              <div class="label">GAMEPLAY SCREENSHOT<br>1280 × 720</div>
+            </div>
+
+            <div class="feature-cards">
+              <div class="feature-card">
+                <div class="feature-num mono">01</div>
+                <div>
+                  <div class="feature-title">캐주얼하지만 깊이 있게</div>
+                  <div class="feature-desc">귀엽고 가벼운 비주얼로 쉽게 시작하지만, 그 안엔 계속 파고들 시스템이 있습니다.</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-num mono">02</div>
+                <div>
+                  <div class="feature-title">끊기지 않는 연결</div>
+                  <div class="feature-desc">주사위를 굴려 이동하는 보드형 미션이 아웃게임과 인게임 세션을 자연스럽게 연결해, 플레이가 끊기지 않습니다.</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-num mono">03</div>
+                <div>
+                  <div class="feature-title">전략적 다양성</div>
+                  <div class="feature-desc">캐릭터, 무기, 스킬, 투척 무기의 조합에 따라 다양한 상황에 유연하게 대응하고, 나만의 전략을 만들어갑니다.</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-num mono">04</div>
+                <div>
+                  <div class="feature-title">전략적 지형 활용</div>
+                  <div class="feature-desc">폭탄으로 길을 뚫고, 화염병으로 시야를 확보하는 등 지형 자체가 전략이 됩니다.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 다음 슬라이드(feature 1~4 등)는 여기에 이어서 추가 -->
 
   </div>
 </div>
