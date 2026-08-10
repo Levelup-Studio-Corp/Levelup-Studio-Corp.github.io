@@ -102,11 +102,13 @@
     background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
   }
   .game-logo{
-    font-size:158px;
-    font-weight:800;
+    font-size:158px !important;
+    font-weight:800 !important;
     line-height:.94;
     letter-spacing:-2px;
-    margin:0;
+    margin:0 !important;
+    color:var(--text-hi) !important;
+    text-transform:none !important;
     opacity:0;
     transform:translateY(36px);
     animation:logoReveal 1.1s cubic-bezier(.2,.65,.3,1) forwards;
@@ -220,6 +222,7 @@
   @keyframes logoReveal{ from{opacity:0; transform:translateY(36px);} to{opacity:1; transform:translateY(0);} }
   @keyframes sweep{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(1.4);} }
+  @keyframes ringPulse{ 0%{transform:scale(1); opacity:1;} 100%{transform:scale(2.4); opacity:0;} }
 
   @media (max-width:900px){
     .title-slide{padding:24px 26px;}
@@ -230,7 +233,7 @@
     .radar-cross{width:340px;height:340px;}
     .radar-sweep{width:340px;height:340px;}
     .title-block{max-width:100%; z-index:2;}
-    .game-logo{font-size:56px;}
+    .game-logo{font-size:56px !important;}
     .game-subtitle{font-size:17px;}
     .meta-row{gap:18px; flex-wrap:wrap;}
   }
@@ -270,8 +273,15 @@
     background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
   }
   .section-title{
-    font-size:44px; font-weight:700; letter-spacing:-.5px;
-    color:var(--text-hi); margin:0;
+    font-size:36px !important; font-weight:700 !important; letter-spacing:-.3px;
+    color:var(--text-hi) !important; margin:0 !important;
+    text-transform:none !important;
+  }
+  .section-title .emph{
+    font-size:55px !important;
+    font-weight:800 !important;
+    color:var(--accent-2) !important;
+    text-shadow:0 0 10px rgba(0,180,255,.45);
   }
 
   /* ---------- Outline / Timeline ---------- */
@@ -303,15 +313,30 @@
     width:16px; height:16px; border-radius:50%;
     margin:0 auto 26px;
     box-sizing:border-box;
+    position:relative;
   }
   .node-dot.done{
     background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
     box-shadow:0 0 14px rgba(0,170,255,.6);
   }
   .node-dot.active{
-    background:var(--accent-2);
-    box-shadow:0 0 0 5px rgba(0,180,255,.14);
-    animation:pulse 1.7s ease-in-out infinite;
+    background:transparent;
+  }
+  .node-dot.active::before{
+    content:'';
+    position:absolute; inset:0; margin:auto;
+    width:8px; height:8px; border-radius:50%;
+    background:#ffffff;
+    box-shadow:0 0 10px 2px rgba(255,255,255,.9);
+    z-index:2;
+  }
+  .node-dot.active::after{
+    content:'';
+    position:absolute; inset:0; margin:auto;
+    width:16px; height:16px; border-radius:50%;
+    border:2px solid var(--accent-2);
+    transform-origin:center;
+    animation:ringPulse 1.6s ease-out infinite;
   }
   .node-dot.upcoming{
     background:transparent;
@@ -319,6 +344,7 @@
   }
   .m-date{font-size:12px; color:var(--text-dim); letter-spacing:1.5px; margin-bottom:10px;}
   .m-title{font-size:19px; font-weight:700; color:var(--text-hi); letter-spacing:.2px; margin-bottom:12px;}
+  .m-highlight{color:var(--accent-2); font-weight:600;}
   .m-desc{font-size:13.5px; color:var(--text-mid); line-height:1.7; margin-bottom:16px;}
   .m-status{
     display:inline-flex; align-items:center; gap:7px;
@@ -332,7 +358,7 @@
 
   @media (max-width:900px){
     .content-slide{padding:26px 24px;}
-    .section-title{font-size:28px;}
+    .section-title{font-size:31px !important;}
     .timeline{flex-direction:column; gap:28px; margin-top:36px;}
     .track-base, .track-progress, .track-dashed{display:none;}
     .milestone{text-align:left; padding:0 0 0 26px; border-left:2px solid var(--line);}
@@ -396,17 +422,11 @@
 
     <!-- ============ Outline ============ -->
     <section>
-      <div class="content-slide">
+      <div class="content-slide" data-page="02">
         <div class="bg-grid"></div>
 
-        <div class="cs-header">
-          <img class="cs-logo" src="https://levelupstudio.co.kr/logo.png" alt="LevelUp Studio logo">
-          <div class="cs-page-tag mono">02 · OUTLINE</div>
-        </div>
-
         <div class="outline-body">
-          <div class="section-eyebrow mono">// OUTLINE</div>
-          <h2 class="section-title">지금, 그랜드 런칭까지</h2>
+          <h2 class="section-title">지금. 그리고, <span class="emph">그랜드 런칭</span>까지</h2>
 
           <div class="timeline">
             <div class="track-base"></div>
@@ -417,14 +437,14 @@
               <div class="node-dot done"></div>
               <div class="m-date mono">2025.09</div>
               <div class="m-title">TEAM FORMED</div>
-              <div class="m-desc">LevelUp Studio 결성</div>
+              <div class="m-desc">LevelUp Studio 결성<br><span class="m-highlight">개발 방향 정리</span></div>
             </div>
 
             <div class="milestone">
               <div class="node-dot done"></div>
               <div class="m-date mono">2026.03</div>
               <div class="m-title">SOFT LAUNCH #1</div>
-              <div class="m-desc">Android · iOS 동시 출시<br>목적 : 아키텍처 검증</div>
+              <div class="m-desc">Android · iOS 동시 출시<br><span class="m-highlight">아키텍처 검증</span></div>
               <div class="m-status done mono"><span class="status-dot"></span>DONE</div>
             </div>
 
@@ -432,7 +452,7 @@
               <div class="node-dot active"></div>
               <div class="m-date mono">2026.07</div>
               <div class="m-title">SOFT LAUNCH #2</div>
-              <div class="m-desc">Android · iOS 두 번째 출시<br>목적 : 상품성 · 지속력 검증</div>
+              <div class="m-desc">Android · iOS 두 번째 출시<br><span class="m-highlight">상품성 · 지속력 검증</span></div>
               <div class="m-status active mono"><span class="status-dot"></span>IN PROGRESS</div>
             </div>
 
@@ -440,15 +460,10 @@
               <div class="node-dot upcoming"></div>
               <div class="m-date mono">2026.09</div>
               <div class="m-title">GRAND LAUNCH</div>
-              <div class="m-desc">정식 출시 예정</div>
+              <div class="m-desc"><span class="m-highlight">정식 출시</span> 예정</div>
               <div class="m-status upcoming mono">PLANNED</div>
             </div>
           </div>
-        </div>
-
-        <div class="cs-footer mono">
-          <div class="tag">LEVELUP STUDIO · D.D.D.</div>
-          <div class="tag">02 / 13</div>
         </div>
       </div>
     </section>
@@ -460,6 +475,32 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script>
+  // ---- 공통 헤더/푸터 : 여기서만 수정하면 모든 .content-slide에 자동 반영됨 ----
+  const TOTAL_PAGES = 13;
+  const LOGO_URL = 'https://levelupstudio.co.kr/logo.png';
+  const FOOTER_TAG = 'TOP-DOWN P vs. P SHOOTER';
+
+  document.querySelectorAll('.content-slide[data-page]').forEach(el => {
+    const page = el.getAttribute('data-page');
+
+    const header = document.createElement('div');
+    header.className = 'cs-header';
+    header.innerHTML = `
+      <div class="brand-mark">
+        <img src="${LOGO_URL}" alt="LevelUp Studio logo">
+        <span>Studio</span>
+      </div>`;
+
+    const footer = document.createElement('div');
+    footer.className = 'cs-footer mono';
+    footer.innerHTML = `
+      <div class="tag">${FOOTER_TAG}</div>
+      <div class="tag">${page} / ${TOTAL_PAGES}</div>`;
+
+    el.prepend(header);
+    el.append(footer);
+  });
+
   Reveal.initialize({
     hash: true,
     controls: true,
@@ -470,6 +511,19 @@
     height: 720,
     margin: 0,
   });
+
+  // ---- 마우스 휠로 슬라이드 이동 (즉시 바인딩, 매 이벤트마다 안전하게 호출) ----
+  let wheelLocked = false;
+  document.addEventListener('wheel', (e) => {
+    if (wheelLocked || Math.abs(e.deltaY) < 1) return;
+    wheelLocked = true;
+    try {
+      if (e.deltaY > 0) { Reveal.next(); } else { Reveal.prev(); }
+    } catch (err) {
+      console.warn('Reveal not ready yet:', err);
+    }
+    setTimeout(() => { wheelLocked = false; }, 600);
+  }, { passive: true });
 </script>
 </body>
 </html>
