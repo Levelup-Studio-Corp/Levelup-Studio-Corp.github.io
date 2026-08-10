@@ -87,7 +87,7 @@
   .title-block{
     flex:0 0 auto;
     max-width:760px;
-    margin-left:calc(5% + 80px);
+    margin-left:calc(5% + 110px);
     transform:translateY(-50px);
   }
   .eyebrow{
@@ -158,16 +158,16 @@
     border-radius:50%;
   }
   .radar-ring{
-    position:absolute; border-radius:50%;
+    position:absolute; inset:0; margin:auto;
+    border-radius:50%;
     border:1px solid var(--line);
-    top:50%; left:50%; transform:translate(-50%,-50%);
   }
   .r1{width:400px; height:400px;}
   .r2{width:283px; height:283px;}
   .r3{width:166px; height:166px;}
   .r4{width:58px; height:58px; border-color:rgba(0,180,255,.3);}
   .radar-cross{
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    position:absolute; inset:0; margin:auto;
     width:400px; height:400px;
   }
   .radar-cross::before, .radar-cross::after{
@@ -176,9 +176,9 @@
   .radar-cross::before{ left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%);}
   .radar-cross::after{ top:50%; left:0; right:0; height:1px; transform:translateY(-50%);}
   .radar-sweep{
-    position:absolute; top:50%; left:50%;
+    position:absolute; inset:0; margin:auto;
     width:400px; height:400px;
-    transform:translate(-50%,-50%);
+    transform-origin:center;
     border-radius:50%;
     background:conic-gradient(from 0deg, rgba(0,210,255,.35), transparent 28%, transparent 100%);
     animation: sweep 4.5s linear infinite;
@@ -190,6 +190,8 @@
     background:var(--text-mid); opacity:.7;
   }
   .blip.respawn{
+    inset:0; margin:auto;
+    top:auto; left:auto;
     width:10px; height:10px;
     background:var(--accent-2);
     box-shadow:0 0 14px 3px rgba(0,210,255,.7);
@@ -216,7 +218,7 @@
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
   @keyframes logoReveal{ from{opacity:0; transform:translateY(36px);} to{opacity:1; transform:translateY(0);} }
-  @keyframes sweep{ from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);} }
+  @keyframes sweep{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(1.4);} }
 
   @media (max-width:900px){
@@ -276,7 +278,7 @@
               <div class="blip" style="top:68%; left:32%;"></div>
               <div class="blip" style="top:40%; left:22%;"></div>
               <div class="blip" style="top:74%; left:66%;"></div>
-              <div class="blip respawn" style="top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+              <div class="blip respawn"></div>
             </div>
           </div>
         </div>
