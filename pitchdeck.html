@@ -366,6 +366,355 @@
     .node-dot{margin:0 0 0 -33px; position:absolute; left:0; top:2px;}
   }
 
+  /* ---------- Feature Detail (01~04 공용) ---------- */
+  .feature-eyebrow-row{
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .feature-index{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px; letter-spacing:3px; color:var(--text-dim);
+  }
+  .feature-index b{color:var(--accent-2); font-weight:600;}
+  .feature-detail-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .feature-headline{
+    font-size:40px !important; font-weight:700 !important; letter-spacing:-.3px;
+    color:var(--text-hi) !important; margin:0 0 54px 0 !important;
+    text-transform:none !important;
+  }
+  .feature-panels{
+    display:flex; align-items:stretch; gap:0;
+  }
+  .feature-panel{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:32px 36px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .feature-panel.depth{
+    border-color:rgba(0,180,255,.35);
+    background:linear-gradient(145deg, rgba(0,144,255,0.08), rgba(255,255,255,0));
+  }
+  .panel-tag{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:2px; color:var(--text-dim);
+    padding:5px 12px; border:1px solid var(--line); border-radius:20px;
+    margin-bottom:20px;
+  }
+  .feature-panel.depth .panel-tag{ color:var(--accent-2); border-color:rgba(0,180,255,.35); }
+  .panel-title{font-size:24px; font-weight:700; color:var(--text-hi); margin-bottom:14px; letter-spacing:.1px;}
+  .panel-desc{font-size:15px; color:var(--text-mid); line-height:1.75;}
+  .panel-connector{
+    flex:0 0 auto;
+    width:64px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .panel-connector::before{
+    content:'';
+    width:100%; height:1px;
+    background:linear-gradient(90deg,var(--line),var(--accent-2),var(--line));
+  }
+  .panel-connector span{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    color:var(--accent-2);
+    background:var(--bg);
+    padding:0 6px;
+    font-size:16px;
+  }
+
+  @media screen and (max-width:900px){
+    .feature-panels{flex-direction:column;}
+    .panel-connector{width:100%; height:32px;}
+    .panel-connector::before{width:1px; height:100%;}
+  }
+
+  /* ---------- Complete Contents Circulation (삼각 순환) ---------- */
+  .triangle-row{ display:flex; align-items:stretch; gap:0; }
+  .role-card{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 22px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .role-card.wip{
+    border-color:rgba(0,180,255,.35);
+    background:linear-gradient(145deg, rgba(0,144,255,0.08), rgba(255,255,255,0));
+  }
+  .role-card .thumb{
+    width:100%; aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+    margin-bottom:14px;
+  }
+  .role-card .thumb span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px; color:var(--text-dim); letter-spacing:1.5px;
+  }
+  .role-card .r-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:1.5px; color:var(--text-dim);
+    margin-bottom:6px;
+  }
+  .role-card.wip .r-tag{color:var(--accent-2);}
+  .role-card .r-title{font-size:16px; font-weight:700; color:var(--text-hi); margin-bottom:10px;}
+  .role-card .r-list{ list-style:none; padding:0; margin:0; }
+  .role-card .r-list li{
+    font-size:11.5px; color:var(--text-mid); line-height:1.6;
+    padding-left:12px; position:relative; margin-bottom:4px;
+  }
+  .role-card .r-list li::before{
+    content:'—'; position:absolute; left:0; color:var(--text-dim);
+  }
+  .triangle-connector{
+    flex:0 0 auto; width:52px;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .triangle-connector::before{
+    content:''; width:100%; height:1px;
+    background:linear-gradient(90deg,var(--line),var(--accent-2),var(--line));
+  }
+  .triangle-connector span{
+    position:absolute;
+    font-family:'JetBrains Mono',monospace;
+    color:var(--accent-2); background:var(--bg);
+    padding:0 5px; font-size:14px;
+  }
+  .triangle-close{
+    position:relative;
+    height:34px;
+    margin:0 calc(33.33% - 6px) 0 calc(33.33% - 6px);
+  }
+  .triangle-close::before{
+    content:'';
+    position:absolute; inset:0;
+    border-left:1px solid var(--line);
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    border-radius:0 0 10px 10px;
+  }
+  .triangle-close-label{
+    text-align:center;
+    margin-top:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--text-dim); letter-spacing:1px;
+  }
+
+  @media screen and (max-width:900px){
+    .triangle-row{flex-direction:column;}
+    .triangle-connector{width:100%; height:28px;}
+    .triangle-connector::before{width:1px; height:100%;}
+    .triangle-close{display:none;}
+  }
+
+  /* ---------- Finally Goal (Closing) ---------- */
+  .closing-body{
+    position:relative; z-index:3;
+    flex:1;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center;
+  }
+  .closing-eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px; color:var(--text-dim); letter-spacing:2px;
+    margin-bottom:26px;
+  }
+  .closing-hero{
+    font-size:52px; font-weight:800; color:var(--text-hi);
+    line-height:1.35; max-width:820px; margin:0;
+  }
+  .closing-hero .emph{
+    color:var(--accent-2);
+    text-shadow:0 0 26px rgba(0,180,255,.55);
+  }
+  .closing-sub{
+    font-size:18px; color:var(--text-mid);
+    margin-top:30px; max-width:620px; line-height:1.65;
+  }
+  .closing-sub .accent{ color:var(--accent-2); font-weight:600; }
+
+  @media screen and (max-width:900px){
+    .closing-hero{font-size:32px;}
+    .closing-sub{font-size:15px;}
+  }
+
+  /* ---------- Team Capabilities ---------- */
+  .team-grid{ display:flex; gap:28px; margin-top:54px; }
+  .team-card{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:30px 28px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .team-role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px; color:var(--accent-2); letter-spacing:3px;
+    margin-bottom:8px;
+  }
+  .team-role-full{font-size:19px; font-weight:700; color:var(--text-hi); margin-bottom:22px;}
+  .team-chips{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{
+    font-size:12px;
+    padding:6px 13px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    color:var(--text-mid);
+  }
+
+  @media screen and (max-width:900px){
+    .team-grid{flex-direction:column;}
+  }
+
+  /* ---------- Feature Cycle (공격↔방어 순환 다이어그램) ---------- */
+  .cycle-diagram{
+    position:relative;
+    max-width:800px;
+    margin:26px auto 0;
+  }
+  .cycle-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:46px 60px;
+  }
+  .cycle-card{
+    display:flex; gap:16px; align-items:center;
+    padding:16px 18px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .cycle-card.def{
+    border-color:rgba(0,180,255,.35);
+    background:linear-gradient(145deg, rgba(0,144,255,0.08), rgba(255,255,255,0));
+  }
+  .cycle-card .thumb{
+    flex:0 0 100px;
+    aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+  }
+  .cycle-card .thumb span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:8px; color:var(--text-dim); letter-spacing:1px;
+  }
+  .cycle-card .c-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px; letter-spacing:1.5px; color:var(--text-dim);
+    margin-bottom:5px;
+  }
+  .cycle-card.def .c-tag{color:var(--accent-2);}
+  .cycle-card .c-title{font-size:15px; font-weight:700; color:var(--text-hi); margin-bottom:5px;}
+  .cycle-card .c-desc{font-size:11.5px; color:var(--text-mid); line-height:1.5;}
+
+  .cycle-arrow{
+    position:absolute;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--accent-2);
+    font-size:14px;
+    z-index:2;
+  }
+  .cycle-arrow.top{ top:25%; left:50%; transform:translate(-50%,-50%) rotate(0deg); }
+  .cycle-arrow.right{ top:50%; left:75%; transform:translate(-50%,-50%) rotate(90deg); }
+  .cycle-arrow.bottom{ top:75%; left:50%; transform:translate(-50%,-50%) rotate(180deg); }
+  .cycle-arrow.left{ top:50%; left:25%; transform:translate(-50%,-50%) rotate(270deg); }
+
+  .cycle-note{
+    display:flex; align-items:center; justify-content:center;
+    margin-top:22px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--text-dim); letter-spacing:1px;
+  }
+
+  @media screen and (max-width:900px){
+    .cycle-grid{grid-template-columns:1fr; grid-template-rows:auto;}
+    .cycle-arrow{display:none;}
+  }
+
+  /* ---------- Feature Combination Grid (병렬 조합 요소) ---------- */
+  .feature-grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:12px;
+  }
+  .feature-card-v{
+    display:flex; gap:18px; align-items:center;
+    padding:22px 24px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+  }
+  .feature-card-v .thumb{
+    flex:0 0 120px;
+    aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+  }
+  .feature-card-v .thumb span{
+    font-family:'JetBrains Mono',monospace;
+    font-size:8px; color:var(--text-dim); letter-spacing:1px;
+  }
+  .feature-card-v .text .v-title{font-size:16px; font-weight:700; color:var(--text-hi); margin-bottom:6px;}
+  .feature-card-v .text .v-desc{font-size:12.5px; color:var(--text-mid); line-height:1.55;}
+
+  @media screen and (max-width:900px){
+    .feature-grid2{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Feature Spectrum (light → deep 예시 4개) ---------- */
+  .spectrum-axis{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom:12px;
+  }
+  .spectrum-axis span{font-size:11px; letter-spacing:3px; color:var(--text-dim);}
+  .spectrum-bar{
+    position:relative; height:3px; border-radius:2px;
+    margin-bottom:44px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.12), var(--accent-1), var(--accent-2));
+  }
+  .spectrum-row{ display:flex; gap:26px; }
+  .spectrum-item{ flex:1; }
+  .spectrum-video{
+    width:100%; aspect-ratio:16/9;
+    border:2px dashed var(--line);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.02);
+    margin-bottom:16px;
+  }
+  .spectrum-video .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:1.5px; color:var(--text-dim);
+  }
+  .spectrum-step{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; color:var(--accent-2); letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  .spectrum-title{font-size:15px; font-weight:700; color:var(--text-hi); margin-bottom:8px; line-height:1.35;}
+  .spectrum-desc{font-size:12.5px; color:var(--text-mid); line-height:1.6;}
+
+  @media screen and (max-width:900px){
+    .spectrum-row{flex-direction:column; gap:20px;}
+  }
+
   /* ---------- Key Features ---------- */
   .features-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
   .features-grid{
@@ -636,7 +985,441 @@
       </div>
     </section>
 
-    <!-- 다음 슬라이드(feature 1~4 등)는 여기에 이어서 추가 -->
+    <!-- ============ Feature 01 ============ -->
+    <section>
+      <div class="content-slide" data-page="04">
+        <div class="bg-grid"></div>
+
+        <div class="feature-detail-body">
+          <div class="feature-eyebrow-row">
+            <div class="section-eyebrow mono">// FEATURE</div>
+            <div class="feature-index mono"><b>01</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">캐주얼하지만, 깊이 있게</h2>
+
+          <div class="spectrum-axis mono">
+            <span>LIGHT</span>
+            <span>DEEP</span>
+          </div>
+          <div class="spectrum-bar"></div>
+
+          <div class="spectrum-row">
+            <div class="spectrum-item">
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="spectrum-step">01</div>
+              <div class="spectrum-title">부쉬 속에 숨기</div>
+              <div class="spectrum-desc">부쉬 안으로 들어가면 몸을 숨길 수 있습니다.</div>
+            </div>
+            <div class="spectrum-item">
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="spectrum-step">02</div>
+              <div class="spectrum-title">연사와 정확도</div>
+              <div class="spectrum-desc">총을 연사할수록 정확도가 떨어져, 사격의 완급 조절이 중요해집니다.</div>
+            </div>
+            <div class="spectrum-item">
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="spectrum-step">03</div>
+              <div class="spectrum-title">파마씨, 변수의 시작</div>
+              <div class="spectrum-desc">공격하면 도망가고, 그대로 두면 근접용 망치나 연사용 머신건을 내어주는 NPC. 선택이 판을 바꿉니다.</div>
+            </div>
+            <div class="spectrum-item">
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="spectrum-step">04</div>
+              <div class="spectrum-title">이심전심 투표 카드</div>
+              <div class="spectrum-desc">디펜스 모드에서 다른 플레이어와 투표해 선택이 일치하면, 가중 효과가 붙는 카드를 얻습니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 02 ============ -->
+    <section>
+      <div class="content-slide" data-page="05">
+        <div class="bg-grid"></div>
+
+        <div class="feature-detail-body">
+          <div class="feature-eyebrow-row">
+            <div class="section-eyebrow mono">// FEATURE</div>
+            <div class="feature-index mono"><b>02</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">쉬는 순간에도, <span class="emph">이어지는</span> 플레이</h2>
+
+          <div class="feature-panels">
+            <div class="feature-panel">
+              <div class="panel-tag">OUT-GAME BOARD</div>
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="panel-title">주사위로 이동</div>
+              <div class="panel-desc">보드 위에서 주사위를 굴려 이동합니다.</div>
+            </div>
+
+            <div class="panel-connector"><span>→</span></div>
+
+            <div class="feature-panel">
+              <div class="panel-tag">ENCOUNTER</div>
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="panel-title">잡고, 잡히고</div>
+              <div class="panel-desc">다른 플레이어와 마주치며 예측할 수 없는 변수가 생깁니다.</div>
+            </div>
+
+            <div class="panel-connector"><span>→</span></div>
+
+            <div class="feature-panel depth">
+              <div class="panel-tag">MISSION</div>
+              <div class="spectrum-video"><span class="label">VIDEO</span></div>
+              <div class="panel-title">미션으로 이어지는 세션</div>
+              <div class="panel-desc">이동 중 받은 미션이 자연스럽게 인게임 세션으로 연결됩니다.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 03 ============ -->
+    <section>
+      <div class="content-slide" data-page="06">
+        <div class="bg-grid"></div>
+
+        <div class="feature-detail-body">
+          <div class="feature-eyebrow-row">
+            <div class="section-eyebrow mono">// FEATURE</div>
+            <div class="feature-index mono"><b>03</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">조합이 만드는, <span class="emph">전략적 다양성</span></h2>
+
+          <div class="feature-grid2">
+            <div class="feature-card-v">
+              <div class="thumb"><span>VIDEO</span></div>
+              <div class="text">
+                <div class="v-title">각자만의 개성, 캐릭터</div>
+                <div class="v-desc">캐릭터마다 고유한 특성을 가지고 있습니다.</div>
+              </div>
+            </div>
+            <div class="feature-card-v">
+              <div class="thumb"><span>VIDEO</span></div>
+              <div class="text">
+                <div class="v-title">명확한 특성의 무기</div>
+                <div class="v-desc">다양한 Perk와 뚜렷한 개성을 가진 무기들.</div>
+              </div>
+            </div>
+            <div class="feature-card-v">
+              <div class="thumb"><span>VIDEO</span></div>
+              <div class="text">
+                <div class="v-title">상황을 바꾸는 스킬</div>
+                <div class="v-desc">여러 상황에 대응할 수 있는 다양한 스킬.</div>
+              </div>
+            </div>
+            <div class="feature-card-v">
+              <div class="thumb"><span>VIDEO</span></div>
+              <div class="text">
+                <div class="v-title">다채로운 투척 무기</div>
+                <div class="v-desc">전략의 폭을 넓혀주는 다양한 투척 무기.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 04 ============ -->
+    <section>
+      <div class="content-slide" data-page="07">
+        <div class="bg-grid"></div>
+
+        <div class="feature-detail-body">
+          <div class="feature-eyebrow-row">
+            <div class="section-eyebrow mono">// FEATURE</div>
+            <div class="feature-index mono"><b>04</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">부수고 쌓으며, <span class="emph">순환</span>하는 전장</h2>
+
+          <div class="cycle-diagram">
+            <div class="cycle-grid">
+              <div class="cycle-card">
+                <div class="thumb"><span>VIDEO</span></div>
+                <div>
+                  <div class="c-tag">ATTACK · BOX</div>
+                  <div class="c-title">폭탄</div>
+                  <div class="c-desc">박스를 깨서 길을 만듭니다.</div>
+                </div>
+              </div>
+              <div class="cycle-card def">
+                <div class="thumb"><span>VIDEO</span></div>
+                <div>
+                  <div class="c-tag">DEFENSE · BOX</div>
+                  <div class="c-title">박스탄</div>
+                  <div class="c-desc">박스로 길을 막습니다.</div>
+                </div>
+              </div>
+              <div class="cycle-card def">
+                <div class="thumb"><span>VIDEO</span></div>
+                <div>
+                  <div class="c-tag">DEFENSE · BUSH</div>
+                  <div class="c-title">부쉬탄</div>
+                  <div class="c-desc">부쉬를 만들어 엄폐 지역을 만듭니다.</div>
+                </div>
+              </div>
+              <div class="cycle-card">
+                <div class="thumb"><span>VIDEO</span></div>
+                <div>
+                  <div class="c-tag">ATTACK · BUSH</div>
+                  <div class="c-title">화염병</div>
+                  <div class="c-desc">부쉬를 태워 시야를 확보합니다.</div>
+                </div>
+              </div>
+            </div>
+            <div class="cycle-arrow top">→</div>
+            <div class="cycle-arrow right">→</div>
+            <div class="cycle-arrow bottom">→</div>
+            <div class="cycle-arrow left">→</div>
+          </div>
+
+          <div class="cycle-note">라운드마다 이 공방이 반복됩니다</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Business Metrics ============ -->
+    <section>
+      <div class="content-slide" data-page="08">
+        <div class="bg-grid"></div>
+
+        <div class="outline-body">
+          <div class="section-eyebrow mono">// BUSINESS METRICS</div>
+          <h2 class="section-title"><span class="emph">숫자</span>로, 증명합니다</h2>
+
+          <div style="margin-top:60px; border:2px dashed var(--line); border-radius:12px; padding:60px; text-align:center;">
+            <div class="mono" style="font-size:12px; letter-spacing:2px; color:var(--text-dim);">DATA PENDING · 소프트런치 지표 입력 예정</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Team Capabilities ============ -->
+    <section>
+      <div class="content-slide" data-page="09">
+        <div class="bg-grid"></div>
+
+        <div class="outline-body">
+          <div class="section-eyebrow mono">// TEAM CAPABILITIES</div>
+          <h2 class="section-title">실전에서 <span class="emph">증명된</span> 팀</h2>
+
+          <div class="team-grid">
+            <div class="team-card">
+              <div class="team-role-full">Producer</div>
+              <div class="team-chips">
+                <span class="chip">활 for Kakao</span>
+                <span class="chip">Boxing Star</span>
+                <span class="chip">Gunship Battle: Total Warfare</span>
+              </div>
+            </div>
+            <div class="team-card">
+              <div class="team-role-full">Technical Director</div>
+              <div class="team-chips">
+                <span class="chip">RF Online</span>
+                <span class="chip">Monarch</span>
+                <span class="chip">F.E.A.R Online</span>
+                <span class="chip">Lost Ark</span>
+                <span class="chip">Transformers Alliance</span>
+                <span class="chip">Gun Shot Rumble</span>
+              </div>
+            </div>
+            <div class="team-card">
+              <div class="team-role-full">Art Director</div>
+              <div class="team-chips">
+                <span class="chip">Sudden Attack</span>
+                <span class="chip">Sand Storm for Kakao</span>
+                <span class="chip">Ghostbusters World</span>
+                <span class="chip">Transformers Alliance</span>
+                <span class="chip">Gun Shot Rumble</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Complete Contents Circulation ============ -->
+    <section>
+      <div class="content-slide" data-page="10">
+        <div class="bg-grid"></div>
+
+        <div class="feature-detail-body">
+          <div class="section-eyebrow mono">// COMPLETE CONTENTS CIRCULATION</div>
+          <h2 class="section-title">세 역할이 <span class="emph">맞물려</span> 도는 순환</h2>
+
+          <div class="triangle-row" style="margin-top:38px;">
+            <div class="role-card">
+              <div class="thumb"><span>IMAGE</span></div>
+              <div class="r-tag">ROLE 1 · RANK</div>
+              <div class="r-title">Free For All</div>
+              <ul class="r-list">
+                <li>기본 성장 및 자원 수급</li>
+                <li>특정 일부를 제외한 모든 것을 획득 가능</li>
+                <li>rank 기준의 기본 모드</li>
+              </ul>
+            </div>
+
+            <div class="triangle-connector"><span>↔</span></div>
+
+            <div class="role-card">
+              <div class="thumb"><span>IMAGE</span></div>
+              <div class="r-tag">ROLE 2 · CO-OP</div>
+              <div class="r-title">Defence</div>
+              <ul class="r-list">
+                <li>쉬어갈 수 있는 협력 모드</li>
+                <li>경쟁이 아닌 다른 플레이어와의 협력</li>
+                <li>아이템(무기·방어구) 강화 보상 컨셉</li>
+              </ul>
+            </div>
+
+            <div class="triangle-connector"><span>↔</span></div>
+
+            <div class="role-card wip">
+              <div class="thumb"><span>IMAGE</span></div>
+              <div class="r-tag">ROLE 3 · TEAM P vs. P</div>
+              <div class="r-title">3rd MOD</div>
+              <ul class="r-list">
+                <li>1·2에서 모은 자원을 소진해 새로운 재화 획득</li>
+                <li>세션 한정 아이템을 파는 인세션 상점</li>
+                <li>개인전이 아닌, 팀을 이룬 단체 P vs. P</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="triangle-close"></div>
+          <div class="triangle-close-label">세 역할 모두, 서로 직접 연결되어 있습니다</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Future Blueprint (1/2) ============ -->
+    <section>
+      <div class="content-slide" data-page="11">
+        <div class="bg-grid"></div>
+
+        <div class="outline-body">
+          <div class="section-eyebrow mono">// FUTURE BLUEPRINT — 1 / 2</div>
+          <h2 class="section-title">플레이어가 만날, <span class="emph">새로운 것들</span></h2>
+
+          <div style="display:flex; gap:24px; margin-top:50px;">
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">01</div>
+              <div>
+                <div class="feature-title">신규 모드</div>
+                <div class="feature-desc">세 역할의 모드가 병렬로 확장됩니다. 시즌마다 역할별 모드가 바뀌거나 늘어날 예정입니다.</div>
+              </div>
+            </div>
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">02</div>
+              <div>
+                <div class="feature-title">아이템 확장</div>
+                <div class="feature-desc">신규 무기군과 투척 무기군이 추가됩니다.</div>
+              </div>
+            </div>
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">03</div>
+              <div>
+                <div class="feature-title">스킨</div>
+                <div class="feature-desc">캐릭터·로비 스킨으로 미묘한 효과를 제공하는 한정판 아이템입니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Future Blueprint (2/2) ============ -->
+    <section>
+      <div class="content-slide" data-page="12">
+        <div class="bg-grid"></div>
+
+        <div class="outline-body">
+          <div class="section-eyebrow mono">// FUTURE BLUEPRINT — 2 / 2</div>
+          <h2 class="section-title">그 위를 굴리는, <span class="emph">성장과 경제</span></h2>
+
+          <div style="display:flex; gap:24px; margin-top:50px;">
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">04</div>
+              <div>
+                <div class="feature-title">신규 재화 · 강화 코인</div>
+                <div class="feature-desc">역할 3 모드에서 승리하면 획득할 수 있는 새로운 재화입니다.</div>
+              </div>
+            </div>
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">05</div>
+              <div>
+                <div class="feature-title">캐릭터 성장</div>
+                <div class="feature-desc">캐릭터 카드와 강화 코인으로 캐릭터를 성장시킵니다.</div>
+              </div>
+            </div>
+            <div class="feature-card" style="flex:1;">
+              <div class="feature-num mono">06</div>
+              <div>
+                <div class="feature-title">컨텐츠 보강</div>
+                <div class="feature-desc">경매장으로 아이템을 거래하고, 미션을 하나의 미니게임으로 고도화합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Next Step ============ -->
+    <section>
+      <div class="content-slide" data-page="13">
+        <div class="bg-grid"></div>
+
+        <div class="outline-body">
+          <div class="section-eyebrow mono">// NEXT STEP</div>
+          <h2 class="section-title">지금부터, <span class="emph">다음 3단계</span></h2>
+
+          <div class="timeline">
+            <div class="track-base" style="left:16.67%; width:66.66%;"></div>
+            <div class="track-dashed" style="left:16.67%; width:66.66%;"></div>
+
+            <div class="milestone">
+              <div class="node-dot active"></div>
+              <div class="m-date mono">STAGE 1</div>
+              <div class="m-title">SOFT ITERATION 02</div>
+              <div class="m-desc">Defence, 시즌, 미션, 업적<br>시스템이 포함되어 있습니다.</div>
+              <div class="m-status active mono"><span class="status-dot"></span>IN PROGRESS</div>
+            </div>
+
+            <div class="milestone">
+              <div class="node-dot upcoming"></div>
+              <div class="m-date mono">STAGE 2</div>
+              <div class="m-title">GRAND LAUNCH</div>
+              <div class="m-desc">2026.09, 정식 서비스 출시를<br>예정하고 있습니다.</div>
+              <div class="m-status upcoming mono">PLANNED</div>
+            </div>
+
+            <div class="milestone">
+              <div class="node-dot upcoming"></div>
+              <div class="m-date mono">STAGE 3</div>
+              <div class="m-title">UPDATE / EXTENSION</div>
+              <div class="m-desc">새로운 콘텐츠들이<br>계속 추가됩니다.</div>
+              <div class="m-status upcoming mono">PLANNED</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Finally Goal ============ -->
+    <section>
+      <div class="content-slide" data-page="14">
+        <div class="bg-grid"></div>
+
+        <div class="closing-body">
+          <div class="closing-eyebrow">돌고 도는, 물고 물리는 콘텐츠와 자원들</div>
+          <h2 class="closing-hero">플레이어는, <span class="emph">게임만</span> 하면 됩니다.</h2>
+          <div class="closing-sub">더 빠르게 이루고, 더 강해지고 싶다면 —<br><span class="accent">자원을 사용하면</span> 됩니다.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 마지막 슬라이드 -->
 
   </div>
 </div>
@@ -644,7 +1427,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script>
   // ---- 공통 헤더/푸터 : 여기서만 수정하면 모든 .content-slide에 자동 반영됨 ----
-  const TOTAL_PAGES = 13;
+  const TOTAL_PAGES = 14;
   const LOGO_URL = 'https://levelupstudio.co.kr/logo.png';
   const FOOTER_TAG = 'TOP-DOWN P vs. P SHOOTER';
 
