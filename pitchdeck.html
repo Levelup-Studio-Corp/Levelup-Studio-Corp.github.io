@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>D.D.D: See Ya in Respawn — Publishing Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
+<style>
+  :root{
+    --bg: #05080c;
+    --bg-2: #0a0f16;
+    --panel: #0f141a;
+    --panel-2: #161e26;
+    --accent-1: #0090ff;
+    --accent-2: #00d2ff;
+    --text-hi: #ffffff;
+    --text-mid: #b7c8d8;
+    --text-dim: #6a7b8c;
+    --line: rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;}
+  html, body{background:var(--bg);}
+  .reveal{font-family:'Poppins',sans-serif;color:var(--text-hi);}
+  .reveal .slides{text-align:left;}
+  .reveal .slides section{
+    background:var(--bg);
+    height:100%;
+  }
+
+  /* ---------- Title slide ---------- */
+  .title-slide{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    text-align:center;
+    overflow:hidden;
+  }
+  #particle-canvas{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:0;
+  }
+  .title-content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .studio-mark{
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:6px;
+    color:var(--text-dim);
+    opacity:0;
+    animation:fadeUp .9s ease forwards;
+    animation-delay:.1s;
+    margin-bottom:38px;
+  }
+  .studio-mark span{
+    color:var(--text-mid);
+  }
+  .game-logo{
+    font-size:80px;
+    font-weight:800;
+    line-height:1.05;
+    letter-spacing:-1px;
+    margin:0;
+    opacity:0;
+    transform:translateY(40px);
+    animation:logoReveal 1.2s cubic-bezier(.2,.65,.3,1) forwards;
+    animation-delay:.3s;
+  }
+  .game-logo .dot{
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 40px rgba(0,150,255,.55));
+  }
+  .game-subtitle{
+    font-size:26px;
+    font-weight:300;
+    color:var(--text-mid);
+    margin-top:14px;
+    letter-spacing:1px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:.75s;
+  }
+  .divider{
+    width:64px;
+    height:2px;
+    margin:40px 0;
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    border-radius:2px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:1s;
+  }
+  .doc-label{
+    font-size:16px;
+    font-weight:500;
+    color:var(--text-hi);
+    letter-spacing:2px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:1.15s;
+  }
+  .doc-sub{
+    font-size:14px;
+    color:var(--text-dim);
+    margin-top:10px;
+    letter-spacing:.5px;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:1.3s;
+  }
+  .footer-meta{
+    position:absolute;
+    bottom:34px;
+    left:0; right:0;
+    display:flex;
+    justify-content:space-between;
+    padding:0 48px;
+    font-size:11px;
+    color:var(--text-dim);
+    letter-spacing:1.5px;
+    z-index:2;
+    opacity:0;
+    animation:fadeUp 1s ease forwards;
+    animation-delay:1.5s;
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes logoReveal{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  @media (max-width:768px){
+    .game-logo{font-size:44px;}
+    .game-subtitle{font-size:17px;}
+    .studio-mark{font-size:11px; letter-spacing:4px;}
+    .footer-meta{flex-direction:column; gap:6px; text-align:center; bottom:24px;}
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <section>
+      <div class="title-slide">
+        <canvas id="particle-canvas"></canvas>
+        <div class="title-content">
+          <div class="studio-mark">LEVELUP <span>STUDIO</span></div>
+          <h1 class="game-logo">D.D.D<span class="dot">:</span> See Ya in Respawn</h1>
+          <p class="game-subtitle">실시간 탑다운 PvP 슈터</p>
+          <div class="divider"></div>
+          <div class="doc-label">PUBLISHING PROPOSAL</div>
+          <div class="doc-sub">게임 소개 및 협업 제안서</div>
+        </div>
+        <div class="footer-meta">
+          <span>LEVELUP STUDIO CO., LTD.</span>
+          <span>CONFIDENTIAL</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 다음 슬라이드(outline 등)는 여기에 이어서 추가 -->
+
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    center: false,
+    transition: 'fade',
+    width: 1280,
+    height: 720,
+    margin: 0,
+  });
+
+  // ---------- Particle background (site 톤과 동일한 blue-glow 파티클) ----------
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resize(){
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function initParticles(){
+    particles = [];
+    const count = Math.floor((canvas.width * canvas.height) / 18000);
+    for(let i=0;i<count;i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*1.6 + 0.4,
+        vx: (Math.random()-0.5)*0.15,
+        vy: (Math.random()-0.5)*0.15,
+        a: Math.random()*0.5 + 0.15
+      });
+    }
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x += p.vx;
+      p.y += p.vy;
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(80,190,255,${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', ()=>{ resize(); initParticles(); });
+  resize();
+  initParticles();
+  tick();
+</script>
+</body>
+</html>
