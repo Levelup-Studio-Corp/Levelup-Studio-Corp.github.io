@@ -3,130 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>D.D.D: See Ya in Respawn — Publishing Proposal</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>D.D.D: See Ya in Respawn — Game Introduction</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
 <style>
   :root{
     --bg: #05080c;
-    --bg-2: #0a0f16;
-    --panel: #0f141a;
-    --panel-2: #161e26;
+    --bg-2: #080c12;
     --accent-1: #0090ff;
     --accent-2: #00d2ff;
     --text-hi: #ffffff;
     --text-mid: #b7c8d8;
-    --text-dim: #6a7b8c;
-    --line: rgba(255,255,255,0.08);
+    --text-dim: #57697a;
+    --line: rgba(0,150,255,0.14);
+    --line-soft: rgba(255,255,255,0.06);
   }
   *{box-sizing:border-box;}
   html, body{background:var(--bg);}
   .reveal{font-family:'Poppins',sans-serif;color:var(--text-hi);}
   .reveal .slides{text-align:left;}
-  .reveal .slides section{
-    background:var(--bg);
-    height:100%;
-  }
+  .reveal .slides section{background:var(--bg); height:100%; padding:0;}
+  .mono{font-family:'JetBrains Mono',monospace;}
 
   /* ---------- Title slide ---------- */
   .title-slide{
     position:relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
     height:100%;
-    text-align:center;
     overflow:hidden;
-  }
-  #particle-canvas{
-    position:absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index:0;
-  }
-  .title-content{
-    position:relative;
-    z-index:2;
     display:flex;
     flex-direction:column;
-    align-items:center;
+    justify-content:space-between;
+    padding:36px 56px;
   }
-  .studio-mark{
+
+  /* faint background tactical grid */
+  .bg-grid{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 75%);
+    opacity:0;
+    animation: fadeIn 1.4s ease forwards;
+    animation-delay:.1s;
+  }
+
+  /* ---- top bar ---- */
+  .hud-top{
+    position:relative; z-index:3;
+    display:flex; align-items:center; justify-content:space-between;
+    opacity:0; animation: fadeUp .8s ease forwards; animation-delay:.15s;
+  }
+  .brand-mark{display:flex; align-items:center; gap:10px;}
+  .brand-mark img{height:22px; width:auto; filter:drop-shadow(0 0 10px rgba(0,140,255,.5));}
+  .brand-mark span{font-weight:700; font-size:15px; letter-spacing:2px; color:var(--text-hi);}
+  .status-tag{
+    display:flex; align-items:center; gap:8px;
+    font-size:11px; letter-spacing:2px; color:var(--text-mid);
+    padding:6px 12px; border:1px solid var(--line); border-radius:20px;
+  }
+  .status-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--accent-2);
+    box-shadow:0 0 8px var(--accent-2);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  /* ---- main content ---- */
+  .hud-main{
+    position:relative; z-index:3;
+    flex:1;
     display:flex;
     align-items:center;
-    gap:10px;
-    opacity:0;
-    animation:fadeUp .9s ease forwards;
-    animation-delay:.1s;
-    margin-bottom:48px;
+    gap:6%;
   }
-  .studio-mark img{
-    height:26px;
-    width:auto;
-    filter:drop-shadow(0 0 12px rgba(0,140,255,.5));
+  .title-block{
+    flex:0 0 auto;
+    max-width:560px;
   }
-  .studio-mark-text{
-    font-weight:700;
-    font-size:18px;
-    letter-spacing:2px;
-    color:var(--text-hi);
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12px; letter-spacing:4px; color:var(--accent-2);
+    margin-bottom:26px;
+    opacity:0; animation: fadeUp .8s ease forwards; animation-delay:.35s;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px; height:1px;
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
   }
   .game-logo{
-    font-size:96px;
+    font-size:104px;
     font-weight:800;
-    line-height:1;
-    letter-spacing:-1px;
+    line-height:.94;
+    letter-spacing:-2px;
     margin:0;
     opacity:0;
-    transform:translateY(40px);
-    animation:logoReveal 1.2s cubic-bezier(.2,.65,.3,1) forwards;
-    animation-delay:.3s;
+    transform:translateY(36px);
+    animation:logoReveal 1.1s cubic-bezier(.2,.65,.3,1) forwards;
+    animation-delay:.45s;
   }
   .game-subtitle{
-    font-size:28px;
+    font-size:24px;
     font-weight:300;
     color:var(--text-mid);
-    margin-top:22px;
-    letter-spacing:1px;
+    margin-top:20px;
+    letter-spacing:.3px;
     opacity:0;
-    animation:fadeUp 1s ease forwards;
-    animation-delay:.75s;
+    animation:fadeUp .9s ease forwards;
+    animation-delay:.85s;
   }
   .game-subtitle .highlight{
-    font-weight:700;
-    letter-spacing:2px;
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    filter:drop-shadow(0 0 30px rgba(0,150,255,.5));
+    font-family:'JetBrains Mono',monospace;
+    font-weight:600;
+    letter-spacing:1px;
+    padding:2px 10px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    color:var(--accent-2);
+    background:rgba(0,144,255,.08);
+    text-shadow:0 0 18px rgba(0,180,255,.5);
   }
-  .divider{
-    width:64px;
-    height:2px;
-    margin-top:48px;
-    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
-    border-radius:2px;
-    opacity:0;
-    animation:fadeUp 1s ease forwards;
-    animation-delay:1s;
+  .meta-row{
+    display:flex; gap:28px;
+    margin-top:44px;
+    opacity:0; animation:fadeUp .9s ease forwards; animation-delay:1.1s;
+  }
+  .meta-item{font-size:11px; letter-spacing:1.5px; color:var(--text-dim);}
+  .meta-item b{display:block; font-size:13px; color:var(--text-mid); letter-spacing:.5px; margin-top:4px; font-weight:500;}
+
+  /* ---- radar visual ---- */
+  .radar-wrap{
+    position:relative;
+    flex:1 1 auto;
+    height:520px;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; animation:fadeIn 1.3s ease forwards; animation-delay:.5s;
+  }
+  .radar{
+    position:relative;
+    width:480px; height:480px;
+    border-radius:50%;
+  }
+  .radar-ring{
+    position:absolute; border-radius:50%;
+    border:1px solid var(--line);
+    top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+  .r1{width:480px; height:480px;}
+  .r2{width:340px; height:340px;}
+  .r3{width:200px; height:200px;}
+  .r4{width:70px; height:70px; border-color:rgba(0,180,255,.3);}
+  .radar-cross{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:480px; height:480px;
+  }
+  .radar-cross::before, .radar-cross::after{
+    content:''; position:absolute; background:var(--line);
+  }
+  .radar-cross::before{ left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%);}
+  .radar-cross::after{ top:50%; left:0; right:0; height:1px; transform:translateY(-50%);}
+  .radar-sweep{
+    position:absolute; top:50%; left:50%;
+    width:480px; height:480px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:conic-gradient(from 0deg, rgba(0,210,255,.35), transparent 28%, transparent 100%);
+    animation: sweep 4.5s linear infinite;
+    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+            mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  }
+  .blip{
+    position:absolute; width:6px; height:6px; border-radius:50%;
+    background:var(--text-mid); opacity:.7;
+  }
+  .blip.respawn{
+    width:10px; height:10px;
+    background:var(--accent-2);
+    box-shadow:0 0 14px 3px rgba(0,210,255,.7);
+    animation: pulse 1.6s ease-in-out infinite;
   }
 
-  @keyframes fadeUp{
-    from{opacity:0; transform:translateY(16px);}
-    to{opacity:1; transform:translateY(0);}
+  /* ---- bottom bar ---- */
+  .hud-bottom{
+    position:relative; z-index:3;
+    display:flex; align-items:center; justify-content:space-between;
+    opacity:0; animation:fadeUp .8s ease forwards; animation-delay:1.3s;
   }
-  @keyframes logoReveal{
-    from{opacity:0; transform:translateY(40px);}
-    to{opacity:1; transform:translateY(0);}
+  .hud-bottom .tag{
+    font-size:11px; letter-spacing:2px; color:var(--text-dim);
+  }
+  .hud-bottom .tag b{color:var(--text-mid); font-weight:500;}
+  .corner-mark{
+    width:14px; height:14px;
+    border-left:1.5px solid var(--accent-2);
+    border-bottom:1.5px solid var(--accent-2);
+    opacity:.7;
   }
 
-  @media (max-width:768px){
-    .game-logo{font-size:52px;}
-    .game-subtitle{font-size:18px;}
-    .studio-mark-text{font-size:13px; letter-spacing:1.5px;}
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes logoReveal{ from{opacity:0; transform:translateY(36px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes sweep{ from{transform:translate(-50%,-50%) rotate(0deg);} to{transform:translate(-50%,-50%) rotate(360deg);} }
+  @keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.4; transform:scale(1.4);} }
+
+  @media (max-width:900px){
+    .title-slide{padding:24px 26px;}
+    .hud-main{flex-direction:column; gap:24px; justify-content:center;}
+    .radar-wrap{position:absolute; inset:0; height:100%; opacity:.18; z-index:0;}
+    .radar{width:340px; height:340px;}
+    .r1{width:340px;height:340px;} .r2{width:240px;height:240px;} .r3{width:140px;height:140px;}
+    .radar-cross{width:340px;height:340px;}
+    .radar-sweep{width:340px;height:340px;}
+    .title-block{max-width:100%; z-index:2;}
+    .game-logo{font-size:56px;}
+    .game-subtitle{font-size:17px;}
+    .meta-row{gap:18px; flex-wrap:wrap;}
   }
 </style>
 </head>
@@ -136,15 +231,50 @@
 
     <section>
       <div class="title-slide">
-        <canvas id="particle-canvas"></canvas>
-        <div class="title-content">
-          <div class="studio-mark">
+        <div class="bg-grid"></div>
+
+        <div class="hud-top">
+          <div class="brand-mark">
             <img src="https://levelupstudio.co.kr/logo.png" alt="LevelUp Studio logo">
-            <span class="studio-mark-text">LEVELUP STUDIO</span>
+            <span>LEVELUP STUDIO</span>
           </div>
-          <h1 class="game-logo">D.D.D.</h1>
-          <p class="game-subtitle">See ya in <span class="highlight">RESPAWN</span></p>
-          <div class="divider"></div>
+          <div class="status-tag mono">
+            <span class="status-dot"></span> LIVE · SOFT LAUNCH
+          </div>
+        </div>
+
+        <div class="hud-main">
+          <div class="title-block">
+            <div class="eyebrow mono">TOP-DOWN PVP SHOOTER</div>
+            <h1 class="game-logo">D.D.D.</h1>
+            <p class="game-subtitle">See ya in <span class="highlight">RESPAWN</span></p>
+            <div class="meta-row mono">
+              <div class="meta-item">PLATFORM<b>Android · iOS</b></div>
+              <div class="meta-item">STAGE<b>Soft Launch #2</b></div>
+              <div class="meta-item">GRAND LAUNCH<b>2026.09</b></div>
+            </div>
+          </div>
+
+          <div class="radar-wrap">
+            <div class="radar">
+              <div class="radar-ring r1"></div>
+              <div class="radar-ring r2"></div>
+              <div class="radar-ring r3"></div>
+              <div class="radar-ring r4"></div>
+              <div class="radar-cross"></div>
+              <div class="radar-sweep"></div>
+              <div class="blip" style="top:28%; left:62%;"></div>
+              <div class="blip" style="top:68%; left:32%;"></div>
+              <div class="blip" style="top:40%; left:22%;"></div>
+              <div class="blip" style="top:74%; left:66%;"></div>
+              <div class="blip respawn" style="top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-bottom mono">
+          <div class="tag">GENRE <b>Casual Competitive PvP</b></div>
+          <div class="corner-mark"></div>
         </div>
       </div>
     </section>
@@ -166,53 +296,6 @@
     height: 720,
     margin: 0,
   });
-
-  // ---------- Particle background (site 톤과 동일한 blue-glow 파티클) ----------
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-
-  function resize(){
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-
-  function initParticles(){
-    particles = [];
-    const count = Math.floor((canvas.width * canvas.height) / 18000);
-    for(let i=0;i<count;i++){
-      particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*1.6 + 0.4,
-        vx: (Math.random()-0.5)*0.15,
-        vy: (Math.random()-0.5)*0.15,
-        a: Math.random()*0.5 + 0.15
-      });
-    }
-  }
-
-  function tick(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-      p.x += p.vx;
-      p.y += p.vy;
-      if(p.x < 0) p.x = canvas.width;
-      if(p.x > canvas.width) p.x = 0;
-      if(p.y < 0) p.y = canvas.height;
-      if(p.y > canvas.height) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(80,190,255,${p.a})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(tick);
-  }
-
-  window.addEventListener('resize', ()=>{ resize(); initParticles(); });
-  resize();
-  initParticles();
-  tick();
 </script>
 </body>
 </html>
