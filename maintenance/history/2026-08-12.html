@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-08-12 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date">2026.08.12</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"사용성 개선 및 수정", features:[
+        { title:"마일로 / 포키의 미니건 모션 수정", descs:[] },
+      ]},
+      { label:"버그 수정", features:[
+        { title:"'파마씨' 망치로 박스가 깨지지 않던 오류 수정", descs:[] },
+        { title:"'파마씨' 무기 생성 간격 오류 수정", descs:[
+          "일반 상태일 때는 느리게, 혼란 상태 ( 붉은 HP 게이지 ) 에서는 빠르게 무기를 생성합니다."
+        ]},
+      ]},
+      { label:"밸런스 및 보상 수정", features:[
+        { title:"일일 출석 보상 수정", descs:[
+          "플레이어 여러분에게 더 필요한 것들로 채웠습니다. ^^"
+        ]},
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"Usability Improvements", features:[
+        { title:"Milo / Poki Minigun Motion Fixed", descs:[] },
+      ]},
+      { label:"Bug Fixes", features:[
+        { title:"Fixed Issue Where Boxes Couldn't Be Broken with 'Pharmacist' Hammer", descs:[] },
+        { title:"Fixed 'Pharmacist' Weapon Spawn Interval Error", descs:[
+          "Weapons spawn slowly in normal state and quickly in chaotic state (red HP gauge)."
+        ]},
+      ]},
+      { label:"Balance & Reward Adjustments", features:[
+        { title:"Daily Attendance Rewards Updated", descs:[
+          "Filled with more of what players actually need. ^^"
+        ]},
+      ]},
+    ]
+  },
+  id: {
+    sections: [
+      { label:"Peningkatan Kegunaan", features:[
+        { title:"Perbaikan Gerakan Minigun Milo / Poki", descs:[] },
+      ]},
+      { label:"Perbaikan Bug", features:[
+        { title:"Perbaikan Kotak Tidak Bisa Dipecahkan dengan Palu 'Apoteker'", descs:[] },
+        { title:"Perbaikan Error Interval Pembuatan Senjata 'Apoteker'", descs:[
+          "Senjata dibuat lambat dalam keadaan normal dan cepat dalam keadaan kacau (gauge HP merah)."
+        ]},
+      ]},
+      { label:"Penyesuaian Keseimbangan & Hadiah", features:[
+        { title:"Hadiah Kehadiran Harian Diperbarui", descs:[
+          "Diisi dengan hal-hal yang lebih dibutuhkan pemain. ^^"
+        ]},
+      ]},
+    ]
+  },
+  ms: {
+    sections: [
+      { label:"Peningkatan Kebolehgunaan", features:[
+        { title:"Gerakan Minigun Milo / Poki Diperbaiki", descs:[] },
+      ]},
+      { label:"Pembetulan Bug", features:[
+        { title:"Pembetulan Kotak Tidak Boleh Dipecahkan dengan Tukul 'Ahli Farmasi'", descs:[] },
+        { title:"Pembetulan Ralat Selang Penjanaan Senjata 'Ahli Farmasi'", descs:[
+          "Senjata dijana perlahan dalam keadaan normal dan cepat dalam keadaan huru-hara (gauge HP merah)."
+        ]},
+      ]},
+      { label:"Pelarasan Keseimbangan & Ganjaran", features:[
+        { title:"Ganjaran Kehadiran Harian Dikemas Kini", descs:[
+          "Diisi dengan perkara yang lebih diperlukan pemain. ^^"
+        ]},
+      ]},
+    ]
+  },
+  zh: {
+    sections: [
+      { label:"易用性改进", features:[
+        { title:"修复迈罗/波奇的迷你炮动作", descs:[] },
+      ]},
+      { label:"Bug修复", features:[
+        { title:"修复'药剂师'锤子无法打破箱子的问题", descs:[] },
+        { title:"修复'药剂师'武器生成间隔异常问题", descs:[
+          "普通状态下缓慢生成，混乱状态（红色HP条）下快速生成武器。"
+        ]},
+      ]},
+      { label:"平衡性与奖励调整", features:[
+        { title:"每日签到奖励更新", descs:[
+          "填充了玩家们更需要的东西。^^"
+        ]},
+      ]},
+    ]
+  },
+  fr: {
+    sections: [
+      { label:"Améliorations d'utilisabilité", features:[
+        { title:"Correction du mouvement de la mitrailleuse de Milo / Poki", descs:[] },
+      ]},
+      { label:"Corrections de bugs", features:[
+        { title:"Correction du problème où les boîtes ne pouvaient pas être cassées avec le marteau du 'Pharmacien'", descs:[] },
+        { title:"Correction de l'erreur d'intervalle de création d'armes du 'Pharmacien'", descs:[
+          "Les armes sont créées lentement en état normal et rapidement en état chaotique (jauge HP rouge)."
+        ]},
+      ]},
+      { label:"Ajustements d'équilibre & Récompenses", features:[
+        { title:"Récompenses de présence quotidienne mises à jour", descs:[
+          "Remplies avec ce dont les joueurs ont le plus besoin. ^^"
+        ]},
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
