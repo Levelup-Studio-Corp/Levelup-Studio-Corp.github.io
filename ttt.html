@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>LevelUp Studio - 자원 순환 시스템</title>
+    <style>
+        /* 1. 전체 톤앤매너 설정 (참고 이미지 기반 파스텔 블루 & 라운드 스타일) */
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #E2F1F8; /* 부드러운 파스텔 하늘색 배경 */
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-container {
+            width: 1000px;
+            background: transparent;
+            position: relative;
+        }
+
+        /* 헤더 스타일링 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1E3A8A;
+            letter-spacing: -1px;
+        }
+
+        .page-number {
+            font-size: 14px;
+            font-weight: bold;
+            color: #7BB3D6;
+        }
+
+        /* 타이틀: "조합이 만드는, 전략적 다양성" 느낌 재현 */
+        .main-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2C3E50;
+            margin-bottom: 50px;
+        }
+
+        .highlight {
+            background: linear-gradient(to top, #FFE600 40%, transparent 40%); /* 형광펜 강조 효과 */
+            padding: 0 4px;
+        }
+
+        /* 2. 인포그래픽 레이아웃 (A/B가 위에서 C로 모이는 구조) */
+        .infographic-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        /* 상단 공급처: A컨텐츠 & B컨텐츠 */
+        .supply-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        /* 참고 이미지의 흰색 라운드 카드 전면 인용 */
+        .content-card {
+            width: 440px;
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            text-align: center;
+            position: relative;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: #E0E7FF;
+            color: #4F46E5;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #64748B;
+            line-height: 1.5;
+        }
+
+        /* 자원이 아래로 흐르는 귀여운 커넥터 파이프 라인 */
+        .pipe-line-left, .pipe-line-right {
+            position: absolute;
+            width: 150px;
+            height: 70px;
+            border-bottom: 4px dashed #94A3B8;
+            top: 100px;
+            z-index: 1;
+        }
+        .pipe-line-left {
+            left: 230px;
+            border-left: 4px dashed #94A3B8;
+            border-bottom-left-radius: 20px;
+        }
+        .pipe-line-right {
+            right: 230px;
+            border-right: 4px dashed #94A3B8;
+            border-bottom-right-radius: 20px;
+        }
+
+        /* 하단 베팅처: 거대하고 긴장감 넘치는 C 컨텐츠 박스 (오렌지/레드 포인트) */
+        .betting-container {
+            width: 600px;
+            background: #FFF3E0; /* 경각심을 주는 부드러운 오렌지빛 배경 */
+            border: 3px dashed #FF9800;
+            border-radius: 28px;
+            padding: 30px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .betting-tag {
+            background: #FF5722;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        /* 치킨 게임 눈치싸움 시뮬레이터 (게이지 바) */
+        .gauge-zone {
+            background: #FFF;
+            border-radius: 16px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .gauge-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .gauge-bar-wrapper {
+            height: 20px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .my-gauge {
+            width: 65%;
+            background: #2196F3; /* 내 투입량 블루 */
+        }
+        .enemy-gauge {
+            width: 35%;
+            background: #F44336; /* 상대 투입량 레드 */
+        }
+
+        /* 결과 시각화 (All or Nothing) */
+        .result-zone {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            border-top: 1px solid #FFE0B2;
+            padding-top: 20px;
+        }
+
+        .result-box {
+            width: 45%;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .result-success { background: #E8F5E9; color: #2E7D32; font-weight: bold; }
+        .result-fail { background: #FFEBEE; color: #C62828; font-weight: bold; }
+
+        /* 하단 푸터 */
+        .footer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            color: #7BB3D6;
+            border-top: 1px solid #C5E1A5;
+            padding-top: 15px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <!-- 상단 유틸리티 영역 -->
+    <div class="header">
+        <div class="logo">LEVELUP STUDIO</div>
+        <div class="page-number">04 / 04</div>
+    </div>
+
+    <!-- 페이지 메인 타이틀 -->
+    <div class="main-title">
+        파밍과 베팅이 만드는, <span class="highlight">짜릿한 자원 순환 시스템</span>
+    </div>
+
+    <!-- 인포그래픽 그래픽 영역 -->
+    <div class="infographic-section">
+        
+        <!-- 1단계: 자원 공급원 (A & B) -->
+        <div class="supply-row">
+            <!-- A 컨텐츠 카드 -->
+            <div class="content-card">
+                <span class="card-tag">CONTENT A</span>
+                <div class="card-title">각자만의 개성, 던전 파밍</div>
+                <div class="card-desc">고유 특성을 가진 캐릭터로 스테이지를 클리어하고<br><strong>[기본 자원 🟡]</strong>을 안정적으로 확보합니다.</div>
+            </div>
+
+            <!-- B 컨텐츠 카드 -->
+            <div class="content-card">
+                <span class="card-tag">CONTENT B</span>
+                <div class="card-title">명확한 특성의 필드 난투</div>
+                <div class="card-desc">다양한 무기와 스킬 조합으로 경쟁전에서 승리하고<br><strong>[배틀 자원 🔷]</strong>을 획득합니다.</div>
+            </div>
+        </div>
+
+        <!-- 파이프라인 흐름 가이드선 (CSS 시각화) -->
+        <div class="pipe-line-left"></div>
+        <div class="pipe-line-right"></div>
+
+        <!-- 2단계: 핵심 베팅처 (C 컨텐츠 - 치킨게임) -->
+        <div class="betting-container">
+            <span class="betting-tag">⚠️ RISK PLAY CONTENT C</span>
+            <div class="card-title" style="font-size: 24px; color: #D84315;">눈치싸움 자원 정제소</div>
+            <div class="card-desc" style="color: #4E342E;">
+                A와 B에서 모은 자원을 동시에 녹여 배팅하는 핵심 경쟁 구역입니다.<br>
+                상대가 자원을 더 투자하면 나도 투자해야 승리 확률이 유지됩니다!
+            </div>
+
+            <!-- 치킨 게임 실시간 눈치 싸움 게이지 구현 -->
+            <div class="gauge-zone">
+                <div class="gauge-label">
+                    <span style="color:#2196F3;">⚡ 나의 자원 투자량 (승률 65%)</span>
+                    <span style="color:#F44336;">상대방 투자량 😡</span>
+                </div>
+                <div class="gauge-bar-wrapper">
+                    <div class="my-gauge"></div>
+                    <div class="enemy-gauge"></div>
+                </div>
+            </div>
+
+            <!-- All or Nothing 결과 처리에 대한 규칙 고지 -->
+            <div class="result-zone">
+                <div class="result-box result-success">
+                    🏆 WIN (승리 시)<br>
+                    <span style="font-size: 13px; font-weight: normal; color: #558B2F;">제 3의 핵심 재화 [👑크리스탈] 획득!</span>
+                </div>
+                <div class="result-box result-fail">
+                    💥 LOSE (패배 시)<br>
+                    <span style="font-size: 13px; font-weight: normal; color: #C62828;">투자한 모든 자원 소멸 (꽝!)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 내비게이션 영역 -->
+    <div class="footer">
+        <div>RESOURCE CIRCULATION SYSTEM</div>
+        <div>08 / 15</div>
+    </div>
+</div>
+
+</body>
+</html>
