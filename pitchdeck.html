@@ -80,6 +80,17 @@
     box-shadow:var(--card-shadow);
   }
   .chip-tag b{color:var(--ink);}
+  .market-links{
+    position:absolute; left:50%; bottom:28px; transform:translateX(-50%); z-index:5;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .market-link{
+    display:inline-flex; align-items:center; gap:7px;
+    background:rgba(255,255,255,.85); border-radius:999px; padding:8px 16px;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:10px; letter-spacing:.2px; color:var(--blue-dark);
+    box-shadow:var(--card-shadow); text-decoration:none; white-space:nowrap;
+  }
+  .market-link .icon{ width:12px; height:12px; flex:0 0 auto; fill:currentColor; }
 
   /* ---------- headline system ---------- */
   .section-eyebrow{
@@ -108,7 +119,7 @@
     box-shadow:0 4px 0 var(--yellow-dark);
     margin-bottom:24px;
   }
-  .title-main{ display:flex; align-items:center; justify-content:center; height:100%; padding:0 8px; transform:translateY(-20px); }
+  .title-main{ display:flex; align-items:center; justify-content:center; height:100%; padding:0 8px; transform:translateY(-45px); }
   .title-copy{ max-width:600px; margin-left:0; transform:scale(1.2); transform-origin:center center; text-align:center; }
   .headline-hero{
     font-family:'Baloo 2',sans-serif !important; font-weight:800 !important; font-size:118px !important; line-height:.92 !important;
@@ -365,6 +376,7 @@
   section.present .position-map .pm-point:nth-child(1 of .pm-point){ animation-delay:.5s; }
   section.present .position-map .pm-point:nth-child(2 of .pm-point){ animation-delay:.62s; }
   section.present .position-map .pm-point:nth-child(3 of .pm-point){ animation-delay:.74s; }
+  section.present .position-map .pm-point:nth-child(4 of .pm-point){ animation-delay:1.0s; }
   @keyframes pmPointIn{ 0%{ opacity:0; transform:translate(-50%,-50%) scale(0); } 100%{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
   html.print-pdf .position-map .pm-point{ animation:none !important; opacity:1 !important; transform:translate(-50%,-50%) !important; }
 
@@ -670,6 +682,19 @@
 
         <div class="bottom-bar">
           <div class="chip-tag">GENRE&nbsp; <b>Casual Competitive P vs. P</b></div>
+          <div class="market-links">
+            <!-- 플레이스토어 -->
+            <a class="market-link google-play" href="https://play.google.com/store/apps/details?id=com.levelupdevs.udt" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M325.3 234.3L104.6 13a24.5 24.5 0 0 0-11.3-3 24.9 24.9 0 0 0-24.9 24.9v441.3a24.9 24.9 0 0 0 24.9 24.9 24.5 24.5 0 0 0 11.3-3l220.7-221.3-60.1-60.1z"/><path d="M385.4 174.2L133.8 32.1l191.5 191.5 60.1-60.1z"/><path d="M472.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8z"/><path d="M325.3 288.3l-191.5-191.5v383l191.5-191.5z"/><path d="M133.8 479.9l251.6-142.1-60.1-60.1z"/></svg>
+              <span>Google Play</span>
+            </a>
+
+            <!-- 앱스토어 -->
+            <a class="market-link app-store" href="https://itunes.apple.com/app/id6763499736" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span>App Store</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -871,6 +896,7 @@
                 <div class="pm-plot">
                   <div class="pm-point" style="left:34%; top:58%;"><span class="pm-dot"></span><span class="pm-name">Brawl Stars</span></div>
                   <div class="pm-point" style="left:65%; top:70%;"><span class="pm-dot"></span><span class="pm-name">Zooba</span></div>
+                  <div class="pm-point" style="left:22%; top:80%;"><span class="pm-dot"></span><span class="pm-name">Tanks a lot</span></div>
                   <div class="pm-point us" style="left:26%; top:20%;"><img class="pm-dot" src="medias/picon.png" alt="D.D.D"><span class="pm-name">D.D.D</span></div>
                 </div>
                 <div class="pm-axis-x"><span>진입장벽 낮음</span><span>높음</span></div>
