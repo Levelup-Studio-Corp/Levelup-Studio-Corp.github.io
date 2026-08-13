@@ -100,6 +100,19 @@
 
   /* ---------- Title slide ---------- */
   .title-stage{ padding:32px 48px; }
+  .bg-video{ position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .bg-video iframe{
+    position:absolute; top:50%; left:50%; width:100%; height:100%;
+    min-width:177.78vh; min-height:56.25vw;
+    transform:translate(-50%,-50%); border:0;
+    filter:grayscale(.9) brightness(1.45) contrast(.7) saturate(.25);
+    opacity:.3;
+  }
+  .bg-video::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 55%, #eafce0 100%);
+    opacity:.55;
+  }
   .pill-tag{
     display:inline-flex; align-items:center; gap:8px;
     background:var(--yellow); color:var(--ink);
@@ -108,8 +121,8 @@
     box-shadow:0 4px 0 var(--yellow-dark);
     margin-bottom:24px;
   }
-  .title-main{ display:flex; align-items:center; height:100%; padding:0 8px; gap:56px; transform:translateY(-20px); }
-  .title-copy{ max-width:600px; margin-left:150px; transform:scale(1.2); transform-origin:left center; }
+  .title-main{ display:flex; align-items:center; justify-content:center; height:100%; padding:0 8px; transform:translateY(-20px); }
+  .title-copy{ max-width:600px; margin-left:0; transform:scale(1.2); transform-origin:center center; text-align:center; }
   .headline-hero{
     font-family:'Baloo 2',sans-serif !important; font-weight:800 !important; font-size:118px !important; line-height:.92 !important;
     color:var(--white) !important; margin:0 !important; letter-spacing:-2px;
@@ -117,7 +130,7 @@
     filter:drop-shadow(0 8px 0 rgba(0,0,0,.15));
     text-transform:none !important;
   }
-  .subline{ display:flex; align-items:center; gap:12px; margin-top:24px; flex-wrap:wrap; }
+  .subline{ display:flex; align-items:center; justify-content:center; gap:12px; margin-top:24px; flex-wrap:wrap; }
   .subline .plain{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:27px; color:var(--ink); }
   .respawn-chip{
     font-family:'Baloo 2',sans-serif; font-weight:800; font-size:29px; color:var(--white);
@@ -125,7 +138,7 @@
     padding:5px 20px; border-radius:14px; box-shadow:0 5px 0 #0a5d90;
     -webkit-text-stroke:2px var(--blue-dark); paint-order:stroke fill;
   }
-  .meta-row{ display:flex; gap:14px; margin-top:34px; }
+  .meta-row{ display:flex; justify-content:center; gap:14px; margin-top:34px; }
   .meta-chip{ background:var(--white); border-radius:16px; padding:11px 16px; box-shadow:var(--card-shadow); min-width:108px; }
   .meta-chip .k{ font-family:'Nunito',sans-serif; font-weight:800; font-size:10px; letter-spacing:.8px; color:var(--ink-soft); opacity:.65; text-transform:uppercase; }
   .meta-chip .v{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin-top:3px; }
@@ -477,6 +490,9 @@
     <!-- ============ Title ============ -->
     <section>
       <div class="slide-shell title-stage">
+        <div class="bg-video">
+          <iframe src="https://www.youtube.com/embed/4a8rlcf05WQ?autoplay=1&mute=1&loop=1&playlist=4a8rlcf05WQ&controls=0&showinfo=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1" title="D.D.D game trailer" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+        </div>
         <div class="cloud" style="width:100px;height:58px; top:40px; left:6%; animation-duration:14s;"></div>
         <div class="cloud" style="width:130px;height:72px; top:80px; left:55%; animation-duration:18s; animation-delay:-5s;"></div>
 
@@ -499,15 +515,6 @@
               <div class="meta-chip"><div class="k">Platform</div><div class="v">Android · iOS</div></div>
               <div class="meta-chip"><div class="k">Stage</div><div class="v">Soft Launch #2</div></div>
               <div class="meta-chip"><div class="k">Grand Launch</div><div class="v">2026.09</div></div>
-            </div>
-          </div>
-          <div class="showcase">
-            <div class="char-card">
-              <img src="medias/1-1.png" alt="Milo character screenshot">
-              <!--div class="char-ribbon">
-                <div class="name">MILO</div>
-                <div class="tag">Crafty Troublemaker</div>
-            </div-->
             </div>
           </div>
         </div>
