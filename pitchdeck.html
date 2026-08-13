@@ -364,30 +364,33 @@
   }
 
   /* ---------- Mode Role Circulation (신규 p12) ---------- */
-  .mode-flow-wrap{ flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:10px; }
+  .mode-flow-wrap{ flex:1; display:flex; flex-direction:column; justify-content:center; gap:20px; padding-top:10px; }
   .mode-grid{ display:flex; gap:24px; }
-  .mode-card{ flex:1; background:var(--white); border-radius:16px; padding:14px 22px 16px; box-shadow:var(--card-shadow); text-align:center; }
+  .mode-card{ flex:1; display:flex; flex-direction:column; justify-content:center; background:var(--white); border-radius:16px; padding:12px 22px; box-shadow:var(--card-shadow); text-align:center; }
   .mode-card .tag{ display:inline-block; font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; letter-spacing:1px;
-    color:var(--blue-dark); background:#eaf6ff; padding:4px 13px; border-radius:14px; margin-bottom:8px; }
+    color:var(--blue-dark); background:#eaf6ff; padding:4px 13px; border-radius:14px; margin-bottom:20px; }
   .mode-card .title{ font-family:'Baloo 2',sans-serif; font-size:17px; font-weight:700; color:var(--ink); margin-bottom:6px; }
   .mode-card .desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; }
 
-  .mode-flow-svg{ width:100%; height:80px; display:block; overflow:visible; }
+  .mode-flow-svg{ width:100%; height:70px; display:block; overflow:visible; }
   .flow-path{
-    fill:none; stroke:var(--blue); stroke-width:5; stroke-linecap:round; opacity:.6;
+    fill:none; stroke:var(--blue); stroke-width:7; stroke-linecap:round; opacity:.6;
     stroke-dasharray:14 10;
     animation: flowDash 1s linear infinite;
   }
   @keyframes flowDash{ to{ stroke-dashoffset:-24; } }
 
-  .mode-core{ border:3px dashed #f0a300; border-radius:18px; background:#fff7e6; padding:16px 28px 18px; }
+  .mode-core{
+    border:3px dashed #f0a300; border-radius:18px; background:#fff7e6; padding:4px 28px 5px;
+    display:flex; flex-direction:column; align-items:center;
+  }
   .mode-core .tag{
     display:inline-flex; align-items:center; gap:6px;
     font-family:'Baloo 2',sans-serif; font-weight:800; font-size:12px; color:#fff;
     background:linear-gradient(180deg,#ff9a4d,#e8630a); padding:5px 15px; border-radius:12px;
-    margin-bottom:8px; box-shadow:0 3px 0 #b8480a;
+    margin-bottom:14px; box-shadow:0 3px 0 #b8480a;
   }
-  .mode-core .title{ font-family:'Baloo 2',sans-serif; font-size:19px; font-weight:800; color:var(--ink); margin-bottom:8px; }
+  .mode-core .title{ font-family:'Baloo 2',sans-serif; font-size:19px; font-weight:800; color:var(--ink); margin-bottom:20px; }
   .mode-core .list{ list-style:none; padding:0; margin:0; }
   .mode-core .list li{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; padding-left:16px; position:relative; margin-bottom:4px; }
   .mode-core .list li::before{ content:'—'; position:absolute; left:0; color:var(--ink-faint); }
@@ -408,7 +411,7 @@
   .card9 .list li::before{ content:'—'; position:absolute; left:0; color:var(--ink-faint); }
   .card9.image-only{ padding:0; display:flex; align-items:center; justify-content:center; }
   .card9.image-only img{ width:100%; height:100%; object-fit:cover; border-radius:12px; display:block; min-width:0; min-height:0; }  
-  .grid9-comment{ margin-top:14px; text-align:center; font-family:'Nunito',sans-serif; font-size:12px; color:var(--ink-faint); font-style:italic; }
+  .grid9-comment{ margin-top:55px; text-align:center; font-family:'Nunito',sans-serif; font-size:12px; color:var(--ink-faint); font-style:italic; }
   .grid9-comment b{ color:var(--blue-dark); font-weight:800; font-style:normal; }
 
   section.present .grid9 .card9{
@@ -959,7 +962,10 @@
               <div class="thumb has-media"><img src="medias/11-1.png" alt="Free For All"></div>
               <div class="r-body">
                 <div class="r-tag">ROLE 1 · RANK</div><div class="r-title">Free For All</div>
-                <ul class="r-list"><li>기본 성장 및 자원 수급</li><li>특정 일부를 제외한 모든 것을 획득 가능</li><li>Rank 모드</li></ul>
+                <ul class="r-list">
+                  <li>기본 성장 및 자원 수급.</li>
+                  <li>특정 일부를 제외한 모든 것을 획득 가능.</li>
+                  <li>Rank 모드.</li></ul>
               </div>
             </div>
 
@@ -967,7 +973,11 @@
               <div class="thumb has-media"><img src="medias/11-2.png" alt="Defence"></div>
               <div class="r-body">
                 <div class="r-tag">ROLE 2 · CO-OP</div><div class="r-title">Defence</div>
-                <ul class="r-list"><li>쉬어갈 수 있는 협력 모드</li><li>경쟁이 아닌 다른 플레이어와의 협력</li><li>아이템(무기·방어구) 강화 보상 컨셉</li></ul>
+                <ul class="r-list">
+                  <li>쉬어갈 수 있<span style="color:#e0e0e0">(을 것처럼 보이)</span>는 협력 모드.</li>
+                  <li>경쟁이 아닌 다른 플레이어와의 협력.</li>
+                  <li>아이템(무기·방어구) 강화 보상 컨셉.</li>
+                </ul>
               </div>
             </div>
 
@@ -975,15 +985,18 @@
               <div class="thumb has-media"><img src="medias/11-3.png" alt="Warfare"></div>
               <div class="r-body">
                 <div class="r-tag">ROLE 3 · TEAM P vs. P</div><div class="r-title">Warfare (가칭)</div>
-                <ul class="r-list"><li>1·2에서 모은 자원을 소진해 새로운 재화 획득</li><li>세션 한정 아이템을 파는 인세션 상점</li><li>개인전이 아닌, 팀을 이룬 단체 P vs. P</li></ul>
+                <ul class="r-list">
+                  <li>1·2에서 모은 자원을 사용해 승리 시 새로운 재화 획득.</li>
+                  <li>세션 한정 아이템을 파는 인 세션 상점.</li>
+                  <li>개인전이 아닌, 팀을 이룬 단체 P vs. P</li></ul>
               </div>
             </div>
 
-            <div class="orbit-arrow arrow-right" style="top:calc(22% + 100px); left:73%;">↘</div>
+            <div class="orbit-arrow arrow-right" style="top:calc(22% + 100px); left:70%;">↘</div>
             <div class="orbit-arrow arrow-bottom" style="top:78%; left:50%; transform:translateX(-50%);">←</div>
             <div class="orbit-arrow arrow-left" style="top:calc(22% + 100px); left:27%;">↗</div>
-            <div class="orbit-num num-01" style="top:calc(2% - 100px); left:50%; transform:translateX(-50%);">01</div>
-            <div class="orbit-num num-02" style="top:58%; left:98%; transform:translateY(-50%);">02</div>
+            <div class="orbit-num num-01" style="top:calc(2% - 50px); left:50%; transform:translateX(-50%);">01</div>
+            <div class="orbit-num num-02" style="top:58%; left:95%; transform:translateY(-50%);">02</div>
             <div class="orbit-num num-03" style="top:58%; left:2%; transform:translateY(-50%);">03</div>
           </div>
         </div>
@@ -1010,20 +1023,20 @@
               </div>
             </div>
 
-            <svg class="mode-flow-svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-              <path class="flow-path" d="M260,0 C260,55 500,55 500,100"></path>
-              <path class="flow-path" d="M740,0 C740,55 500,55 500,100"></path>
+            <svg class="mode-flow-svg" viewBox="0 0 1000 70" preserveAspectRatio="none">
+              <path class="flow-path" d="M260,0 C260,30 500,30 500,65"></path>
+              <path class="flow-path" d="M740,0 C740,30 500,30 500,65"></path>
             </svg>
 
             <div class="mode-core">
               <div class="tag">⚡ ROLE 3 · CORE CONTENT</div>
               <div class="title">코어 컨텐츠, 팀 대전</div>
               <ul class="list">
-                <li>특수 강화나 핵심적인 역할을 하는 코어 컨텐츠에 요구되는 자원(강화 코인) 보상</li>
-                <li>다른 플레이어들과 팀 대전</li>
-                <li>세션 안에서 역할 1 · 2에서 획득한 자원을 소비하여 인스턴스 강화</li>
-                <li>즉, 코어 컨텐츠를 위해 승리해야 하고, 이를 위해 역할 1 · 2가 필요합니다</li>
-                <li class="emph-line">이를 통해 지속적인 자원 소비 및 결제 유도가 가능합니다</li>
+                <li>특수 강화나 핵심적인 역할을 하는 코어 컨텐츠에 요구되는 자원(강화 코인) 보상.</li>
+                <li>다른 플레이어들과 팀 대전.</li>
+                <li>세션 안에서 <span style="color:#0331ff">ROLE 1 · 2</span>에서 획득한 자원을 소비하여 인스턴스 강화.</li>
+                <li>즉, 코어 컨텐츠를 위해 승리해야 하고, 이를 위해 <span style="color:#0331ff">ROLE 1 · 2</span>가 필요합니다.</li>
+                <li class="emph-line">이를 통해 지속적인 자원 소비 및 결제 유도가 가능합니다.</li>
               </ul>
             </div>
           </div>
