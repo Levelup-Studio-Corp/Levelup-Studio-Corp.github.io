@@ -179,6 +179,52 @@
   .m-status .status-dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
   .m-note{ margin-top:12px; font-size:11px; color:var(--ink-faint); font-style:italic; line-height:1.5; }
 
+  /* ---------- Timeline entrance dynamics (plays when the slide becomes active) ---------- */
+  section.present .timeline .track-progress{
+    animation: trackDraw .9s cubic-bezier(.22,.9,.32,1) both;
+  }
+  @keyframes trackDraw{
+    0%{ clip-path:inset(0 100% 0 0); }
+    100%{ clip-path:inset(0 0% 0 0); }
+  }
+  section.present .timeline .track-dashed{
+    animation: dashedFade .5s ease-out .8s both;
+  }
+  @keyframes dashedFade{ 0%{opacity:0;} 100%{opacity:1;} }
+
+  section.present .timeline .milestone{
+    animation: milestoneIn .6s ease-out both;
+  }
+  section.present .timeline .milestone:nth-child(1 of .milestone){ animation-delay:.05s; }
+  section.present .timeline .milestone:nth-child(2 of .milestone){ animation-delay:.3s; }
+  section.present .timeline .milestone:nth-child(3 of .milestone){ animation-delay:.55s; }
+  section.present .timeline .milestone:nth-child(4 of .milestone){ animation-delay:.8s; }
+  @keyframes milestoneIn{
+    0%{ opacity:0; transform:translateY(14px); }
+    100%{ opacity:1; transform:translateY(0); }
+  }
+
+  section.present .timeline .milestone .node-dot{
+    animation: dotPop .45s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  section.present .timeline .milestone:nth-child(1 of .milestone) .node-dot{ animation-delay:.15s; }
+  section.present .timeline .milestone:nth-child(2 of .milestone) .node-dot{ animation-delay:.4s; }
+  section.present .timeline .milestone:nth-child(3 of .milestone) .node-dot{ animation-delay:.65s; }
+  section.present .timeline .milestone:nth-child(4 of .milestone) .node-dot{ animation-delay:.9s; }
+  @keyframes dotPop{
+    0%{ transform:scale(0); }
+    70%{ transform:scale(1.15); }
+    100%{ transform:scale(1); }
+  }
+  section.present .timeline .node-dot.active::after{ animation-delay:.9s; }
+
+  html.print-pdf .timeline .milestone,
+  html.print-pdf .timeline .track-progress,
+  html.print-pdf .timeline .track-dashed,
+  html.print-pdf .timeline .node-dot{
+    animation:none !important; opacity:1 !important; clip-path:none !important; transform:none !important;
+  }
+
   /* ---------- Key Features ---------- */
   .features-grid{ display:flex; gap:44px; margin-top:44px; align-items:stretch; }
   .screenshot-panel{
@@ -192,6 +238,21 @@
   .feature-num{ font-family:'Baloo 2',sans-serif; font-size:16px; color:var(--blue-dark); font-weight:800; flex:0 0 auto; }
   .feature-title{ font-family:'Baloo 2',sans-serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:5px; }
   .feature-desc{ font-size:13px; color:var(--ink-soft); line-height:1.55; }
+
+  section.present .feature-cards .feature-card{
+    animation: featureCardIn .55s cubic-bezier(.22,.9,.32,1) both;
+  }
+  section.present .feature-cards .feature-card:nth-child(1 of .feature-card){ animation-delay:.1s; }
+  section.present .feature-cards .feature-card:nth-child(2 of .feature-card){ animation-delay:.28s; }
+  section.present .feature-cards .feature-card:nth-child(3 of .feature-card){ animation-delay:.46s; }
+  section.present .feature-cards .feature-card:nth-child(4 of .feature-card){ animation-delay:.64s; }
+  @keyframes featureCardIn{
+    0%{ opacity:0; transform:translateX(24px); }
+    100%{ opacity:1; transform:translateX(0); }
+  }
+  html.print-pdf .feature-cards .feature-card{
+    animation:none !important; opacity:1 !important; transform:none !important;
+  }
 
   /* ---------- Genre Intro (p2) ---------- */
   .intro-body{ display:flex; gap:44px; align-items:center; margin-top:20px; }
@@ -381,6 +442,8 @@
   .team-chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{ font-family:'Nunito',sans-serif; font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:14px;
     background:#eaf6ff; color:var(--blue-dark); }
+  .chip2{ font-family:'Nunito',sans-serif; font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:14px;
+    background:#c8d6ff; color:var(--blue-dark); }
 
   /* Complete Contents Circulation — 원형 순환 다이어그램 */
   .orbit-wrap{ position:relative; width:100%; max-width:960px; height:480px; margin:2px auto 0; }
@@ -423,7 +486,7 @@
     border-radius:18px; padding:16px 18px;
     background:var(--white); box-shadow:var(--card-shadow);
   }
-  .orbit-card.wip{ background:#eaf6ff; }
+  .orbit-card.wip{ background:#cfc49f; }
   .orbit-card.top{ top:0; left:50%; transform:translateX(-50%); }
   .orbit-card.right{ bottom:0; right:0; }
   .orbit-card.left{ bottom:0; left:0; }
@@ -448,8 +511,10 @@
   .closing-body{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
   .closing-eyebrow{ font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; color:var(--ink-faint); letter-spacing:1px; margin-bottom:22px; }
   .closing-hero{ font-family:'Baloo 2',sans-serif !important; font-size:50px !important; font-weight:800 !important; color:#000000 !important; line-height:1.35 !important; max-width:800px; margin:0 !important; text-transform:none !important; }
-  .closing-sub{ font-size:17px; color:var(--ink-soft); margin-top:26px; max-width:600px; line-height:1.6; }
+  .closing-sub{ font-size:17px; color:var(--ink-soft); margin-top:26px; max-width:800px; line-height:1.6; }
   .closing-sub .accent{ color:var(--blue-dark); font-weight:800; }
+  .closing-sub2{ font-size:6px; color:var(--ink-soft); margin-top:50px; max-width:800px; line-height:1.; }
+  .closing-sub2 .accent{ color:var(--blue-dark); font-weight:800; }
 
   @media screen and (max-width:900px){
     .title-main{ flex-direction:column; gap:20px; }
@@ -525,7 +590,7 @@
 
               <div class="intro-statement">
                 <div class="badge">NOT JUST<br>CASUAL</div>
-                <p>가볍고 친근해 보이지만, <b>심도 있는 게임</b>입니다.</p>
+                <p>가볍고 친근하게 보이지만, <b>심도 있는 게임</b>입니다.</p>
               </div>
 
               <div class="intro-refs">
@@ -545,11 +610,142 @@
       </div>
     </section>
 
-    <!-- ============ Outline ============ -->
+    <!-- ============ Key Features ============ -->
     <section>
       <div class="slide-shell" data-page="03">
         <div class="body-wrap">
-          <h2 class="section-title">지금. 그리고, <span class="emph">그랜드 런칭</span>까지</h2>
+          <h2 class="section-title">우리에게는 <span class="emph">'이런'</span> 특징들이 있습니다</h2>
+          <div class="features-grid">
+            <div class="screenshot-panel">
+              <img src="medias/4-1.png" alt="Poky gameplay screenshot">
+            </div>
+            <div class="feature-cards">
+              <div class="feature-card"><div class="feature-num mono">01</div>
+                <div><div class="feature-title">캐주얼하지만 깊이 있게</div>
+                <div class="feature-desc">귀엽고 가벼운 비주얼로 쉽게 시작하지만, 그 안엔 계속 파고들 시스템이 있습니다.</div></div>
+              </div>
+              <div class="feature-card"><div class="feature-num mono">02</div>
+                <div><div class="feature-title">끊기지 않는 연결</div>
+                <div class="feature-desc">주사위를 굴려 이동하는 보드형 미션이 아웃게임과 인게임 세션을 자연스럽게 연결해, 플레이가 끊기지 않습니다.</div></div>
+              </div>
+              <div class="feature-card"><div class="feature-num mono">03</div>
+                <div><div class="feature-title">전략적 다양성</div>
+                <div class="feature-desc">캐릭터, 무기, 스킬, 투척 무기의 조합에 따라 다양한 상황에 유연하게 대응하고, 나만의 전략을 만들어갑니다.</div></div>
+              </div>
+              <div class="feature-card"><div class="feature-num mono">04</div>
+                <div><div class="feature-title">전략적 지형 활용</div>
+                <div class="feature-desc">폭탄으로 길을 뚫고, 화염병으로 시야를 확보하는 등 지형 자체가 전략이 됩니다.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 01 ============ -->
+    <section>
+      <div class="slide-shell" data-page="04">
+        <div class="body-wrap">
+          <div class="feature-eyebrow-row">
+            <div class="feature-index mono"><b>01</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">캐주얼하지만, 깊이 있게</h2>
+          <div class="spectrum-axis"><span>LIGHT</span><span>DEEP</span></div>
+          <div class="spectrum-bar"></div>
+          <div class="spectrum-row">
+            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-1.mp4" autoplay muted loop playsinline></video></div>
+              <div class="spectrum-step">01</div><div class="spectrum-title">파마씨, 변수의 시작</div>
+              <div class="spectrum-desc">강력한 근접용 망치나 연사용 머신건을 내어주는, 공격을 받으면 도망가는 자유 대전의 키가 되는 NPC 입니다.</div></div>
+            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-2.mp4" autoplay muted loop playsinline></video></div>
+              <div class="spectrum-step">02</div><div class="spectrum-title">진짜 슈팅 게임</div>
+              <div class="spectrum-desc">FPS·TPS의 느낌을 탑 뷰에 맞도록 재해석했습니다.</div></div>
+            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-3.mp4" autoplay muted loop playsinline></video></div>
+              <div class="spectrum-step">03</div><div class="spectrum-title">이심 전심 투표 카드</div>
+              <div class="spectrum-desc">디펜스 모드에서 다른 플레이어와 투표해 선택이 일치하면, 가중 효과가 붙는 카드를 얻습니다.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 02 ============ -->
+    <section>
+      <div class="slide-shell" data-page="05">
+        <div class="body-wrap">
+          <div class="feature-eyebrow-row">
+            <div class="feature-index mono"><b>02</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">끊임없이 <span class="emph">이어지는</span> 플레이</h2>
+          <div class="feature-panels">
+            <div class="feature-panel"><div class="panel-tag">OUT-GAME BOARD</div>
+              <div class="spectrum-video has-media"><video src="medias/6-1.mp4" autoplay muted loop playsinline></video></div>
+              <div class="panel-title">주사위를 던지고</div>
+              <div class="panel-desc">보드 위에서 주사위를 굴려 이동합니다.</div></div>
+            <div class="panel-connector"><span>→</span></div>
+            <div class="feature-panel"><div class="panel-tag">ENCOUNTER</div>
+              <div class="spectrum-video has-media"><video src="medias/6-2.mp4" autoplay muted loop playsinline></video></div>
+              <div class="panel-title">잡고, 잡히고</div>
+              <div class="panel-desc">변수가 되는 존재와 레이싱.</div></div>
+            <div class="panel-connector"><span>→</span></div>
+            <div class="feature-panel depth"><div class="panel-tag">MISSION</div>
+              <div class="spectrum-video has-media"><video src="medias/6-3.mp4" autoplay muted loop playsinline></video></div>
+              <div class="panel-title">미션에서 게임으로. 다시 미션..!</div>
+              <div class="panel-desc">전투를 통해 완료된 미션 보상이 다음 미션으로 연결됩니다.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 03 ============ -->
+    <section>
+      <div class="slide-shell" data-page="06">
+        <div class="body-wrap">
+          <div class="feature-eyebrow-row">
+            <div class="feature-index mono"><b>03</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">조합이 만드는, <span class="emph">전략적 다양성</span></h2>
+          <div class="feature-grid2">
+            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-1.mp4" autoplay muted loop playsinline></video></div>
+              <div class="v-body"><div class="v-title">각자만의 개성, 캐릭터</div><div class="v-desc">캐릭터마다 고유한 특성을 가지고 있습니다.</div></div></div>
+            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-2.mp4" autoplay muted loop playsinline></video></div>
+              <div class="v-body"><div class="v-title">명확한 특성의 무기</div><div class="v-desc">뚜렷한 개성을 가진 무기들과 PERK 이 있습니다.</div></div></div>
+            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-3.mp4" autoplay muted loop playsinline></video></div>
+              <div class="v-body"><div class="v-title">상황을 바꾸는 스킬</div><div class="v-desc">여러 상황에 대응할 수 있는 다양한 스킬.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Feature 04 ============ -->
+    <section>
+      <div class="slide-shell" data-page="07">
+        <div class="body-wrap">
+          <div class="feature-eyebrow-row">
+            <div class="feature-index mono"><b>04</b> / 04</div>
+          </div>
+          <h2 class="feature-headline">부수고 쌓으며, <span class="emph">순환</span>하는 전장</h2>
+          <div class="cycle-diagram">
+            <div class="cycle-grid">
+              <div class="cycle-card"><div class="thumb has-media"><video src="medias/8-1.mp4" autoplay muted loop playsinline></video></div>
+                <div><div class="c-tag">ATTACK · BOX</div><div class="c-title">폭탄</div><div class="c-desc">박스를 깨서 길을 만듭니다.</div></div></div>
+              <div class="cycle-card def"><div class="thumb has-media"><video src="medias/8-2.mp4" autoplay muted loop playsinline></video></div>
+                <div><div class="c-tag">DEFENSE · BOX</div><div class="c-title">박스탄</div><div class="c-desc">박스로 길을 막습니다.</div></div></div>
+              <div class="cycle-card def"><div class="thumb has-media"><video src="medias/8-4.mp4" autoplay muted loop playsinline></video></div>
+                <div><div class="c-tag">DEFENSE · BUSH</div><div class="c-title">부쉬탄</div><div class="c-desc">부쉬를 만들어 엄폐 지역을 만듭니다.</div></div></div>
+              <div class="cycle-card"><div class="thumb has-media"><video src="medias/8-3.mp4" autoplay muted loop playsinline></video></div>
+                <div><div class="c-tag">ATTACK · BUSH</div><div class="c-title">화염병</div><div class="c-desc">부쉬를 태워 시야를 확보합니다.</div></div></div>
+            </div>
+            <div class="cycle-arrow top">→</div>
+            <div class="cycle-arrow bottom">→</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Outline ============ -->
+    <section>
+      <div class="slide-shell" data-page="08">
+        <div class="body-wrap">
+          <h2 class="section-title">지금까지 우리는. 그리고, <span class="emph">그랜드 런칭</span>까지</h2>
           <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
           <div class="timeline">
             <div class="track-base"></div>
@@ -585,140 +781,13 @@
               <div class="m-date mono">2026.09</div>
               <div class="m-title">GRAND LAUNCH</div>
               <div class="m-desc"><span class="m-highlight">정식 출시</span> 예정</div>
-              <div class="m-status upcoming mono">PLANNED</div>
+              <div class="m-status upcoming mono">PLANNED</div></p>
+              <div class="chip2">새로운 모드 / 새로운 재화</div></p>
+              <div class="chip2">캐릭터 강화와 스탯 조정</div></p>
+              <div class="chip2">캐릭터와 배경 스킨</div></p>
+              <div class="chip2">무기 장신구</div>              
             </div>
           </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Key Features ============ -->
-    <section>
-      <div class="slide-shell" data-page="04">
-        <div class="body-wrap">
-          <h2 class="section-title">우리에게는 <span class="emph">'이런'</span> 특징들이 있습니다</h2>
-          <div class="features-grid">
-            <div class="screenshot-panel">
-              <img src="medias/4-1.png" alt="Poky gameplay screenshot">
-            </div>
-            <div class="feature-cards">
-              <div class="feature-card"><div class="feature-num mono">01</div>
-                <div><div class="feature-title">캐주얼하지만 깊이 있게</div>
-                <div class="feature-desc">귀엽고 가벼운 비주얼로 쉽게 시작하지만, 그 안엔 계속 파고들 시스템이 있습니다.</div></div>
-              </div>
-              <div class="feature-card"><div class="feature-num mono">02</div>
-                <div><div class="feature-title">끊기지 않는 연결</div>
-                <div class="feature-desc">주사위를 굴려 이동하는 보드형 미션이 아웃게임과 인게임 세션을 자연스럽게 연결해, 플레이가 끊기지 않습니다.</div></div>
-              </div>
-              <div class="feature-card"><div class="feature-num mono">03</div>
-                <div><div class="feature-title">전략적 다양성</div>
-                <div class="feature-desc">캐릭터, 무기, 스킬, 투척 무기의 조합에 따라 다양한 상황에 유연하게 대응하고, 나만의 전략을 만들어갑니다.</div></div>
-              </div>
-              <div class="feature-card"><div class="feature-num mono">04</div>
-                <div><div class="feature-title">전략적 지형 활용</div>
-                <div class="feature-desc">폭탄으로 길을 뚫고, 화염병으로 시야를 확보하는 등 지형 자체가 전략이 됩니다.</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Feature 01 ============ -->
-    <section>
-      <div class="slide-shell" data-page="05">
-        <div class="body-wrap">
-          <div class="feature-eyebrow-row">
-            <div class="feature-index mono"><b>01</b> / 04</div>
-          </div>
-          <h2 class="feature-headline">캐주얼하지만, 깊이 있게</h2>
-          <div class="spectrum-axis"><span>LIGHT</span><span>DEEP</span></div>
-          <div class="spectrum-bar"></div>
-          <div class="spectrum-row">
-            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-1.mp4" autoplay muted loop playsinline></video></div>
-              <div class="spectrum-step">01</div><div class="spectrum-title">파마씨, 변수의 시작</div>
-              <div class="spectrum-desc">공격하면 도망가고, 그대로 두면 근접용 망치나 연사용 머신건을 내어주는 NPC. 선택이 판을 바꿉니다.</div></div>
-            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-2.mp4" autoplay muted loop playsinline></video></div>
-              <div class="spectrum-step">02</div><div class="spectrum-title">진짜 슈팅 게임</div>
-              <div class="spectrum-desc">FPS·TPS의 느낌을 탑뷰에 맞도록 재해석했습니다.</div></div>
-            <div class="spectrum-item"><div class="spectrum-video has-media"><video src="medias/5-3.mp4" autoplay muted loop playsinline></video></div>
-              <div class="spectrum-step">03</div><div class="spectrum-title">이심전심 투표 카드</div>
-              <div class="spectrum-desc">디펜스 모드에서 다른 플레이어와 투표해 선택이 일치하면, 가중 효과가 붙는 카드를 얻습니다.</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Feature 02 ============ -->
-    <section>
-      <div class="slide-shell" data-page="06">
-        <div class="body-wrap">
-          <div class="feature-eyebrow-row">
-            <div class="feature-index mono"><b>02</b> / 04</div>
-          </div>
-          <h2 class="feature-headline">쉬는 순간에도, <span class="emph">이어지는</span> 플레이</h2>
-          <div class="feature-panels">
-            <div class="feature-panel"><div class="panel-tag">OUT-GAME BOARD</div>
-              <div class="spectrum-video has-media"><video src="medias/6-1.mp4" autoplay muted loop playsinline></video></div>
-              <div class="panel-title">주사위를 던지고</div>
-              <div class="panel-desc">보드 위에서 주사위를 굴려 이동합니다.</div></div>
-            <div class="panel-connector"><span>→</span></div>
-            <div class="feature-panel"><div class="panel-tag">ENCOUNTER</div>
-              <div class="spectrum-video has-media"><video src="medias/6-2.mp4" autoplay muted loop playsinline></video></div>
-              <div class="panel-title">잡고, 잡히고</div>
-              <div class="panel-desc">변수가 되는 존재와 레이싱.</div></div>
-            <div class="panel-connector"><span>→</span></div>
-            <div class="feature-panel depth"><div class="panel-tag">MISSION</div>
-              <div class="spectrum-video has-media"><video src="medias/6-3.mp4" autoplay muted loop playsinline></video></div>
-              <div class="panel-title">미션에서 게임으로. 다시 미션..!</div>
-              <div class="panel-desc">전투를 통해 완료된 미션 보상이 다음 미션으로 연결됩니다.</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Feature 03 ============ -->
-    <section>
-      <div class="slide-shell" data-page="07">
-        <div class="body-wrap">
-          <div class="feature-eyebrow-row">
-            <div class="feature-index mono"><b>03</b> / 04</div>
-          </div>
-          <h2 class="feature-headline">조합이 만드는, <span class="emph">전략적 다양성</span></h2>
-          <div class="feature-grid2">
-            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-1.mp4" autoplay muted loop playsinline></video></div>
-              <div class="v-body"><div class="v-title">각자만의 개성, 캐릭터</div><div class="v-desc">캐릭터마다 고유한 특성을 가지고 있습니다.</div></div></div>
-            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-2.mp4" autoplay muted loop playsinline></video></div>
-              <div class="v-body"><div class="v-title">명확한 특성의 무기</div><div class="v-desc">다양한 Perk와 뚜렷한 개성을 가진 무기들.</div></div></div>
-            <div class="feature-card-v"><div class="thumb has-media"><video src="medias/7-3.mp4" autoplay muted loop playsinline></video></div>
-              <div class="v-body"><div class="v-title">상황을 바꾸는 스킬</div><div class="v-desc">여러 상황에 대응할 수 있는 다양한 스킬.</div></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Feature 04 ============ -->
-    <section>
-      <div class="slide-shell" data-page="08">
-        <div class="body-wrap">
-          <div class="feature-eyebrow-row">
-            <div class="feature-index mono"><b>04</b> / 04</div>
-          </div>
-          <h2 class="feature-headline">부수고 쌓으며, <span class="emph">순환</span>하는 전장</h2>
-          <div class="cycle-diagram">
-            <div class="cycle-grid">
-              <div class="cycle-card"><div class="thumb has-media"><video src="medias/8-1.mp4" autoplay muted loop playsinline></video></div>
-                <div><div class="c-tag">ATTACK · BOX</div><div class="c-title">폭탄</div><div class="c-desc">박스를 깨서 길을 만듭니다.</div></div></div>
-              <div class="cycle-card def"><div class="thumb has-media"><video src="medias/8-2.mp4" autoplay muted loop playsinline></video></div>
-                <div><div class="c-tag">DEFENSE · BOX</div><div class="c-title">박스탄</div><div class="c-desc">박스로 길을 막습니다.</div></div></div>
-              <div class="cycle-card def"><div class="thumb has-media"><video src="medias/8-4.mp4" autoplay muted loop playsinline></video></div>
-                <div><div class="c-tag">DEFENSE · BUSH</div><div class="c-title">부쉬탄</div><div class="c-desc">부쉬를 만들어 엄폐 지역을 만듭니다.</div></div></div>
-              <div class="cycle-card"><div class="thumb has-media"><video src="medias/8-3.mp4" autoplay muted loop playsinline></video></div>
-                <div><div class="c-tag">ATTACK · BUSH</div><div class="c-title">화염병</div><div class="c-desc">부쉬를 태워 시야를 확보합니다.</div></div></div>
-            </div>
-            <div class="cycle-arrow top">→</div>
-            <div class="cycle-arrow bottom">→</div>
           </div>
         </div>
       </div>
@@ -760,7 +829,7 @@
           <h2 class="section-title">세 역할이 <span class="emph">맞물려</span> 도는 순환</h2>
           <div class="orbit-wrap">
             <div class="orbit-ring"></div>
-            <div class="orbit-center">콘텐츠<br>순환</div>
+            <!--div class="orbit-center">콘텐츠<br>순환</div-->
 
             <div class="orbit-card top">
               <div class="thumb has-media"><img src="medias/11-1.png" alt="Free For All"></div>
@@ -842,14 +911,14 @@
     <section>
       <div class="slide-shell" data-page="12">
         <div class="body-wrap">
-          <h2 class="section-title">플레이어가 만날, <span class="emph">새로운 것들</span></h2>
+          <h2 class="section-title">플레이어가 만날, <span class="emph">새로운</span> 것들</h2>
 
           <div class="grid9">
             <div class="card9">
               <div class="num">01</div><div class="title">신규 모드</div>
               <ul class="list">
                 <li>각 역할을 담당하는 모드가 다양하게 추가됩니다.</li>
-                <li>시즌마다 역할별 모드가 바뀌거나 복수의 모드가 진행됩니다.</li>
+                <li>시즌마다 역할 별 모드가 바뀌거나 복수의 모드가 진행됩니다.</li>
                 <li>다양한 재미를 만들어, LC를 자연스럽게 연장할 수 있습니다.</li>
               </ul>
             </div>
@@ -858,7 +927,7 @@
               <ul class="list">
                 <li>신규 모드에 어울리는 다양한 무기군이 확장될 예정입니다.</li>
                 <li>같은 모드라도 새로운 무기군으로 새로운 재미 요소를 만들 수 있습니다.</li>
-                <li>지뢰 등 새로운 투척 무기도 고려 중입니다.</li>
+                <li>지뢰 등 새로운 방향의 무기도 고려 중입니다.</li>
               </ul>
             </div>
             <div class="card9">
@@ -872,7 +941,6 @@
               <ul class="list">
                 <li>각 캐릭터만 사용할 수 있는 고유한 스킬도 추가 예정입니다.</li>
                 <li>공용 스킬과 달리, 지정된 무기 착용 시에만 동작합니다.</li>
-                <li>캐릭터 레벨이 일정 이상이 되면 사용할 수 있습니다.</li>
               </ul>
             </div>
             <div class="card9">
@@ -880,12 +948,14 @@
               <ul class="list">
                 <li>다른 플레이어와 집단을 만들어 함께 할 수 있는 커뮤니티 추가 예정입니다.</li>
                 <li>이탈 방지 / 새로운 컨텐츠 생성을 기대할 수 있습니다.</li>
+                <li>집단 거주지 ( 하우징 ) 등.</li>
               </ul>
             </div>
             <div class="card9">
               <div class="num">06</div><div class="title">세트 효과</div>
               <ul class="list">
                 <li>캐릭터 / 로비 등에 사용하는 스킨 조합에 따라 발동되는 효과입니다.</li>
+                <li>BM 으로 연계할 수 있습니다.</li>
               </ul>
             </div>
             <div class="card9">
@@ -916,7 +986,7 @@
     <section>
       <div class="slide-shell" data-page="13">
         <div class="body-wrap">
-          <h2 class="section-title">지금부터, <span class="emph">다음 3단계</span></h2>
+          <h2 class="section-title">이제부터, <span class="emph">가야 할</span> 길들은..</h2>
           <div class="timeline">
             <div class="track-base" style="left:16.67%; width:66.66%;"></div>
             <div class="track-dashed" style="left:16.67%; width:66.66%;"></div>
@@ -938,7 +1008,7 @@
               <div class="node-dot upcoming"></div>
               <div class="m-date mono">STAGE 3</div>
               <div class="m-title">UPDATE / EXTENSION</div>
-              <div class="m-desc">새로운 콘텐츠들이<br>계속 추가됩니다.</div>
+              <div class="m-desc">새로운 컨텐츠들이<br>계속 추가될 예정입니다.</div>
               <div class="m-status upcoming mono">PLANNED</div>
             </div>
           </div>
@@ -950,9 +1020,10 @@
     <section>
       <div class="slide-shell" data-page="14">
         <div class="closing-body">
-          <div class="closing-eyebrow">돌고 도는, 물고 물리는 콘텐츠와 자원들</div>
+          <div class="closing-eyebrow">돌고 도는, 물고 물리는 컨텐츠와 자원들</div>
           <h2 class="closing-hero">플레이어는!<br><span class="emph">게임만</span> 하면 됩니다.</h2>
-          <div class="closing-sub">더 빠르게 이루고, 더 강해지고 싶다면 —<br><span class="accent">자원을 사용하면</span> 됩니다.</div>
+          <div class="closing-sub">더 빠르게 이루고, 더 강해지고 싶은 욕구는 —<br>많은 <span class="accent">연습</span>을 통해 이룰 수 있습니다.</div>
+          <div class="closing-sub2"><span class="accent">더 빠르게 하고 싶으면, 더 많이</span> 하고, 더 많이<span class="accent">결제</span>하면 될..겁니다.</div>
         </div>
       </div>
     </section>
