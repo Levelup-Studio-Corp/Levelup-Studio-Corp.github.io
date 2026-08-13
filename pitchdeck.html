@@ -314,6 +314,55 @@
     .intro-statement{ flex-direction:column; align-items:flex-start; }
   }
 
+  /* ---------- Differentiation (p3): 카드 3개 + 2D 포지셔닝 맵 ---------- */
+  .diff-grid{ display:flex; gap:44px; align-items:stretch; margin-top:30px; }
+  .diff-grid .feature-cards{ flex:0 0 46%; }
+  .position-map{
+    flex:1; display:flex; gap:12px;
+    background:var(--white); border-radius:20px; box-shadow:var(--card-shadow-lg);
+    padding:26px 28px;
+  }
+  .pm-axis-y{
+    display:flex; flex-direction:column; justify-content:space-between; align-items:center;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; letter-spacing:.5px; color:var(--ink-faint);
+    padding:4px 0;
+  }
+  .pm-body{ flex:1; display:flex; flex-direction:column; gap:10px; min-width:0; }
+  .pm-plot{
+    position:relative; flex:1; border-radius:14px;
+    background:#f4fbff; border:1px solid rgba(27,43,58,.08);
+  }
+  .pm-plot::before{ content:''; position:absolute; left:0; right:0; top:50%; height:1px; background:var(--dash); }
+  .pm-plot::after{ content:''; position:absolute; top:0; bottom:0; left:50%; width:1px; background:var(--dash); }
+  .pm-axis-x{
+    display:flex; justify-content:space-between;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; letter-spacing:.5px; color:var(--ink-faint);
+    padding:0 2px;
+  }
+  .pm-point{ position:absolute; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:5px; }
+  .pm-point .pm-dot{ width:14px; height:14px; border-radius:50%; background:var(--white); border:3px solid var(--blue-dark); box-shadow:var(--card-shadow); }
+  .pm-point .pm-name{
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:10.5px; color:var(--ink-soft);
+    background:rgba(255,255,255,.9); padding:2px 8px; border-radius:8px; white-space:nowrap;
+  }
+  .pm-point.us .pm-dot{ width:20px; height:20px; background:var(--yellow); border-color:var(--yellow-dark); box-shadow:0 3px 0 var(--yellow-dark); }
+  .pm-point.us .pm-name{ color:var(--ink); background:var(--yellow); font-size:12px; padding:4px 12px; box-shadow:0 3px 0 var(--yellow-dark); }
+
+  section.present .position-map .pm-point{
+    animation: pmPointIn .4s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  section.present .position-map .pm-point:nth-child(1 of .pm-point){ animation-delay:.5s; }
+  section.present .position-map .pm-point:nth-child(2 of .pm-point){ animation-delay:.62s; }
+  section.present .position-map .pm-point:nth-child(3 of .pm-point){ animation-delay:.74s; }
+  @keyframes pmPointIn{ 0%{ opacity:0; transform:translate(-50%,-50%) scale(0); } 100%{ opacity:1; transform:translate(-50%,-50%) scale(1); } }
+  html.print-pdf .position-map .pm-point{ animation:none !important; opacity:1 !important; transform:translate(-50%,-50%) !important; }
+
+  @media screen and (max-width:900px){
+    .diff-grid{ flex-direction:column; }
+    .diff-grid .feature-cards{ flex:1 1 auto; width:100%; }
+    .position-map{ min-height:280px; }
+  }
+
   /* ---------- Mode Role Circulation (신규 p12) ---------- */
   .mode-flow-wrap{ flex:1; display:flex; flex-direction:column; justify-content:space-between; padding-top:10px; }
   .mode-grid{ display:flex; gap:24px; }
@@ -778,9 +827,47 @@
       </div>
     </section>
 
-    <!-- ============ Outline ============ -->
+    <!-- ============ Differentiation ============ -->
     <section>
       <div class="slide-shell" data-page="08">
+        <div class="body-wrap">
+          <h2 class="section-title">비슷하지만 <span class="emph">다릅니다</span></h2>
+
+          <div class="diff-grid">
+            <div class="feature-cards">
+              <div class="feature-card"><div class="feature-num mono">01</div>
+                <div><div class="feature-title">모드 선택이 아닌 순환 루프</div>
+                <div class="feature-desc">'주사위 → 레이싱 → 미션 → 전투 → 주사위'로 이어지는 구조. 무엇을 할지 고르는 대신, 게임이 스스로 다음 할 것으로 유도합니다.</div></div>
+              </div>
+              <div class="feature-card"><div class="feature-num mono">02</div>
+                <div><div class="feature-title">캐릭터가 아닌 시스템에서 나오는 깊이</div>
+                <div class="feature-desc">쉽고 간단하게 시작되지만, 컨트롤·지형·전술·카드 조합이 겹치며 만드는 게임의 천장. 리소스를 늘리지 않아도 실력 차가 드러납니다.</div></div>
+              </div>
+              <div class="feature-card"><div class="feature-num mono">03</div>
+                <div><div class="feature-title">설계된 타깃 확산</div>
+                <div class="feature-desc">10대가 시작점이지만, 동네 놀이터의 정서로 부모·형제·친구까지 자연스럽게 끌어들이도록 의도했습니다.</div></div>
+              </div>
+            </div>
+
+            <div class="position-map">
+              <div class="pm-axis-y"><span>깊음</span><span>얕음</span></div>
+              <div class="pm-body">
+                <div class="pm-plot">
+                  <div class="pm-point" style="left:34%; top:58%;"><span class="pm-dot"></span><span class="pm-name">Brawl Stars</span></div>
+                  <div class="pm-point" style="left:65%; top:70%;"><span class="pm-dot"></span><span class="pm-name">Zooba</span></div>
+                  <div class="pm-point us" style="left:26%; top:20%;"><span class="pm-dot"></span><span class="pm-name">D.D.D</span></div>
+                </div>
+                <div class="pm-axis-x"><span>진입장벽 낮음</span><span>높음</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Outline ============ -->
+    <section>
+      <div class="slide-shell" data-page="09">
         <div class="body-wrap">
           <h2 class="section-title">지금까지 우리는. 그리고, <span class="emph">그랜드 런칭</span>까지</h2>
           <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
@@ -832,7 +919,7 @@
 
     <!-- ============ Business Metrics ============ >
     <section>
-      <div class="slide-shell" data-page="09">
+      <div class="slide-shell" data-page="10">
         <div class="body-wrap">
           <h2 class="section-title"><span class="emph">숫자</span>로, 증명합니다</h2>
           <div style="margin-top:50px; border:3px dashed var(--dash); border-radius:16px; padding:56px; text-align:center; background:rgba(255,255,255,.4);">
@@ -844,7 +931,7 @@
 
     <!-- ============ Team Capabilities ============ -->
     <section>
-      <div class="slide-shell" data-page="9">
+      <div class="slide-shell" data-page="10">
         <div class="body-wrap">
           <h2 class="section-title">실전에서 <span class="emph">증명된</span> 팀</h2>
           <div class="team-grid">
@@ -861,7 +948,7 @@
 
     <!-- ============ Complete Contents Circulation ============ -->
     <section>
-      <div class="slide-shell" data-page="10">
+      <div class="slide-shell" data-page="11">
         <div class="body-wrap">
           <h2 class="section-title">세 역할이 <span class="emph">맞물려</span> 도는 순환</h2>
           <div class="orbit-wrap">
@@ -905,7 +992,7 @@
 
     <!-- ============ Mode Role Circulation (NEW) ============ -->
     <section>
-      <div class="slide-shell" data-page="11">
+      <div class="slide-shell" data-page="12">
         <div class="body-wrap">
           <h2 class="section-title">모드 역할에 의한 <span class="emph">자원 순환</span></h2>
 
@@ -946,7 +1033,7 @@
 
     <!-- ============ Future Blueprint (revised, 9 cards) ============ -->
     <section>
-      <div class="slide-shell" data-page="12">
+      <div class="slide-shell" data-page="13">
         <div class="body-wrap">
           <h2 class="section-title">플레이어가 만날, <span class="emph">새로운</span> 것들</h2>
 
@@ -1021,7 +1108,7 @@
 
     <!-- ============ Next Step ============ -->
     <section>
-      <div class="slide-shell" data-page="13">
+      <div class="slide-shell" data-page="14">
         <div class="body-wrap">
           <h2 class="section-title">이제부터, <span class="emph">가야 할</span> 길들은..</h2>
           <div class="timeline">
@@ -1055,7 +1142,7 @@
 
     <!-- ============ Finally Goal ============ -->
     <section>
-      <div class="slide-shell" data-page="14">
+      <div class="slide-shell" data-page="15">
         <div class="closing-body">
           <div class="closing-eyebrow">돌고 도는, 물고 물리는 컨텐츠와 자원들</div>
           <h2 class="closing-hero">플레이어는!<br><span class="emph">게임만</span> 하면 됩니다.</h2>
@@ -1070,7 +1157,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script>
-  const TOTAL_PAGES = 14;
+  const TOTAL_PAGES = 15;
   const LOGO_URL = 'https://levelupstudio.co.kr/logo.png';
   const FOOTER_TAG = 'TOP-DOWN P vs. P SHOOTER';
 
