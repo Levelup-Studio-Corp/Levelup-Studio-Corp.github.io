@@ -362,6 +362,29 @@
   .grid9-comment{ margin-top:14px; text-align:center; font-family:'Nunito',sans-serif; font-size:12px; color:var(--ink-faint); font-style:italic; }
   .grid9-comment b{ color:var(--blue-dark); font-weight:800; font-style:normal; }
 
+  section.present .grid9 .card9{
+    animation: card9In .5s cubic-bezier(.22,.9,.32,1) both;
+  }
+  section.present .grid9 .card9:nth-child(1 of .card9){ animation-delay:.05s; }
+  section.present .grid9 .card9:nth-child(2 of .card9){ animation-delay:.15s; }
+  section.present .grid9 .card9:nth-child(3 of .card9){ animation-delay:.25s; }
+  section.present .grid9 .card9:nth-child(4 of .card9){ animation-delay:.35s; }
+  section.present .grid9 .card9:nth-child(5 of .card9){ animation-delay:.45s; }
+  section.present .grid9 .card9:nth-child(6 of .card9){ animation-delay:.55s; }
+  section.present .grid9 .card9:nth-child(7 of .card9){ animation-delay:.65s; }
+  section.present .grid9 .card9:nth-child(8 of .card9){ animation-delay:.75s; }
+  @keyframes card9In{
+    0%{ opacity:0; transform:translateY(16px) scale(.96); }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  section.present .grid9-comment{
+    animation: fadeInComment .5s ease-out .9s both;
+  }
+  @keyframes fadeInComment{ 0%{opacity:0;} 100%{opacity:1;} }
+  html.print-pdf .grid9 .card9, html.print-pdf .grid9-comment{
+    animation:none !important; opacity:1 !important; transform:none !important;
+  }
+
   @media screen and (max-width:900px){
     .grid9{ grid-template-columns:1fr; grid-template-rows:auto; }
   }
@@ -419,10 +442,10 @@
 
   /* cycle diagram (feature 04) */
   .cycle-diagram{ position:relative; max-width:1120px; margin:16px auto 0; }
-  .cycle-grid{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:56px 80px; }
-  .cycle-card{ display:flex; gap:22px; align-items:center; padding:26px 28px; border-radius:22px; background:var(--white); box-shadow:var(--card-shadow); }
+  .cycle-grid{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:25px 80px; }
+  .cycle-card{ display:flex; gap:12px; align-items:center; padding:26px 28px 26px 13px; border-radius:22px; background:var(--white); box-shadow:var(--card-shadow); }
   .cycle-card.def{ background:#eaf6ff; }
-  .cycle-card .thumb{ flex:0 0 182px; aspect-ratio:16/9; border-radius:12px; border:3px dashed var(--dash); background:rgba(255,255,255,.5);
+  .cycle-card .thumb{ flex:0 0 275px; align-self:stretch; border-radius:12px; border:3px dashed var(--dash); background:rgba(255,255,255,.5);
     display:flex; align-items:center; justify-content:center; overflow:hidden; }
   .cycle-card .thumb.has-media{ border:none; background:#000; }
   .cycle-card .thumb.has-media video{ width:100%; height:100%; object-fit:cover; display:block; }
@@ -501,6 +524,20 @@
   .orbit-card .r-list{ list-style:none; padding:0; margin:0; }
   .orbit-card .r-list li{ font-size:11.5px; color:var(--ink-soft); line-height:1.45; padding-left:11px; position:relative; margin-bottom:3px; }
   .orbit-card .r-list li::before{ content:'—'; position:absolute; left:0; color:var(--ink-faint); }
+
+  /* ---------- Orbit diagram entrance dynamics (p10): ring -> 01/top -> arrow -> 02/right -> arrow -> 03/left -> arrow ---------- */
+  @keyframes orbitReveal{ 0%{ opacity:0; filter:blur(6px); } 100%{ opacity:1; filter:blur(0); } }
+  section.present .orbit-wrap .orbit-ring{ animation:orbitReveal .5s ease-out 0s both; }
+  section.present .orbit-wrap .orbit-num.num-01,
+  section.present .orbit-wrap .orbit-card.top{ animation:orbitReveal .5s ease-out .5s both; }
+  section.present .orbit-wrap .orbit-arrow.arrow-right{ animation:orbitReveal .5s ease-out .8s both; }
+  section.present .orbit-wrap .orbit-num.num-02,
+  section.present .orbit-wrap .orbit-card.right{ animation:orbitReveal .5s ease-out 1.3s both; }
+  section.present .orbit-wrap .orbit-arrow.arrow-bottom{ animation:orbitReveal .5s ease-out 1.6s both; }
+  section.present .orbit-wrap .orbit-num.num-03,
+  section.present .orbit-wrap .orbit-card.left{ animation:orbitReveal .5s ease-out 2.1s both; }
+  section.present .orbit-wrap .orbit-arrow.arrow-left{ animation:orbitReveal .5s ease-out 2.4s both; }
+  html.print-pdf .orbit-wrap *{ animation:none !important; opacity:1 !important; filter:none !important; }
 
   @media screen and (max-width:900px){
     .orbit-wrap{ height:auto; }
@@ -855,12 +892,12 @@
               </div>
             </div>
 
-            <div class="orbit-arrow" style="top:calc(22% + 100px); left:73%;">↘</div>
-            <div class="orbit-arrow" style="top:78%; left:50%; transform:translateX(-50%);">←</div>
-            <div class="orbit-arrow" style="top:calc(22% + 100px); left:27%;">↗</div>
-            <div class="orbit-num" style="top:calc(2% - 100px); left:50%; transform:translateX(-50%);">01</div>
-            <div class="orbit-num" style="top:58%; left:98%; transform:translateY(-50%);">02</div>
-            <div class="orbit-num" style="top:58%; left:2%; transform:translateY(-50%);">03</div>
+            <div class="orbit-arrow arrow-right" style="top:calc(22% + 100px); left:73%;">↘</div>
+            <div class="orbit-arrow arrow-bottom" style="top:78%; left:50%; transform:translateX(-50%);">←</div>
+            <div class="orbit-arrow arrow-left" style="top:calc(22% + 100px); left:27%;">↗</div>
+            <div class="orbit-num num-01" style="top:calc(2% - 100px); left:50%; transform:translateX(-50%);">01</div>
+            <div class="orbit-num num-02" style="top:58%; left:98%; transform:translateY(-50%);">02</div>
+            <div class="orbit-num num-03" style="top:58%; left:2%; transform:translateY(-50%);">03</div>
           </div>
         </div>
       </div>
