@@ -242,7 +242,7 @@
     flex:0 0 38%; border-radius:20px; overflow:hidden; box-shadow:var(--card-shadow-lg);
     min-height:400px; position:relative;
   }
-  .screenshot-panel img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .screenshot-panel img, .screenshot-panel video{ width:100%; height:100%; object-fit:cover; display:block; }
   .feature-cards{ flex:1; display:flex; flex-direction:column; gap:14px; justify-content:center; }
   .feature-card{ display:flex; gap:16px; align-items:flex-start; padding:18px 22px; border-radius:16px;
     background:var(--white); box-shadow:var(--card-shadow); }
@@ -744,7 +744,7 @@
           <h2 class="section-title">우리에게는 <span class="emph">'이런'</span> 특징들이 있습니다</h2>
           <div class="features-grid">
             <div class="screenshot-panel">
-              <img src="medias/4-1.png" alt="Poky gameplay screenshot">
+              <video src="medias/4-1.mp4" autoplay muted loop playsinline data-autoplay></video>
             </div>
             <div class="feature-cards">
               <div class="feature-card"><div class="feature-num mono">01</div>
