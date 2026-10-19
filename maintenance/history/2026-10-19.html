@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026-10-19 Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins','Apple SD Gothic Neo','Noto Sans KR',sans-serif;}
+body{background:transparent;color:white;padding:8px 4px 40px;}
+.patch-date{font-size:12px;color:#4a6a84;margin-bottom:20px;letter-spacing:1px;}
+.card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:12px;}
+.card-title{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:1.5px;color:#56c4ff;margin-bottom:14px;text-transform:uppercase;}
+.feature{margin-bottom:16px;}
+.feature:last-child{margin-bottom:0;}
+.feature-title{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#e0edf7;font-weight:600;line-height:1.5;margin-bottom:5px;}
+.feature-title .bullet{color:#56c4ff;flex-shrink:0;}
+.feature-desc{font-size:11px;color:#5a7a96;line-height:1.7;padding-left:16px;}
+.feature-desc li{list-style:none;display:block;padding-left:12px;position:relative;margin-bottom:3px;}
+.feature-desc li::before{content:"▸";color:#3a5a76;position:absolute;left:0;top:0;}
+</style>
+</head>
+<body>
+<div class="patch-date">2026.10.19</div>
+<div id="content"></div>
+
+<script>
+const TEXTS = {
+  ko: {
+    sections: [
+      { label:"사용성 개선 및 수정", features:[
+        { title:"자유대전 맵 ( 동네 놀이터 ) 수정", descs:[] },
+        { title:"상점 항목 조정", descs:[
+          "테마 / 스킨 등을 위한 항목 추가와 일부 항목들이 조정되었습니다."
+        ]},
+        { title:"튜토리얼 수정", descs:[
+          "신규 유저를 위한 튜토리얼이 수정되었습니다."
+        ]},
+      ]},
+      { label:"신규 컨텐츠", features:[
+        { title:"전쟁 모드(Warfare) 추가", descs:[
+          "5 vs. 5 팀이 되어 플레이됩니다 ( 자동 매칭 ).",
+          "모드의 승 / 패 및 순위에 따라 '별 코인(Star Coin)'을 획득할 수 있습니다.",
+          "모드 상점에서 구매한 것들은 게임이 종료되면 사용할 수 없습니다."
+        ]},
+        { title:"친구 시스템 추가", descs:[
+          "원하는 친구를 등록하고, 상태를 확인할 수 있습니다.",
+          "닉네임으로 추가 가능하며, 사용하기 위해서는 플레이어도 계정 연동을 해야 합니다."
+        ]},
+        { title:"파티 플레이 기능 추가", descs:[
+          "등록된 친구와 함께 같은 방에서 플레이 할 수 있는 기능입니다.",
+          "친구 창에서 '초대'를 통해 파티를 구성할 수 있습니다."
+        ]},
+        { title:"캐릭터 카드를 모아 캐릭터를 성장시키는 기능 추가", descs:[
+          "레벨에 따라 '별 코인' 추가 필요할 수 있습니다."
+        ]},
+        { title:"캐릭터 스킨 변경 기능 추가", descs:[
+          "상점에서 '별 코인'으로 구매할 수 있습니다."
+        ]},
+        { title:"테마 기능 추가", descs:[
+          "로비 배경을 변경하는 기능으로 상점에서 '별 코인'으로 구매할 수 있습니다."
+        ]},
+        { title:"업적 항목 추가", descs:[
+          "전쟁 모드 관련 업적이 추가되었습니다."
+        ]},
+        { title:"가이드 미션 추가", descs:[
+          "튜토리얼을 완료하면, 로비에서 '가이드 미션'이 활성화됩니다."
+        ]},
+      ]},
+      { label:"밸런스 조정", features:[
+        { title:"심지 고폭탄의 공격 범위 소폭 하향 조정", descs:[] },
+        { title:"폭탄에 의해 벽에 부딪히면 추가 피해가 적용되도록 수정", descs:[] },
+      ]},
+    ]
+  },
+  en: {
+    sections: [
+      { label:"Usability Improvements", features:[
+        { title:"Free-for-All Map (Neighborhood Playground) Updated", descs:[] },
+        { title:"Shop Items Adjusted", descs:[
+          "Added new items for themes/skins and adjusted some existing items."
+        ]},
+        { title:"Tutorial Updated", descs:[
+          "Updated the tutorial for new users."
+        ]},
+      ]},
+      { label:"New Content", features:[
+        { title:"Warfare Mode Added", descs:[
+          "Played in 5 vs. 5 teams (auto-matched).",
+          "Earn Star Coins based on your wins/losses and ranking in this mode.",
+          "Items purchased in the mode shop cannot be used once the match ends."
+        ]},
+        { title:"Friend System Added", descs:[
+          "Add friends you want and check their status.",
+          "Friends can be added by nickname; both players must have linked accounts to use this feature."
+        ]},
+        { title:"Party Play Feature Added", descs:[
+          "Play in the same room together with your registered friends.",
+          "Form a party by inviting friends from the Friends window."
+        ]},
+        { title:"Character Growth via Character Cards Added", descs:[
+          "Leveling up may require additional Star Coins."
+        ]},
+        { title:"Character Skin Change Added", descs:[
+          "Can be purchased with Star Coins in the shop."
+        ]},
+        { title:"Theme Feature Added", descs:[
+          "Changes your lobby background; purchasable with Star Coins in the shop."
+        ]},
+        { title:"New Achievements Added", descs:[
+          "Added achievements related to Warfare Mode."
+        ]},
+        { title:"Guide Missions Added", descs:[
+          "Guide Missions are activated in the lobby after completing the tutorial."
+        ]},
+      ]},
+      { label:"Balance Adjustments", features:[
+        { title:"Slightly Reduced Wick Bomb's Attack Range", descs:[] },
+        { title:"Fixed Bonus Damage Not Applying When Blown Into a Wall by an Explosion", descs:[] },
+      ]},
+    ]
+  },
+  id: {
+    sections: [
+      { label:"Peningkatan Kegunaan", features:[
+        { title:"Peta Free-for-All (Taman Bermain Lingkungan) Diperbarui", descs:[] },
+        { title:"Penyesuaian Item Toko", descs:[
+          "Menambahkan item baru untuk tema/skin dan menyesuaikan beberapa item yang sudah ada."
+        ]},
+        { title:"Tutorial Diperbarui", descs:[
+          "Memperbarui tutorial untuk pemain baru."
+        ]},
+      ]},
+      { label:"Konten Baru", features:[
+        { title:"Mode Warfare Ditambahkan", descs:[
+          "Dimainkan dalam tim 5 lawan 5 (pencocokan otomatis).",
+          "Dapatkan Star Coin berdasarkan kemenangan/kekalahan dan peringkat dalam mode ini.",
+          "Item yang dibeli di toko mode ini tidak dapat digunakan setelah pertandingan berakhir."
+        ]},
+        { title:"Sistem Teman Ditambahkan", descs:[
+          "Tambahkan teman yang diinginkan dan periksa statusnya.",
+          "Dapat ditambahkan melalui nama panggilan; kedua pemain harus menautkan akun untuk menggunakan fitur ini."
+        ]},
+        { title:"Fitur Party Play Ditambahkan", descs:[
+          "Bermain di ruangan yang sama bersama teman yang terdaftar.",
+          "Bentuk party melalui 'Undang' di jendela Teman."
+        ]},
+        { title:"Pertumbuhan Karakter melalui Kartu Karakter Ditambahkan", descs:[
+          "Menaikkan level mungkin membutuhkan Star Coin tambahan."
+        ]},
+        { title:"Perubahan Skin Karakter Ditambahkan", descs:[
+          "Dapat dibeli dengan Star Coin di toko."
+        ]},
+        { title:"Fitur Tema Ditambahkan", descs:[
+          "Mengubah latar belakang lobi; dapat dibeli dengan Star Coin di toko."
+        ]},
+        { title:"Pencapaian Baru Ditambahkan", descs:[
+          "Menambahkan pencapaian terkait Mode Warfare."
+        ]},
+        { title:"Misi Panduan Ditambahkan", descs:[
+          "Misi Panduan aktif di lobi setelah menyelesaikan tutorial."
+        ]},
+      ]},
+      { label:"Penyesuaian Keseimbangan", features:[
+        { title:"Mengurangi Sedikit Jangkauan Serangan Bom Sumbu", descs:[] },
+        { title:"Memperbaiki Kerusakan Tambahan saat Terlempar ke Dinding Akibat Ledakan", descs:[] },
+      ]},
+    ]
+  },
+  ms: {
+    sections: [
+      { label:"Peningkatan Kebolehgunaan", features:[
+        { title:"Peta Free-for-All (Taman Permainan Kejiranan) Dikemas Kini", descs:[] },
+        { title:"Pelarasan Item Kedai", descs:[
+          "Menambah item baharu untuk tema/skin dan melaraskan beberapa item sedia ada."
+        ]},
+        { title:"Tutorial Dikemas Kini", descs:[
+          "Mengemas kini tutorial untuk pemain baharu."
+        ]},
+      ]},
+      { label:"Kandungan Baharu", features:[
+        { title:"Mod Warfare Ditambah", descs:[
+          "Dimainkan dalam pasukan 5 lawan 5 (padanan automatik).",
+          "Dapatkan Star Coin berdasarkan kemenangan/kekalahan dan kedudukan dalam mod ini.",
+          "Item yang dibeli di kedai mod ini tidak boleh digunakan selepas perlawanan tamat."
+        ]},
+        { title:"Sistem Rakan Ditambah", descs:[
+          "Tambah rakan yang diingini dan semak status mereka.",
+          "Boleh ditambah melalui nama panggilan; kedua-dua pemain perlu menghubungkan akaun untuk menggunakan ciri ini."
+        ]},
+        { title:"Ciri Party Play Ditambah", descs:[
+          "Bermain dalam bilik yang sama bersama rakan yang didaftarkan.",
+          "Bentuk parti melalui 'Jemput' di tetingkap Rakan."
+        ]},
+        { title:"Pertumbuhan Watak melalui Kad Watak Ditambah", descs:[
+          "Menaikkan tahap mungkin memerlukan Star Coin tambahan."
+        ]},
+        { title:"Penukaran Skin Watak Ditambah", descs:[
+          "Boleh dibeli dengan Star Coin di kedai."
+        ]},
+        { title:"Ciri Tema Ditambah", descs:[
+          "Menukar latar belakang lobi; boleh dibeli dengan Star Coin di kedai."
+        ]},
+        { title:"Pencapaian Baharu Ditambah", descs:[
+          "Menambah pencapaian berkaitan Mod Warfare."
+        ]},
+        { title:"Misi Panduan Ditambah", descs:[
+          "Misi Panduan diaktifkan di lobi selepas menyelesaikan tutorial."
+        ]},
+      ]},
+      { label:"Pelarasan Keseimbangan", features:[
+        { title:"Mengurangkan Sedikit Jarak Serangan Bom Sumbu", descs:[] },
+        { title:"Membaiki Kerosakan Tambahan apabila Terhempas ke Dinding Akibat Letupan", descs:[] },
+      ]},
+    ]
+  },
+  zh: {
+    sections: [
+      { label:"易用性改进", features:[
+        { title:"自由对战地图(社区游乐场)已更新", descs:[] },
+        { title:"商店项目调整", descs:[
+          "新增了主题/皮肤等项目，并调整了部分现有项目。"
+        ]},
+        { title:"新手教程更新", descs:[
+          "为新玩家更新了教程内容。"
+        ]},
+      ]},
+      { label:"新内容", features:[
+        { title:"新增战争模式(Warfare)", descs:[
+          "以5对5队伍进行游戏(自动匹配)。",
+          "根据该模式的胜负及排名可获得'星币(Star Coin)'。",
+          "在模式商店购买的物品在对局结束后将无法使用。"
+        ]},
+        { title:"新增好友系统", descs:[
+          "可添加想要的好友并查看其状态。",
+          "可通过昵称添加好友；双方玩家均需完成账号绑定才能使用该功能。"
+        ]},
+        { title:"新增组队游玩功能", descs:[
+          "可与已添加的好友在同一房间内一起游玩。",
+          "可在好友窗口通过'邀请'组建队伍。"
+        ]},
+        { title:"新增通过角色卡培养角色的功能", descs:[
+          "提升等级可能需要额外消耗'星币'。"
+        ]},
+        { title:"新增角色皮肤更换功能", descs:[
+          "可在商店使用'星币'购买。"
+        ]},
+        { title:"新增主题功能", descs:[
+          "可更改大厅背景，可在商店使用'星币'购买。"
+        ]},
+        { title:"新增成就项目", descs:[
+          "新增了与战争模式相关的成就。"
+        ]},
+        { title:"新增引导任务", descs:[
+          "完成教程后，大厅中将激活'引导任务'。"
+        ]},
+      ]},
+      { label:"平衡性调整", features:[
+        { title:"小幅下调引信高爆弹的攻击范围", descs:[] },
+        { title:"修复爆炸击飞撞墙时未正确施加额外伤害的问题", descs:[] },
+      ]},
+    ]
+  },
+  fr: {
+    sections: [
+      { label:"Améliorations d'utilisabilité", features:[
+        { title:"Carte de mêlée libre (Aire de jeux du quartier) mise à jour", descs:[] },
+        { title:"Articles de la boutique ajustés", descs:[
+          "Ajout de nouveaux articles pour les thèmes/skins et ajustement de certains articles existants."
+        ]},
+        { title:"Tutoriel mis à jour", descs:[
+          "Mise à jour du tutoriel pour les nouveaux joueurs."
+        ]},
+      ]},
+      { label:"Nouveau contenu", features:[
+        { title:"Mode Warfare ajouté", descs:[
+          "Joué en équipes de 5 contre 5 (appariement automatique).",
+          "Gagnez des Star Coins selon vos victoires/défaites et votre classement dans ce mode.",
+          "Les objets achetés dans la boutique du mode ne peuvent plus être utilisés une fois la partie terminée."
+        ]},
+        { title:"Système d'amis ajouté", descs:[
+          "Ajoutez les amis de votre choix et consultez leur statut.",
+          "Peut être ajouté par pseudo ; les deux joueurs doivent avoir lié leur compte pour utiliser cette fonctionnalité."
+        ]},
+        { title:"Fonction de jeu en groupe (Party) ajoutée", descs:[
+          "Jouez dans la même salle avec vos amis enregistrés.",
+          "Formez un groupe via 'Inviter' dans la fenêtre Amis."
+        ]},
+        { title:"Évolution des personnages via les cartes de personnage ajoutée", descs:[
+          "Monter de niveau peut nécessiter des Star Coins supplémentaires."
+        ]},
+        { title:"Changement de skin de personnage ajouté", descs:[
+          "Peut être acheté avec des Star Coins dans la boutique."
+        ]},
+        { title:"Fonction de thème ajoutée", descs:[
+          "Change le fond du lobby ; peut être acheté avec des Star Coins dans la boutique."
+        ]},
+        { title:"Nouveaux succès ajoutés", descs:[
+          "Ajout de succès liés au mode Warfare."
+        ]},
+        { title:"Missions de guidage ajoutées", descs:[
+          "Les missions de guidage s'activent dans le lobby une fois le tutoriel terminé."
+        ]},
+      ]},
+      { label:"Ajustements d'équilibre", features:[
+        { title:"Légère réduction de la portée d'attaque de la bombe à mèche", descs:[] },
+        { title:"Correction des dégâts bonus non appliqués lors d'une projection contre un mur par une explosion", descs:[] },
+      ]},
+    ]
+  },
+};
+
+function getLang() {
+  const p = new URLSearchParams(window.location.search).get("lang");
+  if (p && TEXTS[p]) return p;
+  const saved = localStorage.getItem("lang");
+  if (saved && TEXTS[saved]) return saved;
+  const os = navigator.language.split("-")[0];
+  return TEXTS[os] ? os : "en";
+}
+
+function render() {
+  const lang = getLang();
+  const t = TEXTS[lang] || TEXTS["en"];
+  const container = document.getElementById("content");
+  container.innerHTML = t.sections.map(sec => `
+    <div class="card">
+      <div class="card-title">✦ ${sec.label}</div>
+      ${sec.features.map(f => `
+        <div class="feature">
+          <div class="feature-title"><span class="bullet">•</span>${f.title}</div>
+          ${f.descs.length > 0 ? `<ul class="feature-desc">${f.descs.map(d => `<li>${d}</li>`).join("")}</ul>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+render();
+</script>
+</body>
+</html>
