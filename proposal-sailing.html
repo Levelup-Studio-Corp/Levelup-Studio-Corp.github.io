@@ -60,6 +60,14 @@
   .status-dot{ width:6px; height:6px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 8px var(--accent-1); }
   .title-main{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
   h1.game-logo{ font-size:104px; font-weight:800; line-height:.95; letter-spacing:-1px; margin:0; color:var(--text-hi); }
+  .zero-impact{
+    display:inline-block; color:var(--accent-2); font-size:1.18em; letter-spacing:2px;
+    animation:zero-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes zero-pulse{
+    0%,100%{ text-shadow:0 0 18px rgba(232,179,106,.45), 0 0 42px rgba(232,179,106,.18); }
+    50%{ text-shadow:0 0 34px rgba(232,179,106,.85), 0 0 70px rgba(232,179,106,.4); }
+  }
   .game-sub{ font-size:28px; font-weight:500; color:var(--text-mid); margin-top:14px; letter-spacing:.5px; }
   .hook-line{ margin-top:14px; font-size:16px; color:var(--text-mid); max-width:1200px; line-height:1.6; }
   .codename{
@@ -321,7 +329,7 @@
         <div class="status-tag"><span class="status-dot"></span>R & D 진행 중</div>
       </div>
       <div class="title-main">
-        <h1 class="game-logo display">LONGITUDE<br>ZERO</h1>
+        <h1 class="game-logo display">LONGITUDE<br><span class="zero-impact">ZERO</span></h1>
         <div class="game-sub">롱지튜드 제로 <span style="color:var(--text-dim);">(가칭)</span></div>
         <div class="hook-line">세력을 이루고, 항로를 넓혀<br>세계의 중심이라는 타이틀을 쟁취하라.</div>
         <div class="codename">Project Name : Sailing</div>
