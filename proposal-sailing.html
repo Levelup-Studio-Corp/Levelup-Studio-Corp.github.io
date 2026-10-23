@@ -203,8 +203,35 @@
 .cover .bg-grid{opacity:.5;}
 .orbit-art{position:absolute;right:-95px;top:60px;width:570px;height:500px;opacity:.7;pointer-events:none;}
 .orbit-art svg{width:100%;height:100%;overflow:visible;}
-.orbit-art .globe-spin{transform-origin:300px 255px;animation:globe-rotate 48s linear infinite;}
-@keyframes globe-rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.orbit-art .globe-tilt{transform-origin:300px 255px;transform:rotate(23.5deg);}
+/* 자오선 두 개의 rx를 |cos(경도)|로 흔들어 실제 구체가 축을 중심으로 자전하는 것처럼
+   보이게 함 — 전체를 평면으로 돌리면 접시처럼 보여서, 선 너비 자체가 숨쉬게 만드는 방식. */
+.orbit-art .meridian-a{animation:meridian-sweep-a 10s linear infinite;}
+.orbit-art .meridian-b{animation:meridian-sweep-b 10s linear infinite;}
+@keyframes meridian-sweep-a{
+  0%{rx:192; stroke-opacity:.32;} 10%{rx:155; stroke-opacity:.26;} 20%{rx:59; stroke-opacity:.14;}
+  30%{rx:59; stroke-opacity:.14;} 40%{rx:155; stroke-opacity:.26;} 50%{rx:192; stroke-opacity:.32;}
+  60%{rx:155; stroke-opacity:.26;} 70%{rx:59; stroke-opacity:.14;} 80%{rx:59; stroke-opacity:.14;}
+  90%{rx:155; stroke-opacity:.26;} 100%{rx:192; stroke-opacity:.32;}
+}
+@keyframes meridian-sweep-b{
+  0%{rx:0; stroke-opacity:.08;} 10%{rx:113; stroke-opacity:.2;} 20%{rx:183; stroke-opacity:.3;}
+  30%{rx:183; stroke-opacity:.3;} 40%{rx:113; stroke-opacity:.2;} 50%{rx:0; stroke-opacity:.08;}
+  60%{rx:113; stroke-opacity:.2;} 70%{rx:183; stroke-opacity:.3;} 80%{rx:183; stroke-opacity:.3;}
+  90%{rx:113; stroke-opacity:.2;} 100%{rx:0; stroke-opacity:.08;}
+}
+.orbit-art .ship-marker{offset-path:circle(220px at 300px 255px);offset-rotate:auto;animation:sail-orbit 26s linear infinite;}
+@keyframes sail-orbit{from{offset-distance:0%;}to{offset-distance:100%;}}
+/* 점선 전체를 항상 그려두는 대신, 짧은 점선 구간(항적)만 배와 같은 26초 주기로
+   둘레를 따라 흘러가게 — dasharray에 점선+큰 공백을 한 세트로 넣고 dashoffset만 돌림. */
+.orbit-art .wake-trail{animation:wake-flow 26s linear infinite;}
+@keyframes wake-flow{from{stroke-dashoffset:0;}to{stroke-dashoffset:-1382;}}
+/* 가운데 000° 마커 — 곡선을 따라 왕복하면서, 지나온 만큼만 점선이 그려지고(처음엔
+   아무것도 없다가) 되돌아갈 땐 다시 지워지게. pathLength=100이라 0~100 단위로 계산. */
+.orbit-art .route-trail{stroke-dasharray:100; stroke-dashoffset:100; animation:route-draw 9s ease-in-out infinite alternate;}
+.orbit-art .route-marker{offset-path:path("M131 353Q252 108 446 185"); offset-rotate:0deg; animation:route-move 9s ease-in-out infinite alternate;}
+@keyframes route-draw{from{stroke-dashoffset:100;}to{stroke-dashoffset:0;}}
+@keyframes route-move{from{offset-distance:0%;}to{offset-distance:100%;}}
 .overview .pillars:first-of-type .pillar-card{min-height:135px;}
 .overview .pillars:last-child .pillar-card{min-height:180px;display:flex;flex-direction:column;justify-content:center;}
 .overview .pillars:last-child .pillar-card:last-child{background:linear-gradient(115deg,rgba(105,78,44,.24),rgba(12,32,42,.8));}
@@ -288,10 +315,10 @@
   <!-- 1. Title -->
   <section class="cover">
     <div class="bg-grid"></div>
-    <div class="title-slide"><div class="orbit-art" aria-hidden="true"><svg viewBox="0 0 560 500" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ocean"><stop stop-color="#124450" stop-opacity=".35"/><stop offset="1" stop-color="#071219" stop-opacity=".1"/></radialGradient></defs><g class="globe-spin"><circle cx="300" cy="255" r="192" fill="url(#ocean)" stroke="#42b9b4" stroke-opacity=".45"/><ellipse cx="300" cy="255" rx="95" ry="192" stroke="#42b9b4" stroke-opacity=".25"/><ellipse cx="300" cy="255" rx="155" ry="192" stroke="#42b9b4" stroke-opacity=".2"/><ellipse cx="300" cy="255" rx="192" ry="64" stroke="#42b9b4" stroke-opacity=".3"/><ellipse cx="300" cy="255" rx="192" ry="132" stroke="#42b9b4" stroke-opacity=".22"/><path d="M108 255H492M300 63V447" stroke="#42b9b4" stroke-opacity=".25"/><circle cx="300" cy="255" r="220" stroke="#42b9b4" stroke-opacity=".15" stroke-dasharray="2 9"/></g><path d="M300 35V475" stroke="#eac28b" stroke-opacity=".65"/><path d="M131 353Q252 108 446 185" stroke="#eac28b" stroke-width="1.5" stroke-dasharray="5 6"/><circle cx="446" cy="185" r="5" fill="#eac28b"/><circle cx="446" cy="185" r="13" stroke="#eac28b" stroke-opacity=".4"/><text x="316" y="53" fill="#eac28b" font-family="monospace" font-size="11" letter-spacing="3">000°</text></svg></div>
+    <div class="title-slide"><div class="orbit-art" aria-hidden="true"><svg viewBox="0 0 560 500" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ocean"><stop stop-color="#124450" stop-opacity=".35"/><stop offset="1" stop-color="#071219" stop-opacity=".1"/></radialGradient></defs><g class="globe-tilt"><path d="M300 35V475" stroke="#eac28b" stroke-opacity=".65"/><circle cx="300" cy="255" r="192" fill="url(#ocean)" stroke="#42b9b4" stroke-opacity=".45"/><ellipse class="meridian-a" cx="300" cy="255" rx="192" ry="192" stroke="#42b9b4"/><ellipse class="meridian-b" cx="300" cy="255" rx="0" ry="192" stroke="#42b9b4"/><ellipse cx="300" cy="255" rx="192" ry="64" stroke="#42b9b4" stroke-opacity=".3"/><ellipse cx="300" cy="255" rx="192" ry="132" stroke="#42b9b4" stroke-opacity=".22"/><path d="M108 255H492M300 63V447" stroke="#42b9b4" stroke-opacity=".25"/></g><circle class="wake-trail" cx="300" cy="255" r="220" stroke="#42b9b4" stroke-opacity=".4" stroke-dasharray="6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 6 10 1142"/><g class="ship-marker"><path d="M-7,3 L7,3 L5,8 L-5,8 Z" fill="#eac28b"/><path d="M-1,-11 L-1,3 L7,3 Z" fill="#eac28b" opacity=".85"/></g><path class="route-trail" pathLength="100" d="M131 353Q252 108 446 185" stroke="#eac28b" stroke-width="1.5"/><g class="route-marker"><circle r="5" fill="#eac28b"/><circle r="13" stroke="#eac28b" stroke-opacity=".4"/></g><text x="316" y="53" fill="#eac28b" font-family="monospace" font-size="11" letter-spacing="3">000°</text></svg></div>
       <div class="hud-top">
         <div class="eyebrow" style="margin:0;">Pre-Production · Internal Proposal</div>
-        <div class="status-tag"><span class="status-dot"></span>싱글플레이 검증 완료</div>
+        <div class="status-tag"><span class="status-dot"></span>R & D 진행 중</div>
       </div>
       <div class="title-main">
         <h1 class="game-logo display">LONGITUDE<br>ZERO</h1>
@@ -366,9 +393,9 @@
       <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
         <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
       </div>
-      <p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
+      <!--p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
         <span class="tag-tbd">TBD</span> 기부 외 교역/건조 활동이 협회 기여도로 얼마나 환산되는지는 다음 설계 단계에서 확정.
-      </p>
+      </p-->
     </div>
   </section>
 
@@ -387,9 +414,9 @@
       <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
         <video src="medias/sailing/5-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
       </div>
-      <p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
+      <!--p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
         <span class="tag-tbd">TBD</span> 보급/수리 자원 소모 체계, "좌초"의 실제 페널티 강도(완전 손실 vs 구조 가능)는 다음 설계 단계에서 확정.
-      </p>
+      </p-->
     </div>
   </section>
 
@@ -466,14 +493,14 @@
     <h2 class="display">R & D 가 필요한 것들.</h2>
     <table class="plan">
       <tr><th>영역</th><th>상태</th><th>비고</th></tr>
-      <tr><td>행성 렌더링 (큐브 스피어 LOD)</td><td><span class="status-pill done">완료</span></td><td>싱글플레이 프로토타입에서 동작 확인</td></tr>
-      <tr><td>기후/해류/항해 시뮬레이션</td><td><span class="status-pill done">완료</span></td><td>클라이언트 로컬 — 서버 포팅 전</td></tr>
-      <tr><td>일식/월식, 그림자 최적화</td><td><span class="status-pill tested">진행 중</span></td><td>메커니즘 가능성만 확인, 실구현 전</td></tr>
-      <tr><td>함선 연출</td><td><span class="status-pill tested">진행 중</span></td><td>배의 Yaw / Pitch / Roll 과 항적 및 바람에 의한 연출 등</td></tr>
-      <tr><td>서버 권위화 (날씨/배 이동)</td><td><span class="status-pill planned">설계 완료</span></td><td>아키텍처 설계 완료, 구현 전 — 부록 참고</td></tr>
-      <tr><td>3×3 인터레스트/존 샤딩</td><td><span class="status-pill planned">설계 완료</span></td><td>마이그레이션 4단계, 가장 마지막 착수</td></tr>
-      <tr><td>경제/전투/외교/점령</td><td><span class="status-pill planned">스켈레톤 설계</span></td><td>디테일 미확정</td></tr>
-      <tr><td>최적화</td><td><span class="status-pill planned">예정</span></td><td>매시브한 환경을 처리해야 하는 문제</td></tr>
+      <tr><td>행성 렌더링 (큐브 스피어 LOD)</td><td><span class="status-pill done">완료</span></td><td>싱글플레이 프로토타입에서 동작 확인.</td></tr>
+      <tr><td>기후/해류/항해 시뮬레이션</td><td><span class="status-pill done">완료</span></td><td>클라이언트 로컬 — 서버 포팅 전.</td></tr>
+      <tr><td>일식/월식, 그림자 최적화</td><td><span class="status-pill tested">진행 중</span></td><td>메커니즘 가능성만 확인, 실구현 전.</td></tr>
+      <tr><td>함선 연출</td><td><span class="status-pill tested">진행 중</span></td><td>배의 Yaw / Pitch / Roll 과 항적 및 바람에 의한 연출 등.</td></tr>
+      <tr><td>서버 권위화 (날씨/배 이동)</td><td><span class="status-pill planned">설계 완료</span></td><td>아키텍처 설계 완료.</td></tr>
+      <tr><td>3×3 인터레스트/존 샤딩</td><td><span class="status-pill planned">설계 완료</span></td><td>마이그레이션 4단계, 가장 마지막 착수.</td></tr>
+      <tr><td>경제/전투/외교/점령</td><td><span class="status-pill planned">스켈레톤 설계</span></td><td>디테일 미확정.</td></tr>
+      <tr><td>최적화</td><td><span class="status-pill planned">예정</span></td><td>매시브한 환경을 처리해야 하는 문제.</td></tr>
     </table>
   </section>
 
@@ -555,31 +582,19 @@
     </div>
   </section>
 
-  <!-- 14.5 Content & Launch Milestones -->
+  <!-- 15 Content & Launch Milestones -->
   <section>
     <div class="eyebrow">Content & Launch Milestones</div>
     <h2 class="display">유럽에서 시작해 세계로 — 지역 웨이브 확장</h2>
     <table class="plan">
       <tr><th>시기</th><th>콘텐츠(세력 · 척수 · 항구)</th><th>비고</th></tr>
       <tr><td>~2028 Q1<br><span class="hl">소프트 런칭</span></td><td>유럽 5개 세력(포르투갈·스페인·잉글랜드·프랑스·네덜란드) — 40척, 항구 16개(기존 DB)</td><td>실제 커밋 범위</td></tr>
-      <tr><td>시즌1<br>28 Q2~Q3</td><td>지중해·바르바리(오스만·오만·알제) — 24척, 항구 3개</td><td>세력당 항구 1개뿐 — 보강 검토</td></tr>
-      <tr><td>시즌2<br>28 Q4~29 Q1</td><td>동아시아(중국·조선·일본) — 24척, 항구 10개(기존 DB)</td><td>국내 타깃층 반응 기대 구간</td></tr>
-      <tr><td>시즌3<br>29 Q2~Q3</td><td>동남아 술탄국(말라카·아체·마자파힛) — 24척</td><td><span class="tag-tbd">TBD</span> 아체 항구 신규 추가 필요</td></tr>
-      <tr><td>시즌4<br>29 Q4~</td><td>인도양(구자라트·마라타) — 16척</td><td><span class="tag-tbd">TBD</span> 구자라트 항구 신규 추가, WorldState 정치 레이어 완성판 투입</td></tr>
+      <tr><td>시즌 1.<br>28 Q2~Q3</td><td>지중해·바르바리(오스만·오만·알제) — 24척, 항구 3개</td><td>세력당 항구 1개뿐 — 보강 검토</td></tr>
+      <tr><td>시즌 2.<br>28 Q4~29 Q1</td><td>동아시아(중국·조선·일본) — 24척, 항구 10개(기존 DB)</td><td>국내 타깃층 반응 기대 구간</td></tr>
+      <tr><td>시즌 3.<br>29 Q2~Q3</td><td>동남아 술탄국(말라카·아체·마자파힛) — 24척</td><td><span class="tag-tbd">TBD</span> 아체 항구 신규 추가 필요</td></tr>
+      <tr><td>시즌 4.<br>29 Q4~</td><td>인도양(구자라트·마라타) — 16척</td><td><span class="tag-tbd">TBD</span> 구자라트 항구 신규 추가, WorldState 정치 레이어 완성판 투입</td></tr>
     </table>
-    <!--p class="sub" style="margin-top:14px; font-size:13.5px;">전체 16개 세력·128척 중 소프트 런칭은 유럽 5개 세력뿐 — 나머지는 출시 후 약 2년에 걸쳐 단계적으로 공개. "활동 영역 확장" 루프(6번 슬라이드)와 그대로 맞물리는 구조.</p-->
-  </section>
-
-  <!-- 16. Platform -->
-  <section class="platform">
-    <div class="eyebrow">Platform Strategy</div>
-    <h2 class="display">PC (Steam) 우선, 그 다음은 자원에 따라</h2>
-    <table class="plan">
-      <tr><th>플랫폼</th><th>우선순위</th><th>비고</th></tr>
-      <tr><td>PC (Steam)</td><td>확정 · 1순위</td><td>지금 프로토타입 기반으로 바로 진행</td></tr>
-      <tr><td>모바일 (iOS/Android)</td><td>자원 여유 시 확장</td><td>시점 미확정 — 확정 로드맵이 아니라 후속 검토 항목. 기존 Android 빌드 경험 보유</td></tr>
-    </table>
-    <p class="sub" style="margin-top:16px;">Web(WebGL)은 범위에서 제외 — PC가 핵심 타겟을 충분히 커버한다.</p>
+    <p class="sub" style="margin-top:25px; font-size:13.5px; text-align:center;">소프트런칭 시기에 맞게 최대한 많은 문명과 함선 처리 — 나머지는 출시 후 단계적으로 DLC 형태로 처리.</p>
   </section>
 
 </div>
