@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LONGITUDE ZERO — Project Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
+<style>
+  :root{
+    --bg: #050b10;
+    --bg-2: #081219;
+    --accent-1: #14919b;
+    --accent-2: #e8b36a;
+    --text-hi: #ffffff;
+    --text-mid: #c2cfd6;
+    --text-dim: #7c8c94;
+    --line: rgba(20,145,155,0.22);
+    --line-soft: rgba(255,255,255,0.06);
+    --card-bg: rgba(255,255,255,0.03);
+    --warn: #d98a4f;
+  }
+  *{box-sizing:border-box;}
+  html, body{background:var(--bg);}
+  .reveal{font-family:'Noto Sans KR','Poppins',sans-serif;color:var(--text-hi);}
+  .reveal .slides{text-align:left;}
+  .reveal .slides section{background:var(--bg); height:100%; padding:60px 72px;}
+  .reveal h1, .reveal h2, .reveal h3{ text-transform:none; }
+  .display{font-family:'Poppins',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  .bg-grid{
+    position:absolute; inset:0; z-index:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 70% at 62% 50%, black 20%, transparent 75%);
+  }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:14px; letter-spacing:4px; color:var(--accent-2);
+    margin-bottom:20px; text-transform:uppercase;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); }
+
+  h1.display{ font-size:40px; font-weight:700; margin:0 0 6px; letter-spacing:.3px; }
+  h2.display{ font-size:32px; font-weight:600; margin:0 0 26px; color:var(--text-hi); }
+  .sub{ color:var(--text-mid); font-size:19px; line-height:1.65; }
+  .hl{ color:var(--accent-2); font-weight:600; }
+  .tag-tbd{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--warn); border:1px solid rgba(217,138,79,.4); border-radius:4px; padding:2px 8px; margin-left:8px; vertical-align:middle; }
+
+  /* ---------- Title slide ---------- */
+  .title-slide{ position:relative; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+  .hud-top{ position:relative; z-index:3; display:flex; align-items:center; justify-content:space-between; }
+  .status-tag{ display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:2px; color:var(--text-mid); padding:6px 12px; border:1px solid var(--line); border-radius:20px; }
+  .status-dot{ width:6px; height:6px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 8px var(--accent-1); }
+  .title-main{ position:relative; z-index:3; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  h1.game-logo{ font-size:104px; font-weight:800; line-height:.95; letter-spacing:-1px; margin:0; color:var(--text-hi); }
+  .game-sub{ font-size:28px; font-weight:500; color:var(--text-mid); margin-top:14px; letter-spacing:.5px; }
+  .hook-line{ margin-top:14px; font-size:16px; color:var(--text-mid); max-width:1200px; line-height:1.6; }
+  .codename{
+    font-family:'JetBrains Mono',monospace; font-weight:600; font-size:14px; letter-spacing:1px;
+    padding:4px 12px; border:1px solid var(--line); border-radius:4px; color:var(--accent-2);
+    background:rgba(20,145,155,.08); display:inline-block; margin-top:20px;
+  }
+  .meta-row{ display:flex; gap:48px; margin-top:44px; }
+  .meta-item{ font-size:11px; letter-spacing:1.5px; color:var(--text-dim); text-transform:uppercase; }
+  .meta-item b{ display:block; font-size:16px; color:var(--text-mid); margin-top:6px; font-weight:500; letter-spacing:.3px; }
+
+  /* ---------- pillars grid ---------- */
+  .pillars{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px; }
+  .pillar-card{ background:var(--card-bg); border:1px solid var(--line-soft); border-radius:10px; padding:22px 24px; }
+  .pillar-card .num{ font-family:'JetBrains Mono',monospace; color:var(--accent-2); font-size:13px; letter-spacing:1px; }
+  .pillar-card h3{ font-size:19px; margin:10px 0 8px; color:var(--text-hi); font-weight:600; }
+  .pillar-card p{ font-size:15.5px; color:var(--text-mid); line-height:1.6; margin:0; }
+
+  /* ---------- media placeholder ---------- */
+  .media-slot{
+    border:1.5px dashed var(--line); border-radius:10px; background:rgba(255,255,255,0.015);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    color:var(--text-dim); text-align:center; padding:28px;
+  }
+  .media-slot .tag{ font-size:11px; letter-spacing:2px; color:var(--accent-2); text-transform:uppercase; }
+  .media-slot .desc{ font-size:14.5px; color:var(--text-mid); max-width:460px; line-height:1.55; }
+  .media-slot .icon{ font-size:30px; opacity:.6; }
+  .media-full{ flex:1; min-height:0; margin-top:14px; }
+  .flex-col{ display:flex; flex-direction:column; height:100%; }
+
+  .media-box{ position:relative; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#000; }
+  .reveal .media-box video{ position:absolute; top:0; right:0; bottom:0; left:0; width:100% !important; height:100% !important; max-width:none !important; max-height:none !important; object-fit:cover; object-position:50% 50%; display:block; margin:0; padding:0; border:0; box-shadow:none; }
+
+  .dash-list{ margin:16px 0 0; padding:0; list-style:none; }
+  .dash-list li{ font-size:17px; color:var(--text-mid); line-height:1.8; padding-left:20px; position:relative; margin-bottom:12px; }
+  .dash-list li::before{ content:'—'; position:absolute; left:0; color:var(--accent-1); }
+  .dash-list.no-dash li{ padding-left:0; }
+  .dash-list.no-dash li::before{ content:none; }
+
+  .loop-list{ counter-reset:loop; list-style:none; margin:14px 0 0; padding:0; columns:2; column-gap:40px; }
+  .loop-list li{ counter-increment:loop; position:relative; padding-left:34px; margin-bottom:11px; font-size:15px; color:var(--text-mid); line-height:1.45; break-inside:avoid; }
+  .loop-list li::before{
+    content:counter(loop); position:absolute; left:0; top:-1px; width:22px; height:22px; border-radius:50%;
+    border:1px solid var(--accent-1); color:var(--accent-1); font-family:'JetBrains Mono',monospace; font-size:11px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .loop-list b{ color:var(--text-hi); }
+
+  /* ---------- horizontal progression flow ---------- */
+  .flow-row{ display:flex; align-items:center; justify-content:center; gap:18px; margin-top:40px; }
+  .flow-box{
+    border:1px solid var(--line); border-radius:10px; background:var(--card-bg);
+    padding:22px 26px; text-align:center; flex:1; max-width:280px;
+  }
+  .flow-box .t{ font-size:17px; font-weight:600; color:var(--text-hi); }
+  .flow-box .d{ font-size:13px; color:var(--text-mid); margin-top:8px; line-height:1.5; }
+  .flow-arrow{ color:var(--accent-2); font-size:26px; flex:0 0 auto; }
+  .flow-cycle{ text-align:center; margin-top:22px; color:var(--text-dim); font-size:13.5px; }
+  .inline-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--accent-2); border:1px solid rgba(232,179,106,.35); border-radius:4px; padding:2px 8px; margin-left:4px; }
+
+  .split{ display:grid; grid-template-columns:1.1fr 1fr; gap:46px; align-items:center; height:100%; }
+  .split ul{ margin:16px 0 0; padding:0; list-style:none; }
+  .split li{ font-size:16.5px; color:var(--text-mid); line-height:1.7; padding-left:20px; position:relative; margin-bottom:10px; }
+  .split li::before{ content:'—'; position:absolute; left:0; color:var(--accent-1); }
+
+  /* ---------- scenario quote block ---------- */
+  .scenario{
+    border-left:3px solid var(--accent-2); background:var(--card-bg); border-radius:0 10px 10px 0;
+    padding:26px 30px; margin-top:18px; font-size:17.5px; line-height:1.85; color:var(--text-hi);
+  }
+  .scenario .line{ display:block; margin-bottom:10px; }
+  .scenario .q{ color:var(--accent-2); font-weight:600; }
+
+  /* ---------- architecture diagram ---------- */
+  .arch{ display:flex; flex-direction:column; align-items:center; gap:0; margin-top:4px; }
+  .arch-row{ display:flex; gap:16px; justify-content:center; width:100%; }
+  .arch-box{
+    border:1px solid var(--line); border-radius:8px; background:var(--card-bg);
+    padding:14px 20px; text-align:center; min-width:150px;
+  }
+  .arch-box .t{ font-size:14px; font-weight:600; color:var(--text-hi); }
+  .arch-box .d{ font-size:13px; color:var(--text-mid); margin-top:4px; }
+  .arch-box.accent{ border-color:var(--accent-1); }
+  .arch-arrow{ color:var(--text-dim); font-size:20px; text-align:center; margin:4px 0; }
+
+  /* ---------- table ---------- */
+  table.plan{ width:100%; border-collapse:collapse; margin-top:4px; }
+  table.plan th{ text-align:left; font-size:12px; letter-spacing:1.5px; color:var(--accent-2); text-transform:uppercase; padding:10px 14px; border-bottom:1px solid var(--line); }
+  table.plan td{ font-size:15.5px; color:var(--text-mid); padding:12px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  table.plan tr td:first-child{ color:var(--text-hi); font-weight:600; white-space:nowrap; }
+  .status-pill{ display:inline-block; font-size:11px; letter-spacing:.5px; padding:2px 9px; border-radius:10px; font-weight:600; }
+  .status-pill.done{ background:rgba(20,145,155,.18); color:#5fd0d6; }
+  .status-pill.tested{ background:rgba(232,179,106,.16); color:var(--accent-2); }
+  .status-pill.planned{ background:rgba(255,255,255,.08); color:var(--text-dim); }
+
+  .stepper{ display:flex; gap:0; margin-top:14px; }
+  .step{ flex:1; position:relative; padding:18px 18px 0 0; }
+  .step:not(:last-child)::after{ content:''; position:absolute; top:35px; left:34px; right:0; height:1px; background:var(--line); z-index:0; }
+  .step .n{ position:relative; z-index:1; width:34px; height:34px; border-radius:50%; border:1px solid var(--accent-1); background:var(--bg); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent-1); margin-bottom:12px; }
+  .step .t{ font-size:15px; font-weight:600; color:var(--text-hi); margin-bottom:6px; }
+  .step .d{ font-size:15px; color:var(--text-mid); line-height:1.5; }
+  .step .milestone{ display:inline-block; margin-top:8px; font-size:11px; color:var(--accent-2); border:1px solid rgba(232,179,106,.35); border-radius:4px; padding:2px 7px; }
+
+  .checklist{ columns:2; column-gap:40px; }
+  .checklist li{ font-size:14.5px; color:var(--text-mid); line-height:1.6; margin-bottom:10px; break-inside:avoid; list-style:none; padding-left:22px; position:relative;}
+  .checklist li::before{ content:'☐'; position:absolute; left:0; color:var(--accent-2); }
+
+  .footer-line{ position:absolute; bottom:26px; left:72px; right:72px; display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); letter-spacing:1px; }
+  .appendix-marker{ position:absolute; top:26px; right:72px; font-size:11px; letter-spacing:2px; color:var(--text-dim); text-transform:uppercase; }
+
+/* Editorial presentation refresh */
+:root{--bg:#071219;--bg-2:#0c202a;--accent-1:#42b9b4;--accent-2:#eac28b;--text-hi:#f4f4ec;--text-mid:#bbcbd1;--text-dim:#8ba2ad;--line:rgba(66,185,180,.3);--line-soft:rgba(183,213,222,.13);--card-bg:rgba(18,43,54,.65);--r-heading-text-transform:none;--r-main-font:'Noto Sans KR',sans-serif;--r-main-font-size:20px;--r-heading-font:'Noto Sans KR',sans-serif;--r-background-color:#071219;--r-main-color:#bbcbd1;--r-link-color:#42b9b4;}
+.reveal{font-size:20px;line-height:1.55;}
+.reveal .slides section{padding:54px 68px 66px;background:radial-gradient(ellipse at 100% 0%,rgba(28,92,104,.17),transparent 55%),var(--bg);box-sizing:border-box;}
+.reveal .slides section::before{content:'';position:absolute;left:68px;right:68px;bottom:43px;height:1px;background:var(--line-soft);pointer-events:none;}
+.reveal .slides section::after{content:'LONGITUDE ZERO  /  PROJECT SAILING';position:absolute;left:68px;bottom:19px;font:10px 'JetBrains Mono',monospace;letter-spacing:2px;color:var(--text-dim);pointer-events:none;}
+.reveal h1,.reveal h2,.reveal h3{font-family:'Noto Sans KR',sans-serif;word-break:keep-all;overflow-wrap:break-word;text-transform:none;line-height:1.3;}
+.reveal h2.display{font-size:38px;font-weight:700;letter-spacing:-1.5px;margin:0 0 25px;line-height:1.3;}
+.reveal h3{font-size:21px;letter-spacing:-.6px;}
+.reveal p{margin:0 0 18px;}
+.eyebrow{font:12px 'JetBrains Mono',monospace;letter-spacing:2.8px;margin-bottom:18px;color:var(--accent-1);}
+.eyebrow::before{width:30px;background:var(--accent-1);}
+.sub{font-size:18px;line-height:1.8;word-break:keep-all;}
+.pillar-card{position:relative;border-radius:5px;padding:23px 26px;background:linear-gradient(125deg,rgba(25,58,70,.75),rgba(13,32,42,.6));border:1px solid var(--line-soft);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.pillar-card .num{font-size:11px;letter-spacing:2px;color:var(--accent-1);}
+.reveal .pillar-card h3{font-size:21px;font-weight:600;margin:10px 0;}
+.pillar-card p{font-size:17px;line-height:1.7;word-break:keep-all;}
+.pillars{gap:16px;}
+.hl{color:var(--accent-2);}
+.reveal .slides .cover{background:radial-gradient(ellipse at 83% 46%,rgba(31,118,129,.2),transparent 52%),#071219;}
+.cover .title-slide{position:relative;}
+.cover .title-main{align-items:flex-start;}
+.reveal h1.game-logo{font-family:'Poppins',sans-serif;font-size:91px;font-weight:600;line-height:1.02;letter-spacing:-4px;max-width:740px;margin:0 0 14px;}
+.game-sub{font-size:22px;letter-spacing:1px;}
+.hook-line{font-size:18px;max-width:620px;line-height:1.8;margin-top:25px;word-break:keep-all;}
+.codename{font-size:11px;letter-spacing:2px;padding:8px 12px;margin-top:25px;}
+.status-tag{font-size:11px;letter-spacing:1px;border-color:var(--line-soft);padding:9px 14px;}
+.status-dot{background:var(--accent-1);box-shadow:0 0 10px rgba(66,185,180,.4);}
+.cover .footer-line{bottom:4px;left:0;right:0;}
+.cover::after{display:none;}
+.cover .bg-grid{opacity:.5;}
+.orbit-art{position:absolute;right:-95px;top:60px;width:570px;height:500px;opacity:.7;pointer-events:none;}
+.orbit-art svg{width:100%;height:100%;overflow:visible;}
+.orbit-art .globe-spin{transform-origin:300px 255px;animation:globe-rotate 48s linear infinite;}
+@keyframes globe-rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.overview .pillars:first-of-type .pillar-card{min-height:135px;}
+.overview .pillars:last-child .pillar-card{min-height:180px;display:flex;flex-direction:column;justify-content:center;}
+.overview .pillars:last-child .pillar-card:last-child{background:linear-gradient(115deg,rgba(105,78,44,.24),rgba(12,32,42,.8));}
+.concept .sub{max-width:1050px!important;margin-bottom:22px!important;}
+.concept .pillar-card{padding:18px 23px;}
+.concept .pillar-card p{font-size:16px;}
+.concept .pillar-card h3{font-size:20px;}
+.endgame>div{display:grid;grid-template-columns:1fr 1.05fr;grid-template-rows:auto auto 1fr;column-gap:38px;}
+.endgame .eyebrow,.endgame h2{grid-column:1/-1;}
+.endgame .dash-list{grid-column:1;max-width:none!important;margin:0!important;}
+.endgame .media-box{position:relative!important;right:auto!important;bottom:auto!important;width:100%!important;height:320px!important;grid-column:2;align-self:center;}
+.reveal ul.dash-list,.reveal ol.loop-list{display:block;list-style:none;margin-left:0;}
+.dash-list li{font-size:18px;line-height:1.8;margin-bottom:16px;word-break:keep-all;}
+.loop-list{columns:unset!important;max-width:none!important;display:grid!important;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px!important;}
+.loop-list li{margin:0;min-height:98px;padding:24px 22px 22px 66px;border:1px solid var(--line-soft);border-radius:5px;background:var(--card-bg);font-size:19px;line-height:1.65;word-break:keep-all;}
+.loop-list li::before{left:20px;top:26px;width:28px;height:28px;font-size:12px;color:var(--accent-2);border-color:rgba(234,194,139,.4);border-radius:3px;}
+.at-sea .loop-list{gap:14px;}
+.at-sea .loop-list li{min-height:82px;padding-top:20px;padding-bottom:18px;}
+.at-sea .loop-list li::before{top:22px;}
+.flow-row{gap:22px;margin-top:65px;}
+.flow-box{max-width:none;padding:38px 20px;min-height:195px;border-radius:5px;border-top:2px solid var(--accent-1);background:linear-gradient(150deg,rgba(30,65,76,.65),rgba(12,29,39,.8));}
+.flow-box .t{font-size:25px;line-height:1.5;}
+.flow-box .d{font-size:16px;margin-top:18px;}
+.flow-arrow{font-size:24px;}
+.flow-cycle{font-size:16px;margin-top:32px;color:var(--accent-2);}
+.scenario{margin-top:32px;padding:28px 34px;border-left:2px solid var(--accent-2);font-size:23px;line-height:1.65;background:linear-gradient(90deg,rgba(234,194,139,.07),transparent);}
+.scenario .line{margin-bottom:14px;}
+.scenario .line:last-child{margin-bottom:0;}
+.scenario .q{font-size:25px;line-height:1.6;}
+.media-box{border-radius:5px;border-color:rgba(66,185,180,.35);box-shadow:0 16px 36px rgba(0,0,0,.2);}
+.reveal .media-box video{object-fit:contain;background:#050c12;}
+.reveal .world .media-box video,.reveal .climate .media-box video{object-fit:cover;object-position:50% 50%;}
+.world .flex-col{height:100%;}
+.world .eyebrow,.world h2,.world .sub{flex-shrink:0;}
+.world .media-full{margin-top:14px;min-height:0;}
+.world .sub{font-size:16px;line-height:1.65;}
+.climate .pillar-card{padding:16px 22px;}
+.climate .pillar-card p{font-size:16px;line-height:1.65;}
+.climate .media-box{height:220px!important;margin-top:20px!important;}
+.reveal table.plan{width:100%;font-size:17px;border-collapse:separate;border-spacing:0;line-height:1.6;}
+.reveal table.plan th{font-size:12px;letter-spacing:2px;padding:14px 18px;color:var(--accent-1);background:rgba(35,79,91,.22);border-bottom:1px solid var(--line);}
+.reveal table.plan td{font-size:16px;padding:15px 18px;border-bottom:1px solid var(--line-soft);word-break:keep-all;}
+.reveal table.plan tr:nth-child(odd) td{background:rgba(255,255,255,.015);}
+.reveal table.plan td:first-child{white-space:normal;}
+.status-pill{font-size:12px;padding:4px 10px;white-space:nowrap;}
+.stepper{gap:18px;margin-top:54px;}
+.step{padding:22px 20px 26px;min-width:0;border:1px solid var(--line-soft);border-radius:5px;background:var(--card-bg);}
+.step:not(:last-child)::after{content:'→';top:33px;left:auto;right:-17px;width:16px;height:auto;font-size:15px;background:none;color:var(--accent-2);}
+.step .n{height:40px;width:40px;margin-bottom:26px;border-radius:4px;color:var(--accent-2);border-color:rgba(234,194,139,.4);}
+.step .t{font-size:20px;margin-bottom:14px;line-height:1.5;word-break:keep-all;}
+.step .d{font-size:16px;line-height:1.8;word-break:keep-all;}
+.step .milestone{font-size:12px;line-height:1.6;margin-top:20px;}
+.step:nth-child(3){border-color:rgba(234,194,139,.45);}
+.production .dash-list{margin-top:40px;max-width:1000px;}
+.production .dash-list li{font-size:23px;padding:18px 0 23px 30px;border-bottom:1px solid var(--line-soft);}
+.closing .split{margin-top:45px;gap:22px;}
+.closing .pillar-card{min-height:255px;border-top:2px solid var(--accent-1);padding:30px;}
+.closing .pillar-card h3{font-size:25px;margin-bottom:22px;}
+.closing .pillar-card p{font-size:19px;line-height:1.85;}
+.closing .split>div:last-child .pillar-card{border-top-color:var(--accent-2);}
+.arch{margin-top:12px;gap:0;}
+.arch-box{padding:10px 24px;border-radius:4px;min-width:235px;}
+.arch-box .t{font-size:17px;}.arch-box .d{font-size:14px;}
+.arch-arrow{font-size:16px;margin:3px 0;}
+.architecture .sub{font-size:17px;}
+.checklist{columns:1;margin:35px 0 0!important;padding:0!important;list-style:none;}
+.checklist li{padding:15px 20px 15px 40px;margin:0;border-bottom:1px solid var(--line-soft);font-size:18px;}
+.checklist li::before{left:8px;top:16px;}
+.appendix-marker{font:10px 'JetBrains Mono',monospace;top:24px;right:68px;}
+.reveal .slide-number{right:30px;bottom:16px;background:transparent;color:var(--accent-2);font:12px 'JetBrains Mono',monospace;}
+.reveal .controls{color:var(--accent-1);bottom:45px;right:18px;transform:scale(.8);}
+.reveal .progress{height:2px;color:var(--accent-1);}
+@media print{.reveal .slides section{print-color-adjust:exact;-webkit-print-color-adjust:exact;}.reveal .controls{display:none;}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- 1. Title -->
+  <section class="cover">
+    <div class="bg-grid"></div>
+    <div class="title-slide"><div class="orbit-art" aria-hidden="true"><svg viewBox="0 0 560 500" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ocean"><stop stop-color="#124450" stop-opacity=".35"/><stop offset="1" stop-color="#071219" stop-opacity=".1"/></radialGradient></defs><g class="globe-spin"><circle cx="300" cy="255" r="192" fill="url(#ocean)" stroke="#42b9b4" stroke-opacity=".45"/><ellipse cx="300" cy="255" rx="95" ry="192" stroke="#42b9b4" stroke-opacity=".25"/><ellipse cx="300" cy="255" rx="155" ry="192" stroke="#42b9b4" stroke-opacity=".2"/><ellipse cx="300" cy="255" rx="192" ry="64" stroke="#42b9b4" stroke-opacity=".3"/><ellipse cx="300" cy="255" rx="192" ry="132" stroke="#42b9b4" stroke-opacity=".22"/><path d="M108 255H492M300 63V447" stroke="#42b9b4" stroke-opacity=".25"/><circle cx="300" cy="255" r="220" stroke="#42b9b4" stroke-opacity=".15" stroke-dasharray="2 9"/></g><path d="M300 35V475" stroke="#eac28b" stroke-opacity=".65"/><path d="M131 353Q252 108 446 185" stroke="#eac28b" stroke-width="1.5" stroke-dasharray="5 6"/><circle cx="446" cy="185" r="5" fill="#eac28b"/><circle cx="446" cy="185" r="13" stroke="#eac28b" stroke-opacity=".4"/><text x="316" y="53" fill="#eac28b" font-family="monospace" font-size="11" letter-spacing="3">000°</text></svg></div>
+      <div class="hud-top">
+        <div class="eyebrow" style="margin:0;">Pre-Production · Internal Proposal</div>
+        <div class="status-tag"><span class="status-dot"></span>싱글플레이 검증 완료</div>
+      </div>
+      <div class="title-main">
+        <h1 class="game-logo display">LONGITUDE<br>ZERO</h1>
+        <div class="game-sub">롱지튜드 제로 <span style="color:var(--text-dim);">(가칭)</span></div>
+        <div class="hook-line">세력을 이루고, 항로를 넓혀<br>세계의 중심이라는 타이틀을 쟁취하라.</div>
+        <div class="codename">Project Name : Sailing</div>
+      </div>
+      <div class="footer-line"><span>LONGITUDE ZERO</span><span>CONFIDENTIAL — INTERNAL USE</span></div>
+    </div>
+  </section>
+
+  <!-- 2. One-liner + pillars -->
+  <section class="concept">
+    <div class="eyebrow">Concept</div>
+    <h2 class="display">경계 없는 지구, 끝없이 달라지는 항로</h2>
+    <p class="sub" style="max-width:760px; margin-bottom:30px;">
+      로딩도 구역도 없는 행성 전체가 플레이 공간.<br>바람과 해류, 돌발 기상이 실제로 항로에 영향을 주는 살아있는 세계에서!<br>플레이어는 <span class="hl">교역</span>·<span class="hl">탐험</span>·<span class="hl">세력전</span> 등을 통해 세계의 중심이라는 타이틀을 쟁취한다.
+    </p>
+    <div class="pillars">
+      <div class="pillar-card">
+        <div class="num">01</div>
+        <h3>경계 없는 지구 전체</h3>
+        <p>큐브스피어 LOD로 행성 표면 전체를 <span class="hl">심리스</span>하게 렌더링 — 존 전환, 로딩 없음.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">02</div>
+        <h3>살아있는 기후 시뮬레이션</h3>
+        <p>무역풍 / 편서풍 / 극동풍과 실제 해류에 영향을 받는 항해.<br>돌풍·태풍 등 <span class="hl">살아있는 기후</span> 시뮬레이션.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">03</div>
+        <h3>쟁취하는 세계의 중심</h3>
+        <p>항해 협회 기여로 세력 순위가 갈리고, 1위 세력의 본거지가 <span class="hl">Longitude Zero</span>가!</p>
+      </div>
+      <div class="pillar-card">
+        <div class="num">04</div>
+        <h3>서버 권위 구조</h3>
+        <p>모든 처리는 서버 기반으로.<br>클라이언트는 입력·예측·표현만 — <span class="hl">MMO</span> 플레이.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Endgame: Longitude Zero -->
+  <section class="endgame">
+    <div style="position:relative; height:100%;">
+      <div class="eyebrow">Endgame Goal</div>
+      <h2 class="display">세계의 중심은, 쟁취하는 것</h2>
+      <ul class="dash-list no-dash" style="max-width:560px;">
+        <li>모든 항구(기존 항구 + 플레이어가 세운 신규 항구)에는 <b style="color:var(--text-hi);">협회</b>가 존재.</li>
+        <li>플레이어 ( 세력 ) 은 <b style="color:var(--text-hi);">기부</b> 등의 <b style="color:var(--text-hi);">기여</b>로 자기 집단의 순위 향상.</li>
+        <li>전 세계 항해 협회 순위 <b style="color:var(--accent-2);">1위 세력의 본거지</b>가 <b style="color:var(--text-hi);">Longitude Zero</b>!</li>
+        <li>경쟁에 따라 계속 바뀔 수 있는 <b style="color:var(--text-hi);">살아있는 타이틀</b>.</li>
+        <li>게임 내 각종 명예적인 모든 장치에 적용.</li>
+      </ul>
+      <div class="media-box" style="position:absolute; right:0; bottom:0; width:560px; height:340px;">
+        <video src="medias/sailing/4-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Port activities -->
+  <section class="port">
+    <div style="position:relative; height:100%;">
+      <div class="eyebrow">Core Loop — Port</div>
+      <h2 class="display">항구에서 할 것들</h2>
+      <ul class="dash-list no-dash" style="max-width:560px;">
+        <li>무역품 <b>구매/판매</b> — 항구별 시세차로 이익</li>
+        <li><b>신규 배 건조</b> — 지역/문명/항구별 상이한 함선</li>
+        <li>정비 · 보급 — 다음 항해를 위한 기본 보충</li>
+        <li>항해 협회에 <b>기여(기부)</b> → 세력 순위 · <span class="hl">Longitude Zero</span> 경쟁</li>
+      </ul>
+      <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
+        <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+      <p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
+        <span class="tag-tbd">TBD</span> 기부 외 교역/건조 활동이 협회 기여도로 얼마나 환산되는지는 다음 설계 단계에서 확정.
+      </p>
+    </div>
+  </section>
+
+  <!-- 5. Voyage events -->
+  <section class="at-sea">
+    <div style="position:relative; height:100%;">
+      <div class="eyebrow">Core Loop — At Sea</div>
+      <h2 class="display">항해 중 발생하는 이벤트와 행위</h2>
+      <ul class="dash-list no-dash" style="max-width:560px;">
+        <li>노지 <b>상륙</b> → 긴급 임시 보급</li>
+        <li><b>정박(앵커링)</b> → 낚시 등 컨텐츠</li>
+        <li><b>전투</b> → 승리 전리품 / 패배 좌초</li>
+        <li><b>기상 이변</b> → 돌풍 등</li>
+        <li>아이캔디 <b>이벤트</b> (돌고래 쇼 등)</li>
+      </ul>
+      <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
+        <video src="medias/sailing/5-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+      <p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
+        <span class="tag-tbd">TBD</span> 보급/수리 자원 소모 체계, "좌초"의 실제 페널티 강도(완전 손실 vs 구조 가능)는 다음 설계 단계에서 확정.
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. Progression diagram -->
+  <section class="progression">
+    <div class="eyebrow">Progression Loop</div>
+    <h2 class="display">무역이 곧 성장</h2>
+    <div class="flow-row">
+      <div class="flow-box"><div class="t">무역으로<br>재화 획득</div><div class="d">항구 간 시세차로 이익 추구<br>시세는 실시간 변동</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="t">신규 함선 건조</div><div class="d">지역·문명 별 다양한 함선.<br>함선의 등급 ( 크기 )·타입 등 다양하게 준비.</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box"><div class="t">활동 영역 확장</div><div class="d">더 먼 항로, 새 항구·세력권 진입.<br>위험은 커지지만, 수익도 증가.</div></div>
+    </div>
+    <div class="flow-cycle">↺ 가장 기본적인 활동 ( 컨텐츠 ) 사이클.</div>
+  </section>
+
+  <!-- 7. A Cycle of Play -->
+  <section class="scenario-slide">
+    <div class="eyebrow">User Scenario</div>
+    <h2 class="display">플레이어는 어떤 선택과 경험을?</h2>
+    <div class="scenario">
+      <span class="line">목적지 항구의 시세가 상승.</span>
+      <span class="line">가장 빠른 항로에는 태풍이 다가온다.</span>
+      <span class="line">우회하면 안전하지만, 경쟁 선단이 이득을 가져갈 가능성.</span>
+      <span class="line">안전한 항로에는 해적도 존재할 수 있다.</span>
+      <span class="line q">어떤 항로를 선택할 것인가?</span>
+    </div>
+    <p class="sub" style="margin-top:22px;">
+      <span class="hl">살아있는 기후</span>는 단순 배경 연출이 아니라 매번 다른 판단을 만드는 변수.<br>날씨·해류·경쟁자의 움직임이 매 항해마다 다른 경험을 가지게 함.
+    </p>
+  </section>
+
+  <!-- 8. World -->
+  <section class="world">
+    <div class="flex-col">
+      <div class="eyebrow">World</div>
+      <h2 class="display">지구 전체가 무대</h2>
+      <div class="media-box media-full">
+        <video src="medias/sailing/5-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+      <p class="sub" style="margin-top:14px; margin-bottom:0;">
+        큐브 스피어 쿼드 트리 LOD로 실제 지형을 사용하며, 가까워질수록 자세한 지형을 그리는 형태.<br>고해상도 위성 이미지로 해안선을 구현.<br>다양한 자연현상 시뮬레이션.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. Weather & Ocean differentiation -->
+  <section class="climate">
+    <div class="eyebrow">What Makes Sailing Different</div>
+    <h2 class="display">기후와 해류가 항로를 결정</h2>
+    <div class="pillars" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="pillar-card">
+        <h3>대기</h3>
+        <p>무역풍·편서풍·극동풍이 퍼시스턴트하게 흐르고, 태풍이 <b>생성 → 이동 → 소멸</b>의 생애주기를 가짐.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>해류</h3>
+        <p>5대양 환류 규모의 해류와 지역 해류 구현<br>→ 항로 선택이 곧 전략.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>항해</h3>
+        <p>기본적으로는 바람의 힘으로 운항.<br>→ 이동·정지 상태와 무관하게 지속적으로 대기와 해류에 영향을 받음.</p>
+      </div>
+    </div>
+    <div class="media-box" style="height:220px; margin-top:20px;">
+      <video src="medias/sailing/6-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+    </div>
+  </section>
+
+  <!-- 10. Verification status -->
+  <section class="verification">
+    <div class="eyebrow">Verification Status</div>
+    <h2 class="display">R & D 가 필요한 것들.</h2>
+    <table class="plan">
+      <tr><th>영역</th><th>상태</th><th>비고</th></tr>
+      <tr><td>행성 렌더링 (큐브 스피어 LOD)</td><td><span class="status-pill done">완료</span></td><td>싱글플레이 프로토타입에서 동작 확인</td></tr>
+      <tr><td>기후/해류/항해 시뮬레이션</td><td><span class="status-pill done">완료</span></td><td>클라이언트 로컬 — 서버 포팅 전</td></tr>
+      <tr><td>일식/월식, 그림자 최적화</td><td><span class="status-pill tested">진행 중</span></td><td>메커니즘 가능성만 확인, 실구현 전</td></tr>
+      <tr><td>함선 연출</td><td><span class="status-pill tested">진행 중</span></td><td>배의 Yaw / Pitch / Roll 과 항적 및 바람에 의한 연출 등</td></tr>
+      <tr><td>서버 권위화 (날씨/배 이동)</td><td><span class="status-pill planned">설계 완료</span></td><td>아키텍처 설계 완료, 구현 전 — 부록 참고</td></tr>
+      <tr><td>3×3 인터레스트/존 샤딩</td><td><span class="status-pill planned">설계 완료</span></td><td>마이그레이션 4단계, 가장 마지막 착수</td></tr>
+      <tr><td>경제/전투/외교/점령</td><td><span class="status-pill planned">스켈레톤 설계</span></td><td>디테일 미확정</td></tr>
+      <tr><td>최적화</td><td><span class="status-pill planned">예정</span></td><td>매시브한 환경을 처리해야 하는 문제</td></tr>
+    </table>
+  </section>
+
+  <!-- 11. Content roadmap -->
+  <section class="content">
+    <div class="eyebrow">Content Roadmap</div>
+    <h2 class="display">무역만 하는 게임이 아니라, 다양한 경험을 하는 게임.</h2>
+    <div class="pillars">
+      <div class="pillar-card"><div class="num">ECO</div><h3>무역 · 경제</h3><p>항구별 시세, 화물 교역<br>모든 교역량 기반으로 설계.</p></div>
+      <div class="pillar-card"><div class="num">WAR</div><h3>전투 ( 인스턴스 )</h3><p>월드에 상시 전투가 가능하지만, 다른 플레이어의 간섭이 최대한 배제되도록.<br>턴제(WEGO) 검토 중.</p></div>
+      <div class="pillar-card"><div class="num">POL</div><h3>점령 · 외교 · 평판</h3><p>NPC, 항구 · 국가 소유권, 동맹 · 전쟁 선포.<br>플레이어에 의한 신규 항구 · 국가.</p></div>
+      <div class="pillar-card"><div class="num">NPC</div><h3>해적선 · 선단</h3><p>약탈형 NPC 및 플레이어의 약탈.<br>추후 다수 선박을 묶는 선단 구성 ( 낮은 우선순위 ).</p></div>
+    </div>
+  </section>
+
+  <!-- 12. Project Overview -->
+  <section class="overview">
+    <div class="eyebrow">Project Overview</div>
+    <h2 class="display">세계의 중심을 향한 항해!</h2>
+    <div class="pillars" style="grid-template-columns:1fr 1fr 1fr; margin-top:8px;">
+      <div class="pillar-card">
+        <div class="num">GENRE</div>
+        <h3>오픈 월드 항해 · 무역 · 전투</h3>
+      </div>
+      <div class="pillar-card">
+        <div class="num">PLATFORM</div>
+        <h3>PC (Steam)</h3>
+      </div>
+      <div class="pillar-card">
+        <div class="num">ENGINE</div>
+        <h3>Unity</h3>
+      </div>
+    </div>
+    <div class="pillars" style="grid-template-columns:1fr 1fr; margin-top:18px;">
+      <div class="pillar-card">
+        <div class="num">TARGET</div>
+        <h3>20 ~ 40대 남성</h3>
+        <p>'대항해시대'를 기억하고 추억하는 세대.<br>비주얼이 아닌 게임 컨텐츠를 필요로 하는 플레이어들.</p>
+      </div>
+      <div class="pillar-card" style="border-color:var(--accent-2);">
+        <div class="num" style="color:var(--accent-2);">LAUNCH</div>
+        <h3>2028년 1분기 소프트 런칭</h3>
+      </div>
+    </div>
+    <div class="pillars" style="grid-template-columns:1fr; margin-top:18px;">
+      <div class="pillar-card">
+        <div class="num">TEAM</div>
+        <h3>1인 개발 체제</h3>
+        <p>기획·개발은 1인 체제로 진행. 아트 등 리소스는 출시 이전 별도(내부 팀 투입)로 처리 예정.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. First shippable scope -->
+  <section class="scope">
+    <div class="eyebrow">First Shippable Scope<span class="tag-tbd">TBD</span></div>
+    <h2 class="display">첫 검증 버전은 어디까지인가</h2>
+    <p class="sub" style="margin-bottom:10px;">1인 개발 체제에 맞춰, 우선 처리할 범위를 좁히고 확장하는 형태로.</p>
+    <table class="plan">
+      <tr><th>항목</th><th>비고</th></tr>
+      <tr><td>출시 형태</td><td><span class="status-pill done">확정</span> 2028년 1분기 소프트 런칭.</td></tr>
+      <tr><td>항구 수</td><td>월드 와이드 서버에서 주요 국가 및 항구 포함 ( 유럽 중심 ).</td></tr>
+      <tr><td>선박 종류</td><td>포함되는 주요 문명 ( 국가 ) 의 함선 다수.<br>수량은 힘 닿는 곳까지.</td></tr>
+      <tr><td>교역 범위 (상품 수/시세 변동 규칙)</td><td>포함되는 지역 / 문명 / 항구와 고증에 의한 특산물들.</td></tr>
+      <tr><td>동시 참여 인원</td><td>스케일 아웃으로 단일 서버 목표.<br>채널링은 감안.</td></tr>
+      <!--tr><td>"재미있게 한 판 돌아간다"의 성공 기준</td><td>TBD</td></tr-->
+    </table>
+  </section>
+
+  <!-- 14. Dev roadmap -->
+  <section class="roadmap">
+    <div class="eyebrow">Development Roadmap</div>
+    <h2 class="display">마이그레이션 순서 — 리스크 오름차순</h2>
+    <div class="stepper">
+      <div class="step"><div class="n">1</div><div class="t">시각 동기화</div><div class="d">서버 epoch 배선. 게임플레이 변화 없는 순수 작업.</div></div>
+      <div class="step"><div class="n">2</div><div class="t">날씨/태풍 권위화</div><div class="d">"클라마다 다른 날씨" 버그 해결. 가치 대비 리스크 최상.</div></div>
+      <div class="step"><div class="n">3</div><div class="t">배 이동 권위화</div><div class="d">좌초 판정 포함 서버 포팅, 클라 예측/보정 추가.</div><div class="milestone">첫 멀티플레이 항해 가능 시점</div></div>
+      <div class="step"><div class="n">4</div><div class="t">인터레스트 매니지먼트</div><div class="d">존 샤딩, 수평 확장. 필요가 입증된 뒤 가장 마지막.</div></div>
+    </div>
+  </section>
+
+  <!-- 14.5 Content & Launch Milestones -->
+  <section>
+    <div class="eyebrow">Content & Launch Milestones</div>
+    <h2 class="display">유럽에서 시작해 세계로 — 지역 웨이브 확장</h2>
+    <table class="plan">
+      <tr><th>시기</th><th>콘텐츠(세력 · 척수 · 항구)</th><th>비고</th></tr>
+      <tr><td>~2028 Q1<br><span class="hl">소프트 런칭</span></td><td>유럽 5개 세력(포르투갈·스페인·잉글랜드·프랑스·네덜란드) — 40척, 항구 16개(기존 DB)</td><td>실제 커밋 범위</td></tr>
+      <tr><td>시즌1<br>28 Q2~Q3</td><td>지중해·바르바리(오스만·오만·알제) — 24척, 항구 3개</td><td>세력당 항구 1개뿐 — 보강 검토</td></tr>
+      <tr><td>시즌2<br>28 Q4~29 Q1</td><td>동아시아(중국·조선·일본) — 24척, 항구 10개(기존 DB)</td><td>국내 타깃층 반응 기대 구간</td></tr>
+      <tr><td>시즌3<br>29 Q2~Q3</td><td>동남아 술탄국(말라카·아체·마자파힛) — 24척</td><td><span class="tag-tbd">TBD</span> 아체 항구 신규 추가 필요</td></tr>
+      <tr><td>시즌4<br>29 Q4~</td><td>인도양(구자라트·마라타) — 16척</td><td><span class="tag-tbd">TBD</span> 구자라트 항구 신규 추가, WorldState 정치 레이어 완성판 투입</td></tr>
+    </table>
+    <!--p class="sub" style="margin-top:14px; font-size:13.5px;">전체 16개 세력·128척 중 소프트 런칭은 유럽 5개 세력뿐 — 나머지는 출시 후 약 2년에 걸쳐 단계적으로 공개. "활동 영역 확장" 루프(6번 슬라이드)와 그대로 맞물리는 구조.</p-->
+  </section>
+
+  <!-- 16. Platform -->
+  <section class="platform">
+    <div class="eyebrow">Platform Strategy</div>
+    <h2 class="display">PC (Steam) 우선, 그 다음은 자원에 따라</h2>
+    <table class="plan">
+      <tr><th>플랫폼</th><th>우선순위</th><th>비고</th></tr>
+      <tr><td>PC (Steam)</td><td>확정 · 1순위</td><td>지금 프로토타입 기반으로 바로 진행</td></tr>
+      <tr><td>모바일 (iOS/Android)</td><td>자원 여유 시 확장</td><td>시점 미확정 — 확정 로드맵이 아니라 후속 검토 항목. 기존 Android 빌드 경험 보유</td></tr>
+    </table>
+    <p class="sub" style="margin-top:16px;">Web(WebGL)은 범위에서 제외 — PC가 핵심 타겟을 충분히 커버한다.</p>
+  </section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash:true, controls:true, progress:true, center:false,
+    width:1280, height:720, margin:0.04,
+    transition:'fade',
+    slideNumber:'c/t', mouseWheel:true, keyboard:true, touch:true
+  });
+</script>
+</body>
+</html>
