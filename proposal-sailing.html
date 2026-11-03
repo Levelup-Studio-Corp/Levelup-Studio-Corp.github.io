@@ -81,7 +81,7 @@
 
   /* ---------- pillars grid ---------- */
   .pillars{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px; }
-  .pillar-card{ background:var(--card-bg); border:1px solid var(--line-soft); border-radius:10px; padding:22px 24px; }
+  .pillar-card{ background:var(--card-bg); border:1px solid var(--line-soft); border-radius:10px; padding:15px 15px; }
   .pillar-card .num{ font-family:'JetBrains Mono',monospace; color:var(--accent-2); font-size:13px; letter-spacing:1px; }
   .pillar-card h3{ font-size:19px; margin:10px 0 8px; color:var(--text-hi); font-weight:600; }
   .pillar-card p{ font-size:15.5px; color:var(--text-mid); line-height:1.6; margin:0; }
@@ -271,7 +271,7 @@
 .scenario .q{font-size:25px;line-height:1.6;}
 .media-box{border-radius:5px;border-color:rgba(66,185,180,.35);box-shadow:0 16px 36px rgba(0,0,0,.2);}
 .reveal .media-box video{object-fit:contain;background:#050c12;}
-.reveal .world .media-box video,.reveal .climate .media-box video{object-fit:cover;object-position:50% 50%;}
+.reveal .world .media-box video,.reveal .climate .media-box video,.reveal .ship .media-box video{object-fit:cover;object-position:50% 50%;}
 .world .flex-col{height:100%;}
 .world .eyebrow,.world h2,.world .sub{flex-shrink:0;}
 .world .media-full{margin-top:14px;min-height:0;}
@@ -284,6 +284,15 @@
 .reveal table.plan td{font-size:16px;padding:15px 18px;border-bottom:1px solid var(--line-soft);word-break:keep-all;}
 .reveal table.plan tr:nth-child(odd) td{background:rgba(255,255,255,.015);}
 .reveal table.plan td:first-child{white-space:normal;}
+.verification,.milestones{display:flex!important;flex-direction:column;}
+.verification .eyebrow,.verification h2,.milestones .eyebrow,.milestones h2,.milestones p.sub{flex-shrink:0;}
+.verification .table-scroll,.milestones .table-scroll{flex:0 1 auto;min-height:0;overflow-y:auto;margin-top:4px;}
+.milestones table.plan td{padding:10px 18px;}
+.milestones p.sub{margin-top:12px!important;}
+.verification .table-scroll table.plan,.milestones .table-scroll table.plan{margin-top:0;}
+.verification .table-scroll thead th,.milestones .table-scroll thead th{position:sticky;top:0;z-index:2;background:var(--bg-2);box-shadow:0 1px 0 var(--line);}
+.verification .table-scroll::-webkit-scrollbar,.milestones .table-scroll::-webkit-scrollbar{width:8px;}
+.verification .table-scroll::-webkit-scrollbar-thumb,.milestones .table-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
 .status-pill{font-size:12px;padding:4px 10px;white-space:nowrap;}
 .stepper{gap:18px;margin-top:54px;}
 .step{padding:22px 20px 26px;min-width:0;border:1px solid var(--line-soft);border-radius:5px;background:var(--card-bg);}
@@ -374,7 +383,7 @@
     <div style="position:relative; height:100%;">
       <div class="eyebrow">Endgame Goal</div>
       <h2 class="display">세계의 중심은, 쟁취하는 것</h2>
-      <ul class="dash-list no-dash" style="max-width:560px;">
+      <ul class="dash-list" style="max-width:560px;">
         <li>모든 항구(기존 항구 + 플레이어가 세운 신규 항구)에는 <b style="color:var(--text-hi);">협회</b>가 존재.</li>
         <li>플레이어 ( 세력 ) 은 <b style="color:var(--text-hi);">기부</b> 등의 <b style="color:var(--text-hi);">기여</b>로 자기 집단의 순위 향상.</li>
         <li>전 세계 항해 협회 순위 <b style="color:var(--accent-2);">1위 세력의 본거지</b>가 <b style="color:var(--text-hi);">Longitude Zero</b>!</li>
@@ -392,11 +401,12 @@
     <div style="position:relative; height:100%;">
       <div class="eyebrow">Core Loop — Port</div>
       <h2 class="display">항구에서 할 것들</h2>
-      <ul class="dash-list no-dash" style="max-width:560px;">
+      <ul class="dash-list" style="max-width:560px;">
         <li>무역품 <b>구매/판매</b> — 항구별 시세차로 이익</li>
         <li><b>신규 배 건조</b> — 지역/문명/항구별 상이한 함선</li>
         <li>정비 · 보급 — 다음 항해를 위한 기본 보충</li>
-        <li>항해 협회에 <b>기여(기부)</b> → 세력 순위 · <span class="hl">Longitude Zero</span> 경쟁</li>
+        <li>항해 협회에 <b>기여(기부)</b> → 세력 순위 · 항구 성장 · <span class="hl">Longitude Zero</span> 경쟁</li>
+        <li><b>계류지</b>(본거지 항구) 지정 — 개인 소유, 파산해도 위탁 운송으로 재기 가능</li>
       </ul>
       <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
         <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
@@ -412,7 +422,7 @@
     <div style="position:relative; height:100%;">
       <div class="eyebrow">Core Loop — At Sea</div>
       <h2 class="display">항해 중 발생하는 이벤트와 행위</h2>
-      <ul class="dash-list no-dash" style="max-width:560px;">
+      <ul class="dash-list" style="max-width:560px;">
         <li>노지 <b>상륙</b> → 긴급 임시 보급</li>
         <li><b>정박(앵커링)</b> → 낚시 등 컨텐츠</li>
         <li><b>전투</b> → 승리 전리품 / 패배 좌초</li>
@@ -467,7 +477,7 @@
         <video src="medias/sailing/5-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
       </div>
       <p class="sub" style="margin-top:14px; margin-bottom:0;">
-        큐브 스피어 쿼드 트리 LOD로 실제 지형을 사용하며, 가까워질수록 자세한 지형을 그리는 형태.<br>고해상도 위성 이미지로 해안선을 구현.<br>다양한 자연현상 시뮬레이션.
+        큐브 스피어 쿼드 트리 LOD로 실제 지형을 사용하며, 가까워질수록 자세한 지형을 그리는 형태.<br>고해상도 위성 이미지로 해안선을 구현하고, 항구·도시는 이름 등 세부 정보를 표기.<br>낮과 밤은 태양·달의 실제 궤도 회전(하루=10분)으로, 계절은 위도 기반 변화(겨울 강설 등)로 표현.
       </p>
     </div>
   </section>
@@ -479,11 +489,11 @@
     <div class="pillars" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="pillar-card">
         <h3>대기</h3>
-        <p>무역풍·편서풍·극동풍이 퍼시스턴트하게 흐르고, 태풍이 <b>생성 → 이동 → 소멸</b>의 생애주기를 가짐.</p>
+        <p>무역풍·편서풍·극동풍이 퍼시스턴트하게 흐르고, 태풍이 <b>생성 → 이동 → 소멸</b>의 생애주기를 가짐.<br>지역 구름은 흐름에 따라 먹구름화되며 비·번개로 이어짐.</p>
       </div>
       <div class="pillar-card">
         <h3>해류</h3>
-        <p>5대양 환류 규모의 해류와 지역 해류 구현<br>→ 항로 선택이 곧 전략.</p>
+        <p>5대양 환류 규모의 해류와 지역 해류 구현<br>→ 항로 선택이 곧 전략.<br>파도·너울 연출 포함, 추후 데이터 테이블화.</p>
       </div>
       <div class="pillar-card">
         <h3>항해</h3>
@@ -495,21 +505,53 @@
     </div>
   </section>
 
+  <!-- 9b. Ship physics & customization -->
+  <section class="ship">
+    <div class="eyebrow">Ship Simulation</div>
+    <div class="split" style="height:auto; align-items:start; margin-top:14px;">
+      <div>
+        <h3 style="color:var(--text-hi); font-size:25px; margin:0 0 5px;">항해 피직스</h3>
+        <ul class="dash-list">
+          <li><b style="color:var(--text-hi);">해류</b>·<b style="color:var(--text-hi);">바람</b>이 곧 속도.</li>
+          <li>적재량과 무게에 따른 연출과 달라지는 <b style="color:var(--text-hi);">항해</b> 스타일.</li>
+          <li><b style="color:var(--text-hi);">파도</b>·<b style="color:var(--text-hi);">너울</b> 처리, Yaw / Pitch / Roll 과 <b style="color:var(--text-hi);">항적</b> 등 자연스러운 배의 움직임.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--text-hi); font-size:25px; margin:0 0 5px;">커스터마이징 & 건조</h3>
+        <ul class="dash-list">
+          <li><b style="color:var(--text-hi);">돛</b>·<b style="color:var(--text-hi);">함포</b>·<b style="color:var(--text-hi);">선수상</b>·<b style="color:var(--text-hi);">문장</b> 등 배 튜닝.</li>
+          <li>다양한 형태의 배 획득 과정 ( <b style="color:var(--text-hi);">구매</b>·<b style="color:var(--text-hi);">건조</b> ) 등.</li>
+          <li>건조 방식(구매형 vs 재료 수집형)<span class="tag-tbd">TBD</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="media-box" style="height:350px; margin-top:8px;">
+      <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls style="object-position:center 75%;"></video>
+    </div>
+  </section>
+
   <!-- 10. Verification status -->
   <section class="verification">
     <div class="eyebrow">Verification Status</div>
     <h2 class="display">R & D 가 필요한 것들.</h2>
-    <table class="plan">
-      <tr><th>영역</th><th>상태</th><th>비고</th></tr>
-      <tr><td>행성 렌더링 (큐브 스피어 LOD)</td><td><span class="status-pill done">완료</span></td><td>싱글플레이 프로토타입에서 동작 확인.</td></tr>
-      <tr><td>기후/해류/항해 시뮬레이션</td><td><span class="status-pill done">완료</span></td><td>클라이언트 로컬 — 서버 포팅 전.</td></tr>
-      <tr><td>일식/월식, 그림자 최적화</td><td><span class="status-pill tested">진행 중</span></td><td>메커니즘 가능성만 확인, 실구현 전.</td></tr>
-      <tr><td>함선 연출</td><td><span class="status-pill tested">진행 중</span></td><td>배의 Yaw / Pitch / Roll 과 항적 및 바람에 의한 연출 등.</td></tr>
-      <tr><td>서버 권위화 (날씨/배 이동)</td><td><span class="status-pill planned">설계 완료</span></td><td>아키텍처 설계 완료.</td></tr>
-      <tr><td>3×3 인터레스트/존 샤딩</td><td><span class="status-pill planned">설계 완료</span></td><td>마이그레이션 4단계, 가장 마지막 착수.</td></tr>
-      <tr><td>경제/전투/외교/점령</td><td><span class="status-pill planned">스켈레톤 설계</span></td><td>디테일 미확정.</td></tr>
-      <tr><td>최적화</td><td><span class="status-pill planned">예정</span></td><td>매시브한 환경을 처리해야 하는 문제.</td></tr>
-    </table>
+    <div class="table-scroll">
+      <table class="plan">
+        <thead>
+          <tr><th>영역</th><th>상태</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>행성 렌더링 (큐브 스피어 LOD)</td><td><span class="status-pill done">완료</span></td><td>싱글플레이 프로토타입에서 동작 확인.</td></tr>
+          <tr><td>기후/해류/항해 시뮬레이션</td><td><span class="status-pill done">완료</span></td><td>클라이언트 로컬 — 서버 포팅 전.</td></tr>
+          <tr><td>일식/월식, 그림자 최적화</td><td><span class="status-pill tested">진행 중</span></td><td>메커니즘 가능성만 확인, 실구현 전.</td></tr>
+          <tr><td>함선 연출</td><td><span class="status-pill tested">진행 중</span></td><td>배의 Yaw / Pitch / Roll 과 항적 및 바람에 의한 연출 등.</td></tr>
+          <tr><td>서버 권위화 (날씨/배 이동)</td><td><span class="status-pill planned">설계 완료</span></td><td>아키텍처 설계 완료.</td></tr>
+          <tr><td>3×3 인터레스트/존 샤딩</td><td><span class="status-pill planned">설계 완료</span></td><td>마이그레이션 4단계, 가장 마지막 착수.</td></tr>
+          <tr><td>경제/전투/외교/점령</td><td><span class="status-pill planned">스켈레톤 설계</span></td><td>디테일 미확정.</td></tr>
+          <tr><td>최적화</td><td><span class="status-pill planned">예정</span></td><td>매시브한 환경을 처리해야 하는 문제.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- 11. Content roadmap -->
@@ -517,7 +559,7 @@
     <div class="eyebrow">Content Roadmap</div>
     <h2 class="display">무역만 하는 게임이 아니라, 다양한 경험을 하는 게임.</h2>
     <div class="pillars">
-      <div class="pillar-card"><div class="num">ECO</div><h3>무역 · 경제</h3><p>항구별 시세, 화물 교역<br>모든 교역량 기반으로 설계.</p></div>
+      <div class="pillar-card"><div class="num">ECO</div><h3>무역 · 경제</h3><p>항구별 시세, 화물 교역<br>모든 교역량 기반으로 설계.<br>특산물은 항구별 고유 — 보관 상태에 따라 부패해 가치 변동.</p></div>
       <div class="pillar-card"><div class="num">WAR</div><h3>전투 ( 인스턴스 )</h3><p>월드에 상시 전투가 가능하지만, 다른 플레이어의 간섭이 최대한 배제되도록.<br>턴제(WEGO) 검토 중.</p></div>
       <div class="pillar-card"><div class="num">POL</div><h3>점령 · 외교 · 평판</h3><p>NPC, 항구 · 국가 소유권, 동맹 · 전쟁 선포.<br>플레이어에 의한 신규 항구 · 국가.</p></div>
       <div class="pillar-card"><div class="num">NPC</div><h3>해적선 · 선단</h3><p>약탈형 NPC 및 플레이어의 약탈.<br>추후 다수 선박을 묶는 선단 구성 ( 낮은 우선순위 ).</p></div>
@@ -531,7 +573,7 @@
     <div class="pillars" style="grid-template-columns:1fr 1fr 1fr; margin-top:8px;">
       <div class="pillar-card">
         <div class="num">GENRE</div>
-        <h3>오픈 월드 항해 · 무역 · 전투</h3>
+        <h3>MMO 오픈 월드 항해 · 무역 · 전투</h3>
       </div>
       <div class="pillar-card">
         <div class="num">PLATFORM</div>
@@ -591,18 +633,24 @@
   </section>
 
   <!-- 15 Content & Launch Milestones -->
-  <section>
+  <section class="milestones">
     <div class="eyebrow">Content & Launch Milestones</div>
     <h2 class="display">유럽에서 시작해 세계로 — 지역 웨이브 확장</h2>
-    <table class="plan">
-      <tr><th>시기</th><th>콘텐츠(세력 · 척수 · 항구)</th><th>비고</th></tr>
-      <tr><td>~2028 Q1<br><span class="hl">소프트 런칭</span></td><td>유럽 5개 세력(포르투갈·스페인·잉글랜드·프랑스·네덜란드) — 40척, 항구 16개(기존 DB)</td><td>실제 커밋 범위</td></tr>
-      <tr><td>시즌 1.<br>28 Q2~Q3</td><td>지중해·바르바리(오스만·오만·알제) — 24척, 항구 3개</td><td>세력당 항구 1개뿐 — 보강 검토</td></tr>
-      <tr><td>시즌 2.<br>28 Q4~29 Q1</td><td>동아시아(중국·조선·일본) — 24척, 항구 10개(기존 DB)</td><td>국내 타깃층 반응 기대 구간</td></tr>
-      <tr><td>시즌 3.<br>29 Q2~Q3</td><td>동남아 술탄국(말라카·아체·마자파힛) — 24척</td><td><span class="tag-tbd">TBD</span> 아체 항구 신규 추가 필요</td></tr>
-      <tr><td>시즌 4.<br>29 Q4~</td><td>인도양(구자라트·마라타) — 16척</td><td><span class="tag-tbd">TBD</span> 구자라트 항구 신규 추가, WorldState 정치 레이어 완성판 투입</td></tr>
-    </table>
-    <p class="sub" style="margin-top:25px; font-size:13.5px; text-align:center;">소프트런칭 시기에 맞게 최대한 많은 문명과 함선 처리 — 나머지는 출시 후 단계적으로 DLC 형태로 처리.</p>
+    <div class="table-scroll">
+      <table class="plan">
+        <thead>
+          <tr><th>시기</th><th>콘텐츠(세력 · 척수 · 항구)</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>~2028 Q1<br><span class="hl">소프트 런칭</span></td><td>유럽 지역 · 세력 우선.</td><td>실제 커밋 범위</td></tr>
+          <tr><td>시즌 1.<br>28 Q2~Q3</td><td>지중해 · 바르바리 지역 · 세력</td><td>세력당 항구 1개뿐 — 보강 검토</td></tr>
+          <tr><td>시즌 2.<br>28 Q4~29 Q1</td><td>동아시아 ( 중국 · 조선 · 일본 )</td><td>국내 타깃층 반응 기대 구간</td></tr>
+          <tr><td>시즌 3.<br>29 Q2~Q3</td><td>동남아 ( 말라카 · 아체 · 마자파힛 )</td><td><span class="tag-tbd">TBD</span> 아체 항구 신규 추가 필요</td></tr>
+          <tr><td>시즌 4.<br>29 Q4~</td><td>인도양( 구자라트 · 마라타 )</td><td><span class="tag-tbd">TBD</span> 구자라트 항구 신규 추가, WorldState 정치 레이어 완성판 투입</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top:25px; font-size:13.5px; text-align:center;">대략적인 일정이며, 소프트런칭은 MMO 로서 의미있는 플레이가 가능한 버전 — 이후 컨텐츠 및 에셋들은 DLC 형태로 단계적 추가 예정.</p>
   </section>
 
 </div>
