@@ -126,6 +126,18 @@
   .flow-box .d{ font-size:13px; color:var(--text-mid); margin-top:8px; line-height:1.5; }
   .flow-arrow{ color:var(--accent-2); font-size:26px; flex:0 0 auto; }
   .flow-cycle{ text-align:center; margin-top:22px; color:var(--text-dim); font-size:13.5px; }
+
+  /* ---------- cycle diagram (triangular loop) ---------- */
+  .cycle-wrap{ position:relative; width:1144px; height:420px; margin:26px auto 0; }
+  .cycle-wrap svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .cyc-path{ fill:none; stroke:var(--accent-1); stroke-width:2.5; stroke-dasharray:7 7; }
+  .cyc-arrowhead{ fill:var(--accent-2); }
+  .cycle-node{ position:absolute; width:280px; box-sizing:border-box; border-radius:5px; border-top:2px solid var(--accent-1); background:linear-gradient(150deg,rgba(30,65,76,.65),rgba(12,29,39,.8)); padding:20px 22px; }
+  .cycle-node .n{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--accent-2); }
+  .cycle-node .t{ font-size:20px; font-weight:600; color:var(--text-hi); line-height:1.4; margin-top:6px; }
+  .cycle-node .d{ font-size:14px; color:var(--text-mid); margin-top:9px; line-height:1.55; }
+  .cycle-center{ position:absolute; left:432px; top:170px; width:280px; text-align:center; color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:1px; }
+  .cycle-center .ic{ font-size:30px; color:var(--accent-2); display:block; margin-bottom:6px; }
   .inline-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1px; color:var(--accent-2); border:1px solid rgba(232,179,106,.35); border-radius:4px; padding:2px 8px; margin-left:4px; }
 
   .split{ display:grid; grid-template-columns:1.1fr 1fr; gap:46px; align-items:center; height:100%; }
@@ -278,7 +290,6 @@
 .world .sub{font-size:16px;line-height:1.65;}
 .climate .pillar-card{padding:16px 22px;}
 .climate .pillar-card p{font-size:16px;line-height:1.65;}
-.climate .media-box{height:220px!important;margin-top:20px!important;}
 .reveal table.plan{width:100%;font-size:17px;border-collapse:separate;border-spacing:0;line-height:1.6;}
 .reveal table.plan th{font-size:12px;letter-spacing:2px;padding:14px 18px;color:var(--accent-1);background:rgba(35,79,91,.22);border-bottom:1px solid var(--line);}
 .reveal table.plan td{font-size:16px;padding:15px 18px;border-bottom:1px solid var(--line-soft);word-break:keep-all;}
@@ -322,6 +333,18 @@
 .reveal .controls{color:var(--accent-1);bottom:45px;right:18px;transform:scale(.8);}
 .reveal .progress{height:2px;color:var(--accent-1);}
 @media print{.reveal .slides section{print-color-adjust:exact;-webkit-print-color-adjust:exact;}.reveal .controls{display:none;}}
+/* Motion follows the active page; content stays readable without JavaScript. */
+.reveal .pillar-card{transition:border-color .25s ease,box-shadow .25s ease;}
+.reveal .pillar-card:hover{border-color:var(--line);box-shadow:0 10px 32px rgba(0,0,0,.2);}
+.reveal .slides section.present .cyc-path{animation:current-flow 12s linear infinite;}
+@keyframes current-flow{to{stroke-dashoffset:-140;}}
+.reveal .scenario .line.q{position:relative;}
+.reveal .scenario .line.q::after{content:'';display:block;width:96px;height:2px;margin-top:12px;background:var(--accent-2);transform-origin:left;}
+.reveal .slides section.present .scenario .line.q::after{animation:question-rule .7s 1.2s both;}
+@keyframes question-rule{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+.reveal table.plan tbody tr{transition:background-color .2s;}
+.reveal table.plan tbody tr:hover{background-color:rgba(66,185,180,.07);}
+@media print{.reveal .slides section .cyc-path,.reveal .scenario .line.q::after{animation:none!important;}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important;}}
 </style>
 </head>
@@ -358,7 +381,7 @@
       <div class="pillar-card">
         <div class="num">01</div>
         <h3>경계 없는 지구 전체</h3>
-        <p>큐브스피어 LOD로 행성 표면 전체를 <span class="hl">심리스</span>하게 렌더링 — 존 전환, 로딩 없음.</p>
+        <p>큐브 스피어 LOD로 행성 표면 전체를 <span class="hl">심리스</span>하게 렌더링.<br>(메인이 되는 ) 바다에서의 항에에는 존 전환, 로딩 없음.</p>
       </div>
       <div class="pillar-card">
         <div class="num">02</div>
@@ -367,67 +390,106 @@
       </div>
       <div class="pillar-card">
         <div class="num">03</div>
-        <h3>쟁취하는 세계의 중심</h3>
-        <p>항해 협회 기여로 세력 순위가 갈리고, 1위 세력의 본거지가 <span class="hl">Longitude Zero</span>가!</p>
+        <h3>MMO 플레이!</h3>
+        <p>매시브 다중 유저가 함께 플레이 하는 <span class="hl">MMO 게임</span>.<br>실시간 처리되는 특산물들의 시세 등.</p>
       </div>
       <div class="pillar-card">
         <div class="num">04</div>
-        <h3>서버 권위 구조</h3>
-        <p>모든 처리는 서버 기반으로.<br>클라이언트는 입력·예측·표현만 — <span class="hl">MMO</span> 플레이.</p>
+        <h3>세계의 중심이 목표</h3>
+        <p>항해 협회에 대한 기여 등의 행위로 세력-길드 순위가 갈리고,<br>1위 세력의 본거지가 <span class="hl">Longitude Zero</span>!</p>
       </div>
     </div>
   </section>
 
-  <!-- 3. Endgame: Longitude Zero -->
-  <section class="endgame">
-    <div style="position:relative; height:100%;">
-      <div class="eyebrow">Endgame Goal</div>
-      <h2 class="display">세계의 중심은, 쟁취하는 것</h2>
-      <ul class="dash-list" style="max-width:560px;">
-        <li>모든 항구(기존 항구 + 플레이어가 세운 신규 항구)에는 <b style="color:var(--text-hi);">협회</b>가 존재.</li>
-        <li>플레이어 ( 세력 ) 은 <b style="color:var(--text-hi);">기부</b> 등의 <b style="color:var(--text-hi);">기여</b>로 자기 집단의 순위 향상.</li>
-        <li>전 세계 항해 협회 순위 <b style="color:var(--accent-2);">1위 세력의 본거지</b>가 <b style="color:var(--text-hi);">Longitude Zero</b>!</li>
-        <li>경쟁에 따라 계속 바뀔 수 있는 <b style="color:var(--text-hi);">살아있는 타이틀</b>.</li>
-        <li>게임 내 각종 명예적인 모든 장치에 적용.</li>
+  <!-- 3. World -->
+  <section class="world">
+    <div class="flex-col">
+      <div class="eyebrow">01 - World</div>
+      <h2 class="display">지구 전체가 무대</h2>
+      <div class="media-box media-full">
+        <video src="medias/sailing/5-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+      <ul class="dash-list">
+        <li>큐브 스피어 쿼드 트리 LOD로 실제 지형을 사용하며, 가까워질수록 <b style="color:var(--accent-2);">자세한 지형</b> 표현.</li>
+        <li>고해상도 위성 이미지로 <b style="color:var(--accent-2);">해안선</b>을 구현하고, 항구 · 도시도 실제의 것 사용.</li>
+        <li><b style="color:var(--accent-2);">낮과 밤</b>은 태양·달의 실제 궤도 회전으로, <b style="color:var(--accent-2);">계절</b>은 위도 기반 변화로 표현.</li>        
       </ul>
-      <div class="media-box" style="position:absolute; right:0; bottom:0; width:560px; height:340px;">
-        <video src="medias/sailing/4-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+    </div>
+  </section>
+
+  <!-- 4. Weather & Ocean differentiation -->
+  <section class="climate">
+    <div class="eyebrow">02 - What Makes Sailing Different</div>
+    <h2 class="display">기후와 해류가 항로를 결정</h2>
+    <div class="pillars" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="pillar-card">
+        <h3>대기</h3>
+        <p>무역풍 · 편서풍 · 극동풍이 상존하고,<br><b>생성 → 이동 → 소멸</b>의 생애주기를 가지는 태풍.<br>환경에 맞춰 생성되는 구름이 흐름에 따라 먹구름화되며 비 · 번개로 이어짐.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>해류</h3>
+        <p>대양 규모의 환류와 지역 해류 모두 구현<br>→ 항로 선택이 곧 전략.<br>파도·너울 연출 포함, 추후 데이터 테이블화.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>항해</h3>
+        <p>바람과 해류의 힘을 이용한 항해.<br>→ 이동·정지 상태와 무관하게 지속적으로 대기와 해류에 영향을 받음.</p>
+      </div>
+    </div>
+    <div class="media-box" style="height:280px; margin-top:20px;">
+      <video src="medias/sailing/6-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+    </div>
+  </section>
+
+  <!-- 5. Ship physics & customization -->
+  <section class="ship">
+    <div class="eyebrow">02 - Ship Simulation</div>
+    <div class="media-box" style="height:360px; margin-top:8px;">
+      <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls style="object-position:center 75%;"></video>
+    </div>
+    <div class="pillars" style="grid-template-columns:1fr 1fr;">
+      <div class="pillar-card">
+        <h3>항해 피직스</h3>
+        <p>적재량과 무게에 따른 연출과 달라지는 <b style="color:var(--text-hi);">항해</b> 스타일.<br><b style="color:var(--text-hi);">파도</b>·<b style="color:var(--text-hi);">너울</b> 처리, Yaw / Pitch / Roll 과 <b style="color:var(--text-hi);">항적</b> 등 자연스러운 배의 움직임.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>건조 & 커스터마이징</h3>
+        <p>돈을 모아 구매하거나, 직접 도면과 재료를 모아 배를 건조.<br><b style="color:var(--text-hi);">돛</b>·<b style="color:var(--text-hi);">함포</b>·<b style="color:var(--text-hi);">선수상</b>·<b style="color:var(--text-hi);">문장</b> 등 배 튜닝.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. Port activities -->
-  <section class="port">
-    <div style="position:relative; height:100%;">
-      <div class="eyebrow">Core Loop — Port</div>
-      <h2 class="display">항구에서 할 것들</h2>
-      <ul class="dash-list" style="max-width:560px;">
-        <li>무역품 <b>구매/판매</b> — 항구별 시세차로 이익</li>
-        <li><b>신규 배 건조</b> — 지역/문명/항구별 상이한 함선</li>
-        <li>정비 · 보급 — 다음 항해를 위한 기본 보충</li>
-        <li>항해 협회에 <b>기여(기부)</b> → 세력 순위 · 항구 성장 · <span class="hl">Longitude Zero</span> 경쟁</li>
-        <li><b>계류지</b>(본거지 항구) 지정 — 개인 소유, 파산해도 위탁 운송으로 재기 가능</li>
-      </ul>
-      <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
-        <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
-      </div>
-      <!--p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
-        <span class="tag-tbd">TBD</span> 기부 외 교역/건조 활동이 협회 기여도로 얼마나 환산되는지는 다음 설계 단계에서 확정.
-      </p-->
-    </div>
-  </section>
-
-  <!-- 5. Voyage events -->
+  <!-- 6. Voyage events -->
   <section class="at-sea">
     <div style="position:relative; height:100%;">
       <div class="eyebrow">Core Loop — At Sea</div>
-      <h2 class="display">항해 중 발생하는 이벤트와 행위</h2>
+      <h2 class="display">03 - 항해 중 할 것들</h2>
       <ul class="dash-list" style="max-width:560px;">
-        <li>노지 <b>상륙</b> → 긴급 임시 보급</li>
-        <li><b>정박(앵커링)</b> → 낚시 등 컨텐츠</li>
-        <li><b>전투</b> → 승리 전리품 / 패배 좌초</li>
-        <li><b>기상 이변</b> → 돌풍 등</li>
-        <li>아이캔디 <b>이벤트</b> (돌고래 쇼 등)</li>
+        <div class="pillars" style="grid-template-columns:1fr 1fr;">
+          <div class="pillar-card">
+            <h3>노지 상륙</h3>
+            <p>긴급 · 임시 <b style="color:var(--text-hi);">보급</b>.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>정박</h3>
+            <p>낚시 등 다양한 행위를 위한!</p>
+          </div>
+          <div class="pillar-card">
+            <h3>전투 ( NPC )</h3>
+            <p>해적선 등 NPC 선박과 전투.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>전투 ( PC )</h3>
+            <p>다른 플레이어와 해상 전투.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>기상 이변 대응</h3>
+            <p>돌풍 등의 이변에 대한 대응.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>아이 캔디 이벤트</h3>
+            <p>돌고래 쇼 등.</p>
+          </div>
+        </div>
       </ul>
       <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
         <video src="medias/sailing/5-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
@@ -438,18 +500,102 @@
     </div>
   </section>
 
-  <!-- 6. Progression diagram -->
+  <!-- 7. Port activities -->
+  <section class="port">
+    <div style="position:relative; height:100%;">
+      <div class="eyebrow">Core Loop — Port</div>
+      <h2 class="display">03 - 항구에서 할 것들</h2>
+      <ul class="dash-list" style="max-width:560px;">
+        <div class="pillars" style="grid-template-columns:1fr 1fr;">
+          <div class="pillar-card">
+            <h3>무역</h3>
+            <p>구매 · 판매. <b style="color:var(--text-hi);">시세차</b>로 이익.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>배 획득</h3>
+            <p>새로운 배를 건조.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>정비 / 보급</h3>
+            <p>배 수리 및 선원 · 보급품 벌충.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>퀘스트</h3>
+            <p>안정 · 안전한 수익 행위.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>우호도 / 점유 / 점령</h3>
+            <p>단계 별 항구와 상호작용.</p>
+          </div>
+          <div class="pillar-card">
+            <h3>아이 캔디 이벤트</h3>
+            <p>유물 발견 등.</p>
+          </div>
+        </div>
+      </ul>
+      <div class="media-box" style="position:absolute; right:0; bottom:48px; width:520px; height:300px;">
+        <video src="medias/sailing/7-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+      <!--p class="sub" style="position:absolute; left:0; right:0; bottom:0; margin:0; font-size:14.5px;">
+        <span class="tag-tbd">TBD</span> 기부 외 교역/건조 활동이 협회 기여도로 얼마나 환산되는지는 다음 설계 단계에서 확정.
+      </p-->
+    </div>
+  </section>
+
+  <!-- 8. Endgame: Longitude Zero -->
+  <section class="endgame">
+    <div style="position:relative; height:100%;">
+      <div class="eyebrow">Endgame Goal</div>
+      <h2 class="display">04 - 세계의 중심은 쟁취하는 것</h2>
+      <div class="pillars" style="grid-template-columns:1fr;">
+        <div class="pillar-card">
+          <h3>게임의 최종 목표</h3>
+          <p>세상의 중심이 되기 위한 개인과 집단의 투자와 노력.<br>항해 협회에 대한 기여 등의 행위로 세력-길드 순위가 갈리고,<br>1위 세력의 본거지가 <span class="hl">Longitude Zero</span>!</p>
+        </div>
+        <div class="pillar-card">
+          <h3>그 세상은 1위의 것</h3>
+          <p><span class="hl">Longitude Zero</span>로 대표.<br>이 뿐 아니라, 게임 내 모든 순위 표현 등의 것은 1등의 것.<br>게임 내 경쟁에 의해 계속 바뀔 수 있는 살아있는 타이틀.</p>
+        </div>
+      </div>
+      <div class="media-box" style="height:280px; margin-top:20px;">
+        <video src="medias/sailing/4-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Progression diagram -->
   <section class="progression">
+    <img src="medias/sailing/9-1.png" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 50%; opacity:.7; filter:blur(0.2px); z-index:-1; pointer-events:none;">
     <div class="eyebrow">Progression Loop</div>
     <h2 class="display">무역이 곧 성장</h2>
-    <div class="flow-row">
-      <div class="flow-box"><div class="t">무역으로<br>재화 획득</div><div class="d">항구 간 시세차로 이익 추구<br>시세는 실시간 변동</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box"><div class="t">신규 함선 건조</div><div class="d">지역·문명 별 다양한 함선.<br>함선의 등급 ( 크기 )·타입 등 다양하게 준비.</div></div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box"><div class="t">활동 영역 확장</div><div class="d">더 먼 항로, 새 항구·세력권 진입.<br>위험은 커지지만, 수익도 증가.</div></div>
+    <div class="cycle-wrap">
+      <svg viewBox="0 0 1144 420">
+        <defs>
+          <marker id="cyc-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="cyc-arrowhead" d="M0,0 L10,5 L0,10 z"/>
+          </marker>
+        </defs>
+        <path class="cyc-path" marker-end="url(#cyc-arrow)" d="M380 70 Q 572 15 760 70"/>
+        <path class="cyc-path" marker-end="url(#cyc-arrow)" d="M815 145 Q 780 235 705 295"/>
+        <path class="cyc-path" marker-end="url(#cyc-arrow)" d="M435 295 Q 325 220 265 145"/>
+      </svg>
+      <div class="cycle-node" style="left:90px; top:0;">
+        <div class="n">01</div>
+        <div class="t">무역으로 재화 획득</div>
+        <div class="d">항구 간 시세차로 이익 추구<br>시세는 실시간 변동</div>
+      </div>
+      <div class="cycle-node" style="left:774px; top:0;">
+        <div class="n">02</div>
+        <div class="t">신규 함선 건조</div>
+        <div class="d">지역·문명 별 다양한 함선.<br>함선의 등급(크기)·타입 등 다양하게 준비.</div>
+      </div>
+      <div class="cycle-node" style="left:432px; top:300px;">
+        <div class="n">03</div>
+        <div class="t">활동 영역 확장</div>
+        <div class="d">더 먼 항로, 새 항구·세력권 진입.<br>위험은 커지지만, 수익도 증가.</div>
+      </div>
+      <div class="cycle-center"><span class="ic">↻</span><span style="color: #e9e9e9; font-style:italic; font-weight: 900;">가장 기본적인<br>활동(컨텐츠) 사이클</span></div>
     </div>
-    <div class="flow-cycle">↺ 가장 기본적인 활동 ( 컨텐츠 ) 사이클.</div>
   </section>
 
   <!-- 7. A Cycle of Play -->
@@ -466,69 +612,6 @@
     <p class="sub" style="margin-top:22px;">
       <span class="hl">살아있는 기후</span>는 단순 배경 연출이 아니라 매번 다른 판단을 만드는 변수.<br>날씨·해류·경쟁자의 움직임이 매 항해마다 다른 경험을 가지게 함.
     </p>
-  </section>
-
-  <!-- 8. World -->
-  <section class="world">
-    <div class="flex-col">
-      <div class="eyebrow">World</div>
-      <h2 class="display">지구 전체가 무대</h2>
-      <div class="media-box media-full">
-        <video src="medias/sailing/5-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
-      </div>
-      <p class="sub" style="margin-top:14px; margin-bottom:0;">
-        큐브 스피어 쿼드 트리 LOD로 실제 지형을 사용하며, 가까워질수록 자세한 지형을 그리는 형태.<br>고해상도 위성 이미지로 해안선을 구현하고, 항구·도시는 이름 등 세부 정보를 표기.<br>낮과 밤은 태양·달의 실제 궤도 회전(하루=10분)으로, 계절은 위도 기반 변화(겨울 강설 등)로 표현.
-      </p>
-    </div>
-  </section>
-
-  <!-- 9. Weather & Ocean differentiation -->
-  <section class="climate">
-    <div class="eyebrow">What Makes Sailing Different</div>
-    <h2 class="display">기후와 해류가 항로를 결정</h2>
-    <div class="pillars" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="pillar-card">
-        <h3>대기</h3>
-        <p>무역풍·편서풍·극동풍이 퍼시스턴트하게 흐르고, 태풍이 <b>생성 → 이동 → 소멸</b>의 생애주기를 가짐.<br>지역 구름은 흐름에 따라 먹구름화되며 비·번개로 이어짐.</p>
-      </div>
-      <div class="pillar-card">
-        <h3>해류</h3>
-        <p>5대양 환류 규모의 해류와 지역 해류 구현<br>→ 항로 선택이 곧 전략.<br>파도·너울 연출 포함, 추후 데이터 테이블화.</p>
-      </div>
-      <div class="pillar-card">
-        <h3>항해</h3>
-        <p>기본적으로는 바람의 힘으로 운항.<br>→ 이동·정지 상태와 무관하게 지속적으로 대기와 해류에 영향을 받음.</p>
-      </div>
-    </div>
-    <div class="media-box" style="height:220px; margin-top:20px;">
-      <video src="medias/sailing/6-1.mp4" data-autoplay muted loop playsinline preload="metadata" controls></video>
-    </div>
-  </section>
-
-  <!-- 9b. Ship physics & customization -->
-  <section class="ship">
-    <div class="eyebrow">Ship Simulation</div>
-    <div class="split" style="height:auto; align-items:start; margin-top:14px;">
-      <div>
-        <h3 style="color:var(--text-hi); font-size:25px; margin:0 0 5px;">항해 피직스</h3>
-        <ul class="dash-list">
-          <li><b style="color:var(--text-hi);">해류</b>·<b style="color:var(--text-hi);">바람</b>이 곧 속도.</li>
-          <li>적재량과 무게에 따른 연출과 달라지는 <b style="color:var(--text-hi);">항해</b> 스타일.</li>
-          <li><b style="color:var(--text-hi);">파도</b>·<b style="color:var(--text-hi);">너울</b> 처리, Yaw / Pitch / Roll 과 <b style="color:var(--text-hi);">항적</b> 등 자연스러운 배의 움직임.</li>
-        </ul>
-      </div>
-      <div>
-        <h3 style="color:var(--text-hi); font-size:25px; margin:0 0 5px;">커스터마이징 & 건조</h3>
-        <ul class="dash-list">
-          <li><b style="color:var(--text-hi);">돛</b>·<b style="color:var(--text-hi);">함포</b>·<b style="color:var(--text-hi);">선수상</b>·<b style="color:var(--text-hi);">문장</b> 등 배 튜닝.</li>
-          <li>다양한 형태의 배 획득 과정 ( <b style="color:var(--text-hi);">구매</b>·<b style="color:var(--text-hi);">건조</b> ) 등.</li>
-          <li>건조 방식(구매형 vs 재료 수집형)<span class="tag-tbd">TBD</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="media-box" style="height:350px; margin-top:8px;">
-      <video src="medias/sailing/4-12.mp4" data-autoplay muted loop playsinline preload="metadata" controls style="object-position:center 75%;"></video>
-    </div>
   </section>
 
   <!-- 10. Verification status -->
@@ -657,10 +740,51 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
 <script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const printView = new URLSearchParams(location.search).has('print-pdf');
+  let pageAnimations = [];
+
+  function animatePage(slide) {
+    pageAnimations.forEach(animation => animation.cancel());
+    pageAnimations = [];
+    if (!slide || reducedMotion.matches || printView || !Element.prototype.animate) return;
+
+    function enter(element, delay, kind = 'rise') {
+      const from = kind === 'media'
+        ? { opacity: 0, transform: 'scale(.975)' }
+        : kind === 'heading'
+          ? { opacity: 0, transform: 'translateX(-18px)' }
+          : { opacity: 0, transform: 'translateY(20px)' };
+      pageAnimations.push(element.animate([
+        from,
+        { opacity: 1, transform: 'none' }
+      ], { duration: kind === 'media' ? 850 : 600, delay,
+        easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards' }));
+    }
+
+    slide.querySelectorAll('.eyebrow').forEach(el => enter(el, 30, 'heading'));
+    slide.querySelectorAll('h2.display, .game-logo').forEach(el => enter(el, 110, 'heading'));
+    slide.querySelectorAll('.pillar-card').forEach((el, index) => enter(el, 200 + index * 85));
+    slide.querySelectorAll('.media-box').forEach(el => enter(el, 180, 'media'));
+    slide.querySelectorAll('.cycle-node, .step').forEach((el, index) => enter(el, 230 + index * 180));
+    slide.querySelectorAll('.cycle-center').forEach(el => enter(el, 700));
+    slide.querySelectorAll('.scenario .line').forEach((el, index) => enter(el, 220 + index * 210));
+    slide.querySelectorAll('tbody tr').forEach((el, index) => enter(el, 170 + Math.min(index, 7) * 55));
+    slide.querySelectorAll('.sub, .game-sub, .hook-line, .codename, .dash-list > li').forEach((el, index) => enter(el, 230 + Math.min(index, 5) * 80));
+  }
+
+  Reveal.on('ready', event => animatePage(event.currentSlide));
+  Reveal.on('slidechanged', event => animatePage(event.currentSlide));
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      pageAnimations.forEach(animation => animation.cancel());
+      pageAnimations = [];
+    }
+  });
   Reveal.initialize({
     hash:true, controls:true, progress:true, center:false,
     width:1280, height:720, margin:0.04,
-    transition:'fade',
+    transition:reducedMotion.matches ? 'none' : 'slide', transitionSpeed:'fast',
     slideNumber:'c/t', mouseWheel:true, keyboard:true, touch:true
   });
 </script>
